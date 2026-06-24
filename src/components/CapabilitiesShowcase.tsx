@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  ScanSearch,
-  MessageSquare,
-  Building2,
-  Network,
   Star,
   TrendingUp,
   Search,
@@ -472,7 +468,7 @@ const MultiOrgRLSMock = () => {
 
 interface Feature {
   id: string;
-  Icon: typeof ScanSearch;
+  tag: string;
   title: string;
   body: string;
   Mock: React.ComponentType;
@@ -481,29 +477,29 @@ interface Feature {
 const features: Feature[] = [
   {
     id: "chat",
-    Icon: MessageSquare,
+    tag: "Claude · bases",
     title: "Chat IA con bases técnicas",
     body: "Cada licitación tiene su hilo IA. Pregunta sobre acreditaciones, plazos, riesgos. Acceso al texto completo de las bases con persistencia por organización.",
     Mock: ChatMock,
   },
   {
     id: "detection",
-    Icon: ScanSearch,
+    tag: "tiempo real",
     title: "Detección automática con IA",
     body: "El motor escanea ChileCompra en vivo, lee cada licitación nueva y la puntúa contra tu perfil. 6.062 licitaciones procesadas, 7 sobre umbral típicamente.",
     Mock: DetectionFeedMock,
   },
   {
     id: "ocs",
-    Icon: Building2,
-    title: "Órdenes de compra · Único en Chile",
+    tag: "único en Chile",
+    title: "Órdenes de compra",
     body: "35.500 OCs catastradas con 40+ campos. Vincula OC ↔ licitación, calificación al proveedor, tiempo de cierre. Lo que ningún competidor te muestra.",
     Mock: OCsMock,
   },
   {
     id: "multi",
-    Icon: Network,
-    title: "Multi-organización con RLS",
+    tag: "RLS · Postgres",
+    title: "Multi-organización",
     body: "Una cuenta, varias razones sociales. Datos aislados a nivel motor BD con Row Level Security. Cada perfil con su matching, equipo y notas.",
     Mock: MultiOrgRLSMock,
   },
@@ -568,85 +564,65 @@ export default function CapabilitiesShowcase() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,100,224,0.05),_transparent_60%)]" />
 
       <div className="container-edge relative">
-        {/* Header */}
-        <div className="text-center max-w-[760px] mx-auto mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 border border-amber-400/30 bg-amber-400/[0.06] rounded-full mb-6">
-            <LiveDot size={7} />
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-amber-400 font-medium">
-              Capacidades · clic para explorar
-            </span>
-          </div>
-          <h2 className="font-display font-medium text-[44px] md:text-[64px] leading-[1] tracking-[-0.04em] text-cream-50">
-            Cuatro piezas.
-            <br />
+        {/* Header — left-aligned editorial */}
+        <div className="max-w-[820px] mb-10 md:mb-14">
+          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-amber-400 font-medium">
+            El motor, por dentro
+          </span>
+          <h2 className="mt-4 font-display font-medium text-[38px] md:text-[58px] leading-[1.02] tracking-[-0.04em] text-cream-50">
+            Cuatro capacidades sobre el{" "}
             <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
-              Una plataforma viva.
+              mismo dato
             </span>
+            .
           </h2>
-          <p className="mt-6 font-sans text-[16px] md:text-[18px] leading-[1.5] text-cream-200">
-            Hacé click en cualquier capacidad para ver su pieza del producto. Si no tocas nada, avanza sola cada 5.5 segundos.
-          </p>
         </div>
 
         {/* Stage: clickable cards left + bento right */}
         <div className="grid lg:grid-cols-12 gap-5 lg:gap-6">
-          {/* LEFT — clickable cards */}
-          <div className="lg:col-span-4 flex flex-col gap-3">
+          {/* LEFT — capability index (accordion) */}
+          <div className="lg:col-span-4 flex flex-col self-start">
             {features.map((feat, i) => {
               const isActive = i === active;
-              const Icon = feat.Icon;
               return (
                 <button
                   key={feat.id}
                   type="button"
                   onClick={() => handleSelect(i)}
-                  className={`relative text-left rounded-xl border transition-all duration-400 overflow-hidden p-5 group/card ${
-                    isActive
-                      ? "bg-white border-amber-400/40 shadow-lg shadow-amber-400/10"
-                      : "bg-ink-900/30 border-[var(--hairline)] hover:border-cream-300/30 hover:bg-ink-900/50"
-                  }`}
+                  aria-pressed={isActive}
+                  className="group/row relative text-left border-t border-[var(--hairline)] last:border-b last:border-[var(--hairline)] py-5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-400/50"
                 >
-                  {/* Active accent — left edge */}
-                  <span
-                    className={`absolute left-0 top-3 bottom-3 w-[3px] rounded-r-full transition-all duration-500 ${
-                      isActive ? "bg-amber-400 shadow-[0_0_16px_rgba(0,100,224,0.5)]" : "bg-transparent"
-                    }`}
-                  />
-
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <div
-                      className={`h-8 w-8 grid place-items-center rounded-lg border transition-all duration-400 ${
-                        isActive
-                          ? "border-amber-400/40 bg-amber-400/10"
-                          : "border-[var(--hairline)] bg-ink-800"
-                      }`}
-                    >
-                      <Icon
-                        className={`h-4 w-4 transition-colors duration-400 ${
-                          isActive ? "text-amber-400" : "text-cream-300"
-                        }`}
-                        strokeWidth={1.6}
-                      />
-                    </div>
+                  <div className="flex items-baseline justify-between gap-4">
                     <h3
-                      className={`font-display font-medium text-[16px] tracking-[-0.015em] transition-colors duration-400 ${
-                        isActive ? "text-cream-50" : "text-cream-200"
+                      className={`font-display font-medium tracking-[-0.02em] transition-all duration-300 ${
+                        isActive
+                          ? "text-cream-50 text-[22px] md:text-[25px]"
+                          : "text-cream-300 group-hover/row:text-cream-100 text-[18px] md:text-[20px]"
                       }`}
                     >
                       {feat.title}
                     </h3>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-cream-400 whitespace-nowrap flex-shrink-0 pt-1">
+                      {feat.tag}
+                    </span>
                   </div>
-                  <p
-                    className={`font-sans text-[13px] leading-[1.5] transition-colors duration-400 ${
-                      isActive ? "text-cream-200" : "text-cream-300"
+
+                  {/* Body reveals only on the active row */}
+                  <div
+                    className={`grid transition-all duration-500 ease-out ${
+                      isActive ? "grid-rows-[1fr] opacity-100 mt-2.5" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
-                    {feat.body}
-                  </p>
+                    <div className="overflow-hidden">
+                      <p className="font-sans text-[14px] leading-[1.55] text-cream-200 max-w-[42ch]">
+                        {feat.body}
+                      </p>
+                    </div>
+                  </div>
 
-                  {/* Progress bar at the top of the active card */}
+                  {/* Autoplay progress — hairline under the active row */}
                   {isActive && (
-                    <div className="absolute top-0 inset-x-0 h-[2px] bg-[var(--hairline)] overflow-hidden">
+                    <div className="absolute left-0 -bottom-px h-[2px] w-full bg-transparent overflow-hidden">
                       <div
                         className="h-full bg-amber-400 transition-[width] duration-100 ease-linear"
                         style={{ width: `${progress * 100}%` }}
@@ -661,13 +637,8 @@ export default function CapabilitiesShowcase() {
           {/* RIGHT — bento stage with strict containment */}
           <div className="lg:col-span-8">
             <div className="relative h-[480px] md:h-[540px] rounded-2xl overflow-hidden bg-white shadow-[0_30px_100px_-30px_rgba(0,100,224,0.30),0_0_0_1px_rgba(10,10,10,0.06)]">
-              {/* Browser-chrome top bar */}
+              {/* Context bar */}
               <div className="absolute top-0 inset-x-0 h-9 border-b border-[var(--hairline)] bg-ink-900/40 flex items-center justify-between px-4 z-10">
-                <div className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-cream-400/40" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-cream-400/40" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-cream-400/40" />
-                </div>
                 <div className="font-mono text-[10px] text-cream-400 flex items-center gap-2">
                   <LiveDot size={5} color="bg-sage-400" ringColor="bg-sage-400" />
                   app.iautolicita.cl / {f.id}
