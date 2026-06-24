@@ -10,7 +10,7 @@ const logos = [
   { src: "/logos/carabineros.svg", alt: "Carabineros de Chile" },
   { src: "/logos/codelco.svg", alt: "Codelco" },
   { src: "/logos/armada.svg", alt: "Armada de Chile" },
-  { src: "/logos/fach.svg", alt: "Fuerza Aérea de Chile" },
+  { src: "/logos/minsal-escudo.svg", alt: "Ministerio de Salud · Gobierno de Chile" },
   { src: "/logos/ejercito.svg", alt: "Ejército de Chile" },
   { src: "/logos/sii.svg", alt: "SII · Servicio de Impuestos Internos" },
 ];
