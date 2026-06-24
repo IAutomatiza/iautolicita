@@ -124,36 +124,78 @@ const DetectionFeedMock = () => {
    (Bases · Precios · Competencia · Alertas)
 ═══════════════════════════════════════════════════════════════ */
 
+type AriaTurn = {
+  cat: string;
+  q: string;
+  lead: string;
+  kind: "bars" | "stats" | "rank" | "config";
+  bars?: { label: string; pct: number }[];
+  stats?: { k: string; v: string }[];
+  rank?: { name: string; pct: number; you?: boolean }[];
+  config?: { k: string; v: string }[];
+  chips: string[];
+  src: string;
+};
+
 const AriaMock = () => {
-  const turns = [
+  const turns: AriaTurn[] = [
     {
       cat: "Bases",
       q: "¿Criterios de evaluación de la 4500-12-LP24?",
-      a: "Técnica 40% · Económica 35% · Administrativa 25%. Plazo 45 días corridos, boleta de garantía 10%.",
-      chips: ["Técnica 40%", "Económica 35%", "Plazo 45d"],
+      lead: "Analicé las bases. La evaluación se reparte así:",
+      kind: "bars",
+      bars: [
+        { label: "Oferta técnica", pct: 40 },
+        { label: "Oferta económica", pct: 35 },
+        { label: "Cumpl. administrativo", pct: 25 },
+      ],
+      chips: ["Plazo 45 días", "Boleta 10%", "Admite consorcios"],
+      src: "Fuente · bases 4500-12-LP24",
     },
     {
       cat: "Precios",
       q: "¿Precio real pagado por notebooks en 2024?",
-      a: "Promedio $487.320 · rango p25–p75 $389K–$612K · mejor por volumen $421.500.",
-      chips: ["12.847 OCs", "p25–p75", "−14% volumen"],
+      lead: "Según las órdenes de compra del año:",
+      kind: "stats",
+      stats: [
+        { k: "Promedio", v: "$487.320" },
+        { k: "Rango p25–p75", v: "$389K–$612K" },
+        { k: "Mejor x vol.", v: "$421.500" },
+      ],
+      chips: ["Comercial Ing SpA", "TecnoGlobal", "PC Factory"],
+      src: "Fuente · 12.847 OCs · 2024",
     },
     {
       cat: "Competencia",
       q: "¿Quiénes compiten conmigo en MINSAL?",
-      a: "847 adjudicaciones en 12 meses. Comercial Médica 34%, HealthSupply 21%, MediTech 14%. Tú: 7%.",
-      chips: ["5 rivales", "MINSAL", "Q1 +23%"],
+      lead: "5 competidores principales en tu rubro:",
+      kind: "rank",
+      rank: [
+        { name: "Comercial Médica", pct: 34 },
+        { name: "HealthSupply", pct: 21 },
+        { name: "MediTech Chile", pct: 14 },
+        { name: "Tu empresa", pct: 7, you: true },
+      ],
+      chips: ["847 adjudicaciones", "Q1 +23%"],
+      src: "Fuente · MINSAL · últimos 12 meses",
     },
     {
       cat: "Alertas",
       q: "Alértame de licitaciones TI sobre $50M",
-      a: "Configurada: TI · Software · Hardware · ≥ $50M · tiempo real + resumen 8:00 AM. 3 activas coinciden.",
-      chips: ["≥ $50M", "tiempo real", "3 activas"],
+      lead: "Listo, configuré tu alerta:",
+      kind: "config",
+      config: [
+        { k: "Rubros", v: "TI · Software · Hardware" },
+        { k: "Monto", v: "≥ $50.000.000" },
+        { k: "Frecuencia", v: "Tiempo real + 8:00 AM" },
+      ],
+      chips: ["3 activas coinciden"],
+      src: "Fuente · tu perfil + ChileCompra",
     },
   ];
   const [idx, setIdx] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % turns.length), 3800);
+    const t = setInterval(() => setIdx((i) => (i + 1) % turns.length), 4200);
     return () => clearInterval(t);
   }, [turns.length]);
   const turn = turns[idx];
@@ -178,20 +220,103 @@ const AriaMock = () => {
 
       {/* Conversation — re-keys per turn to replay the entrance */}
       <div key={idx} className="flex-1 min-h-0 overflow-hidden mt-4 flex flex-col gap-3">
-        <div className="flex justify-end" style={{ animation: "ariaIn 0.45s 0.05s both" }}>
+        {/* User question */}
+        <div className="flex justify-end" style={{ animation: "ariaIn 0.4s 0.05s both" }}>
           <div className="max-w-[82%] bg-amber-400/10 border border-amber-400/25 rounded-2xl rounded-br-sm px-3.5 py-2">
             <p className="font-sans text-[12.5px] text-cream-50">{turn.q}</p>
           </div>
         </div>
-        <div className="flex justify-start" style={{ animation: "ariaIn 0.5s 0.5s both" }}>
-          <div className="max-w-[94%] border-l-2 border-amber-400 pl-3.5 py-1">
-            <div className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-amber-400 mb-1.5">
-              ARIA · {turn.cat}
+
+        {/* ARIA answer with a rich data render */}
+        <div className="flex justify-start" style={{ animation: "ariaIn 0.45s 0.55s both" }}>
+          <div className="w-full border-l-2 border-amber-400 pl-3.5 py-0.5">
+            <div className="flex items-center gap-1.5 mb-2">
+              <span className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-amber-400">ARIA</span>
+              <span className="h-1 w-1 rounded-full bg-cream-300/50" />
+              <span className="font-mono text-[8.5px] uppercase tracking-[0.16em] text-cream-300">
+                {turn.cat}
+              </span>
             </div>
-            <p className="font-sans text-[12.5px] leading-[1.55] text-cream-100">
-              {turn.a}
+            <p className="font-sans text-[12.5px] leading-[1.5] text-cream-100 mb-2.5">
+              {turn.lead}
             </p>
-            <div className="mt-2 flex flex-wrap gap-1">
+
+            {turn.kind === "bars" &&
+              turn.bars?.length && (
+                <div className="space-y-1.5">
+                  {turn.bars.map((b) => (
+                    <div key={b.label} className="flex items-center gap-2">
+                      <span className="font-sans text-[11px] text-cream-200 w-[124px] flex-shrink-0 truncate">
+                        {b.label}
+                      </span>
+                      <div className="flex-1 h-1.5 rounded-full bg-cream-300/20 overflow-hidden">
+                        <div className="h-full rounded-full bg-amber-400" style={{ width: `${b.pct}%` }} />
+                      </div>
+                      <span className="num font-mono text-[10.5px] text-cream-50 w-8 text-right">
+                        {b.pct}%
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+            {turn.kind === "stats" && turn.stats?.length && (
+              <div className="grid grid-cols-3 gap-2">
+                {turn.stats.map((s) => (
+                  <div key={s.k} className="rounded-lg border border-[var(--hairline)] bg-ink-900/30 px-2.5 py-2">
+                    <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-cream-300 truncate">
+                      {s.k}
+                    </div>
+                    <div className="num font-display font-medium text-[15px] text-cream-50 mt-1 leading-none">
+                      {s.v}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {turn.kind === "rank" && turn.rank?.length && (
+              <div className="space-y-1.5">
+                {turn.rank.map((r) => (
+                  <div key={r.name} className="flex items-center gap-2">
+                    <span
+                      className={`font-sans text-[11px] w-[124px] flex-shrink-0 truncate ${
+                        r.you ? "text-amber-400 font-medium" : "text-cream-200"
+                      }`}
+                    >
+                      {r.name}
+                    </span>
+                    <div className="flex-1 h-1.5 rounded-full bg-cream-300/20 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full ${r.you ? "bg-amber-400" : "bg-cream-300/50"}`}
+                        style={{ width: `${r.pct * 2.6}%` }}
+                      />
+                    </div>
+                    <span className="num font-mono text-[10.5px] text-cream-50 w-8 text-right">
+                      {r.pct}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {turn.kind === "config" && turn.config?.length && (
+              <div className="rounded-lg border border-[var(--hairline)] bg-ink-900/30 divide-y divide-[var(--hairline)]">
+                {turn.config.map((c) => (
+                  <div key={c.k} className="flex items-center justify-between gap-3 px-3 py-1.5">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-cream-300 flex-shrink-0">
+                      {c.k}
+                    </span>
+                    <span className="font-sans text-[11.5px] text-cream-50 truncate text-right">
+                      {c.v}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Result chips + source */}
+            <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
               {turn.chips.map((c) => (
                 <span
                   key={c}
@@ -200,6 +325,9 @@ const AriaMock = () => {
                   {c}
                 </span>
               ))}
+            </div>
+            <div className="mt-2 font-mono text-[8.5px] uppercase tracking-[0.14em] text-cream-300/70">
+              {turn.src}
             </div>
           </div>
         </div>
