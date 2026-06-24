@@ -6,13 +6,15 @@
 
 import useInView from "../hooks/useInView";
 
+// Relative to Vite's base URL so it works under the GitHub Pages subpath
+const B = import.meta.env.BASE_URL;
 const logos = [
-  { src: "/logos/carabineros.svg", alt: "Carabineros de Chile" },
-  { src: "/logos/codelco.svg", alt: "Codelco" },
-  { src: "/logos/armada.svg", alt: "Armada de Chile" },
-  { src: "/logos/minsal.png", alt: "Ministerio de Salud · Gobierno de Chile" },
-  { src: "/logos/ejercito.svg", alt: "Ejército de Chile" },
-  { src: "/logos/sii.svg", alt: "SII · Servicio de Impuestos Internos" },
+  { src: `${B}logos/carabineros.svg`, alt: "Carabineros de Chile" },
+  { src: `${B}logos/codelco.svg`, alt: "Codelco" },
+  { src: `${B}logos/armada.svg`, alt: "Armada de Chile" },
+  { src: `${B}logos/minsal.png`, alt: "Ministerio de Salud · Gobierno de Chile" },
+  { src: `${B}logos/ejercito.svg`, alt: "Ejército de Chile" },
+  { src: `${B}logos/sii.svg`, alt: "SII · Servicio de Impuestos Internos" },
 ];
 
 export default function TrustedBy() {

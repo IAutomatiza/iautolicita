@@ -12,7 +12,7 @@ export default function DotField({ className = "" }: { className?: string }) {
 
     // Video layer
     const video = document.createElement("video");
-    video.src = "/hero-bg.mp4";
+    video.src = `${import.meta.env.BASE_URL}hero-bg.mp4`;
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
