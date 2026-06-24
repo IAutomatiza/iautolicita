@@ -1,14 +1,11 @@
-// Real institutional logos sourced from Wikimedia Commons.
-// Treatment: structured grid with hairline dividers (Rox-inspired) over the
-// dark ink background. Logos are grayscale for monochrome consistency and
-// fade/slide in with a stagger when the section scrolls into view, then stay
-// still. Individual hover restores color.
+// Institutional emblems of Chilean State bodies whose ChileCompra tenders the
+// platform processes. Only clean transparent-background marks are kept, shown
+// in their original color (government crests read best in color, not grayscale)
+// on a centered, airy row — Sprout/Revolut style. A mono eyebrow + display
+// headline carry the credibility; logos reinforce it. Stagger fade-in on scroll.
 
 import useInView from "../hooks/useInView";
 
-// Only clean transparent-background marks are kept here, so the grid stays
-// visually consistent. The banner-style raster assets (chilecompra.jpg,
-// registrocivil/sernac/conaf/minsal/junaeb .png) were dropped on purpose.
 const logos = [
   { src: "/logos/carabineros.svg", alt: "Carabineros de Chile" },
   { src: "/logos/codelco.svg", alt: "Codelco" },
@@ -22,44 +19,44 @@ export default function TrustedBy() {
   const [ref, inView] = useInView<HTMLUListElement>(0.15);
 
   return (
-    <section className="py-10 md:py-14 border-y border-[var(--hairline)] bg-ink-900/40">
-      <div className="container-edge">
-        <div className="text-center mb-8 md:mb-10">
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream-400">
-            Sincronizado en tiempo real con ChileCompra · cobertura 100% Jun 2024 → hoy
-          </span>
-        </div>
+    <section className="py-14 md:py-20 border-y border-[var(--hairline)] bg-ink-900/40">
+      <div className="container-edge text-center">
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-400 font-medium">
+          Cobertura total · ChileCompra en tiempo real
+        </span>
 
-        {/* Bordered grid: the <ul> draws the top + left hairlines, each <li>
-            draws its right + bottom hairline, completing a clean lattice. */}
+        <h2 className="mt-5 font-display font-medium text-[28px] md:text-[40px] lg:text-[46px] leading-[1.08] tracking-[-0.025em] text-cream-50 max-w-[760px] mx-auto">
+          Procesamos las licitaciones de los{" "}
+          <span className="font-serif italic font-normal text-amber-400 tracking-[-0.015em]">
+            principales organismos
+          </span>{" "}
+          del Estado
+        </h2>
+
         <ul
           ref={ref}
-          className="grid grid-cols-2 sm:grid-cols-3 m-0 list-none
-            border-t border-l border-[var(--hairline)]"
+          className="mt-10 md:mt-12 flex flex-wrap items-center justify-center
+            gap-x-12 gap-y-8 md:gap-x-16 m-0 list-none"
         >
           {logos.map((l, i) => (
             <li
               key={i}
               title={l.alt}
-              className="flex items-center justify-center h-24 md:h-28 px-6 group/logo
-                border-r border-b border-[var(--hairline)]
-                transition-all duration-500 ease-out
-                hover:bg-cream-50/[0.02]"
+              className="flex items-center justify-center h-12 md:h-14 group/logo
+                transition-all duration-500 ease-out"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "translateY(0)" : "translateY(12px)",
-                transitionDelay: `${i * 55}ms`,
+                transitionDelay: `${i * 70}ms`,
               }}
             >
               <img
                 src={l.src}
                 alt={l.alt}
                 loading="lazy"
-                className="h-10 md:h-12 w-auto max-w-[150px] object-contain
-                  grayscale contrast-[1.05] opacity-60
-                  transition duration-300 ease-out
-                  group-hover/logo:grayscale-0 group-hover/logo:opacity-100
-                  group-hover/logo:scale-[1.06]"
+                className="h-full w-auto max-w-[150px] object-contain
+                  opacity-90 transition duration-300 ease-out
+                  group-hover/logo:opacity-100 group-hover/logo:scale-[1.07]"
               />
             </li>
           ))}
