@@ -17,8 +17,6 @@ import Sparkline from "./ui/Sparkline";
    · Each mock is a contained "screen" of the product, no overflow
 ═══════════════════════════════════════════════════════════════ */
 
-const DURATION_MS = 5500;
-
 /* ════════════════════════════════════════════════════════════
    MOCK 1 · Detección IA — live feed of detected tenders
    (Profound "Opportunities"-style stream, replaces the old radar)
@@ -162,31 +160,8 @@ const AriaMock = () => {
 
   return (
     <div className="absolute inset-0 flex flex-col p-5 md:p-6">
-      {/* ARIA identity */}
-      <div className="flex items-center justify-between pb-3 border-b border-[var(--hairline)] flex-shrink-0">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <span className="h-8 w-8 grid place-items-center rounded-lg bg-amber-400/10 border border-amber-400/30 flex-shrink-0">
-            <span className="h-2 w-2 rounded-full bg-amber-400" />
-          </span>
-          <div className="min-w-0">
-            <div className="font-display font-medium text-[15px] text-cream-50 leading-none">
-              ARIA
-            </div>
-            <div className="font-mono text-[8.5px] uppercase tracking-[0.16em] text-cream-300 mt-1 truncate">
-              Asistente de inteligencia
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-          <LiveDot size={6} />
-          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-amber-400">
-            en línea
-          </span>
-        </div>
-      </div>
-
       {/* Capability chips — active one highlights as it cycles */}
-      <div className="flex flex-wrap gap-1.5 mt-3 flex-shrink-0">
+      <div className="flex flex-wrap gap-1.5 flex-shrink-0">
         {turns.map((t, i) => (
           <span
             key={t.cat}
@@ -508,100 +483,61 @@ const MultiOrgRLSMock = () => {
    FEATURES DATA · 4 consolidated capabilities
 ═══════════════════════════════════════════════════════════════ */
 
-interface Feature {
-  id: string;
-  tag: string;
-  title: string;
-  body: string;
-  Mock: React.ComponentType;
-}
+/* ════════════════════════════════════════════════════════════
+   BENTO TILE primitives
+═══════════════════════════════════════════════════════════════ */
 
-const features: Feature[] = [
-  {
-    id: "aria",
-    tag: "asistente IA",
-    title: "ARIA",
-    body: "Tu asistente de inteligencia. Pregúntale en lenguaje natural sobre bases, precios reales pagados, competencia y alertas — responde con datos de ChileCompra, no con texto genérico.",
-    Mock: AriaMock,
-  },
-  {
-    id: "detection",
-    tag: "tiempo real",
-    title: "Detección automática con IA",
-    body: "El motor escanea ChileCompra en vivo, lee cada licitación nueva y la puntúa contra tu perfil. 6.062 licitaciones procesadas, 7 sobre umbral típicamente.",
-    Mock: DetectionFeedMock,
-  },
-  {
-    id: "ocs",
-    tag: "único en Chile",
-    title: "Órdenes de compra",
-    body: "35.500 OCs catastradas con 40+ campos. Vincula OC ↔ licitación, calificación al proveedor, tiempo de cierre. Lo que ningún competidor te muestra.",
-    Mock: OCsMock,
-  },
-  {
-    id: "multi",
-    tag: "RLS · Postgres",
-    title: "Multi-organización",
-    body: "Una cuenta, varias razones sociales. Datos aislados a nivel motor BD con Row Level Security. Cada perfil con su matching, equipo y notas.",
-    Mock: MultiOrgRLSMock,
-  },
-];
+const TileHead = ({
+  title,
+  tag,
+  desc,
+  live,
+}: {
+  title: string;
+  tag: string;
+  desc?: string;
+  live?: boolean;
+}) => (
+  <div className="flex-shrink-0 px-5 pt-4 pb-3.5 relative z-10">
+    <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center gap-2 min-w-0">
+        {live && <LiveDot size={6} />}
+        <h3 className="font-display font-medium text-[17px] tracking-[-0.02em] text-cream-50 truncate">
+          {title}
+        </h3>
+      </div>
+      <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-amber-400 whitespace-nowrap flex-shrink-0">
+        {tag}
+      </span>
+    </div>
+    {desc && (
+      <p className="mt-1.5 font-sans text-[12.5px] leading-[1.45] text-cream-300 max-w-[46ch]">
+        {desc}
+      </p>
+    )}
+  </div>
+);
+
+const TileBody = ({ children }: { children: React.ReactNode }) => (
+  <div className="relative flex-1 min-h-0 overflow-hidden border-t border-[var(--hairline)]">
+    <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_80%,transparent)]">
+      {children}
+    </div>
+  </div>
+);
 
 /* ════════════════════════════════════════════════════════════
-   COMPONENT
+   COMPONENT · Windsurf-style bento of live capability tiles
 ═══════════════════════════════════════════════════════════════ */
 
 export default function CapabilitiesShowcase() {
-  const [active, setActive] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => setInView(e.isIntersecting),
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (paused || !inView) return;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      const p = Math.min(1, elapsed / DURATION_MS);
-      setProgress(p);
-      if (p >= 1) {
-        setActive((a) => (a + 1) % features.length);
-        return;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [active, paused, inView]);
-
-  const handleSelect = (i: number) => {
-    setActive(i);
-    setProgress(0);
-  };
-
-  const f = features[active];
-  const Mock = f.Mock;
+  const tile =
+    "relative flex flex-col rounded-2xl overflow-hidden bg-white border border-[var(--hairline)] shadow-[0_24px_70px_-38px_rgba(0,100,224,0.32)]";
 
   return (
     <section
-      ref={sectionRef}
       id="capacidades"
       className="relative py-16 md:py-32 overflow-hidden bg-ink-950"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,100,224,0.05),_transparent_60%)]" />
 
@@ -620,93 +556,47 @@ export default function CapabilitiesShowcase() {
           </h2>
         </div>
 
-        {/* Stage: clickable cards left + bento right */}
-        <div className="grid lg:grid-cols-12 gap-5 lg:gap-6">
-          {/* LEFT — capability index (accordion) */}
-          <div className="lg:col-span-4 flex flex-col self-start">
-            {features.map((feat, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={feat.id}
-                  type="button"
-                  onClick={() => handleSelect(i)}
-                  aria-pressed={isActive}
-                  className="group/row relative text-left border-t border-[var(--hairline)] last:border-b last:border-[var(--hairline)] py-5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-400/50"
-                >
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3
-                      className={`font-display font-medium tracking-[-0.02em] transition-all duration-300 ${
-                        isActive
-                          ? "text-cream-50 text-[22px] md:text-[25px]"
-                          : "text-cream-300 group-hover/row:text-cream-100 text-[18px] md:text-[20px]"
-                      }`}
-                    >
-                      {feat.title}
-                    </h3>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-cream-400 whitespace-nowrap flex-shrink-0 pt-1">
-                      {feat.tag}
-                    </span>
-                  </div>
-
-                  {/* Body reveals only on the active row */}
-                  <div
-                    className={`grid transition-all duration-500 ease-out ${
-                      isActive ? "grid-rows-[1fr] opacity-100 mt-2.5" : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="font-sans text-[14px] leading-[1.55] text-cream-200 max-w-[42ch]">
-                        {feat.body}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Autoplay progress — hairline under the active row */}
-                  {isActive && (
-                    <div className="absolute left-0 -bottom-px h-[2px] w-full bg-transparent overflow-hidden">
-                      <div
-                        className="h-full bg-amber-400 transition-[width] duration-100 ease-linear"
-                        style={{ width: `${progress * 100}%` }}
-                      />
-                    </div>
-                  )}
-                </button>
-              );
-            })}
+        {/* Bento grid — every capability visible at once, live */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[240px]">
+          {/* ARIA — hero, spans 2×2 */}
+          <div className={`${tile} min-h-[440px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
+            <TileHead
+              title="ARIA"
+              tag="asistente IA"
+              live
+              desc="Pregúntale en lenguaje natural sobre bases, precios reales pagados, competencia y alertas — responde con datos de ChileCompra, no con texto genérico."
+            />
+            <TileBody>
+              <AriaMock />
+            </TileBody>
           </div>
 
-          {/* RIGHT — bento stage with strict containment */}
-          <div className="lg:col-span-8">
-            <div className="relative h-[480px] md:h-[540px] rounded-2xl overflow-hidden bg-white shadow-[0_30px_100px_-30px_rgba(0,100,224,0.30),0_0_0_1px_rgba(10,10,10,0.06)]">
-              {/* Context bar */}
-              <div className="absolute top-0 inset-x-0 h-9 border-b border-[var(--hairline)] bg-ink-900/40 flex items-center justify-between px-4 z-10">
-                <div className="font-mono text-[10px] text-cream-400 flex items-center gap-2">
-                  <LiveDot size={5} color="bg-sage-400" ringColor="bg-sage-400" />
-                  app.iautolicita.cl / {f.id}
-                </div>
-                <span className="font-mono text-[10px] text-cream-400 tabular-nums">
-                  {String(active + 1).padStart(2, "0")} / {String(features.length).padStart(2, "0")}
-                </span>
-              </div>
+          {/* Detección */}
+          <div className={`${tile} min-h-[300px] lg:min-h-0`}>
+            <TileHead title="Detección automática" tag="tiempo real" />
+            <TileBody>
+              <DetectionFeedMock />
+            </TileBody>
+          </div>
 
-              {/* The active mock — single render, fresh on each switch */}
-              <div
-                key={`mock-${active}`}
-                className="absolute inset-0 pt-9 animate-cinematic-fade-in"
-                style={{ willChange: "opacity, transform, filter" }}
-              >
-                <div className="relative h-full">
-                  <Mock />
-                </div>
-              </div>
-            </div>
+          {/* Multi-organización */}
+          <div className={`${tile} min-h-[300px] lg:min-h-0`}>
+            <TileHead title="Multi-organización" tag="RLS · Postgres" />
+            <TileBody>
+              <MultiOrgRLSMock />
+            </TileBody>
+          </div>
 
-            {/* Status line removed per design feedback */}
-            <div className="hidden">
-              {/* placeholder so paused/inView remain in scope */}
-              <span>{paused ? "" : !inView ? "" : f.title}</span>
-            </div>
+          {/* Órdenes de compra — full-width band */}
+          <div className={`${tile} min-h-[340px] lg:min-h-0 lg:col-span-3 lg:row-span-1`}>
+            <TileHead
+              title="Órdenes de compra"
+              tag="único en Chile"
+              desc="35.500 OCs con 40+ campos. Precio real pagado, vínculo OC ↔ licitación y calificación del proveedor — lo que ningún competidor muestra."
+            />
+            <TileBody>
+              <OCsMock />
+            </TileBody>
           </div>
         </div>
       </div>
