@@ -273,17 +273,12 @@ function AriaChatPanel() {
                 {/* ARIA response */}
                 <div className="flex gap-2.5">
                   <div className="h-7 w-7 rounded-lg bg-brand-500/15 grid place-items-center shrink-0">
-                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-                      <circle cx="3" cy="4" r="1.5" fill="#55b4f8" opacity="0.5" />
-                      <circle cx="3" cy="10" r="1.5" fill="#55b4f8" opacity="0.7" />
-                      <circle cx="3" cy="16" r="1.5" fill="#55b4f8" opacity="0.5" />
-                      <path d="M4.5 4 L10 8.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-                      <path d="M4.5 10 L10 10" stroke="#55b4f8" strokeWidth="0.8" opacity="0.6" />
-                      <path d="M4.5 16 L10 11.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-                      <circle cx="11" cy="10" r="1.8" fill="#55b4f8" opacity="0.3" />
-                      <circle cx="11" cy="10" r="0.8" fill="#e0f6ff" />
-                      <path d="M14 10 L18.5 10" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" />
-                      <path d="M17 8 L19 10 L17 12" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    <svg width="15" height="15" viewBox="0 0 32 32" fill="none">
+                      <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
+                      <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
+                      <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
+                      <rect x="20.4" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
+                      <rect x="25.2" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -503,23 +498,13 @@ export default function AriaPage() {
           <div className="relative z-10 w-full container-edge flex flex-col items-center">
             {/* ARIA identity pill */}
             <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#55b4f8]/20 bg-[#55b4f8]/[0.06] backdrop-blur-md mb-10">
-              {/* Custom ARIA icon — three data nodes converging into one insight point */}
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-                {/* Three source nodes */}
-                <circle cx="3" cy="4" r="1.5" fill="#55b4f8" opacity="0.5" />
-                <circle cx="3" cy="10" r="1.5" fill="#55b4f8" opacity="0.7" />
-                <circle cx="3" cy="16" r="1.5" fill="#55b4f8" opacity="0.5" />
-                {/* Connection lines converging */}
-                <path d="M4.5 4 L10 8.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-                <path d="M4.5 10 L10 10" stroke="#55b4f8" strokeWidth="0.8" opacity="0.6" />
-                <path d="M4.5 16 L10 11.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-                {/* Central processing node */}
-                <circle cx="11" cy="10" r="3" fill="#55b4f8" opacity="0.15" />
-                <circle cx="11" cy="10" r="1.8" fill="#55b4f8" opacity="0.3" />
-                <circle cx="11" cy="10" r="0.8" fill="#e0f6ff" />
-                {/* Output arrow — the insight */}
-                <path d="M14 10 L18.5 10" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M17 8 L19 10 L17 12" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              {/* ARIA icon — voice waveform ("aria" = a melodic solo) */}
+              <svg width="19" height="19" viewBox="0 0 32 32" fill="none">
+                <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
+                <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
+                <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
+                <rect x="20.4" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
+                <rect x="25.2" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
               </svg>
               <span className="font-sans text-[12px] text-white/60">
                 Asistente de Revision e Inteligencia Avanzada

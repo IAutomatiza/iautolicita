@@ -123,20 +123,14 @@ const DetectionFeedMock = () => {
    (brand badge + intro bubbles + capability reply pills)
 ═══════════════════════════════════════════════════════════════ */
 
-// ARIA mark — same converging-nodes icon as the /aria page
+// ARIA mark — voice waveform ("aria" = a melodic solo)
 const AriaMark = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" aria-hidden>
-    <circle cx="3" cy="4" r="1.5" fill="#55b4f8" opacity="0.5" />
-    <circle cx="3" cy="10" r="1.5" fill="#55b4f8" opacity="0.7" />
-    <circle cx="3" cy="16" r="1.5" fill="#55b4f8" opacity="0.5" />
-    <path d="M4.5 4 L10 8.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-    <path d="M4.5 10 L10 10" stroke="#55b4f8" strokeWidth="0.8" opacity="0.6" />
-    <path d="M4.5 16 L10 11.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-    <circle cx="11" cy="10" r="3" fill="#55b4f8" opacity="0.15" />
-    <circle cx="11" cy="10" r="1.8" fill="#55b4f8" opacity="0.3" />
-    <circle cx="11" cy="10" r="0.8" fill="#e0f6ff" />
-    <path d="M14 10 L18.5 10" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" />
-    <path d="M17 8 L19 10 L17 12" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden>
+    <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
+    <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
+    <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
+    <rect x="20.4" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
+    <rect x="25.2" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
   </svg>
 );
 
