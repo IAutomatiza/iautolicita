@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   Star,
   TrendingUp,
-  Search,
   Shield,
   ChevronRight,
 } from "lucide-react";
@@ -120,231 +119,99 @@ const DetectionFeedMock = () => {
 };
 
 /* ════════════════════════════════════════════════════════════
-   MOCK 2 · ARIA — assistant cycling through its capabilities
-   (Bases · Precios · Competencia · Alertas)
+   MOCK 2 · ARIA — Cleo-style conversational onboarding
+   (brand badge + intro bubbles + capability reply pills)
 ═══════════════════════════════════════════════════════════════ */
 
-type AriaTurn = {
-  cat: string;
-  q: string;
-  lead: string;
-  kind: "bars" | "stats" | "rank" | "config";
-  bars?: { label: string; pct: number }[];
-  stats?: { k: string; v: string }[];
-  rank?: { name: string; pct: number; you?: boolean }[];
-  config?: { k: string; v: string }[];
-  chips: string[];
-  src: string;
-};
-
 const AriaMock = () => {
-  const turns: AriaTurn[] = [
-    {
-      cat: "Bases",
-      q: "¿Criterios de evaluación de la 4500-12-LP24?",
-      lead: "Analicé las bases. La evaluación se reparte así:",
-      kind: "bars",
-      bars: [
-        { label: "Oferta técnica", pct: 40 },
-        { label: "Oferta económica", pct: 35 },
-        { label: "Cumpl. administrativo", pct: 25 },
-      ],
-      chips: ["Plazo 45 días", "Boleta 10%", "Admite consorcios"],
-      src: "Fuente · bases 4500-12-LP24",
-    },
-    {
-      cat: "Precios",
-      q: "¿Precio real pagado por notebooks en 2024?",
-      lead: "Según las órdenes de compra del año:",
-      kind: "stats",
-      stats: [
-        { k: "Promedio", v: "$487.320" },
-        { k: "Rango p25–p75", v: "$389K–$612K" },
-        { k: "Mejor x vol.", v: "$421.500" },
-      ],
-      chips: ["Comercial Ing SpA", "TecnoGlobal", "PC Factory"],
-      src: "Fuente · 12.847 OCs · 2024",
-    },
-    {
-      cat: "Competencia",
-      q: "¿Quiénes compiten conmigo en MINSAL?",
-      lead: "5 competidores principales en tu rubro:",
-      kind: "rank",
-      rank: [
-        { name: "Comercial Médica", pct: 34 },
-        { name: "HealthSupply", pct: 21 },
-        { name: "MediTech Chile", pct: 14 },
-        { name: "Tu empresa", pct: 7, you: true },
-      ],
-      chips: ["847 adjudicaciones", "Q1 +23%"],
-      src: "Fuente · MINSAL · últimos 12 meses",
-    },
-    {
-      cat: "Alertas",
-      q: "Alértame de licitaciones TI sobre $50M",
-      lead: "Listo, configuré tu alerta:",
-      kind: "config",
-      config: [
-        { k: "Rubros", v: "TI · Software · Hardware" },
-        { k: "Monto", v: "≥ $50.000.000" },
-        { k: "Frecuencia", v: "Tiempo real + 8:00 AM" },
-      ],
-      chips: ["3 activas coinciden"],
-      src: "Fuente · tu perfil + ChileCompra",
-    },
+  const intro = [
+    "Hola, soy ARIA 👋",
+    "Tu copiloto de inteligencia para licitaciones de ChileCompra.",
+    "¿Por dónde partimos?",
   ];
-  const [idx, setIdx] = useState(0);
+  const options = [
+    { label: "detectar licitaciones", emoji: "🎯" },
+    { label: "leer las bases", emoji: "📄" },
+    { label: "precios reales pagados", emoji: "💸" },
+    { label: "analizar mi competencia", emoji: "🥊" },
+    { label: "configurar alertas", emoji: "🔔" },
+  ];
+  const [cycle, setCycle] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % turns.length), 4200);
+    const t = setInterval(() => setCycle((c) => c + 1), 9000);
     return () => clearInterval(t);
-  }, [turns.length]);
-  const turn = turns[idx];
+  }, []);
 
   return (
-    <div className="absolute inset-0 flex flex-col p-5 md:p-6">
-      {/* Capability chips — active one highlights as it cycles */}
-      <div className="flex flex-wrap gap-1.5 flex-shrink-0">
-        {turns.map((t, i) => (
+    <div className="absolute inset-0 overflow-hidden bg-[#EDEFFB]">
+      {/* Giant faint watermark */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-7 opacity-[0.045] select-none"
+      >
+        {[0, 1, 2, 3].map((i) => (
           <span
-            key={t.cat}
-            className={`font-mono text-[9px] uppercase tracking-[0.14em] px-2 py-1 rounded-full border transition-all duration-300 ${
-              i === idx
-                ? "border-amber-400/40 bg-amber-400/[0.08] text-amber-400"
-                : "border-[var(--hairline)] text-cream-400"
-            }`}
+            key={i}
+            className="font-display font-bold text-[58px] md:text-[84px] leading-none tracking-tight text-[#0064E0] whitespace-nowrap"
           >
-            {t.cat}
+            CHAT ARIA
           </span>
         ))}
       </div>
 
-      {/* Conversation — re-keys per turn to replay the entrance */}
-      <div key={idx} className="flex-1 min-h-0 overflow-hidden mt-4 flex flex-col gap-3">
-        {/* User question */}
-        <div className="flex justify-end" style={{ animation: "ariaIn 0.4s 0.05s both" }}>
-          <div className="max-w-[82%] bg-amber-400/10 border border-amber-400/25 rounded-2xl rounded-br-sm px-3.5 py-2">
-            <p className="font-sans text-[12.5px] text-cream-50">{turn.q}</p>
+      {/* Content */}
+      <div key={cycle} className="relative h-full flex flex-col px-5 md:px-7 pt-4 pb-4">
+        {/* Brand badge + profile */}
+        <div className="relative flex items-center justify-center flex-shrink-0">
+          <div className="px-3.5 py-1.5 rounded-2xl bg-[#0064E0] shadow-[0_6px_18px_-6px_rgba(0,100,224,0.6)]">
+            <span className="font-display font-bold text-[19px] tracking-tight text-white leading-none">
+              ARIA
+            </span>
+          </div>
+          <div className="absolute right-0 h-8 w-8 grid place-items-center rounded-full border border-[#0064E0]/30">
+            <span className="h-3 w-3 rounded-full border-[1.5px] border-[#0064E0]/55" />
           </div>
         </div>
 
-        {/* ARIA answer with a rich data render */}
-        <div className="flex justify-start" style={{ animation: "ariaIn 0.45s 0.55s both" }}>
-          <div className="w-full border-l-2 border-amber-400 pl-3.5 py-0.5">
-            <div className="flex items-center gap-1.5 mb-2">
-              <span className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-amber-400">ARIA</span>
-              <span className="h-1 w-1 rounded-full bg-cream-300/50" />
-              <span className="font-mono text-[8.5px] uppercase tracking-[0.16em] text-cream-300">
-                {turn.cat}
-              </span>
+        {/* Today divider */}
+        <div className="mt-3 flex-shrink-0">
+          <div className="text-center font-sans text-[11px] text-cream-300 mb-1.5">Hoy</div>
+          <div className="h-px bg-[#0064E0]/10" />
+        </div>
+
+        {/* Conversation */}
+        <div className="flex-1 min-h-0 mt-3 flex flex-col gap-2 overflow-hidden">
+          {intro.map((m, i) => (
+            <div
+              key={i}
+              className="self-start max-w-[80%] bg-white rounded-3xl rounded-bl-md px-4 py-2.5 shadow-[0_10px_26px_-14px_rgba(0,40,120,0.3)]"
+              style={{ animation: `cleoIn 0.5s ${0.1 + i * 0.45}s both` }}
+            >
+              <p className="font-sans text-[13.5px] leading-[1.4] text-cream-50">{m}</p>
             </div>
-            <p className="font-sans text-[12.5px] leading-[1.5] text-cream-100 mb-2.5">
-              {turn.lead}
-            </p>
+          ))}
 
-            {turn.kind === "bars" &&
-              turn.bars?.length && (
-                <div className="space-y-1.5">
-                  {turn.bars.map((b) => (
-                    <div key={b.label} className="flex items-center gap-2">
-                      <span className="font-sans text-[11px] text-cream-200 w-[124px] flex-shrink-0 truncate">
-                        {b.label}
-                      </span>
-                      <div className="flex-1 h-1.5 rounded-full bg-cream-300/20 overflow-hidden">
-                        <div className="h-full rounded-full bg-amber-400" style={{ width: `${b.pct}%` }} />
-                      </div>
-                      <span className="num font-mono text-[10.5px] text-cream-50 w-8 text-right">
-                        {b.pct}%
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-            {turn.kind === "stats" && turn.stats?.length && (
-              <div className="grid grid-cols-3 gap-2">
-                {turn.stats.map((s) => (
-                  <div key={s.k} className="rounded-lg border border-[var(--hairline)] bg-ink-900/30 px-2.5 py-2">
-                    <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-cream-300 truncate">
-                      {s.k}
-                    </div>
-                    <div className="num font-display font-medium text-[15px] text-cream-50 mt-1 leading-none">
-                      {s.v}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {turn.kind === "rank" && turn.rank?.length && (
-              <div className="space-y-1.5">
-                {turn.rank.map((r) => (
-                  <div key={r.name} className="flex items-center gap-2">
-                    <span
-                      className={`font-sans text-[11px] w-[124px] flex-shrink-0 truncate ${
-                        r.you ? "text-amber-400 font-medium" : "text-cream-200"
-                      }`}
-                    >
-                      {r.name}
-                    </span>
-                    <div className="flex-1 h-1.5 rounded-full bg-cream-300/20 overflow-hidden">
-                      <div
-                        className={`h-full rounded-full ${r.you ? "bg-amber-400" : "bg-cream-300/50"}`}
-                        style={{ width: `${r.pct * 2.6}%` }}
-                      />
-                    </div>
-                    <span className="num font-mono text-[10.5px] text-cream-50 w-8 text-right">
-                      {r.pct}%
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {turn.kind === "config" && turn.config?.length && (
-              <div className="rounded-lg border border-[var(--hairline)] bg-ink-900/30 divide-y divide-[var(--hairline)]">
-                {turn.config.map((c) => (
-                  <div key={c.k} className="flex items-center justify-between gap-3 px-3 py-1.5">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-cream-300 flex-shrink-0">
-                      {c.k}
-                    </span>
-                    <span className="font-sans text-[11.5px] text-cream-50 truncate text-right">
-                      {c.v}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Result chips + source */}
-            <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
-              {turn.chips.map((c) => (
-                <span
-                  key={c}
-                  className="font-mono text-[9px] px-1.5 py-0.5 border border-amber-400/30 bg-amber-400/[0.06] text-amber-400 rounded"
-                >
-                  {c}
+          {/* Suggested capability replies */}
+          <div className="mt-1.5 flex flex-col items-end gap-2">
+            {options.map((o, i) => (
+              <button
+                key={o.label}
+                type="button"
+                className="bg-white border border-[#0064E0]/40 rounded-full px-4 py-2 shadow-[0_4px_14px_-8px_rgba(0,40,120,0.25)] hover:bg-[#0064E0]/[0.05] transition-colors"
+                style={{ animation: `cleoIn 0.45s ${1.5 + i * 0.12}s both` }}
+              >
+                <span className="font-sans text-[13px] font-medium text-[#0064E0]">
+                  {o.label} {o.emoji}
                 </span>
-              ))}
-            </div>
-            <div className="mt-2 font-mono text-[8.5px] uppercase tracking-[0.14em] text-cream-300/70">
-              {turn.src}
-            </div>
+              </button>
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* Input bar */}
-      <div className="mt-3 pt-3 border-t border-[var(--hairline)] flex items-center gap-3 flex-shrink-0">
-        <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-ink-900/30 border border-[var(--hairline)] rounded-lg">
-          <Search className="h-3.5 w-3.5 text-cream-400" strokeWidth={1.8} />
-          <span className="font-sans text-[12px] text-cream-400">Pregúntale algo a ARIA…</span>
-        </div>
-        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-cream-400 flex-shrink-0">⌘ ↵</span>
       </div>
 
       <style>{`
-        @keyframes ariaIn {
-          from { opacity: 0; transform: translateY(8px); }
+        @keyframes cleoIn {
+          from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
@@ -685,18 +552,10 @@ export default function CapabilitiesShowcase() {
         </div>
 
         {/* Bento grid — every capability visible at once, live */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[240px]">
-          {/* ARIA — hero, spans 2×2 */}
-          <div className={`${tile} min-h-[440px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
-            <TileHead
-              title="ARIA"
-              tag="asistente IA"
-              live
-              desc="Pregúntale en lenguaje natural sobre bases, precios reales pagados, competencia y alertas — responde con datos de ChileCompra, no con texto genérico."
-            />
-            <TileBody>
-              <AriaMock />
-            </TileBody>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[262px]">
+          {/* ARIA — hero, spans 2×2 (Cleo-style, full-bleed) */}
+          <div className={`${tile} min-h-[520px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
+            <AriaMock />
           </div>
 
           {/* Detección */}
