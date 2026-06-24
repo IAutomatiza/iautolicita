@@ -1,6 +1,9 @@
 // Real institutional logos sourced from Wikimedia Commons.
-// Treatment: grayscale + slight contrast for monochrome consistency,
-// individual hover restores original color.
+// Treatment: static responsive grid, grayscale + slight contrast for
+// monochrome consistency. Logos fade/slide in with a stagger when the
+// section scrolls into view, then stay still. Individual hover restores color.
+
+import useInView from "../hooks/useInView";
 
 const logos = [
   { src: "/logos/chilecompra.jpg", alt: "ChileCompra · Dirección de Compras y Contratación Pública" },
@@ -17,61 +20,47 @@ const logos = [
   { src: "/logos/junaeb.png", alt: "JUNAEB" },
 ];
 
-const Logo = ({ src, alt, ariaHidden = false }: {
-  src: string;
-  alt: string;
-  ariaHidden?: boolean;
-}) => (
-  <li
-    aria-hidden={ariaHidden || undefined}
-    className="flex items-center justify-center flex-shrink-0 h-10 md:h-12 group/logo"
-    title={alt}
-  >
-    <img
-      src={src}
-      alt={ariaHidden ? "" : alt}
-      loading="lazy"
-      className="h-full w-auto max-w-[140px] object-contain
-        grayscale contrast-[1.05] opacity-65
-        transition duration-300 ease-out
-        group-hover/logo:grayscale-0 group-hover/logo:opacity-100
-        group-hover/logo:scale-[1.06]"
-    />
-  </li>
-);
-
 export default function TrustedBy() {
+  const [ref, inView] = useInView<HTMLUListElement>(0.15);
+
   return (
-    <section className="py-8 md:py-10 border-y border-[var(--hairline)] bg-ink-900/40 overflow-hidden">
+    <section className="py-10 md:py-14 border-y border-[var(--hairline)] bg-ink-900/40">
       <div className="container-edge">
-        <div className="text-center mb-6 md:mb-7">
+        <div className="text-center mb-8 md:mb-10">
           <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream-400">
             Sincronizado en tiempo real con ChileCompra · cobertura 100% Jun 2024 → hoy
           </span>
         </div>
-      </div>
 
-      {/* Two-track seamless marquee:
-          Each <ul> has internal `gap` AND right padding equal to gap.
-          The track is 2× one ul. Animation translates -50% which equals
-          exactly one ul width, so the second ul slides into the first's
-          position with no visual cut. */}
-      <div className="relative group/marquee">
-        <div className="absolute inset-y-0 left-0 w-32 md:w-48 bg-gradient-to-r from-ink-900 to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 md:w-48 bg-gradient-to-l from-ink-900 to-transparent z-10 pointer-events-none" />
-
-        <div className="flex w-max animate-marquee group-hover/marquee:[animation-play-state:paused]">
-          <ul className="flex items-center gap-12 md:gap-16 pr-12 md:pr-16 shrink-0 m-0 list-none">
-            {logos.map((l, i) => (
-              <Logo key={`a-${i}`} {...l} />
-            ))}
-          </ul>
-          <ul className="flex items-center gap-12 md:gap-16 pr-12 md:pr-16 shrink-0 m-0 list-none">
-            {logos.map((l, i) => (
-              <Logo key={`b-${i}`} {...l} ariaHidden />
-            ))}
-          </ul>
-        </div>
+        <ul
+          ref={ref}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-10 md:gap-x-12 md:gap-y-12 m-0 list-none"
+        >
+          {logos.map((l, i) => (
+            <li
+              key={i}
+              title={l.alt}
+              className="flex items-center justify-center h-10 md:h-12 group/logo
+                transition-all duration-500 ease-out"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(12px)",
+                transitionDelay: `${i * 60}ms`,
+              }}
+            >
+              <img
+                src={l.src}
+                alt={l.alt}
+                loading="lazy"
+                className="h-full w-auto max-w-[150px] object-contain
+                  grayscale contrast-[1.05] opacity-65
+                  transition duration-300 ease-out
+                  group-hover/logo:grayscale-0 group-hover/logo:opacity-100
+                  group-hover/logo:scale-[1.06]"
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
