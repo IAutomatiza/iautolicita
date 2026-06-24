@@ -85,7 +85,7 @@ export default function Hero() {
           </div>
 
           <div className="mt-7 font-mono text-[11px] uppercase tracking-[0.18em] text-cream-400 reveal">
-            Cobertura Jun 2024 → May 2026 · 100%  ·  Multi-organización · Chat IA · WhatsApp
+            Multi-organización · Chat IA · WhatsApp
           </div>
         </div>
 

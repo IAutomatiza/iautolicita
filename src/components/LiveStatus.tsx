@@ -180,7 +180,7 @@ export default function LiveStatus() {
               {fmtCompact(licN)}
             </div>
             <div className="mt-3 font-mono text-[10.5px]" style={{ color: "rgba(255,255,255,0.40)" }}>
-              cobertura 100% · Jun 2024 →
+              histórico acumulado
             </div>
           </div>
 

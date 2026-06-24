@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 const faqs = [
   {
     q: "¿Cómo se conecta IAutoLicita con ChileCompra?",
-    a: "Pipeline en producción con cobertura 100% Jun 2024 → hoy: 441K licitaciones, 7.2M adjudicaciones y 6.4M órdenes de compra. Crons nocturnos refrescan los 8 data marts precalculados; las oportunidades vivas se actualizan cada 2 horas. Triggers en Postgres normalizan y explotan automáticamente los ítems de cada licitación.",
+    a: "Pipeline en producción: 441K licitaciones, 7.2M adjudicaciones y 6.4M órdenes de compra. Crons nocturnos refrescan los 8 data marts precalculados; las oportunidades vivas se actualizan cada 2 horas. Triggers en Postgres normalizan y explotan automáticamente los ítems de cada licitación.",
   },
   {
     q: "¿Necesito instalar algo?",
