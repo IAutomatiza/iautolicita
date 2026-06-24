@@ -3,7 +3,6 @@ import {
   Star,
   TrendingUp,
   Search,
-  Paperclip,
   Shield,
   ChevronRight,
 } from "lucide-react";
@@ -123,89 +122,132 @@ const DetectionFeedMock = () => {
 };
 
 /* ════════════════════════════════════════════════════════════
-   MOCK 2 · Chat IA — chat-app-like screen
+   MOCK 2 · ARIA — assistant cycling through its capabilities
+   (Bases · Precios · Competencia · Alertas)
 ═══════════════════════════════════════════════════════════════ */
 
-const ChatMock = () => (
-  <div className="absolute inset-0 flex flex-col p-6">
-    {/* Context bar */}
-    <div className="flex items-center justify-between pb-4 border-b border-[var(--hairline)] mb-5 flex-shrink-0">
-      <div className="flex items-center gap-3 min-w-0">
-        <div className="h-9 w-9 grid place-items-center rounded-lg bg-amber-400/10 border border-amber-400/25 flex-shrink-0">
-          <Paperclip className="h-4 w-4 text-amber-400" strokeWidth={1.6} />
-        </div>
-        <div className="min-w-0">
-          <div className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-cream-300">
-            Lic. 1057-887-LP25 · MOP
-          </div>
-          <div className="font-display font-medium text-[14px] text-cream-50 mt-0.5 truncate">
-            Estudio carga vial Ruta CH-225
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center gap-2 flex-shrink-0">
-        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-amber-400 px-2 py-1 border border-amber-400/30 bg-amber-400/[0.06] rounded-full">
-          Score 84
-        </span>
-      </div>
-    </div>
+const AriaMock = () => {
+  const turns = [
+    {
+      cat: "Bases",
+      q: "¿Criterios de evaluación de la 4500-12-LP24?",
+      a: "Técnica 40% · Económica 35% · Administrativa 25%. Plazo 45 días corridos, boleta de garantía 10%.",
+      chips: ["Técnica 40%", "Económica 35%", "Plazo 45d"],
+    },
+    {
+      cat: "Precios",
+      q: "¿Precio real pagado por notebooks en 2024?",
+      a: "Promedio $487.320 · rango p25–p75 $389K–$612K · mejor por volumen $421.500.",
+      chips: ["12.847 OCs", "p25–p75", "−14% volumen"],
+    },
+    {
+      cat: "Competencia",
+      q: "¿Quiénes compiten conmigo en MINSAL?",
+      a: "847 adjudicaciones en 12 meses. Comercial Médica 34%, HealthSupply 21%, MediTech 14%. Tú: 7%.",
+      chips: ["5 rivales", "MINSAL", "Q1 +23%"],
+    },
+    {
+      cat: "Alertas",
+      q: "Alértame de licitaciones TI sobre $50M",
+      a: "Configurada: TI · Software · Hardware · ≥ $50M · tiempo real + resumen 8:00 AM. 3 activas coinciden.",
+      chips: ["≥ $50M", "tiempo real", "3 activas"],
+    },
+  ];
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % turns.length), 3800);
+    return () => clearInterval(t);
+  }, [turns.length]);
+  const turn = turns[idx];
 
-    {/* Messages — flex-1 with overflow-hidden so it doesn't bleed */}
-    <div className="flex-1 space-y-3 overflow-hidden min-h-0 [mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)]">
-      <div className="flex justify-end" style={{ animation: "fadeInChat 0.5s 0.1s both" }}>
-        <div className="max-w-[78%] bg-amber-400/10 border border-amber-400/25 rounded-2xl rounded-br-sm px-4 py-2.5">
-          <p className="font-sans text-[13px] text-cream-50">¿Qué acreditaciones técnicas exigen?</p>
-        </div>
-      </div>
-      <div className="flex justify-start" style={{ animation: "fadeInChat 0.5s 0.7s both" }}>
-        <div className="max-w-[88%] border-l-2 border-amber-400 pl-3.5 py-1">
-          <div className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-amber-400 mb-1.5">
-            IAutoLicita · Claude
-          </div>
-          <p className="font-sans text-[13px] leading-[1.55] text-cream-100">
-            ISO 9001:2015 vigente, registro MOP categoría 2A o superior, mínimo 3 obras similares en últimos 5 años. Las bases admiten consorcios siempre que el líder cumpla MOP.
-          </p>
-          <div className="mt-2.5 flex flex-wrap gap-1">
-            {["ISO 9001", "Registro MOP 2A", "3+ obras", "Consorcios OK"].map((c) => (
-              <span key={c} className="font-mono text-[9px] px-1.5 py-0.5 border border-amber-400/30 bg-amber-400/[0.06] text-amber-400 rounded">
-                {c}
-              </span>
-            ))}
+  return (
+    <div className="absolute inset-0 flex flex-col p-5 md:p-6">
+      {/* ARIA identity */}
+      <div className="flex items-center justify-between pb-3 border-b border-[var(--hairline)] flex-shrink-0">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <span className="h-8 w-8 grid place-items-center rounded-lg bg-amber-400/10 border border-amber-400/30 flex-shrink-0">
+            <span className="h-2 w-2 rounded-full bg-amber-400" />
+          </span>
+          <div className="min-w-0">
+            <div className="font-display font-medium text-[15px] text-cream-50 leading-none">
+              ARIA
+            </div>
+            <div className="font-mono text-[8.5px] uppercase tracking-[0.16em] text-cream-300 mt-1 truncate">
+              Asistente de inteligencia
+            </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-end" style={{ animation: "fadeInChat 0.5s 1.5s both" }}>
-        <div className="max-w-[78%] bg-amber-400/10 border border-amber-400/25 rounded-2xl rounded-br-sm px-4 py-2.5">
-          <p className="font-sans text-[13px] text-cream-50">¿Cuál es el plazo de presentación?</p>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          <LiveDot size={6} />
+          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-amber-400">
+            en línea
+          </span>
         </div>
       </div>
-      <div className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-cream-400 pl-3.5" style={{ animation: "fadeInChat 0.5s 2s both" }}>
-        <span className="flex gap-0.5">
-          <span className="h-1 w-1 rounded-full bg-amber-400 animate-pulse-soft" />
-          <span className="h-1 w-1 rounded-full bg-amber-400 animate-pulse-soft [animation-delay:0.2s]" />
-          <span className="h-1 w-1 rounded-full bg-amber-400 animate-pulse-soft [animation-delay:0.4s]" />
-        </span>
-        Buscando en bases · 847 KB
-      </div>
-    </div>
 
-    {/* Input bar */}
-    <div className="mt-4 pt-3 border-t border-[var(--hairline)] flex items-center gap-3 flex-shrink-0">
-      <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-ink-900/30 border border-[var(--hairline)] rounded-lg">
-        <Search className="h-3.5 w-3.5 text-cream-400" strokeWidth={1.8} />
-        <span className="font-sans text-[12.5px] text-cream-400">Pregunta sobre esta licitación…</span>
+      {/* Capability chips — active one highlights as it cycles */}
+      <div className="flex flex-wrap gap-1.5 mt-3 flex-shrink-0">
+        {turns.map((t, i) => (
+          <span
+            key={t.cat}
+            className={`font-mono text-[9px] uppercase tracking-[0.14em] px-2 py-1 rounded-full border transition-all duration-300 ${
+              i === idx
+                ? "border-amber-400/40 bg-amber-400/[0.08] text-amber-400"
+                : "border-[var(--hairline)] text-cream-400"
+            }`}
+          >
+            {t.cat}
+          </span>
+        ))}
       </div>
-      <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-cream-400 flex-shrink-0">⌘ ↵</span>
-    </div>
 
-    <style>{`
-      @keyframes fadeInChat {
-        from { opacity: 0; transform: translateY(8px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-    `}</style>
-  </div>
-);
+      {/* Conversation — re-keys per turn to replay the entrance */}
+      <div key={idx} className="flex-1 min-h-0 overflow-hidden mt-4 flex flex-col gap-3">
+        <div className="flex justify-end" style={{ animation: "ariaIn 0.45s 0.05s both" }}>
+          <div className="max-w-[82%] bg-amber-400/10 border border-amber-400/25 rounded-2xl rounded-br-sm px-3.5 py-2">
+            <p className="font-sans text-[12.5px] text-cream-50">{turn.q}</p>
+          </div>
+        </div>
+        <div className="flex justify-start" style={{ animation: "ariaIn 0.5s 0.5s both" }}>
+          <div className="max-w-[94%] border-l-2 border-amber-400 pl-3.5 py-1">
+            <div className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-amber-400 mb-1.5">
+              ARIA · {turn.cat}
+            </div>
+            <p className="font-sans text-[12.5px] leading-[1.55] text-cream-100">
+              {turn.a}
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1">
+              {turn.chips.map((c) => (
+                <span
+                  key={c}
+                  className="font-mono text-[9px] px-1.5 py-0.5 border border-amber-400/30 bg-amber-400/[0.06] text-amber-400 rounded"
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Input bar */}
+      <div className="mt-3 pt-3 border-t border-[var(--hairline)] flex items-center gap-3 flex-shrink-0">
+        <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-ink-900/30 border border-[var(--hairline)] rounded-lg">
+          <Search className="h-3.5 w-3.5 text-cream-400" strokeWidth={1.8} />
+          <span className="font-sans text-[12px] text-cream-400">Pregúntale algo a ARIA…</span>
+        </div>
+        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-cream-400 flex-shrink-0">⌘ ↵</span>
+      </div>
+
+      <style>{`
+        @keyframes ariaIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </div>
+  );
+};
 
 /* ════════════════════════════════════════════════════════════
    MOCK 3 · Órdenes de Compra — dashboard-style screen
@@ -476,11 +518,11 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    id: "chat",
-    tag: "Claude · bases",
-    title: "Chat IA con bases técnicas",
-    body: "Cada licitación tiene su hilo IA. Pregunta sobre acreditaciones, plazos, riesgos. Acceso al texto completo de las bases con persistencia por organización.",
-    Mock: ChatMock,
+    id: "aria",
+    tag: "asistente IA",
+    title: "ARIA",
+    body: "Tu asistente de inteligencia. Pregúntale en lenguaje natural sobre bases, precios reales pagados, competencia y alertas — responde con datos de ChileCompra, no con texto genérico.",
+    Mock: AriaMock,
   },
   {
     id: "detection",
