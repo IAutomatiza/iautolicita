@@ -158,7 +158,34 @@ const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
     from: "aria",
     node: (
       <>
-        Apunta a <span className="font-semibold">$139,9M</span> — 1,8% bajo la mediana que MINSAL pagó por ítems similares: ganas sin regalar margen. Ojo: según la nota de Camila (12 jun) hay que renovar la ISO 13485, vence justo antes del cierre.
+        Apunta a <span className="font-semibold">$139,9M</span> — 1,8% bajo la mediana que MINSAL pagó por ítems similares: ganas sin regalar margen.
+      </>
+    ),
+  },
+  { from: "user", node: <>¿Hay algún riesgo que deba revisar antes de postular?</> },
+  {
+    from: "aria",
+    node: (
+      <>
+        Sí: según la nota de Camila (12 jun), la ISO 13485 vence <span className="font-semibold">3 días antes del cierre</span> — hay que renovarla. En el foro, el organismo ya confirmó boleta de fiel cumplimiento del <span className="font-semibold">10%</span>.
+      </>
+    ),
+  },
+  { from: "user", node: <>¿Y quién suele ganar en este organismo?</> },
+  {
+    from: "aria",
+    node: (
+      <>
+        3 proveedores concentran el <span className="font-semibold">58%</span> de las adjudicaciones de MINSAL en tu rubro. No ganan por precio, sino por evaluación técnica — justo donde tu perfil tiene ventaja.
+      </>
+    ),
+  },
+  { from: "user", node: <>Perfecto. Prepárame el resumen para el equipo.</> },
+  {
+    from: "aria",
+    node: (
+      <>
+        Listo ✅ Dejé en las notas internas el resumen con score, precio sugerido, riesgo de la ISO y los 3 competidores. Lo verá todo tu equipo.
       </>
     ),
   },
@@ -169,24 +196,28 @@ const AriaMock = () => {
   const [shown, setShown] = useState(0);
   const [typing, setTyping] = useState(false);
 
-  // Restart the whole conversation every ~9s
-  useEffect(() => {
-    const id = window.setInterval(() => setCycle((c) => c + 1), 9000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  // Timeline: reveal messages with a "typing…" beat before each ARIA reply
+  // Timeline: reveal each message with a "typing…" beat and enough time to read.
   useEffect(() => {
     setShown(0);
     setTyping(false);
     const timers: number[] = [];
     const at = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
-    at(350, () => setShown(1)); // user 1
-    at(900, () => setTyping(true));
-    at(2000, () => { setTyping(false); setShown(2); }); // aria 1
-    at(2850, () => setShown(3)); // user 2
-    at(3450, () => setTyping(true));
-    at(4650, () => { setTyping(false); setShown(4); }); // aria 2
+    at(600, () => setShown(1)); // user 1
+    at(2000, () => setTyping(true));
+    at(3600, () => { setTyping(false); setShown(2); }); // aria 1
+    at(6800, () => setShown(3)); // user 2
+    at(7700, () => setTyping(true));
+    at(9100, () => { setTyping(false); setShown(4); }); // aria 2
+    at(12000, () => setShown(5)); // user 3
+    at(12900, () => setTyping(true));
+    at(14600, () => { setTyping(false); setShown(6); }); // aria 3
+    at(18000, () => setShown(7)); // user 4
+    at(18900, () => setTyping(true));
+    at(20500, () => { setTyping(false); setShown(8); }); // aria 4
+    at(23700, () => setShown(9)); // user 5
+    at(24600, () => setTyping(true));
+    at(26000, () => { setTyping(false); setShown(10); }); // aria 5
+    at(31000, () => setCycle((c) => c + 1)); // hold, then restart
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [cycle]);
 
@@ -230,8 +261,8 @@ const AriaMock = () => {
           </div>
         </div>
 
-        {/* Messages — revealed in sequence */}
-        <div className="flex-1 min-h-0 overflow-hidden px-4 py-3 flex flex-col gap-2.5">
+        {/* Messages — revealed in sequence, anchored to the bottom */}
+        <div className="flex-1 min-h-0 overflow-hidden px-4 py-3 flex flex-col justify-end gap-2.5 [mask-image:linear-gradient(to_bottom,transparent,black_14%)]">
           {ariaScript.slice(0, shown).map((m, i) =>
             m.from === "user" ? (
               <div
