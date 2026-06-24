@@ -140,12 +140,55 @@ const AriaMark = ({ size = 18 }: { size?: number }) => (
   </svg>
 );
 
+const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
+  { from: "user", node: <>ARIA, ¿qué licitación me conviene priorizar esta semana?</> },
+  {
+    from: "aria",
+    node: (
+      <>
+        La <span className="font-semibold">1057-412-LP25 de MINSAL</span>. Tu match es{" "}
+        <span className="font-semibold">88/100</span> y el organismo adjudica el{" "}
+        <span className="font-semibold">86%</span> de este rubro — de las 3 que revisaste, es la de mayor probabilidad:{" "}
+        <span className="font-semibold">74%</span>.
+      </>
+    ),
+  },
+  { from: "user", node: <>¿Y a qué precio debería ir?</> },
+  {
+    from: "aria",
+    node: (
+      <>
+        Apunta a <span className="font-semibold">$139,9M</span> — 1,8% bajo la mediana que MINSAL pagó por ítems similares: ganas sin regalar margen. Ojo: según la nota de Camila (12 jun) hay que renovar la ISO 13485, vence justo antes del cierre.
+      </>
+    ),
+  },
+];
+
 const AriaMock = () => {
   const [cycle, setCycle] = useState(0);
+  const [shown, setShown] = useState(0);
+  const [typing, setTyping] = useState(false);
+
+  // Restart the whole conversation every ~9s
   useEffect(() => {
-    const t = setInterval(() => setCycle((c) => c + 1), 9000);
-    return () => clearInterval(t);
+    const id = window.setInterval(() => setCycle((c) => c + 1), 9000);
+    return () => window.clearInterval(id);
   }, []);
+
+  // Timeline: reveal messages with a "typing…" beat before each ARIA reply
+  useEffect(() => {
+    setShown(0);
+    setTyping(false);
+    const timers: number[] = [];
+    const at = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
+    at(350, () => setShown(1)); // user 1
+    at(900, () => setTyping(true));
+    at(2000, () => { setTyping(false); setShown(2); }); // aria 1
+    at(2850, () => setShown(3)); // user 2
+    at(3450, () => setTyping(true));
+    at(4650, () => { setTyping(false); setShown(4); }); // aria 2
+    return () => timers.forEach((t) => window.clearTimeout(t));
+  }, [cycle]);
 
   return (
     <div
@@ -168,7 +211,7 @@ const AriaMock = () => {
       />
 
       {/* Content — chat app */}
-      <div key={cycle} className="relative h-full flex flex-col">
+      <div className="relative h-full flex flex-col">
         {/* Chat header */}
         <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/10 flex-shrink-0">
           <span className="h-9 w-9 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
@@ -179,7 +222,7 @@ const AriaMock = () => {
               ARIA<span className="text-[#55b4f8]">.</span>
             </div>
             <div className="flex items-center gap-1.5 mt-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80] animate-pulse" />
               <span className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/45">
                 en línea
               </span>
@@ -187,57 +230,53 @@ const AriaMock = () => {
           </div>
         </div>
 
-        {/* Messages */}
+        {/* Messages — revealed in sequence */}
         <div className="flex-1 min-h-0 overflow-hidden px-4 py-3 flex flex-col gap-2.5">
-          {/* User question — about a specific tender */}
-          <div
-            className="self-end max-w-[84%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
-            style={{ animation: `cleoIn 0.4s 0.1s both` }}
-          >
-            <p className="font-sans text-[13px] leading-[1.4] text-white">
-              ¿Me conviene postular a la 1057-412-LP25 de MINSAL?
-            </p>
-          </div>
+          {ariaScript.slice(0, shown).map((m, i) =>
+            m.from === "user" ? (
+              <div
+                key={`${cycle}-${i}`}
+                className="self-end max-w-[84%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
+                style={{ animation: "msgIn 0.45s cubic-bezier(0.16,1,0.3,1) both" }}
+              >
+                <p className="font-sans text-[13px] leading-[1.4] text-white">{m.node}</p>
+              </div>
+            ) : (
+              <div
+                key={`${cycle}-${i}`}
+                className="flex items-start gap-2 self-start max-w-[90%]"
+                style={{ animation: "msgIn 0.45s cubic-bezier(0.16,1,0.3,1) both" }}
+              >
+                <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
+                  <AriaMark size={12} />
+                </span>
+                <div className="rounded-2xl rounded-tl-md px-4 py-2.5 bg-white/[0.08] border border-white/10 backdrop-blur-sm">
+                  <p className="font-sans text-[13px] leading-[1.5] text-white">{m.node}</p>
+                </div>
+              </div>
+            )
+          )}
 
-          {/* ARIA answer — plain conversational text */}
-          <div className="flex items-start gap-2 self-start max-w-[88%]" style={{ animation: `cleoIn 0.5s 0.7s both` }}>
-            <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-              <AriaMark size={12} />
-            </span>
-            <div className="rounded-2xl rounded-tl-md px-4 py-2.5 bg-white/[0.08] border border-white/10 backdrop-blur-sm space-y-2">
-              <p className="font-sans text-[13px] leading-[1.5] text-white">
-                Sí, tiene buen fit con tu empresa. Tu score de match es <span className="font-semibold">88/100</span> (coinciden insumos clínicos, reactivos y laboratorio) y la probabilidad estimada de adjudicación es <span className="font-semibold">74%</span>.
-              </p>
-              <p className="font-sans text-[13px] leading-[1.5] text-white">
-                MINSAL adjudica el <span className="font-semibold">86%</span> de sus licitaciones de este rubro (142 históricas) y emite la OC en ~38 días.
-              </p>
-              <p className="font-sans text-[13px] leading-[1.5] text-white">
-                Eso sí: según una nota de Camila del 12 jun, hay que renovar la ISO 13485 antes del cierre.
-              </p>
+          {/* Typing indicator */}
+          {typing && (
+            <div
+              className="flex items-end gap-2 self-start"
+              style={{ animation: "msgIn 0.3s ease-out both" }}
+            >
+              <span className="h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
+                <AriaMark size={12} />
+              </span>
+              <div className="rounded-2xl rounded-tl-md px-4 py-3 bg-white/[0.08] border border-white/10 backdrop-blur-sm flex items-center gap-1">
+                {[0, 1, 2].map((d) => (
+                  <span
+                    key={d}
+                    className="h-1.5 w-1.5 rounded-full bg-white/70"
+                    style={{ animation: `ariaDot 1.1s ${d * 0.16}s infinite` }}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-
-          {/* User follow-up — documents */}
-          <div
-            className="self-end max-w-[84%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
-            style={{ animation: `cleoIn 0.4s 1.8s both` }}
-          >
-            <p className="font-sans text-[13px] leading-[1.4] text-white">
-              ¿Qué garantías y plazo exigen las bases?
-            </p>
-          </div>
-
-          {/* ARIA documents answer — plain text with citation */}
-          <div className="flex items-start gap-2 self-start max-w-[88%]" style={{ animation: `cleoIn 0.5s 2.4s both` }}>
-            <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-              <AriaMark size={12} />
-            </span>
-            <div className="rounded-2xl rounded-tl-md px-4 py-2.5 bg-white/[0.08] border border-white/10 backdrop-blur-sm">
-              <p className="font-sans text-[13px] leading-[1.5] text-white">
-                Según las bases técnicas (sección 8): boleta de seriedad por el <span className="font-semibold">3%</span> y de fiel cumplimiento por el <span className="font-semibold">10%</span>. El plazo de entrega es de 45 días corridos.
-              </p>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Input bar */}
@@ -254,9 +293,13 @@ const AriaMock = () => {
       </div>
 
       <style>{`
-        @keyframes cleoIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes msgIn {
+          from { opacity: 0; transform: translateY(10px) scale(0.98); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes ariaDot {
+          0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+          30% { transform: translateY(-3px); opacity: 1; }
         }
       `}</style>
     </div>
