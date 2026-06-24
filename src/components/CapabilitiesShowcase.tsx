@@ -143,16 +143,33 @@ const AriaMock = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#EDEFFB]">
+    <div
+      className="absolute inset-0 overflow-hidden text-white"
+      style={{
+        background:
+          "linear-gradient(180deg, #000115 0%, #000324 14%, #000a37 30%, #001560 52%, #002494 74%, #003ab3 100%)",
+      }}
+    >
+      {/* Depth overlay + dot texture (echoes the /aria hero) */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 70% 50% at 50% 32%, rgba(0,1,21,0.55) 0%, transparent 100%)" }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(rgba(85,180,248,0.16) 1px, transparent 1px)", backgroundSize: "16px 16px" }}
+      />
       {/* Giant faint watermark */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-7 opacity-[0.045] select-none"
+        className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-7 opacity-[0.06] select-none"
       >
         {[0, 1, 2, 3].map((i) => (
           <span
             key={i}
-            className="font-display font-bold text-[58px] md:text-[84px] leading-none tracking-tight text-[#0064E0] whitespace-nowrap"
+            className="font-display font-bold text-[58px] md:text-[84px] leading-none tracking-tight text-[#55b4f8] whitespace-nowrap"
           >
             CHAT ARIA
           </span>
@@ -161,22 +178,35 @@ const AriaMock = () => {
 
       {/* Content */}
       <div key={cycle} className="relative h-full flex flex-col px-5 md:px-7 pt-4 pb-4">
-        {/* Brand badge + profile */}
+        {/* ARIA logo — same mark as the /aria page */}
         <div className="relative flex items-center justify-center flex-shrink-0">
-          <div className="px-3.5 py-1.5 rounded-2xl bg-[#0064E0] shadow-[0_6px_18px_-6px_rgba(0,100,224,0.6)]">
-            <span className="font-display font-bold text-[19px] tracking-tight text-white leading-none">
-              ARIA
+          <div className="inline-flex items-center gap-2">
+            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden>
+              <circle cx="3" cy="4" r="1.5" fill="#55b4f8" opacity="0.5" />
+              <circle cx="3" cy="10" r="1.5" fill="#55b4f8" opacity="0.7" />
+              <circle cx="3" cy="16" r="1.5" fill="#55b4f8" opacity="0.5" />
+              <path d="M4.5 4 L10 8.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
+              <path d="M4.5 10 L10 10" stroke="#55b4f8" strokeWidth="0.8" opacity="0.6" />
+              <path d="M4.5 16 L10 11.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
+              <circle cx="11" cy="10" r="3" fill="#55b4f8" opacity="0.15" />
+              <circle cx="11" cy="10" r="1.8" fill="#55b4f8" opacity="0.3" />
+              <circle cx="11" cy="10" r="0.8" fill="#e0f6ff" />
+              <path d="M14 10 L18.5 10" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" />
+              <path d="M17 8 L19 10 L17 12" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            </svg>
+            <span className="font-display font-semibold text-[22px] tracking-tight leading-none text-white">
+              ARIA<span className="text-[#55b4f8]">.</span>
             </span>
           </div>
-          <div className="absolute right-0 h-8 w-8 grid place-items-center rounded-full border border-[#0064E0]/30">
-            <span className="h-3 w-3 rounded-full border-[1.5px] border-[#0064E0]/55" />
+          <div className="absolute right-0 h-8 w-8 grid place-items-center rounded-full border border-[#55b4f8]/30">
+            <span className="h-3 w-3 rounded-full border-[1.5px] border-[#55b4f8]/60" />
           </div>
         </div>
 
         {/* Today divider */}
         <div className="mt-3 flex-shrink-0">
-          <div className="text-center font-sans text-[11px] text-cream-300 mb-1.5">Hoy</div>
-          <div className="h-px bg-[#0064E0]/10" />
+          <div className="text-center font-sans text-[11px] text-white/45 mb-1.5">Hoy</div>
+          <div className="h-px bg-white/10" />
         </div>
 
         {/* Conversation */}
@@ -197,10 +227,10 @@ const AriaMock = () => {
               <button
                 key={o.label}
                 type="button"
-                className="bg-white border border-[#0064E0]/40 rounded-full px-4 py-2 shadow-[0_4px_14px_-8px_rgba(0,40,120,0.25)] hover:bg-[#0064E0]/[0.05] transition-colors"
+                className="rounded-full px-4 py-2 border border-[#55b4f8]/45 bg-[#55b4f8]/[0.12] backdrop-blur-sm shadow-[0_6px_18px_-10px_rgba(0,0,0,0.6)] hover:bg-[#55b4f8]/20 transition-colors"
                 style={{ animation: `cleoIn 0.45s ${1.5 + i * 0.12}s both` }}
               >
-                <span className="font-sans text-[13px] font-medium text-[#0064E0]">
+                <span className="font-sans text-[13px] font-medium text-white">
                   {o.label} {o.emoji}
                 </span>
               </button>
