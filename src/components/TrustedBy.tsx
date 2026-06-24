@@ -6,19 +6,16 @@
 
 import useInView from "../hooks/useInView";
 
+// Only clean transparent-background marks are kept here, so the grid stays
+// visually consistent. The banner-style raster assets (chilecompra.jpg,
+// registrocivil/sernac/conaf/minsal/junaeb .png) were dropped on purpose.
 const logos = [
-  { src: "/logos/chilecompra.jpg", alt: "ChileCompra · Dirección de Compras y Contratación Pública" },
   { src: "/logos/carabineros.svg", alt: "Carabineros de Chile" },
   { src: "/logos/codelco.svg", alt: "Codelco" },
   { src: "/logos/armada.svg", alt: "Armada de Chile" },
   { src: "/logos/fach.svg", alt: "Fuerza Aérea de Chile" },
   { src: "/logos/ejercito.svg", alt: "Ejército de Chile" },
   { src: "/logos/sii.svg", alt: "SII · Servicio de Impuestos Internos" },
-  { src: "/logos/registrocivil.png", alt: "Servicio de Registro Civil e Identificación" },
-  { src: "/logos/sernac.png", alt: "SERNAC" },
-  { src: "/logos/conaf.png", alt: "CONAF" },
-  { src: "/logos/minsal.png", alt: "MINSAL" },
-  { src: "/logos/junaeb.png", alt: "JUNAEB" },
 ];
 
 export default function TrustedBy() {
@@ -37,7 +34,7 @@ export default function TrustedBy() {
             draws its right + bottom hairline, completing a clean lattice. */}
         <ul
           ref={ref}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 m-0 list-none
+          className="grid grid-cols-2 sm:grid-cols-3 m-0 list-none
             border-t border-l border-[var(--hairline)]"
         >
           {logos.map((l, i) => (
