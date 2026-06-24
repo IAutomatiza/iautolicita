@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Radar,
+  ScanSearch,
   MessageSquare,
   Building2,
   Network,
@@ -25,164 +25,102 @@ import Sparkline from "./ui/Sparkline";
 const DURATION_MS = 5500;
 
 /* ════════════════════════════════════════════════════════════
-   MOCK 1 · Detección IA — radar centered with side panels
+   MOCK 1 · Detección IA — live feed of detected tenders
+   (Profound "Opportunities"-style stream, replaces the old radar)
 ═══════════════════════════════════════════════════════════════ */
 
-const RadarMock = () => {
-  const points = [
-    { angle: 28, radius: 0.62, score: 92, org: "MINSAL" },
-    { angle: 55, radius: 0.85, score: 84, org: "MOP" },
-    { angle: 92, radius: 0.42, score: 71, org: "JUNAEB" },
-    { angle: 118, radius: 0.75, score: 88, org: "DGAC" },
-    { angle: 175, radius: 0.92, score: 86, org: "CONAF" },
-    { angle: 205, radius: 0.48, score: 79, org: "JUNJI" },
-    { angle: 238, radius: 0.78, score: 91, org: "FOSIS" },
-    { angle: 295, radius: 0.88, score: 73, org: "SAG" },
-    { angle: 322, radius: 0.45, score: 82, org: "SENCE" },
-    { angle: 12, radius: 0.36, score: 95, org: "MIN. JUSTICIA" },
+const DetectionFeedMock = () => {
+  const detections = [
+    { org: "MINSAL", title: "Insumos clínicos · regiones", score: 92, reason: "coincide con 3 categorías ganadas" },
+    { org: "MOP", title: "Estudio carga vial Ruta CH-225", score: 88, reason: "keyword 'ingeniería' + monto objetivo" },
+    { org: "CONAF", title: "Brigada control forestal", score: 86, reason: "categoría afín a tu perfil" },
+    { org: "JUNAEB", title: "Ración alimentaria escolar", score: 84, reason: "organismo comprador frecuente" },
+    { org: "FOSIS", title: "Programa apoyo social", score: 79, reason: "monto dentro de tu rango" },
   ];
-  const SIZE = 280;
-  const CX = SIZE / 2;
-  const CY = SIZE / 2;
-  const R = SIZE / 2 - 8;
-  const SWEEP = 5;
-  const [hl, setHl] = useState<{ org: string; score: number } | null>(null);
+  const [scan, setScan] = useState(0);
   useEffect(() => {
-    let raf = 0;
-    const t0 = performance.now();
-    const tick = (now: number) => {
-      const ang = (((now - t0) / 1000) % SWEEP) / SWEEP * 360;
-      const hit = points.find((p) => {
-        const d = Math.abs(((p.angle - ang + 540) % 360) - 180);
-        return Math.abs(d - 180) < 12;
-      });
-      setHl(hit ? { org: hit.org, score: hit.score } : null);
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  const polar = (a: number, r: number) => {
-    const rad = ((a - 90) * Math.PI) / 180;
-    return [CX + Math.cos(rad) * r, CY + Math.sin(rad) * r];
-  };
+    const t = setInterval(() => setScan((s) => (s + 1) % detections.length), 1500);
+    return () => clearInterval(t);
+  }, [detections.length]);
 
   return (
-    <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-[200px_1fr_200px] gap-3 p-4 md:p-6">
-      {/* LEFT panel — distribution */}
-      <div className="flex flex-col justify-between min-w-0">
-        <div>
-          <div className="num font-display font-medium text-[40px] leading-none tracking-[-0.04em] text-cream-50">
-            73<span className="text-amber-400">.4</span>
-          </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-cream-300 mt-1.5">
-            score promedio · 7d
-          </div>
-        </div>
-        <div className="space-y-2">
-          {[
-            { label: "≥ 80 pts", count: 7, color: "bg-amber-400" },
-            { label: "60–80 pts", count: 14, color: "bg-brand-300" },
-            { label: "< 60 pts", count: 21, color: "bg-cream-300/50" },
-          ].map((r) => (
-            <div key={r.label} className="flex items-center gap-2 text-[11px]">
-              <span className={`h-1.5 w-1.5 rounded-full ${r.color}`} />
-              <span className="font-mono text-cream-200 flex-1 truncate">{r.label}</span>
-              <span className="num font-mono text-cream-50">{r.count}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* CENTER — radar */}
-      <div className="flex items-center justify-center min-w-0">
-        <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="w-[220px] h-[220px] md:w-[280px] md:h-[280px]">
-          <defs>
-            <radialGradient id="sw4" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#0064E0" stopOpacity="0" />
-              <stop offset="60%" stopColor="#0064E0" stopOpacity="0" />
-              <stop offset="100%" stopColor="#0064E0" stopOpacity="0.45" />
-            </radialGradient>
-            <radialGradient id="cg4" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#0064E0" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#0064E0" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          {[0.25, 0.5, 0.75, 1].map((r, i) => (
-            <circle key={i} cx={CX} cy={CY} r={R * r} fill="none" stroke="rgba(0,100,224,0.18)" strokeWidth="1" strokeDasharray={i === 3 ? "0" : "2 4"} />
-          ))}
-          <line x1={CX - R} y1={CY} x2={CX + R} y2={CY} stroke="rgba(0,100,224,0.12)" strokeWidth="1" />
-          <line x1={CX} y1={CY - R} x2={CX} y2={CY + R} stroke="rgba(0,100,224,0.12)" strokeWidth="1" />
-          <circle cx={CX} cy={CY} r={28} fill="url(#cg4)" />
-          <g style={{ transformOrigin: `${CX}px ${CY}px`, animation: `radarSpin4 ${SWEEP}s linear infinite` }}>
-            <path
-              d={`M ${CX} ${CY} L ${CX} ${CY - R} A ${R} ${R} 0 0 1 ${CX + R * Math.sin((Math.PI / 180) * 45)} ${CY - R * Math.cos((Math.PI / 180) * 45)} Z`}
-              fill="url(#sw4)"
-            />
-            <line x1={CX} y1={CY} x2={CX} y2={CY - R} stroke="#0064E0" strokeWidth="2" strokeLinecap="round" opacity="0.9" />
-          </g>
-          {points.map((p, i) => {
-            const [x, y] = polar(p.angle, R * p.radius);
-            const isHigh = p.score >= 85;
-            const delay = (p.angle / 360) * SWEEP;
-            return (
-              <g key={i}>
-                <circle cx={x} cy={y} r={isHigh ? 3.5 : 2.5} fill="#0064E0" opacity={isHigh ? 1 : p.score >= 70 ? 0.65 : 0.4} />
-                <circle cx={x} cy={y} r={isHigh ? 3.5 : 2.5} fill="none" stroke="#0064E0" strokeWidth="1.4" opacity="0" style={{ animation: `radarPing4 ${SWEEP}s linear infinite`, animationDelay: `${delay}s`, transformOrigin: `${x}px ${y}px` }} />
-              </g>
-            );
-          })}
-          <circle cx={CX} cy={CY} r={3.5} fill="#0064E0" />
-          <circle cx={CX} cy={CY} r={3.5} fill="#0064E0" opacity="0.4">
-            <animate attributeName="r" values="3.5;10;3.5" dur="2.4s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.6;0;0.6" dur="2.4s" repeatCount="indefinite" />
-          </circle>
-        </svg>
-      </div>
-
-      {/* RIGHT panel — live readout */}
-      <div className="flex flex-col gap-3 min-w-0">
-        <div className="flex items-center gap-1.5 px-2 py-1 bg-amber-400/10 border border-amber-400/30 rounded-full self-end">
-          <LiveDot size={6} />
-          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-amber-400 font-medium">
-            scanning
+    <div className="absolute inset-0 flex flex-col p-5 md:p-6">
+      {/* Header — scanning indicator */}
+      <div className="flex items-center justify-between pb-3 border-b border-[var(--hairline)] flex-shrink-0">
+        <div className="flex items-center gap-2">
+          <LiveDot size={7} />
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-amber-400 font-medium">
+            Scanning ChileCompra · en vivo
           </span>
         </div>
-        <div className="bg-white border border-amber-400/30 rounded-lg p-3 shadow-md shadow-amber-400/10 min-h-[80px]">
-          <div className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-cream-300">
-            MATCH detectado
-          </div>
-          {hl ? (
-            <div className="flex items-baseline gap-2 mt-1">
-              <span className="num font-display font-medium text-[28px] leading-none text-amber-400">
-                {hl.score}
-              </span>
-              <span className="font-mono text-[10px] text-cream-200 truncate flex-1 min-w-0">
-                {hl.org}
-              </span>
-            </div>
-          ) : (
-            <div className="font-mono text-[10px] text-cream-300 mt-1 italic">
-              esperando...
-            </div>
-          )}
-        </div>
-        <div className="bg-ink-900/40 border border-[var(--hairline)] rounded-lg p-3">
-          <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-cream-300">
-            Detectadas hoy
-          </div>
-          <div className="num font-display font-medium text-[28px] leading-none text-cream-50 mt-1">
-            42
-          </div>
-          <div className="flex items-center gap-1 mt-1 font-mono text-[9.5px] text-amber-400">
-            <TrendingUp className="h-2.5 w-2.5" strokeWidth={2} />
-            +18% vs ayer
-          </div>
-        </div>
+        <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-cream-300">
+          6.062 procesadas
+        </span>
       </div>
+
+      {/* Feed — detection cards stream in */}
+      <div className="flex-1 min-h-0 overflow-hidden mt-3 space-y-2.5 [mask-image:linear-gradient(to_bottom,black_86%,transparent)]">
+        {detections.map((d, i) => {
+          const active = i === scan;
+          const high = d.score >= 85;
+          return (
+            <div
+              key={d.org}
+              className={`rounded-xl border p-3 transition-all duration-500 ${
+                active
+                  ? "border-amber-400/50 bg-amber-400/[0.05] shadow-md shadow-amber-400/10 scale-[1.015]"
+                  : "border-[var(--hairline)] bg-ink-900/30"
+              }`}
+              style={{ animation: `feedIn 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.12}s both` }}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-cream-300">
+                  {d.org}
+                </span>
+                <span
+                  className={`font-mono text-[9px] uppercase tracking-[0.14em] px-2 py-0.5 rounded-full border ${
+                    high
+                      ? "border-amber-400/40 bg-amber-400/[0.08] text-amber-400"
+                      : "border-[var(--hairline)] text-cream-300"
+                  }`}
+                >
+                  Score {d.score}
+                </span>
+              </div>
+              <div className="font-display font-medium text-[14px] text-cream-50 mt-1 truncate">
+                {d.title}
+              </div>
+              <div className="flex items-center gap-1.5 mt-1.5">
+                {high && (
+                  <TrendingUp className="h-3 w-3 text-amber-400 flex-shrink-0" strokeWidth={2} />
+                )}
+                <span className="font-sans text-[11.5px] text-cream-300 truncate">
+                  {d.reason}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Footer — daily tally */}
+      <div className="flex items-center justify-between pt-3 mt-1 border-t border-[var(--hairline)] flex-shrink-0">
+        <div className="flex items-baseline gap-2">
+          <span className="num font-display font-medium text-[22px] leading-none text-cream-50">
+            42
+          </span>
+          <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-cream-300">
+            detectadas hoy
+          </span>
+        </div>
+        <span className="flex items-center gap-1 font-mono text-[10px] text-amber-400">
+          <TrendingUp className="h-3 w-3" strokeWidth={2} />
+          +18% vs ayer
+        </span>
+      </div>
+
       <style>{`
-        @keyframes radarSpin4 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes radarPing4 { 0%, 92% { opacity: 0; transform: scale(1); } 93% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(3.5); } }
+        @keyframes feedIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
     </div>
   );
@@ -534,7 +472,7 @@ const MultiOrgRLSMock = () => {
 
 interface Feature {
   id: string;
-  Icon: typeof Radar;
+  Icon: typeof ScanSearch;
   title: string;
   body: string;
   Mock: React.ComponentType;
@@ -550,10 +488,10 @@ const features: Feature[] = [
   },
   {
     id: "detection",
-    Icon: Radar,
+    Icon: ScanSearch,
     title: "Detección automática con IA",
     body: "El motor escanea ChileCompra en vivo, lee cada licitación nueva y la puntúa contra tu perfil. 6.062 licitaciones procesadas, 7 sobre umbral típicamente.",
-    Mock: RadarMock,
+    Mock: DetectionFeedMock,
   },
   {
     id: "ocs",
