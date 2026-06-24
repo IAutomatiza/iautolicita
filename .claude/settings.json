@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/working/Desktop/iautomatiza/**)",
+      "WebFetch(domain:iautomatiza.cl)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173/src/App.tsx)",
+      "Bash(curl -s \"http://localhost:5173/src/index.css\")",
+      "Bash(curl -s https://iautomatiza.cl/ -L)"
+    ]
+  }
+}
