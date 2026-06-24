@@ -188,67 +188,95 @@ const AriaMock = () => {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 min-h-0 overflow-hidden px-4 py-3.5 flex flex-col gap-2.5">
-          {/* User question */}
+        <div className="flex-1 min-h-0 overflow-hidden px-4 py-3 flex flex-col gap-2.5">
+          {/* User question — about a specific tender */}
           <div
-            className="self-end max-w-[80%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
+            className="self-end max-w-[84%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
             style={{ animation: `cleoIn 0.4s 0.1s both` }}
           >
             <p className="font-sans text-[13px] leading-[1.4] text-white">
-              ¿Me conviene postular a la 4500-12-LP24 de MINSAL?
+              ¿Me conviene postular a la 1057-412-LP25 de MINSAL?
             </p>
           </div>
 
-          {/* ARIA strategic answer */}
-          <div className="flex items-start gap-2 self-start max-w-[94%]" style={{ animation: `cleoIn 0.5s 0.7s both` }}>
+          {/* ARIA multi-source answer */}
+          <div className="flex items-start gap-2 self-start max-w-[97%]" style={{ animation: `cleoIn 0.5s 0.7s both` }}>
             <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
               <AriaMark size={12} />
             </span>
             <div className="rounded-2xl rounded-tl-md px-3.5 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm">
-              <p className="font-sans text-[13px] leading-[1.45] text-white mb-2.5">
-                Sí, encaja fuerte con tu perfil:
-              </p>
-              <div className="grid grid-cols-3 gap-2">
-                {[
-                  { k: "Match perfil", v: "92/100" },
-                  { k: "Prob. ganar", v: "78%" },
-                  { k: "Cierra en", v: "12 días" },
-                ].map((m) => (
-                  <div key={m.k} className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-2">
-                    <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45 truncate">
-                      {m.k}
-                    </div>
-                    <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-1">
-                      {m.v}
-                    </div>
-                  </div>
+              {/* score + probability (perfil empresa) */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-1.5">
+                  <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45">Score match</div>
+                  <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-0.5">88/100</div>
+                </div>
+                <div className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-1.5">
+                  <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45">Prob. adjudicación</div>
+                  <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-0.5">74%</div>
+                </div>
+              </div>
+              {/* matching keywords */}
+              <div className="mt-2 flex flex-wrap gap-1">
+                {["insumos clínicos", "reactivos", "laboratorio"].map((k) => (
+                  <span
+                    key={k}
+                    className="font-mono text-[8.5px] px-1.5 py-0.5 rounded border border-[#55b4f8]/30 bg-[#55b4f8]/[0.08] text-[#9fd2fb]"
+                  >
+                    {k}
+                  </span>
                 ))}
               </div>
-              <p className="font-sans text-[12px] leading-[1.45] text-white/80 mt-2.5">
-                Ganaste 2 de 3 licitaciones similares en MINSAL.
+              {/* organism intelligence */}
+              <p className="font-sans text-[12.5px] leading-[1.45] text-white mt-2.5">
+                MINSAL adjudica el <span className="font-semibold text-[#55b4f8]">86%</span> de este rubro (142 licitaciones), OC en ~38 días.
               </p>
+              {/* internal team note — attributed */}
+              <div className="mt-2 rounded-lg border-l-2 border-[#fbbf24] bg-[#fbbf24]/[0.08] px-2.5 py-1.5">
+                <p className="font-sans text-[12px] leading-[1.4] text-white/90">
+                  📌 Según nota de <span className="font-medium">Camila · 12 jun</span>: renovar ISO 13485 antes del cierre.
+                </p>
+              </div>
+              {/* sources consulted */}
+              <div className="mt-2.5 flex items-center gap-1.5 flex-wrap">
+                <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/40">Fuentes</span>
+                {["Perfil", "Organismo", "Notas equipo"].map((s) => (
+                  <span
+                    key={s}
+                    className="font-mono text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-white/55"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* User follow-up */}
+          {/* User follow-up — documents */}
           <div
-            className="self-end max-w-[80%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
-            style={{ animation: `cleoIn 0.4s 1.6s both` }}
+            className="self-end max-w-[84%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
+            style={{ animation: `cleoIn 0.4s 1.8s both` }}
           >
             <p className="font-sans text-[13px] leading-[1.4] text-white">
-              ¿A qué precio exacto oferto?
+              ¿Qué garantías y plazo exigen las bases?
             </p>
           </div>
 
-          {/* ARIA price recommendation */}
-          <div className="flex items-start gap-2 self-start max-w-[90%]" style={{ animation: `cleoIn 0.5s 2.2s both` }}>
+          {/* ARIA documents answer */}
+          <div className="flex items-start gap-2 self-start max-w-[94%]" style={{ animation: `cleoIn 0.5s 2.4s both` }}>
             <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
               <AriaMark size={12} />
             </span>
             <div className="rounded-2xl rounded-tl-md px-3.5 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm">
-              <p className="font-sans text-[13px] leading-[1.5] text-white">
-                Oferta <span className="font-semibold text-[#55b4f8]">$139.900.000</span> — 1,8% bajo el p50 histórico. Margen óptimo sin sacrificar competitividad.
+              <p className="font-sans text-[12.5px] leading-[1.5] text-white">
+                Según las bases (§8): boleta de seriedad <span className="font-semibold text-[#55b4f8]">3%</span> y fiel cumplimiento <span className="font-semibold text-[#55b4f8]">10%</span>. Entrega en 45 días corridos.
               </p>
+              <div className="mt-2 flex items-center gap-1.5">
+                <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/40">Fuente</span>
+                <span className="font-mono text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-white/55">
+                  Bases técnicas · §8
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -609,9 +637,9 @@ export default function CapabilitiesShowcase() {
         </div>
 
         {/* Bento grid — every capability visible at once, live */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[262px]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[284px]">
           {/* ARIA — hero, spans 2×2 (Cleo-style, full-bleed) */}
-          <div className={`${tile} min-h-[520px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
+          <div className={`${tile} min-h-[600px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
             <AriaMock />
           </div>
 
