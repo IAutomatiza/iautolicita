@@ -1,7 +1,8 @@
 // Real institutional logos sourced from Wikimedia Commons.
-// Treatment: static responsive grid, grayscale + slight contrast for
-// monochrome consistency. Logos fade/slide in with a stagger when the
-// section scrolls into view, then stay still. Individual hover restores color.
+// Treatment: structured grid with hairline dividers (Rox-inspired) over the
+// dark ink background. Logos are grayscale for monochrome consistency and
+// fade/slide in with a stagger when the section scrolls into view, then stay
+// still. Individual hover restores color.
 
 import useInView from "../hooks/useInView";
 
@@ -32,28 +33,33 @@ export default function TrustedBy() {
           </span>
         </div>
 
+        {/* Bordered grid: the <ul> draws the top + left hairlines, each <li>
+            draws its right + bottom hairline, completing a clean lattice. */}
         <ul
           ref={ref}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-10 md:gap-x-12 md:gap-y-12 m-0 list-none"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 m-0 list-none
+            border-t border-l border-[var(--hairline)]"
         >
           {logos.map((l, i) => (
             <li
               key={i}
               title={l.alt}
-              className="flex items-center justify-center h-10 md:h-12 group/logo
-                transition-all duration-500 ease-out"
+              className="flex items-center justify-center h-24 md:h-28 px-6 group/logo
+                border-r border-b border-[var(--hairline)]
+                transition-all duration-500 ease-out
+                hover:bg-cream-50/[0.02]"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "translateY(0)" : "translateY(12px)",
-                transitionDelay: `${i * 60}ms`,
+                transitionDelay: `${i * 55}ms`,
               }}
             >
               <img
                 src={l.src}
                 alt={l.alt}
                 loading="lazy"
-                className="h-full w-auto max-w-[150px] object-contain
-                  grayscale contrast-[1.05] opacity-65
+                className="h-10 md:h-12 w-auto max-w-[150px] object-contain
+                  grayscale contrast-[1.05] opacity-60
                   transition duration-300 ease-out
                   group-hover/logo:grayscale-0 group-hover/logo:opacity-100
                   group-hover/logo:scale-[1.06]"
