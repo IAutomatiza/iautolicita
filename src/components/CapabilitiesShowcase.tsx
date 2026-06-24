@@ -124,18 +124,6 @@ const DetectionFeedMock = () => {
 ═══════════════════════════════════════════════════════════════ */
 
 const AriaMock = () => {
-  const intro = [
-    "Hola, soy ARIA 👋",
-    "Tu copiloto de inteligencia para licitaciones de ChileCompra.",
-    "¿Por dónde partimos?",
-  ];
-  const options = [
-    { label: "detectar licitaciones", emoji: "🎯" },
-    { label: "leer las bases", emoji: "📄" },
-    { label: "precios reales pagados", emoji: "💸" },
-    { label: "analizar mi competencia", emoji: "🥊" },
-    { label: "configurar alertas", emoji: "🔔" },
-  ];
   const [cycle, setCycle] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setCycle((c) => c + 1), 9000);
@@ -161,20 +149,6 @@ const AriaMock = () => {
         className="absolute inset-0 pointer-events-none"
         style={{ backgroundImage: "radial-gradient(rgba(85,180,248,0.16) 1px, transparent 1px)", backgroundSize: "16px 16px" }}
       />
-      {/* Giant faint watermark */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-7 opacity-[0.06] select-none"
-      >
-        {[0, 1, 2, 3].map((i) => (
-          <span
-            key={i}
-            className="font-display font-bold text-[58px] md:text-[84px] leading-none tracking-tight text-[#55b4f8] whitespace-nowrap"
-          >
-            CHAT ARIA
-          </span>
-        ))}
-      </div>
 
       {/* Content */}
       <div key={cycle} className="relative h-full flex flex-col px-5 md:px-7 pt-4 pb-4">
@@ -209,32 +183,74 @@ const AriaMock = () => {
           <div className="h-px bg-white/10" />
         </div>
 
-        {/* Conversation */}
-        <div className="flex-1 min-h-0 mt-3 flex flex-col gap-2 overflow-hidden">
-          {intro.map((m, i) => (
-            <div
-              key={i}
-              className="self-start max-w-[80%] bg-white rounded-3xl rounded-bl-md px-4 py-2.5 shadow-[0_10px_26px_-14px_rgba(0,40,120,0.3)]"
-              style={{ animation: `cleoIn 0.5s ${0.1 + i * 0.45}s both` }}
-            >
-              <p className="font-sans text-[13.5px] leading-[1.4] text-cream-50">{m}</p>
-            </div>
-          ))}
+        {/* Conversation — a real, high-value exchange */}
+        <div className="flex-1 min-h-0 mt-3 flex flex-col gap-2.5 overflow-hidden">
+          {/* User question */}
+          <div
+            className="self-end max-w-[82%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
+            style={{ animation: `cleoIn 0.4s 0.1s both` }}
+          >
+            <p className="font-sans text-[13px] leading-[1.4] text-white">
+              ¿Me conviene postular a la 4500-12-LP24 de MINSAL?
+            </p>
+          </div>
 
-          {/* Suggested capability replies */}
-          <div className="mt-1.5 flex flex-col items-end gap-2">
-            {options.map((o, i) => (
-              <button
-                key={o.label}
-                type="button"
-                className="rounded-full px-4 py-2 border border-[#55b4f8]/45 bg-[#55b4f8]/[0.12] backdrop-blur-sm shadow-[0_6px_18px_-10px_rgba(0,0,0,0.6)] hover:bg-[#55b4f8]/20 transition-colors"
-                style={{ animation: `cleoIn 0.45s ${1.5 + i * 0.12}s both` }}
-              >
-                <span className="font-sans text-[13px] font-medium text-white">
-                  {o.label} {o.emoji}
-                </span>
-              </button>
-            ))}
+          {/* ARIA strategic answer */}
+          <div
+            className="self-start w-full rounded-2xl px-4 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm"
+            style={{ animation: `cleoIn 0.5s 0.7s both` }}
+          >
+            <div className="flex items-center gap-1.5 mb-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
+              <span className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-[#9fd2fb]">
+                ARIA · recomendación
+              </span>
+            </div>
+            <p className="font-sans text-[13px] leading-[1.45] text-white mb-2.5">
+              Sí, encaja fuerte con tu perfil:
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { k: "Match perfil", v: "92/100" },
+                { k: "Prob. ganar", v: "78%" },
+                { k: "Cierra en", v: "12 días" },
+              ].map((m) => (
+                <div key={m.k} className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-2">
+                  <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45 truncate">
+                    {m.k}
+                  </div>
+                  <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-1">
+                    {m.v}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="font-sans text-[12px] leading-[1.45] text-white/80 mt-2.5">
+              Ganaste 2 de 3 licitaciones similares en MINSAL.
+            </p>
+          </div>
+
+          {/* Follow-up question */}
+          <div
+            className="self-end max-w-[82%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
+            style={{ animation: `cleoIn 0.4s 1.5s both` }}
+          >
+            <p className="font-sans text-[13px] leading-[1.4] text-white">
+              ¿A qué precio exacto oferto?
+            </p>
+          </div>
+
+          {/* ARIA price recommendation */}
+          <div
+            className="self-start max-w-[92%] rounded-2xl px-4 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm"
+            style={{ animation: `cleoIn 0.5s 2.1s both` }}
+          >
+            <p className="font-sans text-[13px] leading-[1.5] text-white">
+              Oferta <span className="font-semibold text-[#55b4f8]">$139.900.000</span> — 1,8% bajo el p50 histórico. Margen óptimo sin sacrificar competitividad.
+            </p>
+            <div className="mt-2 font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/45">
+              Análisis · 35.500 OCs + bases
+            </div>
           </div>
         </div>
       </div>
