@@ -124,8 +124,8 @@ const DetectionFeedMock = () => {
 ═══════════════════════════════════════════════════════════════ */
 
 // ARIA mark — voice waveform ("aria" = a melodic solo)
-const AriaMark = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden>
+const AriaMark = ({ size = 18, animated = false }: { size?: number; animated?: boolean }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden className={animated ? "aria-eq" : undefined}>
     <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
     <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
     <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
@@ -240,7 +240,7 @@ const AriaMock = () => {
         {/* Chat header */}
         <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/10 flex-shrink-0">
           <span className="h-9 w-9 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-            <AriaMark size={17} />
+            <AriaMark size={17} animated />
           </span>
           <div className="min-w-0 flex-1">
             <div className="font-display font-semibold text-[15px] leading-none text-white">

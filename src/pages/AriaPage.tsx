@@ -499,7 +499,7 @@ export default function AriaPage() {
             {/* ARIA identity pill */}
             <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#55b4f8]/20 bg-[#55b4f8]/[0.06] backdrop-blur-md mb-10">
               {/* ARIA icon — voice waveform ("aria" = a melodic solo) */}
-              <svg width="19" height="19" viewBox="0 0 32 32" fill="none">
+              <svg width="19" height="19" viewBox="0 0 32 32" fill="none" className="aria-eq">
                 <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
                 <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
                 <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
