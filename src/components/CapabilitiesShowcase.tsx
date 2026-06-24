@@ -123,6 +123,23 @@ const DetectionFeedMock = () => {
    (brand badge + intro bubbles + capability reply pills)
 ═══════════════════════════════════════════════════════════════ */
 
+// ARIA mark — same converging-nodes icon as the /aria page
+const AriaMark = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" aria-hidden>
+    <circle cx="3" cy="4" r="1.5" fill="#55b4f8" opacity="0.5" />
+    <circle cx="3" cy="10" r="1.5" fill="#55b4f8" opacity="0.7" />
+    <circle cx="3" cy="16" r="1.5" fill="#55b4f8" opacity="0.5" />
+    <path d="M4.5 4 L10 8.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
+    <path d="M4.5 10 L10 10" stroke="#55b4f8" strokeWidth="0.8" opacity="0.6" />
+    <path d="M4.5 16 L10 11.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
+    <circle cx="11" cy="10" r="3" fill="#55b4f8" opacity="0.15" />
+    <circle cx="11" cy="10" r="1.8" fill="#55b4f8" opacity="0.3" />
+    <circle cx="11" cy="10" r="0.8" fill="#e0f6ff" />
+    <path d="M14 10 L18.5 10" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" />
+    <path d="M17 8 L19 10 L17 12" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+);
+
 const AriaMock = () => {
   const [cycle, setCycle] = useState(0);
   useEffect(() => {
@@ -150,44 +167,31 @@ const AriaMock = () => {
         style={{ backgroundImage: "radial-gradient(rgba(85,180,248,0.16) 1px, transparent 1px)", backgroundSize: "16px 16px" }}
       />
 
-      {/* Content */}
-      <div key={cycle} className="relative h-full flex flex-col px-5 md:px-7 pt-4 pb-4">
-        {/* ARIA logo — same mark as the /aria page */}
-        <div className="relative flex items-center justify-center flex-shrink-0">
-          <div className="inline-flex items-center gap-2">
-            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden>
-              <circle cx="3" cy="4" r="1.5" fill="#55b4f8" opacity="0.5" />
-              <circle cx="3" cy="10" r="1.5" fill="#55b4f8" opacity="0.7" />
-              <circle cx="3" cy="16" r="1.5" fill="#55b4f8" opacity="0.5" />
-              <path d="M4.5 4 L10 8.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-              <path d="M4.5 10 L10 10" stroke="#55b4f8" strokeWidth="0.8" opacity="0.6" />
-              <path d="M4.5 16 L10 11.5" stroke="#55b4f8" strokeWidth="0.8" opacity="0.4" />
-              <circle cx="11" cy="10" r="3" fill="#55b4f8" opacity="0.15" />
-              <circle cx="11" cy="10" r="1.8" fill="#55b4f8" opacity="0.3" />
-              <circle cx="11" cy="10" r="0.8" fill="#e0f6ff" />
-              <path d="M14 10 L18.5 10" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" />
-              <path d="M17 8 L19 10 L17 12" stroke="#e0f6ff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            </svg>
-            <span className="font-display font-semibold text-[22px] tracking-tight leading-none text-white">
+      {/* Content — chat app */}
+      <div key={cycle} className="relative h-full flex flex-col">
+        {/* Chat header */}
+        <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/10 flex-shrink-0">
+          <span className="h-9 w-9 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
+            <AriaMark size={17} />
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="font-display font-semibold text-[15px] leading-none text-white">
               ARIA<span className="text-[#55b4f8]">.</span>
-            </span>
-          </div>
-          <div className="absolute right-0 h-8 w-8 grid place-items-center rounded-full border border-[#55b4f8]/30">
-            <span className="h-3 w-3 rounded-full border-[1.5px] border-[#55b4f8]/60" />
+            </div>
+            <div className="flex items-center gap-1.5 mt-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80]" />
+              <span className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/45">
+                en línea
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Today divider */}
-        <div className="mt-3 flex-shrink-0">
-          <div className="text-center font-sans text-[11px] text-white/45 mb-1.5">Hoy</div>
-          <div className="h-px bg-white/10" />
-        </div>
-
-        {/* Conversation — a real, high-value exchange */}
-        <div className="flex-1 min-h-0 mt-3 flex flex-col gap-2.5 overflow-hidden">
+        {/* Messages */}
+        <div className="flex-1 min-h-0 overflow-hidden px-4 py-3.5 flex flex-col gap-2.5">
           {/* User question */}
           <div
-            className="self-end max-w-[82%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
+            className="self-end max-w-[80%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
             style={{ animation: `cleoIn 0.4s 0.1s both` }}
           >
             <p className="font-sans text-[13px] leading-[1.4] text-white">
@@ -196,44 +200,40 @@ const AriaMock = () => {
           </div>
 
           {/* ARIA strategic answer */}
-          <div
-            className="self-start w-full rounded-2xl px-4 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm"
-            style={{ animation: `cleoIn 0.5s 0.7s both` }}
-          >
-            <div className="flex items-center gap-1.5 mb-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
-              <span className="font-mono text-[8.5px] uppercase tracking-[0.18em] text-[#9fd2fb]">
-                ARIA · recomendación
-              </span>
-            </div>
-            <p className="font-sans text-[13px] leading-[1.45] text-white mb-2.5">
-              Sí, encaja fuerte con tu perfil:
-            </p>
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { k: "Match perfil", v: "92/100" },
-                { k: "Prob. ganar", v: "78%" },
-                { k: "Cierra en", v: "12 días" },
-              ].map((m) => (
-                <div key={m.k} className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-2">
-                  <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45 truncate">
-                    {m.k}
+          <div className="flex items-start gap-2 self-start max-w-[94%]" style={{ animation: `cleoIn 0.5s 0.7s both` }}>
+            <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
+              <AriaMark size={12} />
+            </span>
+            <div className="rounded-2xl rounded-tl-md px-3.5 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm">
+              <p className="font-sans text-[13px] leading-[1.45] text-white mb-2.5">
+                Sí, encaja fuerte con tu perfil:
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { k: "Match perfil", v: "92/100" },
+                  { k: "Prob. ganar", v: "78%" },
+                  { k: "Cierra en", v: "12 días" },
+                ].map((m) => (
+                  <div key={m.k} className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-2">
+                    <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45 truncate">
+                      {m.k}
+                    </div>
+                    <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-1">
+                      {m.v}
+                    </div>
                   </div>
-                  <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-1">
-                    {m.v}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <p className="font-sans text-[12px] leading-[1.45] text-white/80 mt-2.5">
+                Ganaste 2 de 3 licitaciones similares en MINSAL.
+              </p>
             </div>
-            <p className="font-sans text-[12px] leading-[1.45] text-white/80 mt-2.5">
-              Ganaste 2 de 3 licitaciones similares en MINSAL.
-            </p>
           </div>
 
-          {/* Follow-up question */}
+          {/* User follow-up */}
           <div
-            className="self-end max-w-[82%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
-            style={{ animation: `cleoIn 0.4s 1.5s both` }}
+            className="self-end max-w-[80%] rounded-3xl rounded-br-md px-4 py-2.5 bg-[#0882f7]"
+            style={{ animation: `cleoIn 0.4s 1.6s both` }}
           >
             <p className="font-sans text-[13px] leading-[1.4] text-white">
               ¿A qué precio exacto oferto?
@@ -241,16 +241,27 @@ const AriaMock = () => {
           </div>
 
           {/* ARIA price recommendation */}
-          <div
-            className="self-start max-w-[92%] rounded-2xl px-4 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm"
-            style={{ animation: `cleoIn 0.5s 2.1s both` }}
-          >
-            <p className="font-sans text-[13px] leading-[1.5] text-white">
-              Oferta <span className="font-semibold text-[#55b4f8]">$139.900.000</span> — 1,8% bajo el p50 histórico. Margen óptimo sin sacrificar competitividad.
-            </p>
-            <div className="mt-2 font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/45">
-              Análisis · 35.500 OCs + bases
+          <div className="flex items-start gap-2 self-start max-w-[90%]" style={{ animation: `cleoIn 0.5s 2.2s both` }}>
+            <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
+              <AriaMark size={12} />
+            </span>
+            <div className="rounded-2xl rounded-tl-md px-3.5 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm">
+              <p className="font-sans text-[13px] leading-[1.5] text-white">
+                Oferta <span className="font-semibold text-[#55b4f8]">$139.900.000</span> — 1,8% bajo el p50 histórico. Margen óptimo sin sacrificar competitividad.
+              </p>
             </div>
+          </div>
+        </div>
+
+        {/* Input bar */}
+        <div className="flex-shrink-0 px-4 pb-4 pt-1">
+          <div className="flex items-center gap-2 rounded-full bg-white/[0.08] border border-white/15 pl-4 pr-1.5 py-1.5 backdrop-blur-sm">
+            <span className="flex-1 font-sans text-[12.5px] text-white/45 truncate">Escríbele a ARIA…</span>
+            <span className="h-7 w-7 grid place-items-center rounded-full bg-[#0882f7] flex-shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M5 12h13M12 5l7 7-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
