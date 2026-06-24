@@ -199,56 +199,21 @@ const AriaMock = () => {
             </p>
           </div>
 
-          {/* ARIA multi-source answer */}
-          <div className="flex items-start gap-2 self-start max-w-[97%]" style={{ animation: `cleoIn 0.5s 0.7s both` }}>
+          {/* ARIA answer — plain conversational text */}
+          <div className="flex items-start gap-2 self-start max-w-[88%]" style={{ animation: `cleoIn 0.5s 0.7s both` }}>
             <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
               <AriaMark size={12} />
             </span>
-            <div className="rounded-2xl rounded-tl-md px-3.5 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm">
-              {/* score + probability (perfil empresa) */}
-              <div className="grid grid-cols-2 gap-2">
-                <div className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-1.5">
-                  <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45">Score match</div>
-                  <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-0.5">88/100</div>
-                </div>
-                <div className="rounded-lg bg-white/[0.06] border border-white/10 px-2.5 py-1.5">
-                  <div className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/45">Prob. adjudicación</div>
-                  <div className="num font-display font-semibold text-[16px] leading-none text-[#55b4f8] mt-0.5">74%</div>
-                </div>
-              </div>
-              {/* matching keywords */}
-              <div className="mt-2 flex flex-wrap gap-1">
-                {["insumos clínicos", "reactivos", "laboratorio"].map((k) => (
-                  <span
-                    key={k}
-                    className="font-mono text-[8.5px] px-1.5 py-0.5 rounded border border-[#55b4f8]/30 bg-[#55b4f8]/[0.08] text-[#9fd2fb]"
-                  >
-                    {k}
-                  </span>
-                ))}
-              </div>
-              {/* organism intelligence */}
-              <p className="font-sans text-[12.5px] leading-[1.45] text-white mt-2.5">
-                MINSAL adjudica el <span className="font-semibold text-[#55b4f8]">86%</span> de este rubro (142 licitaciones), OC en ~38 días.
+            <div className="rounded-2xl rounded-tl-md px-4 py-2.5 bg-white/[0.08] border border-white/10 backdrop-blur-sm space-y-2">
+              <p className="font-sans text-[13px] leading-[1.5] text-white">
+                Sí, tiene buen fit con tu empresa. Tu score de match es <span className="font-semibold">88/100</span> (coinciden insumos clínicos, reactivos y laboratorio) y la probabilidad estimada de adjudicación es <span className="font-semibold">74%</span>.
               </p>
-              {/* internal team note — attributed */}
-              <div className="mt-2 rounded-lg border-l-2 border-[#fbbf24] bg-[#fbbf24]/[0.08] px-2.5 py-1.5">
-                <p className="font-sans text-[12px] leading-[1.4] text-white/90">
-                  📌 Según nota de <span className="font-medium">Camila · 12 jun</span>: renovar ISO 13485 antes del cierre.
-                </p>
-              </div>
-              {/* sources consulted */}
-              <div className="mt-2.5 flex items-center gap-1.5 flex-wrap">
-                <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/40">Fuentes</span>
-                {["Perfil", "Organismo", "Notas equipo"].map((s) => (
-                  <span
-                    key={s}
-                    className="font-mono text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-white/55"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
+              <p className="font-sans text-[13px] leading-[1.5] text-white">
+                MINSAL adjudica el <span className="font-semibold">86%</span> de sus licitaciones de este rubro (142 históricas) y emite la OC en ~38 días.
+              </p>
+              <p className="font-sans text-[13px] leading-[1.5] text-white">
+                Eso sí: según una nota de Camila del 12 jun, hay que renovar la ISO 13485 antes del cierre.
+              </p>
             </div>
           </div>
 
@@ -262,21 +227,15 @@ const AriaMock = () => {
             </p>
           </div>
 
-          {/* ARIA documents answer */}
-          <div className="flex items-start gap-2 self-start max-w-[94%]" style={{ animation: `cleoIn 0.5s 2.4s both` }}>
+          {/* ARIA documents answer — plain text with citation */}
+          <div className="flex items-start gap-2 self-start max-w-[88%]" style={{ animation: `cleoIn 0.5s 2.4s both` }}>
             <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
               <AriaMark size={12} />
             </span>
-            <div className="rounded-2xl rounded-tl-md px-3.5 py-3 bg-white/[0.07] border border-[#55b4f8]/20 backdrop-blur-sm">
-              <p className="font-sans text-[12.5px] leading-[1.5] text-white">
-                Según las bases (§8): boleta de seriedad <span className="font-semibold text-[#55b4f8]">3%</span> y fiel cumplimiento <span className="font-semibold text-[#55b4f8]">10%</span>. Entrega en 45 días corridos.
+            <div className="rounded-2xl rounded-tl-md px-4 py-2.5 bg-white/[0.08] border border-white/10 backdrop-blur-sm">
+              <p className="font-sans text-[13px] leading-[1.5] text-white">
+                Según las bases técnicas (sección 8): boleta de seriedad por el <span className="font-semibold">3%</span> y de fiel cumplimiento por el <span className="font-semibold">10%</span>. El plazo de entrega es de 45 días corridos.
               </p>
-              <div className="mt-2 flex items-center gap-1.5">
-                <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/40">Fuente</span>
-                <span className="font-mono text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-white/55">
-                  Bases técnicas · §8
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -637,9 +596,9 @@ export default function CapabilitiesShowcase() {
         </div>
 
         {/* Bento grid — every capability visible at once, live */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[284px]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[262px]">
           {/* ARIA — hero, spans 2×2 (Cleo-style, full-bleed) */}
-          <div className={`${tile} min-h-[600px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
+          <div className={`${tile} min-h-[540px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
             <AriaMock />
           </div>
 
