@@ -167,7 +167,7 @@ const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
     from: "aria",
     node: (
       <>
-        Sí: según la nota de Camila (12 jun), la ISO 13485 vence <span className="font-semibold">3 días antes del cierre</span> — hay que renovarla. En el foro, el organismo ya confirmó boleta de fiel cumplimiento del <span className="font-semibold">10%</span>.
+        Uno importante: tu certificación ISO 13485 vence <span className="font-semibold">3 días antes del cierre</span>. Según la nota de Camila (12 jun), hay que renovarla antes de presentar la oferta.
       </>
     ),
   },
