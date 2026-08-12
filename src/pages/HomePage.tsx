@@ -5,7 +5,6 @@ import CapacidadesLici from "../components/CapacidadesLici";
 import HowItWorks from "../components/HowItWorks";
 import Results from "../components/Results";
 import PriceSimulator from "../components/PriceSimulator";
-import OrganismoIntelligence from "../components/OrganismoIntelligence";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
 import Footer from "../components/Footer";
@@ -23,7 +22,6 @@ export default function HomePage() {
             una sola sección, porque separados repetían el mismo dato. */}
         <Results />
         <PriceSimulator embedded />
-        <OrganismoIntelligence />
         <FAQ />
         <FinalCTA />
       </main>

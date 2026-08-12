@@ -7,10 +7,9 @@ import WhatsAppButton from "./ui/WhatsAppButton";
 // two flat trust-signal links, and a 3-tier CTA cascade on the right.
 
 const productLinks = [
-  { href: "#capacidades", title: "Capacidades", desc: "Detección, scoring IA y OCs" },
+  { href: "#capacidades", title: "Capacidades", desc: "Detección, precio real, comprador y alertas" },
   { href: "#como",        title: "Cómo funciona", desc: "El flujo end-to-end" },
   { href: "#simulador",   title: "Precio real por ítem", desc: "Lo que el Estado pagó, no lo adjudicado" },
-  { href: "#inteligencia-organismo", title: "Inteligencia del comprador", desc: "Cómo compra el organismo antes de postular" },
 ];
 
 // "Lici." va como wordmark —negrita con el punto azul— igual que en la app.
