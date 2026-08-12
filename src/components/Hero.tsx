@@ -62,7 +62,7 @@ export default function Hero() {
             <WhatsAppButton variant="huge" label="Agendar demo" />
             <a
               href="#capacidades"
-              className="group inline-flex items-center justify-center gap-2 h-14 px-7 text-[15px] font-medium font-sans rounded-lg
+              className="group inline-flex items-center justify-center gap-2 h-14 px-7 text-[15px] font-medium font-sans rounded-full
                 bg-white text-cream-50 border border-[var(--hairline-strong)]
                 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(10,10,10,0.04)]
                 hover:border-amber-400/40 hover:text-amber-400
@@ -99,7 +99,7 @@ export default function Hero() {
               licitaciones" tal como la ve un cliente. */}
           <div className="relative max-w-[1180px] mx-auto">
             <img
-              src={`${import.meta.env.BASE_URL}app-iautolicita.png`}
+              src={`${import.meta.env.BASE_URL}app-iautolicita-blanco.png`}
               width={1680}
               height={1050}
               alt="Pantalla Mis licitaciones de IAutoLicita: cada licitación con su score, fecha de cierre y estado de gestión"

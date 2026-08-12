@@ -28,14 +28,14 @@ export default function WhatsAppButton({
 
   // Solid blue with white text + inset highlight + ambient drop shadow
   const filledCore =
-    "bg-amber-400 text-white rounded-lg " +
+    "bg-amber-400 text-white rounded-full " +
     "shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(10,10,10,0.10),0_1px_2px_rgba(10,10,10,0.06),0_6px_18px_-4px_rgba(0,100,224,0.40)] " +
     "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_-1px_0_rgba(10,10,10,0.12),0_2px_4px_rgba(10,10,10,0.08),0_14px_36px_-6px_rgba(0,100,224,0.55)] " +
     "hover:-translate-y-[1px] " +
     "active:translate-y-0 active:shadow-[inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(10,10,10,0.10),0_1px_2px_rgba(10,10,10,0.06)]";
 
   const ghostStyle =
-    "bg-white text-cream-50 border border-[var(--hairline-strong)] rounded-lg " +
+    "bg-white text-cream-50 border border-[var(--hairline-strong)] rounded-full " +
     "shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(10,10,10,0.04)] " +
     "hover:border-amber-400/40 hover:text-amber-400 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_-2px_rgba(0,100,224,0.20)] " +
     "hover:-translate-y-[1px] active:translate-y-0";
@@ -54,7 +54,7 @@ export default function WhatsAppButton({
       {isFilled && (
         <span
           aria-hidden
-          className="absolute inset-0 rounded-lg bg-amber-400 blur-2xl opacity-50 animate-halo-pulse pointer-events-none"
+          className="absolute inset-0 rounded-full bg-amber-400 blur-2xl opacity-50 animate-halo-pulse pointer-events-none"
         />
       )}
       <a
