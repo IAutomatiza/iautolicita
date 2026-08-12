@@ -109,3 +109,36 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #A8A29E;
 }
+
+/* Botón al estilo ClickUp: degradado de marca→violeta→celeste con un
+   brillo que barre la superficie cada pocos segundos. */
+.btn-clickup {
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(90deg, #602bf8 0%, #7b68ee 48%, #49ccf9 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.btn-clickup:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 8px 24px -8px rgba(123, 104, 238, 0.55);
+}
+.btn-clickup::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -80%;
+  width: 55%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  animation: btnShine 3.2s ease-in-out infinite;
+}
+@keyframes btnShine {
+  0% { left: -80%; }
+  55% { left: 130%; }
+  100% { left: 130%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-clickup::after { animation: none; }
+}

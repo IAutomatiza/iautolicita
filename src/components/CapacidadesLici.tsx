@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Radar, Banknote, Building2, BellRing } from "lucide-react";
+import { ScanSearch, ReceiptText, Landmark, MessageSquareDot } from "lucide-react";
 
 /* ════════════════════════════════════════════════════════════
    Capacidades — layout clonado de la sección enterprise de
@@ -217,19 +217,25 @@ const LiciChat = () => {
 /* ── Las cuatro capacidades más vendibles ─────────────────── */
 
 type Capacidad = {
-  icon: typeof Radar;
+  icon: typeof ScanSearch;
   title: string;
   body: string;
 };
 
+/* Íconos elegidos por lo que cuentan, no por lo que rellenan:
+   la lupa que escanea (el radar que puntúa), la boleta (el precio
+   efectivamente pagado en la OC), el frontis de columnas (el
+   organismo público) y la burbuja con punto (la alerta que llega
+   al chat donde el equipo ya está). */
+
 const izquierda: Capacidad[] = [
   {
-    icon: Radar,
+    icon: ScanSearch,
     title: "Radar 24/7 con score",
     body: "Cada licitación nueva se compara con tu perfil y recibe un puntaje 0–100. Las que calzan llegan solas — el resto ni lo ves.",
   },
   {
-    icon: Banknote,
+    icon: ReceiptText,
     title: "El precio real pagado",
     body: "6,4 millones de órdenes de compra te dicen cuánto pagó el Estado por lo mismo. Ofertas para ganar sin regalar margen.",
   },
@@ -237,12 +243,12 @@ const izquierda: Capacidad[] = [
 
 const derecha: Capacidad[] = [
   {
-    icon: Building2,
+    icon: Landmark,
     title: "Conoce a tu comprador",
     body: "Antes de postular sabes si el organismo paga rápido, cuánto deja desierto y quién le está ganando. Sin sorpresas.",
   },
   {
-    icon: BellRing,
+    icon: MessageSquareDot,
     title: "Alertas donde trabajas",
     body: "Cierres, adjudicaciones y cambios llegan por WhatsApp, correo o Telegram. Tu equipo deja de vigilar el portal.",
   },
@@ -251,7 +257,7 @@ const derecha: Capacidad[] = [
 const Feature = ({ f }: { f: Capacidad }) => (
   <div>
     <span className="inline-grid place-items-center h-12 w-12 rounded-xl bg-white border border-[var(--hairline-strong)] shadow-[0_1px_2px_rgba(10,10,10,0.05)]">
-      <f.icon className="h-5 w-5 text-cream-50" strokeWidth={1.8} />
+      <f.icon className="h-5 w-5 text-amber-400" strokeWidth={1.8} />
     </span>
     <h3 className="mt-5 font-display font-medium text-[20px] tracking-[-0.02em] text-cream-50">
       {f.title}
@@ -271,17 +277,18 @@ export default function CapacidadesLici() {
         {/* Encabezado centrado, al patrón GitBook */}
         <div className="max-w-[760px] mx-auto text-center">
           <h2 className="font-display font-medium text-[34px] md:text-[48px] leading-[1.05] tracking-[-0.03em] text-cream-50">
-            Cuatro capacidades sobre el mismo dato.
+            Cuatro capacidades sobre el{" "}
+            <span className="text-amber-400">mismo dato.</span>
           </h2>
           <p className="mt-5 max-w-[560px] mx-auto font-sans text-[16px] md:text-[17px] leading-[1.5] text-cream-200">
             IAutoLicita conecta detección, precio, comprador y alertas a una
             sola base — y Lici te la conversa.
           </p>
+          {/* Píldora al estilo ClickUp: degradado + brillo que barre */}
           <Link
             to="/lici"
-            className="mt-7 inline-flex items-center justify-center h-11 px-6 rounded-full
-              bg-[#0A0A0A]/[0.06] text-cream-50 font-sans font-medium text-[14.5px]
-              hover:bg-[#0A0A0A]/[0.10] transition-colors duration-200"
+            className="btn-clickup mt-7 inline-flex items-center justify-center h-12 px-7 rounded-full
+              text-white font-sans font-semibold text-[15px]"
           >
             Conoce a Lici
           </Link>
