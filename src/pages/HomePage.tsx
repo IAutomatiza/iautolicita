@@ -1,7 +1,7 @@
 import MarketTicker from "../components/MarketTicker";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
-import CapabilitiesShowcase from "../components/CapabilitiesShowcase";
+import CapacidadesLici from "../components/CapacidadesLici";
 import HowItWorks from "../components/HowItWorks";
 import Results from "../components/Results";
 import PriceSimulator from "../components/PriceSimulator";
@@ -17,7 +17,7 @@ export default function HomePage() {
       <Nav />
       <main>
         <Hero />
-        <CapabilitiesShowcase />
+        <CapacidadesLici />
         <HowItWorks />
         {/* Results abre el argumento del precio real y el simulador lo prueba:
             una sola sección, porque separados repetían el mismo dato. */}
