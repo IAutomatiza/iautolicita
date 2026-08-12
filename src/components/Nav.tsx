@@ -13,9 +13,20 @@ const productLinks = [
   { href: "#inteligencia-organismo", title: "Inteligencia del comprador", desc: "Cómo compra el organismo antes de postular" },
 ];
 
-const flatLinks = [
+// "Lici." va como wordmark —negrita con el punto azul— igual que en la app.
+const LiciWordmark = () => (
+  <span className="font-bold">
+    Lici<span className="text-amber-400">.</span>
+  </span>
+);
+
+const flatLinks: {
+  href: string;
+  label: React.ReactNode;
+  isRoute?: boolean;
+}[] = [
   { href: "#resultados", label: "Resultados" },
-  { href: "/lici", label: "Lici ✦", isRoute: true },
+  { href: "/lici", label: <LiciWordmark />, isRoute: true },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -117,7 +128,7 @@ export default function Nav() {
               <Link
                 key={l.href}
                 to={l.href}
-                className="px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans text-amber-400 hover:text-cream-50 transition-colors font-medium"
+                className="px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans text-cream-50 hover:text-amber-400 transition-colors"
               >
                 {l.label}
               </Link>
@@ -188,7 +199,7 @@ export default function Nav() {
                   key={l.href}
                   to={l.href}
                   onClick={() => setMobileOpen(false)}
-                  className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-amber-400 font-medium"
+                  className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-100"
                 >
                   {l.label}
                 </Link>
