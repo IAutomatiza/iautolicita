@@ -1,14 +1,15 @@
+import { useEffect, useRef, useState } from "react";
 import { X, Check, HandCoins, Boxes, Goal, PiggyBank } from "lucide-react";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
    Dos finales — layout clonado de la sección "Write" de Craft
-   (vía Mobbin), a pantalla casi completa: el contenedor azul
-   ocupa el ancho del viewport menos un margen fino y estira su
-   alto a la vista. Las tarjetas entran animadas al hacer scroll
-   —la gris primero, la ganadora después— y se levantan al
-   pasarles por encima.
+   (vía Mobbin), a pantalla casi completa. Las tarjetas rotan
+   entre tres historias reales de con/sin IAutoLicita: el precio,
+   la detección a tiempo y las bases. Cada 6,5s cambia la escena
+   con un fundido; los puntos de abajo permiten saltar a mano y
+   el ciclo se pausa al posar el cursor sobre las tarjetas.
 ═══════════════════════════════════════════════════════════════ */
 
 const MINI = [
@@ -18,8 +19,123 @@ const MINI = [
   { icon: PiggyBank, label: "Margen protegido" },
 ];
 
+const ESCENAS = [
+  {
+    sin: {
+      tag: "Sin datos",
+      ref: "Licitación 1057-412-LP25 · MINSAL",
+      cifra: "$152,4M",
+      veredicto: "Perdió. Adjudicada a otro.",
+      cuerpo: (
+        <>
+          Costos + margen{" "}
+          <span className="text-white/75 font-medium">"por si acaso"</span>.
+          Nadie sabía cuánto pagaba MINSAL de verdad.
+        </>
+      ),
+    },
+    con: {
+      contexto: "La misma licitación, el mismo día",
+      cifra: "$139,9M",
+      cuerpo: (
+        <>
+          Sabía que el Estado venía pagando{" "}
+          <span className="text-white font-medium">~$140M por lo mismo</span>.
+          Ofertó 1,8% bajo la mediana.
+        </>
+      ),
+      veredicto: "Ganó. Con el margen intacto.",
+    },
+  },
+  {
+    sin: {
+      tag: "Buscando a mano",
+      ref: "Licitación 2239-77-LE25 · JUNAEB",
+      cifra: "Vista tarde",
+      veredicto: "Cerró sin su oferta.",
+      cuerpo: (
+        <>
+          Publicada un lunes, cerró el viernes. Entre el portal y el día a
+          día, <span className="text-white/75 font-medium">nadie alcanzó a verla</span>.
+        </>
+      ),
+    },
+    con: {
+      contexto: "La misma licitación, día 1",
+      cifra: "Calce 94/100",
+      cuerpo: (
+        <>
+          El radar la detectó{" "}
+          <span className="text-white font-medium">apenas se publicó</span> y
+          la priorizó por calce con su rubro.
+        </>
+      ),
+      veredicto: "Ofertó con 4 días de ventaja.",
+    },
+  },
+  {
+    sin: {
+      tag: "Bases sin leer",
+      ref: "Licitación 3411-08-LQ25 · GORE Biobío",
+      cifra: "Inadmisible",
+      veredicto: "Fuera antes de competir.",
+      cuerpo: (
+        <>
+          Una garantía exigida en la{" "}
+          <span className="text-white/75 font-medium">página 47 de las bases</span>{" "}
+          dejó la oferta fuera.
+        </>
+      ),
+    },
+    con: {
+      contexto: "Las mismas bases, en minutos",
+      cifra: "Admisible",
+      cuerpo: (
+        <>
+          Lici resumió requisitos, anexos y garantías{" "}
+          <span className="text-white font-medium">con cita a la página exacta</span>.
+        </>
+      ),
+      veredicto: "Oferta completa a la primera.",
+    },
+  },
+];
+
 export default function DosFinales() {
   const [ref, inView] = useInView<HTMLDivElement>(0.25);
+  const [idx, setIdx] = useState(0);
+  const [cambiando, setCambiando] = useState(false);
+  const [pausa, setPausa] = useState(false);
+  // Token que invalida transiciones en vuelo: si un clic manual
+  // llega mientras el ciclo automático estaba a mitad de fundido,
+  // el temporizador viejo queda anulado y no salta una escena extra.
+  const transicion = useRef(0);
+
+  const cambiar = (destino: number | ((i: number) => number)) => {
+    const t = ++transicion.current;
+    setCambiando(true);
+    setTimeout(() => {
+      if (transicion.current !== t) return;
+      setIdx((i) => (typeof destino === "function" ? destino(i) : destino));
+      setCambiando(false);
+    }, 320);
+  };
+
+  // Rotación automática de escenas; se detiene con el cursor
+  // encima y con preferencia de movimiento reducido.
+  useEffect(() => {
+    if (!inView || pausa) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => cambiar((i) => (i + 1) % ESCENAS.length), 6500);
+    return () => clearInterval(t);
+  }, [inView, pausa]);
+
+  const irA = (i: number) => {
+    if (i === idx) return;
+    cambiar(i);
+  };
+
+  const escena = ESCENAS[idx];
 
   // Entrada escalonada: la tarjeta gris llega primero, la ganadora
   // remata. Salen de lados opuestos para que el choque se sienta.
@@ -27,6 +143,10 @@ export default function DosFinales() {
     `transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${delay} ${
       visible ? "opacity-100 translate-x-0 translate-y-0" : `opacity-0 ${desde}`
     }`;
+
+  const fundido = `transition-all duration-300 ${
+    cambiando ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"
+  }`;
 
   return (
     <section id="resultados" className="px-3 md:px-5 py-8 md:py-12">
@@ -37,7 +157,11 @@ export default function DosFinales() {
           className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-[1240px] mx-auto w-full"
         >
           {/* IZQUIERDA — las dos tarjetas superpuestas y animadas */}
-          <div className="relative max-w-[520px] mx-auto w-full">
+          <div
+            className="relative max-w-[520px] mx-auto w-full"
+            onMouseEnter={() => setPausa(true)}
+            onMouseLeave={() => setPausa(false)}
+          >
             {/* Atrás: la oferta a ciegas, apagada */}
             <article
               className={`w-[88%] rounded-2xl p-6 md:p-7 bg-[#1F2126]
@@ -45,29 +169,29 @@ export default function DosFinales() {
                 hover:-translate-y-1 hover:shadow-[0_26px_54px_-18px_rgba(10,20,50,0.55)]
                 ${tarjeta(inView, "-translate-x-10", "")}`}
             >
-              <div className="flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/40">
-                <span className="h-1.5 w-1.5 rounded-full border border-white/40" />
-                Sin datos
+              <div className={fundido}>
+                <div className="flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/40">
+                  <span className="h-1.5 w-1.5 rounded-full border border-white/40" />
+                  {escena.sin.tag}
+                </div>
+                <div className="mt-4 font-sans text-[12.5px] text-white/40">
+                  {escena.sin.ref}
+                </div>
+                <div className="mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white/70">
+                  {escena.sin.cifra}
+                </div>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="grid place-items-center h-6 w-6 rounded-full bg-ruby-400/15">
+                    <X className="h-3.5 w-3.5 text-ruby-400" strokeWidth={2.5} />
+                  </span>
+                  <span className="font-sans text-[13.5px] font-medium text-white/70">
+                    {escena.sin.veredicto}
+                  </span>
+                </div>
+                <p className="mt-4 pt-4 border-t border-white/[0.08] font-sans text-[13.5px] leading-[1.55] text-white/45">
+                  {escena.sin.cuerpo}
+                </p>
               </div>
-              <div className="mt-4 font-sans text-[12.5px] text-white/40">
-                Licitación 1057-412-LP25 · MINSAL
-              </div>
-              <div className="mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white/70">
-                $152,4M
-              </div>
-              <div className="mt-4 flex items-center gap-2">
-                <span className="grid place-items-center h-6 w-6 rounded-full bg-ruby-400/15">
-                  <X className="h-3.5 w-3.5 text-ruby-400" strokeWidth={2.5} />
-                </span>
-                <span className="font-sans text-[13.5px] font-medium text-white/70">
-                  Perdió. Adjudicada a otro.
-                </span>
-              </div>
-              <p className="mt-4 pt-4 border-t border-white/[0.08] font-sans text-[13.5px] leading-[1.55] text-white/45">
-                Costos + margen{" "}
-                <span className="text-white/75 font-medium">"por si acaso"</span>.
-                Nadie sabía cuánto pagaba MINSAL de verdad.
-              </p>
             </article>
 
             {/* Delante: la ganadora, encendida */}
@@ -90,30 +214,46 @@ export default function DosFinales() {
                   backgroundSize: "16px 16px",
                 }}
               />
-              <div className="relative flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-[#55b4f8]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
-                Con IAutoLicita
-              </div>
-              <div className="relative mt-4 font-sans text-[12.5px] text-white/55">
-                La misma licitación, el mismo día
-              </div>
-              <div className="relative mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white">
-                $139,9M
-              </div>
-              <p className="relative mt-3 font-sans text-[13.5px] leading-[1.55] text-white/75">
-                Sabía que el Estado venía pagando{" "}
-                <span className="text-white font-medium">~$140M por lo mismo</span>.
-                Ofertó 1,8% bajo la mediana.
-              </p>
-              <div className="relative mt-5 flex items-center gap-2 pt-4 border-t border-white/15">
-                <span className="grid place-items-center h-6 w-6 rounded-full bg-[#4ade80]/20">
-                  <Check className="h-3.5 w-3.5 text-[#4ade80]" strokeWidth={2.5} />
-                </span>
-                <span className="font-sans text-[13.5px] font-medium text-white">
-                  Ganó. Con el margen intacto.
-                </span>
+              <div className={`relative ${fundido}`}>
+                <div className="flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-[#55b4f8]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
+                  Con IAutoLicita
+                </div>
+                <div className="mt-4 font-sans text-[12.5px] text-white/55">
+                  {escena.con.contexto}
+                </div>
+                <div className="mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white">
+                  {escena.con.cifra}
+                </div>
+                <p className="mt-3 font-sans text-[13.5px] leading-[1.55] text-white/75">
+                  {escena.con.cuerpo}
+                </p>
+                <div className="mt-5 flex items-center gap-2 pt-4 border-t border-white/15">
+                  <span className="grid place-items-center h-6 w-6 rounded-full bg-[#4ade80]/20">
+                    <Check className="h-3.5 w-3.5 text-[#4ade80]" strokeWidth={2.5} />
+                  </span>
+                  <span className="font-sans text-[13.5px] font-medium text-white">
+                    {escena.con.veredicto}
+                  </span>
+                </div>
               </div>
             </article>
+
+            {/* Puntos para saltar entre escenas */}
+            <div className="relative z-10 mt-8 flex justify-center gap-2">
+              {ESCENAS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => irA(i)}
+                  aria-label={`Ejemplo ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === idx
+                      ? "w-7 bg-cream-50"
+                      : "w-1.5 bg-cream-50/25 hover:bg-cream-50/50"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* DERECHA — eyebrow, titular, párrafo, mini-grilla y botón */}
