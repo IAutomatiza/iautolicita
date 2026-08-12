@@ -21,14 +21,17 @@ export default function DosFinales() {
   return (
     <section id="resultados" className="py-16 md:py-28">
       <div className="container-edge">
-        <div className="rounded-[2.5rem] bg-[#D9E6FA] px-6 py-10 md:px-14 md:py-16">
+        {/* El contenedor gigante de Craft, pero en el tinte azul propio del
+            sitio (el mismo 6-7% de los badges y hovers), no en su pastel. */}
+        <div className="rounded-[2.5rem] bg-[#EEF4FC] px-6 py-10 md:px-14 md:py-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-[1180px] mx-auto">
             {/* IZQUIERDA — las dos tarjetas superpuestas, como las ventanas de Craft */}
             <div className="relative max-w-[520px] mx-auto w-full">
               {/* Atrás: la oferta a ciegas, apagada */}
-              {/* El pb extra deja vacía la franja que tapa la tarjeta de
-                  adelante: el veredicto queda siempre visible. */}
-              <article className="w-[88%] rounded-2xl px-6 pt-6 pb-24 md:px-7 md:pt-7 md:pb-28 bg-[#1F2126] shadow-[0_18px_44px_-18px_rgba(10,20,50,0.45)]">
+              {/* Mismo tamaño y padding que la ganadora; el veredicto va
+                  arriba, junto al monto, para que la superposición solo
+                  tape el texto secundario del final. */}
+              <article className="w-[88%] rounded-2xl p-6 md:p-7 bg-[#1F2126] shadow-[0_18px_44px_-18px_rgba(10,20,50,0.45)]">
                 <div className="flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/40">
                   <span className="h-1.5 w-1.5 rounded-full border border-white/40" />
                   Sin datos
@@ -39,19 +42,19 @@ export default function DosFinales() {
                 <div className="mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white/70">
                   $152,4M
                 </div>
-                <p className="mt-3 font-sans text-[13.5px] leading-[1.55] text-white/45">
-                  Costos + margen{" "}
-                  <span className="text-white/75 font-medium">"por si acaso"</span>.
-                  Nadie sabía cuánto pagaba MINSAL de verdad.
-                </p>
-                <div className="mt-5 flex items-center gap-2 pt-4 border-t border-white/[0.08]">
+                <div className="mt-4 flex items-center gap-2">
                   <span className="grid place-items-center h-6 w-6 rounded-full bg-ruby-400/15">
                     <X className="h-3.5 w-3.5 text-ruby-400" strokeWidth={2.5} />
                   </span>
                   <span className="font-sans text-[13.5px] font-medium text-white/70">
-                    Perdió.
+                    Perdió. Adjudicada a otro.
                   </span>
                 </div>
+                <p className="mt-4 pt-4 border-t border-white/[0.08] font-sans text-[13.5px] leading-[1.55] text-white/45">
+                  Costos + margen{" "}
+                  <span className="text-white/75 font-medium">"por si acaso"</span>.
+                  Nadie sabía cuánto pagaba MINSAL de verdad.
+                </p>
               </article>
 
               {/* Delante: la ganadora, encendida y superpuesta */}
