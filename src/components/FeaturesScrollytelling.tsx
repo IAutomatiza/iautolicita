@@ -751,7 +751,7 @@ export default function FeaturesScrollytelling() {
             <span className="text-cream-300">Una sola plataforma.</span>
           </h2>
           <p className="mt-6 font-sans text-[17px] md:text-[18px] leading-[1.5] text-cream-200">
-            Hacé scroll. La pieza viva del producto a la derecha cambia con cada capacidad que lees a la izquierda.
+            Haz scroll. La pieza viva del producto a la derecha cambia con cada capacidad que lees a la izquierda.
           </p>
         </div>
 
@@ -823,7 +823,7 @@ export default function FeaturesScrollytelling() {
               {/* Hint below the mock */}
               <div className="mt-4 flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream-400">
                 <span className="h-px w-8 bg-cream-300/30" />
-                Hacé scroll · el panel cambia con cada capacidad
+                Haz scroll · el panel cambia con cada capacidad
                 <span className="h-px w-8 bg-cream-300/30" />
               </div>
             </div>

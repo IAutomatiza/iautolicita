@@ -375,7 +375,7 @@ export default function PriceSimulator({ embedded = false }: { embedded?: boolea
               {/* Footer with deep-dive link */}
               <div className="mt-7 pt-5 border-t border-[var(--hairline)] flex items-center justify-between flex-wrap gap-3">
                 <div className="font-mono text-[10.5px] text-cream-300">
-                  En la plataforma: filtrá por código UNSPSC exacto, tendencia 12 meses, tu RUT vs mercado
+                  En la plataforma: filtra por código UNSPSC exacto, tendencia 12 meses, tu RUT vs mercado
                 </div>
                 <a
                   href="#"

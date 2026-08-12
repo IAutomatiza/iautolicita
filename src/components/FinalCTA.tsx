@@ -88,7 +88,7 @@ export default function FinalCTA() {
                 className="font-mono text-[10.5px] uppercase tracking-[0.20em] font-medium"
                 style={{ color: "#5790F5" }}
               >
-                Mientras leés esto · 42 licitaciones nuevas
+                Mientras lees esto · 42 licitaciones nuevas
               </span>
             </div>
 

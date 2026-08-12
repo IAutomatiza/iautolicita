@@ -207,7 +207,7 @@ export default function OrganismoIntelligence() {
             {/* Selector de organismo */}
             <div className="mt-9">
               <label className="block mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream-300">
-                Probá con un organismo real
+                Prueba con un organismo real
               </label>
               <div className="relative max-w-[320px]">
                 <select

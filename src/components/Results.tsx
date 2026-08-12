@@ -268,7 +268,7 @@ export default function Results() {
 
             {/* Caption below the table */}
             <p className="mt-5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-cream-300 text-center">
-              ↗ MINSAL y JUNAEB ya cerraron — la próxima licitación similar la podés ganar tú
+              ↗ MINSAL y JUNAEB ya cerraron — la próxima licitación similar la puedes ganar tú
             </p>
           </div>
         </div>
