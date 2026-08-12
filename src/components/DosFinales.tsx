@@ -12,6 +12,10 @@ import useInView from "../hooks/useInView";
    el ciclo se pausa al posar el cursor sobre las tarjetas.
 ═══════════════════════════════════════════════════════════════ */
 
+// Milisegundos entre escenas; debe calzar con la duración de
+// dotFill en index.css (5s).
+const CICLO = 5000;
+
 const MINI = [
   { icon: HandCoins, label: "Lo pagado, no lo adjudicado" },
   { icon: Boxes, label: "6,4M órdenes de compra" },
@@ -118,15 +122,15 @@ export default function DosFinales() {
       if (transicion.current !== t) return;
       setIdx((i) => (typeof destino === "function" ? destino(i) : destino));
       setCambiando(false);
-    }, 320);
+    }, 300);
   };
 
-  // Rotación automática de escenas; se detiene con el cursor
-  // encima y con preferencia de movimiento reducido.
+  // Rotación automática de escenas, siempre activa (se detiene solo
+  // con el cursor encima); con movimiento reducido el CSS convierte
+  // el barrido en un cambio directo. CICLO en sincronía con .dot-fill.
   useEffect(() => {
     if (!inView || pausa) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => cambiar((i) => (i + 1) % ESCENAS.length), 6500);
+    const t = setInterval(() => cambiar((i) => (i + 1) % ESCENAS.length), CICLO);
     return () => clearInterval(t);
   }, [inView, pausa]);
 
@@ -144,8 +148,10 @@ export default function DosFinales() {
       visible ? "opacity-100 translate-x-0 translate-y-0" : `opacity-0 ${desde}`
     }`;
 
-  const fundido = `transition-all duration-300 ${
-    cambiando ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"
+  // Salida: barrido hacia la izquierda. Entrada: .escena-in (CSS)
+  // barre desde la derecha con desenfoque al remontar con key={idx}.
+  const fundido = `escena-in transition-all duration-300 ${
+    cambiando ? "opacity-0 -translate-x-6" : "opacity-100 translate-x-0"
   }`;
 
   return (
@@ -169,7 +175,7 @@ export default function DosFinales() {
                 hover:-translate-y-1 hover:shadow-[0_26px_54px_-18px_rgba(10,20,50,0.55)]
                 ${tarjeta(inView, "-translate-x-10", "")}`}
             >
-              <div className={fundido}>
+              <div key={idx} className={fundido}>
                 <div className="flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/40">
                   <span className="h-1.5 w-1.5 rounded-full border border-white/40" />
                   {escena.sin.tag}
@@ -177,7 +183,7 @@ export default function DosFinales() {
                 <div className="mt-4 font-sans text-[12.5px] text-white/40">
                   {escena.sin.ref}
                 </div>
-                <div className="mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white/70">
+                <div className="cifra-pop mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white/70">
                   {escena.sin.cifra}
                 </div>
                 <div className="mt-4 flex items-center gap-2">
@@ -214,7 +220,7 @@ export default function DosFinales() {
                   backgroundSize: "16px 16px",
                 }}
               />
-              <div className={`relative ${fundido}`}>
+              <div key={idx} className={`relative ${fundido}`}>
                 <div className="flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-[#55b4f8]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
                   Con IAutoLicita
@@ -222,7 +228,7 @@ export default function DosFinales() {
                 <div className="mt-4 font-sans text-[12.5px] text-white/55">
                   {escena.con.contexto}
                 </div>
-                <div className="mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white">
+                <div className="cifra-pop mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white">
                   {escena.con.cifra}
                 </div>
                 <p className="mt-3 font-sans text-[13.5px] leading-[1.55] text-white/75">
@@ -239,19 +245,28 @@ export default function DosFinales() {
               </div>
             </article>
 
-            {/* Puntos para saltar entre escenas */}
+            {/* Puntos para saltar entre escenas; el activo es una
+                barra que se llena hasta el próximo cambio */}
             <div className="relative z-10 mt-8 flex justify-center gap-2">
               {ESCENAS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => irA(i)}
                   aria-label={`Ejemplo ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                  className={`h-1.5 rounded-full transition-all duration-300 overflow-hidden ${
                     i === idx
-                      ? "w-7 bg-cream-50"
+                      ? "w-9 bg-cream-50/20"
                       : "w-1.5 bg-cream-50/25 hover:bg-cream-50/50"
                   }`}
-                />
+                >
+                  {i === idx && (
+                    <span
+                      key={idx}
+                      className="dot-fill block h-full w-full rounded-full bg-cream-50"
+                      style={{ animationPlayState: pausa ? "paused" : "running" }}
+                    />
+                  )}
+                </button>
               ))}
             </div>
           </div>
