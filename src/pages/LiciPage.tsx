@@ -106,10 +106,10 @@ function HeroChatInput() {
 }
 
 /* ═══════════════════════════════════════════════════
-   ARIA CHAT PANEL — Deel AI-style interactive demo
+   Lici CHAT PANEL — Deel AI-style interactive demo
 ═══════════════════════════════════════════════════ */
 
-const ariaChatQuestions = [
+const liciChatQuestions = [
   {
     icon: FileText,
     category: "Bases",
@@ -136,7 +136,7 @@ const ariaChatQuestions = [
   },
 ];
 
-function AriaChatPanel() {
+function LiciChatPanel() {
   const [activeQ, setActiveQ] = useState<number | null>(null);
   const [isTypingResponse, setIsTypingResponse] = useState(false);
   const [displayedAnswer, setDisplayedAnswer] = useState("");
@@ -145,7 +145,7 @@ function AriaChatPanel() {
   useEffect(() => {
     if (activeQ === null) return;
 
-    const fullAnswer = ariaChatQuestions[activeQ].answer;
+    const fullAnswer = liciChatQuestions[activeQ].answer;
     setIsTypingResponse(true);
     setDisplayedAnswer("");
     answerRef.current = 0;
@@ -184,7 +184,7 @@ function AriaChatPanel() {
             </div>
             <div>
               <h3 className="font-display font-medium text-[16px] text-white/90 tracking-[-0.01em]">
-                Preguntale a ARIA
+                Preguntale a Lici
               </h3>
               <p className="text-[11px] text-white/35 font-sans mt-0.5">
                 Inteligencia de mercado en tiempo real
@@ -224,7 +224,7 @@ function AriaChatPanel() {
                 <p className="px-2 py-2 text-[10px] font-mono uppercase tracking-[0.14em] text-white/20">
                   Preguntas sugeridas
                 </p>
-                {ariaChatQuestions.map((q, i) => (
+                {liciChatQuestions.map((q, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveQ(i)}
@@ -266,11 +266,11 @@ function AriaChatPanel() {
                 {/* User question bubble */}
                 <div className="flex justify-end mb-4">
                   <div className="max-w-[85%] px-4 py-2.5 rounded-2xl rounded-br-sm bg-brand-600/80 text-[13px] text-white/90 leading-[1.5]">
-                    {ariaChatQuestions[activeQ].question}
+                    {liciChatQuestions[activeQ].question}
                   </div>
                 </div>
 
-                {/* ARIA response */}
+                {/* Lici response */}
                 <div className="flex gap-2.5">
                   <div className="h-7 w-7 rounded-lg bg-brand-500/15 grid place-items-center shrink-0">
                     <svg width="15" height="15" viewBox="0 0 32 32" fill="none">
@@ -282,7 +282,7 @@ function AriaChatPanel() {
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-[10px] font-mono text-brand-400/60 uppercase tracking-[0.1em]">ARIA</span>
+                    <span className="text-[10px] font-mono text-brand-400/60 uppercase tracking-[0.1em]">Lici</span>
                     <div className="mt-1 text-[13px] text-white/65 leading-[1.65] whitespace-pre-line">
                       {displayedAnswer}
                       {isTypingResponse && (
@@ -301,7 +301,7 @@ function AriaChatPanel() {
           <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06]">
             <Sparkles className="h-4 w-4 text-white/15 shrink-0" strokeWidth={1.6} />
             <span className="flex-1 text-[13px] text-white/20 font-sans">
-              Preguntale algo a ARIA...
+              Preguntale algo a Lici...
             </span>
             <Send className="h-4 w-4 text-white/15 shrink-0" strokeWidth={1.8} />
           </div>
@@ -382,7 +382,7 @@ const bentoFeatures = [
   {
     icon: Search,
     title: "Busqueda semantica",
-    desc: "Describe lo que necesitas — ARIA encuentra licitaciones relevantes aunque usen terminologia diferente.",
+    desc: "Describe lo que necesitas — Lici encuentra licitaciones relevantes aunque usen terminologia diferente.",
     span: "col-span-1",
     accent: "from-teal-500/20 to-emerald-500/10",
     mockup: null,
@@ -398,7 +398,7 @@ const bentoFeatures = [
   {
     icon: Zap,
     title: "Alertas contextualizadas",
-    desc: "ARIA evalua cada licitacion contra tu perfil y notifica solo oportunidades con alto potencial.",
+    desc: "Lici evalua cada licitacion contra tu perfil y notifica solo oportunidades con alto potencial.",
     span: "col-span-1",
     accent: "from-yellow-500/20 to-amber-500/10",
     mockup: null,
@@ -410,19 +410,19 @@ const bentoFeatures = [
 ═══════════════════════════════════════════════════ */
 
 const vsItems = [
-  { label: "Lectura de bases con IA", aria: true, others: "Parcial" },
-  { label: "Precio real pagado por item (OC)", aria: true, others: "No" },
-  { label: "Analisis competitivo automatico", aria: true, others: "No" },
-  { label: "Cobertura historica completa", aria: true, others: "Limitada" },
-  { label: "Busqueda semantica", aria: true, others: "Keyword" },
-  { label: "Recomendacion de precio optimo", aria: true, others: "No" },
+  { label: "Lectura de bases con IA", lici: true, others: "Parcial" },
+  { label: "Precio real pagado por item (OC)", lici: true, others: "No" },
+  { label: "Analisis competitivo automatico", lici: true, others: "No" },
+  { label: "Cobertura historica completa", lici: true, others: "Limitada" },
+  { label: "Busqueda semantica", lici: true, others: "Keyword" },
+  { label: "Recomendacion de precio optimo", lici: true, others: "No" },
 ];
 
 /* ═══════════════════════════════════════════════════
    MAIN PAGE COMPONENT
 ═══════════════════════════════════════════════════ */
 
-export default function AriaPage() {
+export default function LiciPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -464,7 +464,7 @@ export default function AriaPage() {
             >
               Iniciar sesion
             </a>
-            <WhatsAppButton variant="primary" label="Probar ARIA" />
+            <WhatsAppButton variant="primary" label="Probar Lici" />
           </div>
         </div>
       </header>
@@ -496,18 +496,19 @@ export default function AriaPage() {
           />
 
           <div className="relative z-10 w-full container-edge flex flex-col items-center">
-            {/* ARIA identity pill */}
+            {/* Lici identity pill */}
             <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#55b4f8]/20 bg-[#55b4f8]/[0.06] backdrop-blur-md mb-10">
-              {/* ARIA icon — voice waveform ("aria" = a melodic solo) */}
-              <svg width="19" height="19" viewBox="0 0 32 32" fill="none" className="aria-eq">
-                <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
-                <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-                <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
-                <rect x="20.4" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-                <rect x="25.2" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
-              </svg>
+              {/* La marca oficial de Lici, el mismo archivo que usa la app. */}
+              <img
+                src={`${import.meta.env.BASE_URL}brand/lici-icon-dark.png`}
+                alt=""
+                aria-hidden
+                width={19}
+                height={19}
+                style={{ width: 19, height: 19 }}
+              />
               <span className="font-sans text-[12px] text-white/60">
-                Asistente de Revision e Inteligencia Avanzada
+                Lee las bases de cada licitación y te responde con citas
               </span>
             </div>
 
@@ -518,7 +519,7 @@ export default function AriaPage() {
             >
               <span className="text-white/70">Conoce</span>{" "}
               <span className="text-white font-bold">
-                ARIA<span className="text-[#55b4f8]">.</span>
+                Lici<span className="text-[#55b4f8]">.</span>
               </span>
             </h1>
 
@@ -586,7 +587,7 @@ export default function AriaPage() {
         </section>
 
         {/* ═══════════════════════════════
-            ARIA CHAT DEMO — Deel AI-style
+            Lici CHAT DEMO — Deel AI-style
         ═══════════════════════════════ */}
         <section className="py-24 md:py-32 bg-[#000115] relative overflow-hidden">
           {/* Subtle gradient orb */}
@@ -610,7 +611,7 @@ export default function AriaPage() {
                 <h2 className="font-display font-medium text-[32px] md:text-[48px] leading-[1.06] tracking-[-0.03em] text-white/90">
                   Pregunta lo que necesites.
                   <br />
-                  <span className="text-brand-400">ARIA responde con datos.</span>
+                  <span className="text-brand-400">Lici responde con datos.</span>
                 </h2>
 
                 <p className="mt-6 font-sans text-[15px] md:text-[17px] leading-[1.65] text-white/40 max-w-[480px]">
@@ -639,7 +640,7 @@ export default function AriaPage() {
 
               {/* Right — Chat panel */}
               <div className="flex justify-center lg:justify-end">
-                <AriaChatPanel />
+                <LiciChatPanel />
               </div>
             </div>
           </div>
@@ -707,7 +708,7 @@ export default function AriaPage() {
                 <span>Comparacion</span>
               </div>
               <h2 className="font-display font-medium text-[32px] md:text-[48px] leading-[1.05] tracking-[-0.03em] text-white/90">
-                Lo que ARIA hace{" "}
+                Lo que Lici hace{" "}
                 <span className="text-brand-400">diferente.</span>
               </h2>
             </div>
@@ -719,7 +720,7 @@ export default function AriaPage() {
                     Funcionalidad
                   </div>
                   <div className="px-3 py-4 text-center border-l border-white/[0.08] font-mono text-[10px] uppercase tracking-[0.14em] text-brand-400 font-semibold">
-                    ARIA
+                    Lici
                   </div>
                   <div className="px-3 py-4 text-center border-l border-white/[0.08] font-mono text-[10px] uppercase tracking-[0.14em] text-white/30">
                     Otros
@@ -765,18 +766,18 @@ export default function AriaPage() {
               <h2 className="font-display font-medium text-[32px] md:text-[56px] leading-[1.04] tracking-[-0.03em] text-white/90">
                 Empieza a ganar
                 <br />
-                <span className="font-serif italic font-normal text-brand-400 tracking-[-0.02em]">
+                <span className="serif-em text-brand-400">
                   licitaciones.
                 </span>
               </h2>
 
               <p className="mt-6 max-w-[420px] mx-auto font-sans text-[15px] md:text-[17px] leading-[1.55] text-white/40">
-                Agenda una demo personalizada y descubre como ARIA transforma tu
+                Agenda una demo personalizada y descubre como Lici transforma tu
                 estrategia en ChileCompra.
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-                <WhatsAppButton variant="huge" label="Agendar demo con ARIA" />
+                <WhatsAppButton variant="huge" label="Agendar demo con Lici" />
               </div>
 
               <div className="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-white/20">

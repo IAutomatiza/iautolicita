@@ -37,7 +37,7 @@ export default function HowItWorks() {
           </div>
           <h2 className="mt-6 font-display font-medium text-[40px] md:text-[60px] leading-[1] tracking-tightest text-cream-50">
             Cuatro pasos.{" "}
-            <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
+            <span className="serif-em text-amber-400">
               Tres en automático.
             </span>
           </h2>

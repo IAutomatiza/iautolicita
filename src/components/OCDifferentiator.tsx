@@ -49,7 +49,7 @@ export default function OCDifferentiator() {
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5">
             <p className="font-sans text-[17px] leading-[1.6] text-cream-200 max-w-[440px]">
-              El módulo de Órdenes de Compra es la pieza que ningún competidor del mercado chileno implementa. Captura, vincula y expone toda la información que ocurre <em className="font-medium text-cream-50">después</em> de adjudicar una licitación.
+              El módulo de Órdenes de Compra es la pieza que ningún competidor del mercado chileno implementa. Captura, vincula y expone toda la información que ocurre <span className="font-medium text-cream-50">después</span> de adjudicar una licitación.
             </p>
 
             <ul className="mt-10 space-y-4">

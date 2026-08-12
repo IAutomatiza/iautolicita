@@ -45,7 +45,7 @@ export default function FAQ() {
             </span>
             <h2 className="mt-5 font-display font-medium text-[40px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
               Preguntas que{" "}
-              <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
+              <span className="serif-em text-amber-400">
                 recibimos
               </span>
               .

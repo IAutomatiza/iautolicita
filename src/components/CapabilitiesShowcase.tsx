@@ -119,25 +119,27 @@ const DetectionFeedMock = () => {
 };
 
 /* ════════════════════════════════════════════════════════════
-   MOCK 2 · ARIA — Cleo-style conversational onboarding
+   MOCK 2 · Lici — Cleo-style conversational onboarding
    (brand badge + intro bubbles + capability reply pills)
 ═══════════════════════════════════════════════════════════════ */
 
-// ARIA mark — voice waveform ("aria" = a melodic solo)
-const AriaMark = ({ size = 18, animated = false }: { size?: number; animated?: boolean }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden className={animated ? "aria-eq" : undefined}>
-    <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
-    <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-    <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
-    <rect x="20.4" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-    <rect x="25.2" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
-  </svg>
+// La marca oficial de Lici, el mismo archivo que usa la app (versión de tinta
+// clara, porque acá el fondo es oscuro).
+const LiciMark = ({ size = 18 }: { size?: number }) => (
+  <img
+    src={`${import.meta.env.BASE_URL}brand/lici-icon-dark.png`}
+    alt=""
+    aria-hidden
+    width={size}
+    height={size}
+    style={{ width: size, height: size }}
+  />
 );
 
-const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
-  { from: "user", node: <>ARIA, ¿qué licitación me conviene priorizar esta semana?</> },
+const liciScript: { from: "user" | "lici"; node: React.ReactNode }[] = [
+  { from: "user", node: <>Lici, ¿qué licitación me conviene priorizar esta semana?</> },
   {
-    from: "aria",
+    from: "lici",
     node: (
       <>
         La <span className="font-semibold">1057-412-LP25 de MINSAL</span>. Tu match es{" "}
@@ -149,7 +151,7 @@ const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
   },
   { from: "user", node: <>¿Y a qué precio debería ir?</> },
   {
-    from: "aria",
+    from: "lici",
     node: (
       <>
         Apunta a <span className="font-semibold">$139,9M</span> — 1,8% bajo la mediana que MINSAL pagó por ítems similares: ganas sin regalar margen.
@@ -158,7 +160,7 @@ const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
   },
   { from: "user", node: <>¿Hay algún riesgo que deba revisar antes de postular?</> },
   {
-    from: "aria",
+    from: "lici",
     node: (
       <>
         Uno importante: tu certificación ISO 13485 vence <span className="font-semibold">3 días antes del cierre</span>. Según la nota de Camila (12 jun), hay que renovarla antes de presentar la oferta.
@@ -167,7 +169,7 @@ const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
   },
   { from: "user", node: <>¿Y quién suele ganar en este organismo?</> },
   {
-    from: "aria",
+    from: "lici",
     node: (
       <>
         3 proveedores concentran el <span className="font-semibold">58%</span> de las adjudicaciones de MINSAL en tu rubro. No ganan por precio, sino por evaluación técnica — justo donde tu perfil tiene ventaja.
@@ -176,7 +178,7 @@ const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
   },
   { from: "user", node: <>Perfecto. Prepárame el resumen para el equipo.</> },
   {
-    from: "aria",
+    from: "lici",
     node: (
       <>
         Listo ✅ Dejé en las notas internas el resumen con score, precio sugerido, riesgo de la ISO y los 3 competidores. Lo verá todo tu equipo.
@@ -185,7 +187,7 @@ const ariaScript: { from: "user" | "aria"; node: React.ReactNode }[] = [
   },
 ];
 
-const AriaMock = () => {
+const LiciMock = () => {
   const [cycle, setCycle] = useState(0);
   const [shown, setShown] = useState(0);
   const [typing, setTyping] = useState(false);
@@ -198,19 +200,19 @@ const AriaMock = () => {
     const at = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
     at(600, () => setShown(1)); // user 1
     at(2000, () => setTyping(true));
-    at(3600, () => { setTyping(false); setShown(2); }); // aria 1
+    at(3600, () => { setTyping(false); setShown(2); }); // lici 1
     at(6800, () => setShown(3)); // user 2
     at(7700, () => setTyping(true));
-    at(9100, () => { setTyping(false); setShown(4); }); // aria 2
+    at(9100, () => { setTyping(false); setShown(4); }); // lici 2
     at(12000, () => setShown(5)); // user 3
     at(12900, () => setTyping(true));
-    at(14600, () => { setTyping(false); setShown(6); }); // aria 3
+    at(14600, () => { setTyping(false); setShown(6); }); // lici 3
     at(18000, () => setShown(7)); // user 4
     at(18900, () => setTyping(true));
-    at(20500, () => { setTyping(false); setShown(8); }); // aria 4
+    at(20500, () => { setTyping(false); setShown(8); }); // lici 4
     at(23700, () => setShown(9)); // user 5
     at(24600, () => setTyping(true));
-    at(26000, () => { setTyping(false); setShown(10); }); // aria 5
+    at(26000, () => { setTyping(false); setShown(10); }); // lici 5
     at(31000, () => setCycle((c) => c + 1)); // hold, then restart
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [cycle]);
@@ -223,7 +225,7 @@ const AriaMock = () => {
           "linear-gradient(180deg, #000115 0%, #000324 14%, #000a37 30%, #001560 52%, #002494 74%, #003ab3 100%)",
       }}
     >
-      {/* Depth overlay + dot texture (echoes the /aria hero) */}
+      {/* Depth overlay + dot texture (echoes the /lici hero) */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -240,11 +242,11 @@ const AriaMock = () => {
         {/* Chat header */}
         <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/10 flex-shrink-0">
           <span className="h-9 w-9 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-            <AriaMark size={17} animated />
+            <LiciMark size={17} />
           </span>
           <div className="min-w-0 flex-1">
             <div className="font-display font-semibold text-[15px] leading-none text-white">
-              ARIA<span className="text-[#55b4f8]">.</span>
+              Lici<span className="text-[#55b4f8]">.</span>
             </div>
             <div className="flex items-center gap-1.5 mt-1">
               <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80] animate-pulse" />
@@ -257,7 +259,7 @@ const AriaMock = () => {
 
         {/* Messages — revealed in sequence, anchored to the bottom */}
         <div className="flex-1 min-h-0 overflow-hidden px-4 py-3 flex flex-col justify-end gap-2.5 [mask-image:linear-gradient(to_bottom,transparent,black_14%)]">
-          {ariaScript.slice(0, shown).map((m, i) =>
+          {liciScript.slice(0, shown).map((m, i) =>
             m.from === "user" ? (
               <div
                 key={`${cycle}-${i}`}
@@ -273,7 +275,7 @@ const AriaMock = () => {
                 style={{ animation: "msgIn 0.45s cubic-bezier(0.16,1,0.3,1) both" }}
               >
                 <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-                  <AriaMark size={12} />
+                  <LiciMark size={12} />
                 </span>
                 <div className="rounded-2xl rounded-tl-md px-4 py-2.5 bg-white/[0.08] border border-white/10 backdrop-blur-sm">
                   <p className="font-sans text-[13px] leading-[1.5] text-white">{m.node}</p>
@@ -289,14 +291,14 @@ const AriaMock = () => {
               style={{ animation: "msgIn 0.3s ease-out both" }}
             >
               <span className="h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-                <AriaMark size={12} />
+                <LiciMark size={12} />
               </span>
               <div className="rounded-2xl rounded-tl-md px-4 py-3 bg-white/[0.08] border border-white/10 backdrop-blur-sm flex items-center gap-1">
                 {[0, 1, 2].map((d) => (
                   <span
                     key={d}
                     className="h-1.5 w-1.5 rounded-full bg-white/70"
-                    style={{ animation: `ariaDot 1.1s ${d * 0.16}s infinite` }}
+                    style={{ animation: `liciDot 1.1s ${d * 0.16}s infinite` }}
                   />
                 ))}
               </div>
@@ -307,7 +309,7 @@ const AriaMock = () => {
         {/* Input bar */}
         <div className="flex-shrink-0 px-4 pb-4 pt-1">
           <div className="flex items-center gap-2 rounded-full bg-white/[0.08] border border-white/15 pl-4 pr-1.5 py-1.5 backdrop-blur-sm">
-            <span className="flex-1 font-sans text-[12.5px] text-white/45 truncate">Escríbele a ARIA…</span>
+            <span className="flex-1 font-sans text-[12.5px] text-white/45 truncate">Escríbele a Lici…</span>
             <span className="h-7 w-7 grid place-items-center rounded-full bg-[#0882f7] flex-shrink-0">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
                 <path d="M5 12h13M12 5l7 7-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -322,7 +324,7 @@ const AriaMock = () => {
           from { opacity: 0; transform: translateY(10px) scale(0.98); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        @keyframes ariaDot {
+        @keyframes liciDot {
           0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
           30% { transform: translateY(-3px); opacity: 1; }
         }
@@ -656,7 +658,7 @@ export default function CapabilitiesShowcase() {
           </span>
           <h2 className="mt-4 font-display font-medium text-[38px] md:text-[58px] leading-[1.02] tracking-[-0.04em] text-cream-50">
             Cuatro capacidades sobre el{" "}
-            <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
+            <span className="serif-em text-amber-400">
               mismo dato
             </span>
             .
@@ -665,9 +667,9 @@ export default function CapabilitiesShowcase() {
 
         {/* Bento grid — every capability visible at once, live */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 lg:auto-rows-[262px]">
-          {/* ARIA — hero, spans 2×2 (Cleo-style, full-bleed) */}
+          {/* Lici — hero, spans 2×2 (Cleo-style, full-bleed) */}
           <div className={`${tile} min-h-[540px] lg:min-h-0 lg:col-span-2 lg:row-span-2`}>
-            <AriaMock />
+            <LiciMock />
           </div>
 
           {/* Detección */}

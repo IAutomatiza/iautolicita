@@ -101,7 +101,7 @@ export default function FinalCTA() {
                 Tu próxima licitación
               </span>
               <span
-                className="block font-serif italic font-normal text-[44px] md:text-[66px] lg:text-[86px] mt-1 tracking-[-0.025em]"
+                className="block font-display font-medium text-[44px] md:text-[66px] lg:text-[86px] mt-1 tracking-[-0.025em]"
                 style={{ color: "#5790F5" }}
               >
                 ya se publicó.

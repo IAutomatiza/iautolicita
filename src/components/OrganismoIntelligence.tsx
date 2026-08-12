@@ -171,13 +171,13 @@ export default function OrganismoIntelligence() {
 
             <h2 className="font-display font-medium text-[36px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
               Antes de postular,{" "}
-              <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
+              <span className="serif-em text-amber-400">
                 conoces a tu comprador.
               </span>
             </h2>
 
             <p className="mt-5 font-sans text-[15.5px] md:text-[16.5px] leading-[1.55] text-cream-200 max-w-[460px]">
-              Cada ficha de licitación carga 4 KPIs históricos del organismo, su top 5 de proveedores ganadores e <em>insights automáticos</em> generados por IA: cuándo paga, qué tan eficiente es, dónde concentra el gasto.
+              Cada ficha de licitación carga 4 KPIs históricos del organismo, su top 5 de proveedores ganadores e <span className="text-cream-50 font-medium">insights automáticos</span> generados por IA: cuándo paga, qué tan eficiente es, dónde concentra el gasto.
             </p>
 
             <div className="mt-8 space-y-3 max-w-[440px]">

@@ -50,12 +50,12 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Headline: editorial sans+serif italic. ChileCompra in Instrument Serif italic for unique signature. */}
+          {/* Headline: el énfasis va por peso y color, sin cursiva. */}
           <h1 className="mt-8 font-display font-medium text-[40px] md:text-[60px] lg:text-[78px] leading-[1.04] tracking-[-0.04em] text-cream-50">
             Entiende cómo se
             <br />
             mueve{" "}
-            <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
+            <span className="serif-em text-amber-400">
               ChileCompra.
             </span>
             <br />
@@ -111,7 +111,7 @@ export default function Hero() {
               licitaciones" tal como la ve un cliente. */}
           <div className="relative max-w-[1180px] mx-auto">
             <img
-              src="/app-iautolicita.png"
+              src={`${import.meta.env.BASE_URL}app-iautolicita.png`}
               width={1680}
               height={1050}
               alt="Pantalla Mis licitaciones de IAutoLicita: cada licitación con su score, fecha de cierre y estado de gestión"

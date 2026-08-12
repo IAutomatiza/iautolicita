@@ -53,7 +53,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/aria"
+                  to="/lici"
                   className="text-cream-100 hover:text-amber-400 transition-colors"
                 >
                   Chat IA documental

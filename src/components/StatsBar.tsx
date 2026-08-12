@@ -56,7 +56,7 @@ export default function StatsBar() {
                 />
               </div>
 
-              <div className="font-display font-light italic text-[44px] md:text-[64px] leading-none tracking-tightest text-cream-50">
+              <div className="font-display font-light text-[44px] md:text-[64px] leading-none tracking-tightest text-cream-50">
                 <StatCounter
                   value={s.value}
                   prefix={s.prefix}

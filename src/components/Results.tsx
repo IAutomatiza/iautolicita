@@ -73,9 +73,9 @@ export default function Results() {
               </span>
             </div>
 
-            {/* The dollar amount — editorial serif italic (The Economist / NYT cover treatment) */}
+            {/* El monto, en la familia display sin cursiva. */}
             <div className="leading-[0.88] tracking-[-0.05em] text-cream-50">
-              <span className="font-serif italic font-normal text-[88px] md:text-[152px] lg:text-[188px] block">
+              <span className="font-display font-medium text-[88px] md:text-[152px] lg:text-[188px] block">
                 <span className="text-amber-400/70 inline-block align-top mr-1 text-[58%] tracking-tight relative top-[0.18em]">
                   $
                 </span>
@@ -89,10 +89,10 @@ export default function Results() {
               </span>
             </div>
 
-            {/* The brutal headline — editorial italic on the punchline */}
+            {/* El remate va con peso, no con cursiva. */}
             <h2 className="mt-10 font-display font-medium text-[28px] md:text-[36px] lg:text-[44px] leading-[1.1] tracking-[-0.025em] text-cream-50 max-w-[540px]">
               Adjudicados por el Estado a otras empresas mientras tu equipo{" "}
-              <span className="font-serif italic font-normal text-amber-400 tracking-[-0.015em]">
+              <span className="serif-em text-amber-400">
                 revisaba el portal a mano.
               </span>
             </h2>

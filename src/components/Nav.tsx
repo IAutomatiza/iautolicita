@@ -15,7 +15,7 @@ const productLinks = [
 
 const flatLinks = [
   { href: "#resultados", label: "Resultados" },
-  { href: "/aria", label: "ARIA ✦", isRoute: true },
+  { href: "/lici", label: "Lici ✦", isRoute: true },
   { href: "#faq", label: "FAQ" },
 ];
 

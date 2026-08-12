@@ -163,7 +163,7 @@ export default function PriceSimulator({ embedded = false }: { embedded?: boolea
               /* Results ya dijo qué es el precio real; aquí sólo se invita a probarlo. */
               <h3 className="font-display font-medium text-[26px] md:text-[34px] leading-[1.1] tracking-[-0.03em] text-cream-50">
                 Pruébalo:{" "}
-                <span className="font-serif italic font-normal text-amber-400 tracking-[-0.015em]">
+                <span className="serif-em text-amber-400">
                   elige categoría y región.
                 </span>
               </h3>
@@ -172,7 +172,7 @@ export default function PriceSimulator({ embedded = false }: { embedded?: boolea
                 {/* Headline */}
                 <h2 className="font-display font-medium text-[36px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
                   El{" "}
-                  <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
+                  <span className="serif-em text-amber-400">
                     precio real
                   </span>
                   <br />
@@ -180,7 +180,7 @@ export default function PriceSimulator({ embedded = false }: { embedded?: boolea
                 </h2>
 
                 <p className="mt-5 font-sans text-[15.5px] md:text-[16.5px] leading-[1.55] text-cream-200 max-w-[460px]">
-                  No el monto adjudicado. El que <em>realmente</em> se pagó, extraído de cada orden de compra del Estado. Cruza categoría + región para ver la distribución completa.
+                  No el monto adjudicado. El que <span className="text-cream-50 font-medium">realmente</span> se pagó, extraído de cada orden de compra del Estado. Cruza categoría + región para ver la distribución completa.
                 </p>
               </>
             )}
@@ -360,7 +360,7 @@ export default function PriceSimulator({ embedded = false }: { embedded?: boolea
                       style={{ color: m.primary ? "#0064E0" : "#737373" }}>
                       {m.label === "p25" ? "p25 · conservador" : m.label === "p50" ? "p50 · mediana" : "p75 · agresivo"}
                     </div>
-                    <div className={`font-serif italic font-normal leading-none text-[34px] md:text-[44px] tracking-[-0.02em] num tabular-nums ${
+                    <div className={`font-display font-medium leading-none text-[34px] md:text-[44px] tracking-[-0.02em] num tabular-nums ${
                       m.primary ? "text-amber-400" : "text-cream-50"
                     }`}>
                       {fmtCLP(m.val)}
