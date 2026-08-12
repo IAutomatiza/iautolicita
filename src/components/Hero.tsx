@@ -1,6 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import WhatsAppButton from "./ui/WhatsAppButton";
-import LiveDot from "./ui/LiveDot";
+import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 import { useEffect, useState } from "react";
 import useScrollProgress, { lerp } from "../hooks/useScrollProgress";
 
@@ -41,46 +40,46 @@ export default function Hero() {
       <div className="absolute inset-0 bg-grid-faint bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_top,black,transparent_60%)]" />
 
       <div className="container-edge relative">
-        <div className="max-w-[980px] mx-auto text-center">
-          {/* Status pill with classic LED */}
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 border border-amber-400/30 bg-amber-400/[0.06] rounded-full reveal">
-            <LiveDot size={8} />
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-amber-400 font-medium">
-              441K licitaciones · 7.2M adjudicaciones · 6.4M OC
-            </span>
-          </div>
-
-          {/* Dos golpes paralelos: el verbo del resultado lleva el color. */}
-          <h1 className="mt-8 font-display font-medium text-[40px] md:text-[60px] lg:text-[78px] leading-[1.04] tracking-[-0.04em] text-cream-50">
-            Deja de buscar licitaciones.
+        {/* Hero al estilo Wise: titular colosal en mayúsculas condensadas,
+            todo en tinta; las cifras bajan al subtítulo y los CTA son
+            píldoras. Sin badge ni línea mono: el titular ES la pieza. */}
+        <div className="max-w-[1200px] mx-auto text-center">
+          <h1 className="font-condensed uppercase text-cream-50 leading-[0.96] tracking-[0.01em] text-[15vw] md:text-[88px] lg:text-[118px] reveal">
+            Deja de buscar
             <br />
-            Empieza a{" "}
-            <span className="text-amber-400">ganarlas.</span>
+            licitaciones.
+            <br />
+            Empieza a ganarlas.
           </h1>
 
-          <p className="mt-7 max-w-[640px] mx-auto font-sans text-[18px] md:text-[20px] leading-[1.45] text-cream-200 reveal">
-            Detectamos las que calzan con lo que vendes, leemos sus bases con IA y te decimos <span className="text-cream-50 font-medium">cuánto pagó el Estado por lo mismo</span>. Ofertar a ciegas quedó atrás.
+          <p className="mt-8 max-w-[620px] mx-auto font-sans text-[17px] md:text-[19px] leading-[1.45] text-cream-200 reveal">
+            441 mil licitaciones. 6,4 millones de órdenes de compra. La
+            inteligencia para ofertar con el precio real que paga el Estado.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center reveal">
-            <WhatsAppButton variant="huge" label="Agendar demo" />
+          <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center reveal">
+            <a
+              href={buildWAUrl(MSG_DEMO)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-14 px-8 rounded-full
+                bg-amber-400 text-white font-sans font-medium text-[16px]
+                hover:brightness-110 hover:-translate-y-[1px] active:translate-y-0
+                transition-all duration-200 ease-out"
+            >
+              Agendar demo
+            </a>
             <a
               href="#capacidades"
-              className="group inline-flex items-center justify-center gap-2 h-14 px-7 text-[15px] font-medium font-sans rounded-lg
-                bg-white text-cream-50 border border-[var(--hairline-strong)]
-                shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(10,10,10,0.04)]
-                hover:border-amber-400/40 hover:text-amber-400
-                hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_-2px_rgba(0,100,224,0.20)]
-                hover:-translate-y-[1px] active:translate-y-0
-                transition-all duration-200 ease-out tracking-[-0.005em]"
+              className="group inline-flex items-center justify-center gap-2 h-14 px-8 rounded-full
+                bg-white text-cream-50 font-sans font-medium text-[16px]
+                border border-[var(--hairline-strong)]
+                hover:border-amber-400/50 hover:text-amber-400
+                transition-all duration-200 ease-out"
             >
               Ver producto
-              <ArrowRight className="h-[15px] w-[15px] transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+              <ArrowRight className="h-[16px] w-[16px] transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
             </a>
-          </div>
-
-          <div className="mt-7 font-mono text-[11px] uppercase tracking-[0.18em] text-cream-400 reveal">
-            Multi-organización · Chat IA · WhatsApp
           </div>
         </div>
 
