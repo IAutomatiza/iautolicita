@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
+import WhatsAppButton from "./ui/WhatsAppButton";
 import { useEffect, useState } from "react";
 import useScrollProgress, { lerp } from "../hooks/useScrollProgress";
 
@@ -56,28 +56,22 @@ export default function Hero() {
             Detectamos las que calzan con lo que vendes, leemos sus bases con IA y te decimos <span className="text-cream-50 font-medium">cuánto pagó el Estado por lo mismo</span>. Ofertar a ciegas quedó atrás.
           </p>
 
+          {/* Los CTA usan los mismos componentes y radios que el resto del
+              sitio (el azul es el mismo botón del menú, en grande). */}
           <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center reveal">
-            <a
-              href={buildWAUrl(MSG_DEMO)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-14 px-8 rounded-full
-                bg-amber-400 text-white font-sans font-medium text-[16px]
-                hover:brightness-110 hover:-translate-y-[1px] active:translate-y-0
-                transition-all duration-200 ease-out"
-            >
-              Agendar demo
-            </a>
+            <WhatsAppButton variant="huge" label="Agendar demo" />
             <a
               href="#capacidades"
-              className="group inline-flex items-center justify-center gap-2 h-14 px-8 rounded-full
-                bg-white text-cream-50 font-sans font-medium text-[16px]
-                border border-[var(--hairline-strong)]
-                hover:border-amber-400/50 hover:text-amber-400
-                transition-all duration-200 ease-out"
+              className="group inline-flex items-center justify-center gap-2 h-14 px-7 text-[15px] font-medium font-sans rounded-lg
+                bg-white text-cream-50 border border-[var(--hairline-strong)]
+                shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(10,10,10,0.04)]
+                hover:border-amber-400/40 hover:text-amber-400
+                hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_-2px_rgba(0,100,224,0.20)]
+                hover:-translate-y-[1px] active:translate-y-0
+                transition-all duration-200 ease-out tracking-[-0.005em]"
             >
               Ver producto
-              <ArrowRight className="h-[16px] w-[16px] transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+              <ArrowRight className="h-[15px] w-[15px] transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
             </a>
           </div>
         </div>
