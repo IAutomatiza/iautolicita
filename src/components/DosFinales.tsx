@@ -1,135 +1,153 @@
-import { X, Check } from "lucide-react";
+import { X, Check, Banknote, Database, TrendingDown, ShieldCheck } from "lucide-react";
+import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 
 /* ════════════════════════════════════════════════════════════
-   Dos finales — el diferenciador del precio real contado como
-   historia, con el tratamiento visual del before/after de V7
-   (vía Mobbin): el panel sin datos va en grafito apagado, casi
-   sin color; el panel con IAutoLicita se enciende con el mismo
-   degradado azul profundo del chat de Lici. El contraste entre
-   ambos ES el mensaje — sin datos todo es opaco.
+   Dos finales — layout clonado de la sección "Write" de Craft
+   (vía Mobbin): un contenedor redondeado gigante en azul suave;
+   a la izquierda dos tarjetas superpuestas como sus ventanas
+   —la oferta a ciegas en grafito detrás, la ganadora con el
+   degradado de Lici delante—; a la derecha eyebrow, titular,
+   párrafo, grilla 2×2 de mini-features y el botón.
 ═══════════════════════════════════════════════════════════════ */
+
+const MINI = [
+  { icon: Banknote, label: "Lo pagado, no lo adjudicado" },
+  { icon: Database, label: "6,4M órdenes de compra" },
+  { icon: TrendingDown, label: "Oferta bajo la mediana" },
+  { icon: ShieldCheck, label: "Margen protegido" },
+];
 
 export default function DosFinales() {
   return (
-    <section id="resultados" className="relative py-16 md:py-28 overflow-hidden">
-      <div className="container-edge relative">
-        {/* Encabezado */}
-        <div className="max-w-[760px] mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream-300">
-            <span className="h-px w-8 bg-cream-300/30" />
-            <span>El precio real</span>
-            <span className="h-px w-8 bg-cream-300/30" />
-          </div>
-          <h2 className="mt-6 font-display font-medium text-[34px] md:text-[48px] leading-[1.05] tracking-[-0.03em] text-cream-50">
-            La misma licitación.{" "}
-            <span className="text-amber-400">Dos finales.</span>
-          </h2>
-        </div>
-
-        {/* Los dos paneles, al patrón V7 */}
-        <div className="mt-12 md:mt-16 grid md:grid-cols-2 gap-5 md:gap-6 max-w-[1060px] mx-auto items-stretch">
-          {/* SIN DATOS — grafito apagado */}
-          <div>
-            <div className="flex items-center gap-2 mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-cream-300">
-              <span className="h-1.5 w-1.5 rounded-full border border-cream-300/60" />
-              Sin datos
-            </div>
-            <article className="flex flex-col h-[calc(100%-30px)] rounded-2xl p-7 md:p-9 bg-[#1F2126]">
-              <div className="font-sans text-[13.5px] text-white/40">
-                Licitación 1057-412-LP25 · Insumos clínicos · MINSAL
-              </div>
-
-              <div className="mt-6 flex-1">
-                <div className="num font-display font-medium text-[44px] md:text-[56px] leading-none tracking-[-0.03em] text-white/70">
+    <section id="resultados" className="py-16 md:py-28">
+      <div className="container-edge">
+        <div className="rounded-[2.5rem] bg-[#D9E6FA] px-6 py-10 md:px-14 md:py-16">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-[1180px] mx-auto">
+            {/* IZQUIERDA — las dos tarjetas superpuestas, como las ventanas de Craft */}
+            <div className="relative max-w-[520px] mx-auto w-full">
+              {/* Atrás: la oferta a ciegas, apagada */}
+              {/* El pb extra deja vacía la franja que tapa la tarjeta de
+                  adelante: el veredicto queda siempre visible. */}
+              <article className="w-[88%] rounded-2xl px-6 pt-6 pb-24 md:px-7 md:pt-7 md:pb-28 bg-[#1F2126] shadow-[0_18px_44px_-18px_rgba(10,20,50,0.45)]">
+                <div className="flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/40">
+                  <span className="h-1.5 w-1.5 rounded-full border border-white/40" />
+                  Sin datos
+                </div>
+                <div className="mt-4 font-sans text-[12.5px] text-white/40">
+                  Licitación 1057-412-LP25 · MINSAL
+                </div>
+                <div className="mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white/70">
                   $152,4M
                 </div>
-                <p className="mt-4 font-sans text-[15px] leading-[1.6] text-white/45">
-                  Ofertó mirando sus costos y sumando un margen{" "}
-                  <span className="text-white/75 font-medium">"por si acaso"</span>
-                  . Nadie en su equipo sabía cuánto estaba pagando MINSAL de
-                  verdad.
+                <p className="mt-3 font-sans text-[13.5px] leading-[1.55] text-white/45">
+                  Costos + margen{" "}
+                  <span className="text-white/75 font-medium">"por si acaso"</span>.
+                  Nadie sabía cuánto pagaba MINSAL de verdad.
                 </p>
-              </div>
+                <div className="mt-5 flex items-center gap-2 pt-4 border-t border-white/[0.08]">
+                  <span className="grid place-items-center h-6 w-6 rounded-full bg-ruby-400/15">
+                    <X className="h-3.5 w-3.5 text-ruby-400" strokeWidth={2.5} />
+                  </span>
+                  <span className="font-sans text-[13.5px] font-medium text-white/70">
+                    Perdió.
+                  </span>
+                </div>
+              </article>
 
-              <div className="mt-8 flex items-center gap-2.5 pt-6 border-t border-white/[0.08]">
-                <span className="grid place-items-center h-7 w-7 rounded-full bg-ruby-400/15">
-                  <X className="h-4 w-4 text-ruby-400" strokeWidth={2.5} />
-                </span>
-                <span className="font-sans text-[15px] font-medium text-white/70">
-                  Perdió. Adjudicada a otro proveedor.
-                </span>
-              </div>
-            </article>
-          </div>
-
-          {/* CON IAUTOLICITA — el azul profundo de Lici, encendido */}
-          <div>
-            <div className="flex items-center gap-2 mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-amber-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-              Con IAutoLicita
-            </div>
-            <article
-              className="relative flex flex-col h-[calc(100%-30px)] rounded-2xl p-7 md:p-9 overflow-hidden text-white shadow-[0_30px_70px_-25px_rgba(0,58,179,0.55)]"
-              style={{
-                background:
-                  "linear-gradient(180deg, #000115 0%, #000a37 26%, #001560 52%, #002494 76%, #003ab3 100%)",
-              }}
-            >
-              {/* La misma textura de puntos del chat de Lici */}
-              <div
-                aria-hidden
-                className="absolute inset-0 pointer-events-none"
+              {/* Delante: la ganadora, encendida y superpuesta */}
+              <article
+                className="relative z-10 w-[88%] ml-auto -mt-16 md:-mt-20 rounded-2xl p-6 md:p-7 overflow-hidden text-white shadow-[0_28px_60px_-20px_rgba(0,30,110,0.55)]"
                 style={{
-                  backgroundImage:
-                    "radial-gradient(rgba(85,180,248,0.18) 1px, transparent 1px)",
-                  backgroundSize: "16px 16px",
+                  background:
+                    "linear-gradient(180deg, #000115 0%, #000a37 26%, #001560 52%, #002494 76%, #003ab3 100%)",
                 }}
-              />
-
-              <div className="relative font-sans text-[13.5px] text-white/60">
-                La misma licitación, el mismo día
-              </div>
-
-              <div className="relative mt-6 flex-1">
-                <div className="num font-display font-medium text-[44px] md:text-[56px] leading-none tracking-[-0.03em] text-white">
+              >
+                <div
+                  aria-hidden
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(rgba(85,180,248,0.18) 1px, transparent 1px)",
+                    backgroundSize: "16px 16px",
+                  }}
+                />
+                <div className="relative flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-[#55b4f8]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
+                  Con IAutoLicita
+                </div>
+                <div className="relative mt-4 font-sans text-[12.5px] text-white/55">
+                  La misma licitación, el mismo día
+                </div>
+                <div className="relative mt-3 num font-display font-medium text-[38px] leading-none tracking-[-0.03em] text-white">
                   $139,9M
                 </div>
-                <p className="mt-4 font-sans text-[15px] leading-[1.6] text-white/75">
+                <p className="relative mt-3 font-sans text-[13.5px] leading-[1.55] text-white/75">
                   Sabía que el Estado venía pagando{" "}
-                  <span className="text-white font-medium">
-                    ~$140M por lo mismo
-                  </span>{" "}
-                  — está en las órdenes de compra. Ofertó 1,8% bajo la mediana,
-                  sin regalar margen.
+                  <span className="text-white font-medium">~$140M por lo mismo</span>.
+                  Ofertó 1,8% bajo la mediana.
                 </p>
+                <div className="relative mt-5 flex items-center gap-2 pt-4 border-t border-white/15">
+                  <span className="grid place-items-center h-6 w-6 rounded-full bg-[#4ade80]/20">
+                    <Check className="h-3.5 w-3.5 text-[#4ade80]" strokeWidth={2.5} />
+                  </span>
+                  <span className="font-sans text-[13.5px] font-medium text-white">
+                    Ganó. Con el margen intacto.
+                  </span>
+                </div>
+              </article>
+
+              <p className="mt-5 text-center font-mono text-[9px] uppercase tracking-[0.16em] text-cream-300">
+                Ejemplo ilustrativo con datos de demostración
+              </p>
+            </div>
+
+            {/* DERECHA — eyebrow, titular, párrafo, mini-grilla y botón */}
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-cream-300">
+                El precio real
               </div>
 
-              <div className="relative mt-8 flex items-center gap-2.5 pt-6 border-t border-white/15">
-                <span className="grid place-items-center h-7 w-7 rounded-full bg-[#4ade80]/20">
-                  <Check className="h-4 w-4 text-[#4ade80]" strokeWidth={2.5} />
-                </span>
-                <span className="font-sans text-[15px] font-medium text-white">
-                  Ganó. Con el margen intacto.
-                </span>
+              <h2 className="mt-5 font-display font-medium text-[32px] md:text-[44px] leading-[1.08] tracking-[-0.03em] text-cream-50">
+                La misma licitación.
+                <br />
+                <span className="text-amber-400">Dos finales.</span>
+              </h2>
+
+              <p className="mt-6 font-sans text-[16px] md:text-[17px] leading-[1.6] text-cream-100 max-w-[480px]">
+                La diferencia no fue el precio — fue saber cuál era. Ese dato
+                vive en IAutoLicita: el precio efectivamente pagado por el
+                Estado, ítem por ítem. Nadie más en Chile lo tiene.
+              </p>
+
+              {/* Grilla 2×2 de mini-features, al patrón Craft */}
+              <div className="mt-9 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 max-w-[480px]">
+                {MINI.map((m) => (
+                  <div key={m.label} className="flex items-center gap-3.5">
+                    <m.icon
+                      className="h-6 w-6 text-cream-50 flex-shrink-0"
+                      strokeWidth={1.6}
+                    />
+                    <span className="font-sans text-[15px] font-medium text-cream-50">
+                      {m.label}
+                    </span>
+                  </div>
+                ))}
               </div>
-            </article>
+
+              <a
+                href={buildWAUrl(MSG_DEMO)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-10 inline-flex items-center justify-center h-12 px-7 rounded-full
+                  bg-white text-cream-50 font-sans font-medium text-[15px]
+                  shadow-[0_2px_8px_rgba(10,20,50,0.10)]
+                  hover:-translate-y-[1px] hover:shadow-[0_6px_16px_rgba(10,20,50,0.14)]
+                  transition-all duration-200 ease-out"
+              >
+                Agendar demo
+              </a>
+            </div>
           </div>
-        </div>
-
-        {/* El remate */}
-        <div className="mt-12 md:mt-16 max-w-[680px] mx-auto text-center">
-          <p className="font-display font-medium text-[24px] md:text-[32px] leading-[1.2] tracking-[-0.02em] text-cream-50">
-            La diferencia no fue el precio.{" "}
-            <span className="text-amber-400">Fue saber cuál era.</span>
-          </p>
-          <p className="mt-4 font-sans text-[15.5px] leading-[1.55] text-cream-200">
-            Ese dato vive en IAutoLicita: el precio efectivamente pagado en 6,4
-            millones de órdenes de compra del Estado. Nadie más en Chile lo
-            tiene.
-          </p>
-          <p className="mt-6 font-mono text-[9.5px] uppercase tracking-[0.16em] text-cream-400">
-            Ejemplo ilustrativo con datos de demostración
-          </p>
         </div>
       </div>
     </section>
