@@ -290,7 +290,7 @@ export default function CapacidadesLici() {
           <Link to="/lici" className="pill-brain mt-7">
             <span className="pill-brain-inner">
               <span className="font-sans font-medium text-[15px] text-[#202020]">
-                La mejor IA es
+                Conoce a
               </span>
               <img
                 src={`${import.meta.env.BASE_URL}brand/lici-icon.png`}
