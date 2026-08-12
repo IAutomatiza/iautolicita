@@ -500,7 +500,7 @@ export default function LiciPage() {
             <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#55b4f8]/20 bg-[#55b4f8]/[0.06] backdrop-blur-md mb-10">
               {/* La marca oficial de Lici, el mismo archivo que usa la app. */}
               <img
-                src={`${import.meta.env.BASE_URL}brand/lici-icon-dark.png`}
+                src={`${import.meta.env.BASE_URL}brand/lici-icon-dark-glifo.png`}
                 alt=""
                 aria-hidden
                 width={19}

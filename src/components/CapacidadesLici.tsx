@@ -18,7 +18,7 @@ import { ScanSearch, ReceiptText, Landmark, MessageSquareDot, ChevronRight } fro
 
 const LiciMark = ({ size = 18 }: { size?: number }) => (
   <img
-    src={`${import.meta.env.BASE_URL}brand/lici-icon-dark.png`}
+    src={`${import.meta.env.BASE_URL}brand/lici-icon-dark-glifo.png`}
     alt=""
     aria-hidden
     width={size}
@@ -129,7 +129,7 @@ const LiciChat = () => {
       <div className="relative h-full flex flex-col">
         <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/10 flex-shrink-0">
           <span className="h-9 w-9 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-            <LiciMark size={17} />
+            <LiciMark size={23} />
           </span>
           <div className="min-w-0 flex-1">
             <div className="font-display font-semibold text-[15px] leading-none text-white">
@@ -161,7 +161,7 @@ const LiciChat = () => {
                 style={{ animation: "msgIn 0.45s cubic-bezier(0.16,1,0.3,1) both" }}
               >
                 <span className="mt-0.5 h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-                  <LiciMark size={12} />
+                  <LiciMark size={16} />
                 </span>
                 <div className="rounded-2xl rounded-tl-md px-4 py-2.5 bg-white/[0.08] border border-white/10 backdrop-blur-sm">
                   <p className="font-sans text-[13px] leading-[1.5] text-white">{m.node}</p>
@@ -173,7 +173,7 @@ const LiciChat = () => {
           {typing && (
             <div className="flex items-end gap-2 self-start" style={{ animation: "msgIn 0.3s ease-out both" }}>
               <span className="h-6 w-6 grid place-items-center rounded-full bg-[#55b4f8]/15 border border-[#55b4f8]/30 flex-shrink-0">
-                <LiciMark size={12} />
+                <LiciMark size={16} />
               </span>
               <div className="rounded-2xl rounded-tl-md px-4 py-3 bg-white/[0.08] border border-white/10 backdrop-blur-sm flex items-center gap-1">
                 {[0, 1, 2].map((d) => (
@@ -257,7 +257,7 @@ const derecha: Capacidad[] = [
 const Feature = ({ f }: { f: Capacidad }) => (
   <div>
     <span className="inline-grid place-items-center h-12 w-12 rounded-xl bg-white border border-[var(--hairline-strong)] shadow-[0_1px_2px_rgba(10,10,10,0.05)]">
-      <f.icon className="h-5 w-5 text-amber-400" strokeWidth={1.8} />
+      <f.icon className="h-5 w-5 text-cream-50" strokeWidth={1.8} />
     </span>
     <h3 className="mt-5 font-display font-medium text-[20px] tracking-[-0.02em] text-cream-50">
       {f.title}
