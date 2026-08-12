@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import WhatsAppButton from "./ui/WhatsAppButton";
 import LiveDot from "./ui/LiveDot";
+import SpeedWord from "./ui/SpeedWord";
 import { useEffect, useState } from "react";
 import useScrollProgress, { lerp } from "../hooks/useScrollProgress";
 
@@ -50,20 +51,17 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Headline: el énfasis va por peso y color, sin cursiva. */}
+          {/* Dos golpes paralelos: el verbo del resultado lleva el color y
+              las estelas de velocidad. */}
           <h1 className="mt-8 font-display font-medium text-[40px] md:text-[60px] lg:text-[78px] leading-[1.04] tracking-[-0.04em] text-cream-50">
-            Entiende cómo se
+            Deja de buscar licitaciones.
             <br />
-            mueve{" "}
-            <span className="serif-em text-amber-400">
-              ChileCompra.
-            </span>
-            <br />
-            En tiempo real.
+            Empieza a{" "}
+            <SpeedWord className="text-amber-400">ganarlas.</SpeedWord>
           </h1>
 
           <p className="mt-7 max-w-[640px] mx-auto font-sans text-[18px] md:text-[20px] leading-[1.45] text-cream-200 reveal">
-            La plataforma de inteligencia para empresas que venden al Estado. Detectamos cada licitación, leemos sus bases con IA, y rastreamos el <span className="text-cream-50 font-medium">precio real pagado por ítem</span> en cada OC — algo que ningún competidor en Chile tiene.
+            Detectamos las que calzan con lo que vendes, leemos sus bases con IA y te decimos <span className="text-cream-50 font-medium">cuánto pagó el Estado por lo mismo</span>. Ofertar a ciegas quedó atrás.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center reveal">
