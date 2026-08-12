@@ -265,7 +265,9 @@ const derecha: Capacidad[] = [
 
 const Feature = ({ f }: { f: Capacidad }) => (
   <div>
-    <span className="inline-grid place-items-center h-12 w-12 rounded-xl bg-white border border-[var(--hairline-strong)] shadow-[0_1px_2px_rgba(10,10,10,0.05)]">
+    {/* Loseta como la de GitBook: blanca, esquinas generosas y una sombra
+        suave en dos capas que la despega del fondo. */}
+    <span className="inline-grid place-items-center h-14 w-14 rounded-2xl bg-white border border-[var(--hairline)] shadow-[0_6px_16px_-6px_rgba(13,21,48,0.14),0_2px_4px_rgba(13,21,48,0.06)]">
       <f.icon className="h-5 w-5 text-cream-50" strokeWidth={1.8} />
     </span>
     <h3 className="mt-5 font-display font-medium text-[20px] tracking-[-0.02em] text-cream-50">

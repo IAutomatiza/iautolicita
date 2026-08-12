@@ -1,29 +1,81 @@
 import SectionLabel from "./ui/SectionLabel";
 
-const steps = [
+/* ════════════════════════════════════════════════════════════
+   Cómo funciona — cuatro pasos donde el usuario pone uno solo.
+   El copy habla en resultados, no en infraestructura: nada de
+   pipelines, marts ni TipTap. Cada paso dice qué pasa y qué
+   gana el que lo lee, y el chip marca cuáles corren solos.
+═══════════════════════════════════════════════════════════════ */
+
+const steps: {
+  n: string;
+  title: string;
+  body: React.ReactNode;
+  duration: string;
+  auto: boolean;
+}[] = [
   {
     n: "01",
-    title: "Ingresas tu RUT",
-    body: "Tu perfil se auto-genera leyendo tu historial completo en 7.2M adjudicaciones: top categorías ganadas, organismos compradores frecuentes, keywords detectados. En un click pre-cargas el motor matching.",
-    duration: "1 click",
+    title: "Parte con tu RUT",
+    body: (
+      <>
+        Leemos tu historial completo en 7,2 millones de adjudicaciones y tu
+        perfil se arma solo: qué vendes, a qué organismos les has ganado y con
+        qué palabras te buscan.{" "}
+        <span className="text-cream-50 font-medium">
+          Es lo único que haces.
+        </span>
+      </>
+    ),
+    duration: "1 clic",
+    auto: false,
   },
   {
     n: "02",
-    title: "Sincronizamos ChileCompra",
-    body: "Pipeline en producción con 441K licitaciones, 6.4M OC y 7.2M adjudicaciones. 8 data marts precalculados con refresh nocturno + cada 2h para oportunidades vivas.",
+    title: "El radar no duerme",
+    body: (
+      <>
+        Cada licitación nueva de ChileCompra se detecta apenas se publica y
+        recibe un{" "}
+        <span className="text-cream-50 font-medium">score 0–100</span> contra
+        tu perfil. Las que calzan llegan solas a tu bandeja; el resto ni lo
+        ves.
+      </>
+    ),
     duration: "automático · 24/7",
+    auto: true,
   },
   {
     n: "03",
-    title: "Motor matching multimodal puntúa",
-    body: "Cada licitación nueva se clasifica y puntúa apenas se publica, y sus bases técnicas las lee la IA, que extrae requisitos y riesgos. Score combina 3 capas: keywords + códigos UNSPSC + sectores objetivo con pesos Alta/Media/Baja.",
-    duration: "12 seg por base",
+    title: "Lici lee las bases",
+    body: (
+      <>
+        La IA extrae requisitos, plazos y riesgos de las bases, y le pone
+        precio a tu oferta con{" "}
+        <span className="text-cream-50 font-medium">
+          lo que el Estado pagó por lo mismo
+        </span>{" "}
+        en 6,4 millones de órdenes de compra.
+      </>
+    ),
+    duration: "automático · 12 seg por base",
+    auto: true,
   },
   {
     n: "04",
-    title: "Tu equipo decide y postula",
-    body: "Notas TipTap tipificadas (decisión/riesgo/tarea/idea), asignación con notificaciones realtime, chat IA con 4 capas de contexto (datos + bases + notas + inteligencia del organismo). Sync automático al Kanban del CRM.",
-    duration: "ciclo cerrado",
+    title: "Tú solo decides",
+    body: (
+      <>
+        La alerta llega por WhatsApp con todo masticado: score, precio
+        sugerido y riesgos. Tu equipo postula con ventaja —{" "}
+        <span className="text-cream-50 font-medium">
+          sin haber abierto el portal
+        </span>
+        .
+      </>
+    ),
+    duration: "el paso que es tuyo",
+    auto: false,
   },
 ];
 
@@ -51,13 +103,19 @@ export default function HowItWorks() {
             >
               <div className="absolute -top-px left-0 w-12 h-px bg-amber-400 group-hover:w-24 transition-all duration-500" />
 
-              <div className="flex items-baseline gap-4 mb-3">
+              <div className="flex items-baseline justify-between gap-4 mb-3">
                 <div className="num font-display font-medium text-[64px] leading-none text-amber-400">
                   {s.n}
                 </div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-400">
+                <span
+                  className={`font-mono text-[9.5px] uppercase tracking-[0.16em] px-2.5 py-1.5 rounded-full border ${
+                    s.auto
+                      ? "border-amber-400/30 bg-amber-400/[0.06] text-amber-400"
+                      : "border-[var(--hairline-strong)] text-cream-300"
+                  }`}
+                >
                   {s.duration}
-                </div>
+                </span>
               </div>
 
               <h3 className="font-display font-medium text-[28px] leading-[1.05] tracking-[-0.02em] text-cream-50 mt-4">
