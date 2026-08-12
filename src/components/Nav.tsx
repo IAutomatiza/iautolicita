@@ -9,8 +9,8 @@ import WhatsAppButton from "./ui/WhatsAppButton";
 const productLinks = [
   { href: "#capacidades", title: "Capacidades", desc: "Detección, scoring IA y OCs" },
   { href: "#como",        title: "Cómo funciona", desc: "El flujo end-to-end" },
-  { href: "#integraciones", title: "Integraciones", desc: "ChileCompra, ERP y CRM" },
-  { href: "#stack",       title: "Stack", desc: "Cómo construimos la inteligencia" },
+  { href: "#simulador",   title: "Precio real por ítem", desc: "Lo que el Estado pagó, no lo adjudicado" },
+  { href: "#inteligencia-organismo", title: "Inteligencia del comprador", desc: "Cómo compra el organismo antes de postular" },
 ];
 
 const flatLinks = [

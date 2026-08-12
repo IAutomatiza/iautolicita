@@ -9,7 +9,7 @@ import LiveDot from "./ui/LiveDot";
 
 export default function FinalCTA() {
   return (
-    <section className="py-10 md:py-24 relative">
+    <section id="contacto" className="py-10 md:py-24 relative">
       <div className="mx-auto px-3 md:px-4 lg:px-5" style={{ maxWidth: 1920 }}>
         <div
           className="relative overflow-hidden rounded-3xl px-5 md:px-16 py-12 md:py-28"

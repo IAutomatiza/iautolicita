@@ -70,7 +70,7 @@ export default function Hero() {
           <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center reveal">
             <WhatsAppButton variant="huge" label="Agendar demo" />
             <a
-              href="#producto"
+              href="#capacidades"
               className="group inline-flex items-center justify-center gap-2 h-14 px-7 text-[15px] font-medium font-sans rounded-lg
                 bg-white text-cream-50 border border-[var(--hairline-strong)]
                 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(10,10,10,0.04)]

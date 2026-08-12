@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { buildWAUrl, MSG_INFO } from "../lib/whatsapp";
 
 export default function Footer() {
@@ -44,26 +45,26 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#ordenes"
+                  href="#resultados"
                   className="text-cream-100 hover:text-amber-400 transition-colors"
                 >
                   Órdenes de compra
                 </a>
               </li>
               <li>
-                <a
-                  href="#chat"
+                <Link
+                  to="/aria"
                   className="text-cream-100 hover:text-amber-400 transition-colors"
                 >
                   Chat IA documental
-                </a>
+                </Link>
               </li>
               <li>
                 <a
-                  href="#benchmark"
+                  href="#simulador"
                   className="text-cream-100 hover:text-amber-400 transition-colors"
                 >
-                  Benchmark
+                  Benchmark de precios
                 </a>
               </li>
             </ul>
@@ -113,10 +114,16 @@ export default function Footer() {
             © {year} iautomatiza · Santiago, Chile
           </div>
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5">
+            {/* Reemplaza a la sección de status: el detalle vive en su propia página. */}
+            <a
+              href="https://status.iautolicita.cl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-amber-400 transition-colors"
+            >
               <span className="h-1.5 w-1.5 rounded-full bg-sage-400 animate-pulse-soft" />
-              Todos los sistemas operativos
-            </span>
+              Todos los sistemas operativos ↗
+            </a>
           </div>
         </div>
       </div>

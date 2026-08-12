@@ -48,8 +48,9 @@ export default function Results() {
     return () => obs.disconnect();
   }, []);
 
+  // El cierre es corto: el simulador embebido continúa esta misma sección.
   return (
-    <section id="resultados" ref={ref} className="py-16 md:py-32 relative overflow-hidden">
+    <section id="resultados" ref={ref} className="pt-16 md:pt-32 pb-10 md:pb-14 relative overflow-hidden">
       {/* Atmospheric blue glow */}
       <div
         aria-hidden

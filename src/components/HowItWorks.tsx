@@ -29,7 +29,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-16 md:py-32 relative">
+    <section id="como" className="py-16 md:py-32 relative">
       <div className="container-edge">
         <div className="text-center mb-16 max-w-[680px] mx-auto">
           <div className="flex justify-center">

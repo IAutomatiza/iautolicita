@@ -91,7 +91,9 @@ function useSmoothNumber(target: number, durationMs = 700) {
   return val;
 }
 
-export default function PriceSimulator() {
+/* `embedded` lo monta como continuación de Results: sin fondo ni encabezado
+   propios, porque la sección de arriba ya presentó el precio real por ítem. */
+export default function PriceSimulator({ embedded = false }: { embedded?: boolean }) {
   const [catId, setCatId] = useState("aseo");
   const [regId, setRegId] = useState("rm");
 
@@ -116,22 +118,31 @@ export default function PriceSimulator() {
   return (
     <section
       id="simulador"
-      className="relative py-20 md:py-32 overflow-hidden"
+      className={
+        embedded
+          ? "relative pb-20 md:pb-28 overflow-hidden"
+          : "relative py-20 md:py-32 overflow-hidden"
+      }
     >
-      {/* Soft atmospheric glow */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[600px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at top, rgba(0,100,224,0.08) 0%, transparent 60%)",
-        }}
-      />
-      {/* Subtle grid */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-grid-faint bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] pointer-events-none"
-      />
+      {/* El resplandor y la grilla los pone Results cuando va embebido */}
+      {!embedded && (
+        <>
+          {/* Soft atmospheric glow */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-[600px] pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at top, rgba(0,100,224,0.08) 0%, transparent 60%)",
+            }}
+          />
+          {/* Subtle grid */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-grid-faint bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] pointer-events-none"
+          />
+        </>
+      )}
 
       <div className="container-edge relative">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
@@ -148,19 +159,31 @@ export default function PriceSimulator() {
               </span>
             </div>
 
-            {/* Headline */}
-            <h2 className="font-display font-medium text-[36px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
-              El{" "}
-              <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
-                precio real
-              </span>
-              <br />
-              pagado por ítem.
-            </h2>
+            {embedded ? (
+              /* Results ya dijo qué es el precio real; aquí sólo se invita a probarlo. */
+              <h3 className="font-display font-medium text-[26px] md:text-[34px] leading-[1.1] tracking-[-0.03em] text-cream-50">
+                Pruébalo:{" "}
+                <span className="font-serif italic font-normal text-amber-400 tracking-[-0.015em]">
+                  elige categoría y región.
+                </span>
+              </h3>
+            ) : (
+              <>
+                {/* Headline */}
+                <h2 className="font-display font-medium text-[36px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
+                  El{" "}
+                  <span className="font-serif italic font-normal text-amber-400 tracking-[-0.02em]">
+                    precio real
+                  </span>
+                  <br />
+                  pagado por ítem.
+                </h2>
 
-            <p className="mt-5 font-sans text-[15.5px] md:text-[16.5px] leading-[1.55] text-cream-200 max-w-[460px]">
-              No el monto adjudicado. El que <em>realmente</em> se pagó, extraído de cada orden de compra del Estado. Cruza categoría + región para ver la distribución completa.
-            </p>
+                <p className="mt-5 font-sans text-[15.5px] md:text-[16.5px] leading-[1.55] text-cream-200 max-w-[460px]">
+                  No el monto adjudicado. El que <em>realmente</em> se pagó, extraído de cada orden de compra del Estado. Cruza categoría + región para ver la distribución completa.
+                </p>
+              </>
+            )}
 
             {/* Dropdowns */}
             <div className="mt-9 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[480px]">
