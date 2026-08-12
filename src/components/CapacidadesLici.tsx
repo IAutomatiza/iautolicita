@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ScanSearch, ReceiptText, Landmark, MessageSquareDot } from "lucide-react";
+import { ScanSearch, ReceiptText, Landmark, MessageSquareDot, ChevronRight } from "lucide-react";
 
 /* ════════════════════════════════════════════════════════════
    Capacidades — layout clonado de la sección enterprise de
@@ -284,13 +284,27 @@ export default function CapacidadesLici() {
             IAutoLicita conecta detección, precio, comprador y alertas a una
             sola base — y Lici te la conversa.
           </p>
-          {/* Píldora al estilo ClickUp: degradado + brillo que barre */}
-          <Link
-            to="/lici"
-            className="btn-clickup mt-7 inline-flex items-center justify-center h-12 px-7 rounded-full
-              text-white font-sans font-semibold text-[15px]"
-          >
-            Conoce a Lici
+          {/* La GradientPill de clickup.com ("The Best AI is Brain²"),
+              clonada con Lici en el rol de Brain: borde orbitado por el
+              cometa de degradado, interior blanco, wordmark y chevron. */}
+          <Link to="/lici" className="pill-brain mt-7">
+            <span className="pill-brain-inner">
+              <span className="font-sans font-medium text-[15px] text-[#202020]">
+                La mejor IA es
+              </span>
+              <img
+                src={`${import.meta.env.BASE_URL}brand/lici-icon.png`}
+                alt=""
+                aria-hidden
+                width={17}
+                height={17}
+                style={{ width: 17, height: 17 }}
+              />
+              <span className="font-sans font-bold text-[15px] text-[#202020]">
+                Lici<span className="text-amber-400">.</span>
+              </span>
+              <ChevronRight className="h-4 w-4 text-[#202020]" strokeWidth={2.2} />
+            </span>
           </Link>
         </div>
 
