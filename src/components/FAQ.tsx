@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "¿Cómo funciona el chat IA con las bases técnicas?",
-    a: "El chat por licitación tiene acceso a 4 capas de contexto: datos públicos de la licitación + texto completo de las bases (PDFs/DOCs parseados) + notas del equipo + inteligencia del organismo comprador. Puede responder preguntas como '¿este organismo paga rápido?' con cifras reales del histórico. Powered by gpt-4o-mini, retención de conversación 90 días.",
+    a: "El chat por licitación tiene acceso a 4 capas de contexto: datos públicos de la licitación + texto completo de las bases (PDFs/DOCs parseados) + notas del equipo + inteligencia del organismo comprador. Puede responder preguntas como '¿este organismo paga rápido?' con cifras reales del histórico. Corre sobre Claude Sonnet 5 de Anthropic, retención de conversación 90 días.",
   },
   {
     q: "¿Y las herramientas del equipo? ¿Cómo gestionan oportunidades?",
