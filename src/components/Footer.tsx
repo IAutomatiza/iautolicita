@@ -61,10 +61,10 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#simulador"
+                  href="#resultados"
                   className="text-cream-100 hover:text-amber-400 transition-colors"
                 >
-                  Benchmark de precios
+                  El precio real
                 </a>
               </li>
             </ul>
