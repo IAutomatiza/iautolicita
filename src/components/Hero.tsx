@@ -44,17 +44,16 @@ export default function Hero() {
             todo en tinta; las cifras bajan al subtítulo y los CTA son
             píldoras. Sin badge ni línea mono: el titular ES la pieza. */}
         <div className="max-w-[1200px] mx-auto text-center">
-          <h1 className="font-condensed uppercase text-cream-50 leading-[0.96] tracking-[0.01em] text-[15vw] md:text-[88px] lg:text-[118px] reveal">
+          <h1 className="font-condensed uppercase text-cream-50 leading-[0.96] tracking-[0.01em] text-[13vw] md:text-[72px] lg:text-[96px] reveal">
             Deja de buscar
             <br />
             licitaciones.
             <br />
-            Empieza a ganarlas.
+            Empieza a <span className="text-amber-400">ganarlas.</span>
           </h1>
 
-          <p className="mt-8 max-w-[620px] mx-auto font-sans text-[17px] md:text-[19px] leading-[1.45] text-cream-200 reveal">
-            441 mil licitaciones. 6,4 millones de órdenes de compra. La
-            inteligencia para ofertar con el precio real que paga el Estado.
+          <p className="mt-8 max-w-[640px] mx-auto font-sans text-[17px] md:text-[19px] leading-[1.45] text-cream-200 reveal">
+            Detectamos las que calzan con lo que vendes, leemos sus bases con IA y te decimos <span className="text-cream-50 font-medium">cuánto pagó el Estado por lo mismo</span>. Ofertar a ciegas quedó atrás.
           </p>
 
           <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center reveal">
