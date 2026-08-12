@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import WhatsAppButton from "./ui/WhatsAppButton";
 import LiveDot from "./ui/LiveDot";
-import HeroDashboardMock from "./mocks/HeroDashboardMock";
 import { useEffect, useState } from "react";
 import useScrollProgress, { lerp } from "../hooks/useScrollProgress";
 
@@ -108,8 +107,20 @@ export default function Hero() {
             className="absolute -inset-x-12 -top-8 -bottom-12 bg-gradient-to-b from-amber-400/[0.10] to-transparent blur-3xl pointer-events-none"
             style={{ opacity: progress }}
           />
+          {/* Captura de la app real, no una maqueta: la pantalla "Mis
+              licitaciones" tal como la ve un cliente. */}
           <div className="relative max-w-[1180px] mx-auto">
-            <HeroDashboardMock progress={progress} />
+            <img
+              src="/app-iautolicita.png"
+              width={1680}
+              height={1050}
+              alt="Pantalla Mis licitaciones de IAutoLicita: cada licitación con su score, fecha de cierre y estado de gestión"
+              className="w-full h-auto rounded-2xl border border-[var(--hairline-strong)]"
+              style={{
+                boxShadow:
+                  "0 40px 100px -30px rgba(10,10,10,0.28), 0 2px 8px -2px rgba(10,10,10,0.08)",
+              }}
+            />
           </div>
         </div>
       </div>

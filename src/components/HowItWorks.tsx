@@ -16,7 +16,7 @@ const steps = [
   {
     n: "03",
     title: "Motor matching multimodal puntúa",
-    body: "Cada licitación nueva se clasifica y puntúa apenas se publica, y sus bases técnicas las lee Claude Sonnet 5 de Anthropic, que extrae requisitos y riesgos. Score combina 3 capas: keywords + códigos UNSPSC + sectores objetivo con pesos Alta/Media/Baja.",
+    body: "Cada licitación nueva se clasifica y puntúa apenas se publica, y sus bases técnicas las lee la IA, que extrae requisitos y riesgos. Score combina 3 capas: keywords + códigos UNSPSC + sectores objetivo con pesos Alta/Media/Baja.",
     duration: "12 seg por base",
   },
   {
