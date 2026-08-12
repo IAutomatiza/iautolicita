@@ -292,14 +292,6 @@ export default function CapacidadesLici() {
               <span className="font-sans font-medium text-[15px] text-[#202020]">
                 Conoce a
               </span>
-              <img
-                src={`${import.meta.env.BASE_URL}brand/lici-icon.png`}
-                alt=""
-                aria-hidden
-                width={17}
-                height={17}
-                style={{ width: 17, height: 17 }}
-              />
               <span className="font-sans font-bold text-[15px] text-[#202020]">
                 Lici<span className="text-amber-400">.</span>
               </span>
