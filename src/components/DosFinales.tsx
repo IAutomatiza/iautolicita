@@ -46,7 +46,7 @@ export default function DosFinales() {
         <div ref={ref} className="max-w-[1240px] mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-8">
             {/* ── SIN IAUTOLICITA — apagado ─────────────────── */}
-            <div className={entrada(inView, "-translate-x-10", "")}>
+            <div className={`flex flex-col ${entrada(inView, "-translate-x-10", "")}`}>
               <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-cream-300">
                 <span className="h-1.5 w-1.5 rounded-full border border-cream-300" />
                 Sin IAutoLicita
@@ -55,7 +55,7 @@ export default function DosFinales() {
                 Buscar a mano, ofertar a ciegas, perder sin saber por qué.
               </h3>
 
-              <div className="mt-6 rounded-2xl bg-[#1F2126] p-5 md:p-6 space-y-3 shadow-[0_18px_44px_-18px_rgba(10,20,50,0.4)]">
+              <div className="mt-6 flex-1 flex flex-col gap-3 rounded-2xl bg-[#1F2126] p-5 md:p-6 shadow-[0_18px_44px_-18px_rgba(10,20,50,0.4)]">
                 {SIN.map((texto, i) => (
                   <div
                     key={texto}
@@ -73,7 +73,7 @@ export default function DosFinales() {
                 {/* Veredicto */}
                 <div
                   style={retardo(200 + SIN.length * 120)}
-                  className={`rounded-xl border border-ruby-400/20 bg-ruby-400/[0.07] p-4 md:p-5 ${chip(inView)}`}
+                  className={`mt-auto rounded-xl border border-ruby-400/20 bg-ruby-400/[0.07] p-4 md:p-5 ${chip(inView)}`}
                 >
                   <div className="num font-display font-medium text-[26px] md:text-[30px] leading-none tracking-[-0.03em] text-white/75">
                     $152,4M
@@ -86,7 +86,7 @@ export default function DosFinales() {
             </div>
 
             {/* ── CON IAUTOLICITA — encendido ───────────────── */}
-            <div className={entrada(inView, "translate-x-10", "delay-150")}>
+            <div className={`flex flex-col ${entrada(inView, "translate-x-10", "delay-150")}`}>
               <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-amber-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
                 Con IAutoLicita
@@ -97,7 +97,7 @@ export default function DosFinales() {
               </h3>
 
               <div
-                className="relative mt-6 rounded-2xl p-5 md:p-6 space-y-3 overflow-hidden
+                className="relative mt-6 flex-1 flex flex-col gap-3 rounded-2xl p-5 md:p-6 overflow-hidden
                   shadow-[0_28px_60px_-20px_rgba(0,30,110,0.55)]"
                 style={{
                   background:
@@ -130,7 +130,7 @@ export default function DosFinales() {
                 {/* Veredicto */}
                 <div
                   style={retardo(350 + CON.length * 120)}
-                  className={`relative rounded-xl border border-[#4ade80]/30 bg-[#4ade80]/10 p-4 md:p-5 ${chip(inView)}`}
+                  className={`relative mt-auto rounded-xl border border-[#4ade80]/30 bg-[#4ade80]/10 p-4 md:p-5 ${chip(inView)}`}
                 >
                   <div className="num font-display font-medium text-[26px] md:text-[30px] leading-none tracking-[-0.03em] text-white">
                     $139,9M
@@ -148,9 +148,12 @@ export default function DosFinales() {
             style={retardo(900)}
             className={`mt-12 md:mt-14 flex flex-col items-center gap-5 text-center ${chip(inView)}`}
           >
-            <p className="font-display font-medium text-[20px] md:text-[24px] tracking-[-0.02em] text-cream-50 max-w-[560px]">
-              La misma licitación. Dos finales.{" "}
-              <span className="text-cream-300">La diferencia no es suerte — son datos.</span>
+            <p className="font-display font-medium text-[22px] md:text-[28px] leading-[1.25] tracking-[-0.02em] text-cream-50 max-w-[640px]">
+              Los dos querían ganar.{" "}
+              <span className="text-amber-400">Solo uno sabía cuánto ofertar.</span>
+            </p>
+            <p className="font-sans text-[15px] md:text-[16px] text-cream-200 -mt-2">
+              ¿De qué lado quieres licitar?
             </p>
             <a
               href={buildWAUrl(MSG_DEMO)}
