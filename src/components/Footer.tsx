@@ -5,11 +5,11 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink-950 pt-20 pb-10">
+    <footer className="bg-ink-950 mt-10 md:mt-16 border-t border-[var(--hairline-strong)] pt-16 md:pt-20 pb-10">
       <div className="container-edge">
-        <div className="grid md:grid-cols-12 gap-10 md:gap-0 pb-16 border-b border-[var(--hairline-strong)]">
+        <div className="grid md:grid-cols-12 gap-10 pb-14 border-b border-[var(--hairline-strong)]">
           {/* Brand */}
-          <div className="md:col-span-5 md:pr-12">
+          <div className="md:col-span-5">
             <div className="font-display font-medium text-[44px] md:text-[56px] leading-none tracking-tightest text-cream-50">
               <span className="text-amber-400">IA</span>utoLicita<span className="text-amber-400">.</span>
             </div>
@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="md:col-span-3 md:border-l md:border-[var(--hairline-strong)] md:px-10">
+          <div className="md:col-span-3">
             <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-400 mb-4">
               Producto
             </div>
@@ -71,7 +71,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="md:col-span-4 md:border-l md:border-[var(--hairline-strong)] md:pl-10">
+          <div className="md:col-span-4">
             <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-400 mb-4">
               Contacto
             </div>
