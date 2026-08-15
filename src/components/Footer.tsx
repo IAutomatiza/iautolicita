@@ -1,130 +1,173 @@
 import { Link } from "react-router-dom";
-import { buildWAUrl, MSG_INFO } from "../lib/whatsapp";
+import { MessageCircle, Mail, Globe } from "lucide-react";
+import { buildWAUrl, MSG_DEMO, MSG_INFO } from "../lib/whatsapp";
+
+/* ════════════════════════════════════════════════════════════
+   Footer — clon del footer de Notion (vía Mobbin): bloque de
+   marca a la izquierda (logo, iconos, chip, enlaces menores y
+   copyright) y cuatro columnas de enlaces, con el remate en
+   negrita al final de la última columna. Fondo claro.
+═══════════════════════════════════════════════════════════════ */
+
+const COLUMNAS = [
+  {
+    titulo: "Producto",
+    links: [
+      { label: "Capacidades", href: "#capacidades" },
+      { label: "Cómo funciona", href: "#como" },
+      { label: "Con y sin IAutoLicita", href: "#resultados" },
+      { label: "Preguntas frecuentes", href: "#faq" },
+    ],
+  },
+  {
+    titulo: "Empresa",
+    links: [
+      { label: "IAutomatiza", href: "https://iautomatiza.cl", externo: true },
+      { label: "hola@iautomatiza.cl", href: "mailto:hola@iautomatiza.cl" },
+      { label: "WhatsApp directo", href: buildWAUrl(MSG_INFO), externo: true },
+    ],
+  },
+  {
+    titulo: "Recursos",
+    links: [
+      { label: "Conoce a Lici", href: "/lici", interno: true },
+      { label: "Estado del sistema", href: "https://status.iautolicita.cl", externo: true },
+      { label: "Mercado Público", href: "https://www.mercadopublico.cl", externo: true },
+    ],
+  },
+  {
+    titulo: "IAutoLicita para",
+    links: [
+      { label: "Constructoras", href: buildWAUrl(MSG_DEMO), externo: true },
+      { label: "Proveedores del Estado", href: buildWAUrl(MSG_DEMO), externo: true },
+      { label: "Servicios y consultoras", href: buildWAUrl(MSG_DEMO), externo: true },
+    ],
+  },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
+  const enlace = (l: { label: string; href: string; externo?: boolean; interno?: boolean }) =>
+    l.interno ? (
+      <Link to={l.href} className="text-cream-100 hover:text-cream-50 transition-colors">
+        {l.label}
+      </Link>
+    ) : (
+      <a
+        href={l.href}
+        {...(l.externo ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        className="text-cream-100 hover:text-cream-50 transition-colors"
+      >
+        {l.label}
+      </a>
+    );
+
   return (
-    <footer className="bg-ink-950 pt-20 pb-10">
+    <footer className="bg-white border-t border-[var(--hairline)] pt-16 md:pt-20 pb-14">
       <div className="container-edge">
-        <div className="grid md:grid-cols-12 gap-10 pb-14 border-b border-[var(--hairline-strong)]">
-          {/* Brand */}
-          <div className="md:col-span-5">
-            <div className="font-display font-medium text-[44px] md:text-[56px] leading-none tracking-tightest text-cream-50">
+        <div className="grid gap-12 lg:gap-8 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1fr]">
+          {/* ── Bloque de marca ─────────────────────────────── */}
+          <div>
+            <div className="font-display font-bold text-[24px] leading-none tracking-tight text-cream-50">
               <span className="text-amber-400">IA</span>utoLicita<span className="text-amber-400">.</span>
             </div>
-            <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-cream-400">
-              by{" "}
+
+            {/* Iconos de contacto, al estilo de la fila social */}
+            <div className="mt-6 flex items-center gap-4">
+              <a
+                href={buildWAUrl(MSG_INFO)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="text-cream-300 hover:text-cream-50 transition-colors"
+              >
+                <MessageCircle className="h-5 w-5" strokeWidth={1.8} />
+              </a>
+              <a
+                href="mailto:hola@iautomatiza.cl"
+                aria-label="Correo"
+                className="text-cream-300 hover:text-cream-50 transition-colors"
+              >
+                <Mail className="h-5 w-5" strokeWidth={1.8} />
+              </a>
               <a
                 href="https://iautomatiza.cl"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-cream-100 hover:text-amber-400 transition-colors underline-offset-4 hover:underline"
+                aria-label="Sitio de IAutomatiza"
+                className="text-cream-300 hover:text-cream-50 transition-colors"
               >
-                iautomatiza
+                <Globe className="h-5 w-5" strokeWidth={1.8} />
               </a>
             </div>
-            <p className="mt-6 font-sans text-[14px] leading-[1.55] text-cream-200 max-w-[420px]">
-              Inteligencia y gestión integral de licitaciones de ChileCompra. Plataforma SaaS multi-organización operativa en Chile.
-            </p>
-          </div>
 
-          {/* Links */}
-          <div className="md:col-span-3">
-            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-400 mb-4">
-              Producto
-            </div>
-            <ul className="space-y-2 font-sans text-[14px]">
-              <li>
-                <a
-                  href="#capacidades"
-                  className="text-cream-100 hover:text-amber-400 transition-colors"
-                >
-                  Capacidades
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#resultados"
-                  className="text-cream-100 hover:text-amber-400 transition-colors"
-                >
-                  Órdenes de compra
-                </a>
-              </li>
-              <li>
-                <Link
-                  to="/lici"
-                  className="text-cream-100 hover:text-amber-400 transition-colors"
-                >
-                  Chat IA documental
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="#resultados"
-                  className="text-cream-100 hover:text-amber-400 transition-colors"
-                >
-                  El precio real
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div className="md:col-span-4">
-            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-400 mb-4">
-              Contacto
-            </div>
-            <ul className="space-y-3 font-sans text-[14px]">
-              <li>
-                <a
-                  href={buildWAUrl(MSG_INFO)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cream-100 hover:text-amber-400 transition-colors"
-                >
-                  WhatsApp directo
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:hola@iautomatiza.cl"
-                  className="text-cream-100 hover:text-amber-400 transition-colors"
-                >
-                  hola@iautomatiza.cl
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://iautomatiza.cl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cream-100 hover:text-amber-400 transition-colors"
-                >
-                  iautomatiza.cl ↗
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-cream-400">
-          <div>
-            © {year} iautomatiza · Santiago, Chile
-          </div>
-          <div className="flex items-center gap-4">
-            {/* Reemplaza a la sección de status: el detalle vive en su propia página. */}
+            {/* Chip de estado, en el lugar del selector de idioma */}
             <a
               href="https://status.iautolicita.cl"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-amber-400 transition-colors"
+              className="mt-8 inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-3.5 py-2
+                font-sans text-[13.5px] text-cream-50 hover:bg-cream-50/[0.04] transition-colors"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-sage-400 animate-pulse-soft" />
-              Todos los sistemas operativos ↗
+              Todos los sistemas operativos
             </a>
+
+            {/* Enlaces menores */}
+            <div className="mt-6 space-y-2 font-sans text-[13.5px]">
+              <div>
+                <a
+                  href="https://app.iautolicita.cl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cream-100 hover:text-cream-50 transition-colors"
+                >
+                  Iniciar sesión
+                </a>
+              </div>
+              <div>
+                <a
+                  href={buildWAUrl(MSG_INFO)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cream-100 hover:text-cream-50 transition-colors"
+                >
+                  Hablar con ventas
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-8 font-sans text-[13.5px] text-cream-300">
+              © {year} IAutomatiza · Santiago, Chile
+            </div>
           </div>
+
+          {/* ── Columnas de enlaces ─────────────────────────── */}
+          {COLUMNAS.map((col) => (
+            <div key={col.titulo}>
+              <div className="font-sans font-semibold text-[14.5px] text-cream-50 mb-4">
+                {col.titulo}
+              </div>
+              <ul className="space-y-3 font-sans text-[14px]">
+                {col.links.map((l) => (
+                  <li key={l.label}>{enlace(l)}</li>
+                ))}
+                {col.titulo === "IAutoLicita para" && (
+                  <li className="pt-4">
+                    <a
+                      href={buildWAUrl(MSG_DEMO)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[14.5px] text-cream-50 hover:text-amber-400 transition-colors"
+                    >
+                      Agendar demo →
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </footer>
