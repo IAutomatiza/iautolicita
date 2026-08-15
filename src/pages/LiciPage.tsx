@@ -19,92 +19,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 import WhatsAppButton from "../components/ui/WhatsAppButton";
-import DotField from "../components/DotField";
 import VortexLicitaciones from "../components/VortexLicitaciones";
 import Footer from "../components/Footer";
-
-/* ═══════════════════════════════════════════════════
-   TYPEWRITER EFFECT for chat demo
-═══════════════════════════════════════════════════ */
-
-const suggestions = [
-  { label: "Analizar bases", query: "Analiza los criterios de evaluacion de esta licitacion" },
-  { label: "Precios reales", query: "Cuanto pagan por este producto en promedio?" },
-  { label: "Competencia", query: "Quienes son mis competidores en MINSAL?" },
-  { label: "Alertas IA", query: "Notificame licitaciones de TI sobre $50M" },
-];
-
-function HeroChatInput() {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
-  const charRef = useRef(0);
-
-  useEffect(() => {
-    const query = suggestions[activeIdx].query;
-    charRef.current = 0;
-    setDisplayText("");
-    setIsTyping(true);
-
-    const typeInterval = setInterval(() => {
-      charRef.current += 1;
-      if (charRef.current <= query.length) {
-        setDisplayText(query.slice(0, charRef.current));
-      } else {
-        clearInterval(typeInterval);
-        setIsTyping(false);
-        setTimeout(() => {
-          setActiveIdx((i) => (i + 1) % suggestions.length);
-        }, 2800);
-      }
-    }, 45);
-
-    return () => clearInterval(typeInterval);
-  }, [activeIdx]);
-
-  return (
-    <div className="w-full max-w-[640px] mx-auto">
-      {/* Input */}
-      <div className="relative group">
-        <div
-          className="absolute -inset-[1px] rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: "linear-gradient(135deg, rgba(0,100,224,0.4), rgba(87,144,245,0.2), rgba(0,100,224,0.4))",
-          }}
-        />
-        <div className="relative flex items-center gap-3 px-5 py-4 rounded-2xl bg-[#0F1118] backdrop-blur-xl">
-          <Sparkles className="h-5 w-5 text-brand-400 shrink-0" strokeWidth={1.6} />
-          <span className="flex-1 text-[15px] md:text-[16px] text-white/70 font-sans truncate">
-            {displayText}
-            {isTyping && (
-              <span className="inline-block w-[2px] h-[18px] bg-brand-400 ml-0.5 align-middle animate-blink" />
-            )}
-          </span>
-          <button className="h-9 w-9 rounded-xl bg-brand-600 grid place-items-center shrink-0 hover:bg-brand-500 transition-colors shadow-[0_0_20px_rgba(0,100,224,0.4)]">
-            <Send className="h-4 w-4 text-white" strokeWidth={2} />
-          </button>
-        </div>
-      </div>
-
-      {/* Suggestion chips */}
-      <div className="flex flex-wrap gap-2 mt-4 justify-center">
-        {suggestions.map((s, i) => (
-          <button
-            key={s.label}
-            onClick={() => setActiveIdx(i)}
-            className={`px-3.5 py-1.5 rounded-full text-[12px] font-mono uppercase tracking-[0.06em] transition-all duration-300 border ${
-              i === activeIdx
-                ? "border-brand-400/50 bg-brand-400/10 text-brand-300 shadow-[0_0_12px_rgba(0,100,224,0.2)]"
-                : "border-white/[0.06] bg-white/[0.03] text-white/40 hover:text-white/60 hover:border-white/10"
-            }`}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 
 /* ═══════════════════════════════════════════════════
    Lici CHAT PANEL — Deel AI-style interactive demo
@@ -472,95 +389,84 @@ export default function LiciPage() {
 
       <main className="bg-[#000115] text-white">
         {/* ═══════════════════════════════
-            HERO — Antimetal-style dot field
+            HERO — clon del split-hero de contentarchitecture.dev
+            (vía Mobbin): panel crema con eyebrow mono, titular
+            enorme, botones oscuros tipo GET/ACCESS y línea de
+            specs con cursor; el vórtice de datos llena la derecha.
         ═══════════════════════════════ */}
-        <section className="relative min-h-[120vh] flex flex-col items-center justify-center overflow-hidden pt-16 pb-32">
-          {/* Deep blue gradient base */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(180deg, #000115 0%, #000324 10%, #000a37 20%, #001560 35%, #002494 50%, #003ab3 62%, #035dd4 72%, #0882f7 82%, #55b4f8 92%, #b1dffa 100%)",
-            }}
-          />
+        <section className="relative grid lg:grid-cols-2 min-h-[100svh]">
+          {/* IZQUIERDA — panel crema */}
+          <div className="relative bg-[#F2F0EA] text-[#0A0A0A] flex flex-col justify-center px-6 md:px-14 xl:px-20 pt-32 pb-40 lg:py-0">
+            <div className="max-w-[560px]">
+              <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/70">
+                <img
+                  src={`${import.meta.env.BASE_URL}brand/lici-icon-glifo.png`}
+                  alt=""
+                  aria-hidden
+                  width={16}
+                  height={16}
+                  style={{ width: 16, height: 16 }}
+                />
+                Tu analista de licitaciones.
+              </div>
 
-          {/* Dot field canvas — the hero effect */}
-          <div className="absolute inset-0">
-            <DotField />
-          </div>
+              <h1 className="mt-7 font-display font-semibold text-[44px] md:text-[56px] xl:text-[64px] leading-[1.03] tracking-[-0.03em]">
+                Lici se lee todo.
+                <br />
+                <span className="text-[#0064E0]">Y te dice cómo ganar.</span>
+              </h1>
 
-          {/* Dark overlay behind text for readability */}
-          <div
-            className="absolute inset-0 pointer-events-none z-[1]"
-            style={{
-              background: "radial-gradient(ellipse 60% 40% at 50% 40%, rgba(0,1,21,0.75) 0%, transparent 100%)",
-            }}
-          />
+              <p className="mt-7 font-sans text-[16px] md:text-[17px] leading-[1.6] text-[#0A0A0A]/65 max-w-[460px]">
+                Analiza las bases completas, calcula el precio para ganar y
+                mapea tu competencia — entrenada sobre 6,4 millones de
+                órdenes de compra de ChileCompra. Y siempre responde con la
+                cita a la página exacta.
+              </p>
 
-          <div className="relative z-10 w-full container-edge flex flex-col items-center">
-            {/* Lici identity pill */}
-            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#55b4f8]/20 bg-[#55b4f8]/[0.06] backdrop-blur-md mb-10">
-              {/* La marca oficial de Lici, el mismo archivo que usa la app. */}
-              <img
-                src={`${import.meta.env.BASE_URL}brand/lici-icon-dark-glifo.png`}
-                alt=""
-                aria-hidden
-                width={19}
-                height={19}
-                style={{ width: 19, height: 19 }}
-              />
-              <span className="font-sans text-[12px] text-white/60">
-                Lee las bases de cada licitación y te responde con citas
-              </span>
+              {/* Botones al estilo GET / ACCESS del original */}
+              <div className="mt-9 flex items-center gap-1.5">
+                <a
+                  href={buildWAUrl(MSG_DEMO)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
+                >
+                  Probar Lici
+                </a>
+                <a
+                  href="https://app.iautolicita.cl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
+                >
+                  Acceder
+                  <span className="absolute top-2 right-2 h-1.5 w-1.5 rounded-full bg-[#0064E0]" />
+                </a>
+              </div>
             </div>
 
-            {/* Headline — clean, confident, lets the background breathe */}
-            <h1
-              className="font-display font-semibold text-[52px] md:text-[76px] lg:text-[96px] leading-[0.98] tracking-[-0.04em] text-center"
-              style={{ textShadow: "0 2px 8px rgba(0,0,0,0.4)" }}
-            >
-              <span className="text-white/70">Conoce</span>{" "}
-              <span className="text-white font-bold">
-                Lici<span className="text-[#55b4f8]">.</span>
-              </span>
-            </h1>
-
-            {/* Tagline */}
-            <p
-              className="mt-5 font-display font-medium text-[20px] md:text-[26px] leading-[1.2] tracking-[-0.02em] text-center text-white/80"
-              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.4)" }}
-            >
-              Tu asistente de licitaciones que piensa como estratega.
-            </p>
-
-            {/* Subtitle */}
-            <p
-              className="mt-5 max-w-[520px] text-center font-sans text-[15px] md:text-[17px] leading-[1.6] text-white/50"
-              style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
-            >
-              Analiza bases, calcula precios optimos y mapea tu competencia.
-              Entrenada sobre{" "}
-              <span className="text-white/90 font-medium">6.4 millones de ordenes de compra</span>{" "}
-              de ChileCompra.
-            </p>
-
-            {/* Chat input */}
-            <div className="mt-12 w-full">
-              <HeroChatInput />
+            {/* Línea de specs abajo, como el status bar del original */}
+            <div className="mt-16 lg:mt-0 lg:absolute lg:bottom-9 lg:left-14 xl:left-20 lg:right-10 font-mono text-[11px] uppercase tracking-[0.06em] text-[#0A0A0A]/60">
+              <div className="flex flex-wrap gap-x-10 gap-y-1.5">
+                <span>441K licitaciones</span>
+                <span>7,2M adjudicaciones</span>
+                <span>6,4M OC</span>
+                <span>Respuesta: &lt;3s</span>
+              </div>
+              <div className="mt-1.5 flex flex-wrap gap-x-10 gap-y-1.5">
+                <span>Bases: cargadas</span>
+                <span>Citas: página exacta</span>
+                <span>
+                  Cobertura: 99,94%
+                  <span className="inline-block w-[7px] h-[13px] bg-[#0A0A0A] ml-1.5 align-middle animate-blink" />
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Bottom gradient fade to next section */}
-          <div
-            className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
-            style={{
-              background: "linear-gradient(to bottom, transparent, #000115)",
-            }}
-          />
-
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-            <div className="w-[1px] h-8 bg-gradient-to-b from-transparent to-white/20" />
-            <ArrowRight className="h-3.5 w-3.5 text-white/20 rotate-90" strokeWidth={1.5} />
+          {/* DERECHA — el vórtice de datos */}
+          <div className="relative bg-[#05070d] min-h-[440px] md:min-h-[560px] lg:min-h-0 overflow-hidden">
+            <VortexLicitaciones />
           </div>
         </section>
 
@@ -584,41 +490,6 @@ export default function LiciPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════
-            VÓRTICE DE DATOS — clon del text-vortex de
-            contentarchitecture.dev (vía Mobbin): mitad texto,
-            mitad panel con anillos de licitaciones girando
-        ═══════════════════════════════ */}
-        <section className="relative border-b border-white/[0.06]">
-          <div className="grid lg:grid-cols-2">
-            {/* Izquierda: el argumento */}
-            <div className="flex items-center px-6 md:px-14 xl:px-20 py-20 lg:py-28 bg-[#000115]">
-              <div className="max-w-[480px]">
-                <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#55b4f8]">
-                  Datos en vivo de ChileCompra
-                </div>
-                <h2 className="mt-6 font-display font-semibold text-[38px] md:text-[52px] leading-[1.02] tracking-[-0.03em] text-white">
-                  Todo Mercado Público, girando en torno a lo que vendes.
-                </h2>
-                <p className="mt-6 font-sans text-[15px] md:text-[16px] leading-[1.65] text-white/50">
-                  441 mil licitaciones, 7,2 millones de adjudicaciones y 6,4
-                  millones de órdenes de compra orbitando un solo punto: tu
-                  próxima oferta. Lici las ordena, las lee y te dice dónde
-                  está el negocio.
-                </p>
-                <div className="mt-9">
-                  <WhatsAppButton variant="primary" label="Probar Lici" />
-                </div>
-              </div>
-            </div>
-
-            {/* Derecha: el vórtice */}
-            <div className="relative bg-[#05070d] min-h-[420px] md:min-h-[560px] lg:min-h-0 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/[0.06]">
-              <VortexLicitaciones />
-            </div>
           </div>
         </section>
 
