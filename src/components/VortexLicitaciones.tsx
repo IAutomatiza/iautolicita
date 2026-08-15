@@ -144,34 +144,60 @@ export default function VortexLicitaciones() {
       }
     };
 
-    const dibujar = () => {
+    // Apertura como el original: primero los puntos, después los
+    // caracteres se materializan por anillo (de adentro hacia
+    // afuera) mientras todo crece suavemente hasta su tamaño.
+    const INTRO = 1900;
+    let inicio = 0; // timestamp del primer frame visible; 0 = aún no parte
+    const suave = (x: number) => 1 - Math.pow(1 - Math.min(Math.max(x, 0), 1), 3);
+
+    const dibujar = (t = 0) => {
+      const p = quieto || !inicio ? 1 : Math.min((t - inicio) / INTRO, 1);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
-      if (fondo) ctx.drawImage(fondo, 0, 0, W, H);
-      for (const a of anillos) {
+      const esc = 0.84 + 0.16 * suave(p);
+      ctx.save();
+      ctx.translate(W / 2, H / 2);
+      ctx.scale(esc, esc);
+      // los puntos entran primero
+      if (fondo) {
+        ctx.globalAlpha = Math.min(p * 2.5, 1);
+        ctx.drawImage(fondo, -W / 2, -H / 2, W, H);
+      }
+      for (let i = 0; i < anillos.length; i++) {
+        const a = anillos[i];
+        // cada anillo aparece con su propio retardo, del centro afuera
+        const pa = suave((p * INTRO - i * 70) / 600);
+        if (pa <= 0) continue;
         const s = a.lienzo.width / dpr;
         ctx.save();
-        ctx.translate(W / 2, H / 2);
+        ctx.globalAlpha = pa;
         ctx.rotate(a.angulo);
         ctx.drawImage(a.lienzo, -s / 2, -s / 2, s, s);
         ctx.restore();
       }
+      ctx.restore();
+      ctx.globalAlpha = 1;
     };
 
     let tPrevio = 0;
     const paso = (t: number) => {
       raf = requestAnimationFrame(paso);
+      if (!inicio) inicio = t;
       const dt = tPrevio ? Math.min((t - tPrevio) / 1000, 0.05) : 0;
       tPrevio = t;
+      const enIntro = t - inicio < INTRO;
       for (const a of anillos) a.angulo += a.velocidad * dt;
-      // cada ~700ms un anillo al azar muestra un tramo revuelto
-      if (t - ultimoRevuelto > 700 && anillos.length) {
+      // durante la apertura los revueltos son frecuentes (se ve como
+      // si los caracteres se decodificaran); después, esporádicos
+      const cadencia = enIntro ? 110 : 700;
+      if (t - ultimoRevuelto > cadencia && anillos.length) {
         ultimoRevuelto = t;
         const a = anillos[Math.floor(Math.random() * anillos.length)];
         pintarAnillo(a, true);
-        setTimeout(() => pintarAnillo(a, false), 380);
+        setTimeout(() => pintarAnillo(a, false), enIntro ? 200 : 380);
       }
-      dibujar();
+      dibujar(t);
     };
 
     construir();
