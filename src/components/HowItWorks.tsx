@@ -1,7 +1,11 @@
+import useInView from "../hooks/useInView";
+
 /* ════════════════════════════════════════════════════════════
    Cómo funciona — cuatro pasos donde el usuario pone uno solo.
    Copy en resultados, sin jerga de infraestructura ni canales:
    cada paso es una promesa corta con UNA frase destacada.
+   Cierra con una captura real de la app (el módulo Lici con una
+   licitación abierta) que muestra los pasos 2–4 en pantalla.
 ═══════════════════════════════════════════════════════════════ */
 
 const steps: {
@@ -63,6 +67,8 @@ const steps: {
 ];
 
 export default function HowItWorks() {
+  const [shotRef, shotInView] = useInView<HTMLDivElement>(0.2);
+
   return (
     <section id="como" className="py-16 md:py-32 relative">
       <div className="container-edge">
@@ -101,6 +107,27 @@ export default function HowItWorks() {
               </p>
             </article>
           ))}
+        </div>
+
+        {/* La app real: Lici con una licitación abierta — cubre en
+            pantalla lo que los pasos 2–4 prometen en texto */}
+        <div
+          ref={shotRef}
+          className={`mt-16 md:mt-24 max-w-[1100px] mx-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            shotInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="rounded-2xl overflow-hidden border border-[var(--hairline-strong)] shadow-[0_36px_90px_-36px_rgba(0,30,110,0.45)]">
+            <img
+              src={`${import.meta.env.BASE_URL}app-lici-workspace.png`}
+              alt="Lici dentro de IAutoLicita: resumen de bases, documentos a presentar, calce 87/100 y cuánto conviene ofertar"
+              className="w-full h-auto block"
+              loading="lazy"
+            />
+          </div>
+          <div className="mt-5 text-center font-mono text-[10.5px] uppercase tracking-[0.2em] text-cream-300">
+            La app real — Lici con una licitación abierta
+          </div>
         </div>
       </div>
     </section>
