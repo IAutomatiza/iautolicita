@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import WhatsAppButton from "../components/ui/WhatsAppButton";
 import DotField from "../components/DotField";
+import VortexLicitaciones from "../components/VortexLicitaciones";
 import Footer from "../components/Footer";
 
 /* ═══════════════════════════════════════════════════
@@ -583,6 +584,41 @@ export default function LiciPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════
+            VÓRTICE DE DATOS — clon del text-vortex de
+            contentarchitecture.dev (vía Mobbin): mitad texto,
+            mitad panel con anillos de licitaciones girando
+        ═══════════════════════════════ */}
+        <section className="relative border-b border-white/[0.06]">
+          <div className="grid lg:grid-cols-2">
+            {/* Izquierda: el argumento */}
+            <div className="flex items-center px-6 md:px-14 xl:px-20 py-20 lg:py-28 bg-[#000115]">
+              <div className="max-w-[480px]">
+                <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#55b4f8]">
+                  Datos en vivo de ChileCompra
+                </div>
+                <h2 className="mt-6 font-display font-semibold text-[38px] md:text-[52px] leading-[1.02] tracking-[-0.03em] text-white">
+                  Todo Mercado Público, girando en torno a lo que vendes.
+                </h2>
+                <p className="mt-6 font-sans text-[15px] md:text-[16px] leading-[1.65] text-white/50">
+                  441 mil licitaciones, 7,2 millones de adjudicaciones y 6,4
+                  millones de órdenes de compra orbitando un solo punto: tu
+                  próxima oferta. Lici las ordena, las lee y te dice dónde
+                  está el negocio.
+                </p>
+                <div className="mt-9">
+                  <WhatsAppButton variant="primary" label="Probar Lici" />
+                </div>
+              </div>
+            </div>
+
+            {/* Derecha: el vórtice */}
+            <div className="relative bg-[#05070d] min-h-[420px] md:min-h-[560px] lg:min-h-0 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/[0.06]">
+              <VortexLicitaciones />
+            </div>
           </div>
         </section>
 
