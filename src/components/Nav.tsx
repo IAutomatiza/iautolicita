@@ -9,7 +9,7 @@ import WhatsAppButton from "./ui/WhatsAppButton";
 const productLinks = [
   { href: "#capacidades", title: "Capacidades", desc: "Detección, precio real, comprador y alertas" },
   { href: "#como",        title: "Cómo funciona", desc: "El flujo end-to-end" },
-  { href: "#resultados",  title: "El precio real", desc: "La historia de dos ofertas a lo mismo" },
+  { href: "#resultados",  title: "Con y sin IAutoLicita", desc: "Lo que cambia cuando conoces el precio real" },
 ];
 
 // "Lici." va como wordmark —negrita con el punto azul— igual que en la app.
