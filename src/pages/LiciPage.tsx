@@ -375,41 +375,84 @@ export default function LiciPage() {
             specs con cursor; el vórtice de datos llena la derecha.
         ═══════════════════════════════ */}
         <section className="relative grid lg:grid-cols-2 min-h-[100svh]">
-          {/* IZQUIERDA — panel crema */}
-          <div className="relative bg-[#F2F0EA] text-[#0A0A0A] flex flex-col justify-center px-6 md:px-14 xl:px-20 pt-32 pb-40 lg:py-0">
-            <div className="max-w-[560px]">
-              <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/70">
-                <img
-                  src={`${import.meta.env.BASE_URL}brand/lici-icon-glifo.png`}
-                  alt=""
-                  aria-hidden
-                  width={16}
-                  height={16}
-                  style={{ width: 16, height: 16 }}
-                />
+          {/* IZQUIERDA — panel azul Lici, cohesionado con la nav:
+              el glifo y el wordmark en grande como en la app, el
+              titular con el azul de "Hola, Camila" y los botones y
+              specs del clon en versión oscura */}
+          <div className="relative bg-[#000115] text-white flex flex-col justify-center px-6 md:px-14 xl:px-20 pt-32 pb-40 lg:py-0 overflow-hidden">
+            {/* Resplandor y trama de puntos, como el módulo Lici */}
+            <div
+              aria-hidden
+              className="absolute -bottom-48 -left-48 w-[640px] h-[640px] rounded-full pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(0,58,179,0.38) 0%, transparent 65%)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage:
+                  "radial-gradient(rgba(85,180,248,0.12) 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
+                maskImage:
+                  "radial-gradient(ellipse at 15% 85%, black, transparent 60%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse at 15% 85%, black, transparent 60%)",
+              }}
+            />
+
+            <div className="relative max-w-[560px]">
+              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/45">
                 Tu analista de licitaciones.
               </div>
 
-              <h1 className="mt-7 font-display font-semibold text-[44px] md:text-[56px] xl:text-[64px] leading-[1.03] tracking-[-0.03em]">
-                Lici se lee todo.
+              {/* La marca en grande, como la cabecera del módulo en la app */}
+              <div className="mt-7 flex items-center gap-3.5">
+                <span className="grid place-items-center h-12 w-12 rounded-xl border border-white/25 bg-white/[0.04]">
+                  <img
+                    src={`${import.meta.env.BASE_URL}brand/lici-icon-dark-glifo.png`}
+                    alt=""
+                    aria-hidden
+                    width={26}
+                    height={26}
+                    style={{ width: 26, height: 26 }}
+                  />
+                </span>
+                <span className="font-display font-bold text-[34px] tracking-[-0.02em] leading-none">
+                  Lici<span className="text-[#55b4f8]">.</span>
+                </span>
+              </div>
+
+              <h1 className="mt-7 font-display font-semibold text-[44px] md:text-[54px] xl:text-[62px] leading-[1.03] tracking-[-0.03em]">
+                Se lee todo.
                 <br />
-                <span className="text-[#0064E0]">Y te dice cómo ganar.</span>
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(92deg, #55b4f8 0%, #2f7ff0 55%, #0064E0 100%)",
+                  }}
+                >
+                  Y te dice cómo ganar.
+                </span>
               </h1>
 
-              <p className="mt-7 font-sans text-[16px] md:text-[17px] leading-[1.6] text-[#0A0A0A]/65 max-w-[460px]">
+              <p className="mt-7 font-sans text-[16px] md:text-[17px] leading-[1.6] text-white/55 max-w-[460px]">
                 Analiza las bases completas, calcula el precio para ganar y
                 mapea tu competencia — entrenada sobre 6,4 millones de
                 órdenes de compra de ChileCompra. Y siempre responde con la
                 cita a la página exacta.
               </p>
 
-              {/* Botones al estilo GET / ACCESS del original */}
+              {/* Botones al estilo GET / ACCESS del original, en claro */}
               <div className="mt-9 flex items-center gap-1.5">
                 <a
                   href={buildWAUrl(MSG_DEMO)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
+                  className="inline-flex items-center h-12 px-6 rounded-lg bg-[#F2F0EA] font-mono text-[12px] uppercase tracking-[0.14em] text-[#16161A] hover:bg-[#0064E0] hover:text-white transition-colors duration-200"
                 >
                   Probar Lici
                 </a>
@@ -417,7 +460,7 @@ export default function LiciPage() {
                   href="https://app.iautolicita.cl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
+                  className="relative inline-flex items-center h-12 px-6 rounded-lg bg-[#F2F0EA] font-mono text-[12px] uppercase tracking-[0.14em] text-[#16161A] hover:bg-[#0064E0] hover:text-white transition-colors duration-200"
                 >
                   Acceder
                   <span className="absolute top-2 right-2 h-1.5 w-1.5 rounded-full bg-[#0064E0]" />
@@ -426,7 +469,7 @@ export default function LiciPage() {
             </div>
 
             {/* Línea de specs abajo, como el status bar del original */}
-            <div className="mt-16 lg:mt-0 lg:absolute lg:bottom-9 lg:left-14 xl:left-20 lg:right-10 font-mono text-[11px] uppercase tracking-[0.06em] text-[#0A0A0A]/60">
+            <div className="relative mt-16 lg:mt-0 lg:absolute lg:bottom-9 lg:left-14 xl:left-20 lg:right-10 font-mono text-[11px] uppercase tracking-[0.06em] text-white/40">
               <div className="flex flex-wrap gap-x-10 gap-y-1.5">
                 <span>441K licitaciones</span>
                 <span>7,2M adjudicaciones</span>
@@ -438,14 +481,14 @@ export default function LiciPage() {
                 <span>Citas: página exacta</span>
                 <span>
                   Cobertura: 99,94%
-                  <span className="inline-block w-[7px] h-[13px] bg-[#0A0A0A] ml-1.5 align-middle animate-blink" />
+                  <span className="inline-block w-[7px] h-[13px] bg-[#55b4f8] ml-1.5 align-middle animate-blink" />
                 </span>
               </div>
             </div>
           </div>
 
           {/* DERECHA — el vórtice de datos */}
-          <div className="relative bg-[#05070d] min-h-[440px] md:min-h-[560px] lg:min-h-0 overflow-hidden">
+          <div className="relative bg-[#05070d] min-h-[440px] md:min-h-[560px] lg:min-h-0 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/[0.06]">
             <VortexLicitaciones />
           </div>
         </section>
