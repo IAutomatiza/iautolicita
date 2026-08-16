@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import LiciGlifo from "./LiciGlifo";
 import { Link } from "react-router-dom";
 import { ScanSearch, ReceiptText, Landmark, MessageSquareDot, ChevronRight } from "lucide-react";
 
@@ -17,14 +18,7 @@ import { ScanSearch, ReceiptText, Landmark, MessageSquareDot, ChevronRight } fro
 /* ── El chat de Lici, animado en loop ─────────────────────── */
 
 const LiciMark = ({ size = 18 }: { size?: number }) => (
-  <img
-    src={`${import.meta.env.BASE_URL}brand/lici-icon-dark-glifo.png`}
-    alt=""
-    aria-hidden
-    width={size}
-    height={size}
-    style={{ width: size, height: size }}
-  />
+  <LiciGlifo alto={size} />
 );
 
 const liciScript: { from: "user" | "lici"; node: React.ReactNode }[] = [

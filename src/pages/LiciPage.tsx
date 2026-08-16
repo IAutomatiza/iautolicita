@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import WhatsAppButton from "../components/ui/WhatsAppButton";
 import VortexLicitaciones from "../components/VortexLicitaciones";
+import LiciGlifo from "../components/LiciGlifo";
 import AsciiRain from "../components/AsciiRain";
 import Footer from "../components/Footer";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
@@ -411,14 +412,7 @@ export default function LiciPage() {
               {/* La marca en grande, como la cabecera del módulo en la app */}
               <div className="mt-7 flex items-center gap-3.5">
                 <span className="grid place-items-center h-12 w-12 rounded-xl border border-white/25 bg-white/[0.04]">
-                  <img
-                    src={`${import.meta.env.BASE_URL}brand/lici-icon-dark-glifo.png`}
-                    alt=""
-                    aria-hidden
-                    width={26}
-                    height={26}
-                    style={{ width: 26, height: 26 }}
-                  />
+                  <LiciGlifo alto={27} />
                 </span>
                 <span className="font-display font-bold text-[34px] tracking-[-0.02em] leading-none">
                   Lici<span className="text-[#55b4f8]">.</span>
