@@ -17,6 +17,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import LiciGlifo from "./LiciGlifo";
+import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
    Bento "El motor, por dentro" — clon del Bento Grid de MagicUI
@@ -488,13 +489,15 @@ const CtaTarjeta = ({ t }: { t: Tarjeta }) => {
   );
 };
 
-const BentoCard = ({ t }: { t: Tarjeta }) => (
+const BentoCard = ({ t, entrada, retardo }: { t: Tarjeta; entrada: boolean; retardo: number }) => (
   <div
     className={[
       "group relative flex transform-gpu flex-col justify-end overflow-hidden rounded-2xl",
       "border border-[var(--hairline-strong)] bg-white shadow-[0_14px_40px_-18px_rgba(13,21,48,0.18)]",
+      entrada ? "bento-in" : "",
       t.clase,
     ].join(" ")}
+    style={{ animationDelay: `${retardo}s` }}
   >
     <div className="absolute inset-0">{t.fondo}</div>
 
@@ -527,10 +530,15 @@ const BentoCard = ({ t }: { t: Tarjeta }) => (
 /* ── El grid ──────────────────────────────────────────────── */
 
 export default function MotorBento() {
+  // Entrada al hacer scroll: cada tarjeta llega con el blur-fade de
+  // MagicUI, escalonada. La base es visible (la animación solo corre
+  // al entrar en pantalla), así Safari nunca deja nada invisible.
+  const [ref, inView] = useInView<HTMLDivElement>(0.12);
+
   return (
-    <div className="grid w-full auto-rows-[21rem] grid-cols-3 gap-4 md:auto-rows-[22rem]">
-      {TARJETAS.map((t) => (
-        <BentoCard key={t.nombre} t={t} />
+    <div ref={ref} className="grid w-full auto-rows-[21rem] grid-cols-3 gap-4 md:auto-rows-[22rem]">
+      {TARJETAS.map((t, i) => (
+        <BentoCard key={t.nombre} t={t} entrada={inView} retardo={0.08 + i * 0.13} />
       ))}
 
       <style>{`
@@ -543,13 +551,20 @@ export default function MotorBento() {
         @keyframes avisoIn {
           from { opacity: 0; transform: translateY(-14px) scale(0.96); }
         }
+        /* backwards: invisible durante el retardo, y al terminar vuelve
+           al estado base (idéntico al final) sin bloquear los hovers */
+        .bento-in { animation: bentoIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+        @keyframes bentoIn {
+          from { opacity: 0; transform: translateY(28px) scale(0.97); filter: blur(10px); }
+          to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
         .lici-aura { animation: liciAura 2.4s ease-out infinite; }
         @keyframes liciAura {
           from { transform: scale(1); opacity: 0.55; }
           to { transform: scale(1.6); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .bento-marquee, .aviso-in, .lici-aura { animation: none; }
+          .bento-marquee, .aviso-in, .lici-aura, .bento-in { animation: none; }
           .lici-aura { opacity: 0; }
         }
       `}</style>
