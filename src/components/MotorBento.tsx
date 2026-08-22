@@ -3,13 +3,17 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   FileText,
+  FileSearch,
   ScanSearch,
   Share2,
   CalendarDays,
-  Timer,
+  AlarmClock,
   Trophy,
   ReceiptText,
-  MessageSquareDot,
+  BadgeDollarSign,
+  MessagesSquare,
+  Landmark,
+  Mail,
   ChevronRight,
 } from "lucide-react";
 import LiciGlifo from "./LiciGlifo";
@@ -20,16 +24,16 @@ import LiciGlifo from "./LiciGlifo";
    efectos originales adaptados a licitaciones:
 
    1. Marquee de archivos  → los documentos de una licitación,
-      borrosos hasta que el cursor los enfoca (blur → nítido).
-   2. AnimatedList          → el radar: avisos que van llegando
-      solos en loop (calce, cierres, adjudicaciones, precios).
-   3. AnimatedBeam          → todo converge en Lici y sale hacia
-      donde trabaja el equipo; tarjeta en el tema oscuro de Lici.
+      borrosos hasta que el cursor los enfoca.
+   2. AnimatedList          → el radar: avisos llegando solos en
+      loop, con losetas degradadas como las del original.
+   3. AnimatedBeam          → tarjeta blanca como la del original:
+      nodos circulares con ícono, el glifo de Lici al centro con
+      aura, y el degradado azul viajando por cada línea (SMIL).
    4. Calendar              → el mes real con los cierres marcados.
 
-   El chrome de cada tarjeta replica el hover de MagicUI: el
-   bloque de texto sube, el ícono se encoge y aparece el CTA.
-   En móvil (sin hover) el CTA queda visible desde el inicio.
+   El chrome replica el hover de MagicUI: el texto sube, el ícono
+   se encoge y aparece el CTA. En móvil el CTA queda visible.
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── 1 · Marquee de documentos ────────────────────────────── */
@@ -87,34 +91,37 @@ const MarqueeDocs = () => (
 
 /* ── 2 · Lista animada del radar ──────────────────────────── */
 
+/* Losetas con degradado (como los cuadros de color del demo
+   original de MagicUI), no planas: cada aviso tiene su par. */
+
 const AVISOS = [
   {
     Icon: ScanSearch,
-    tinte: "#2F63E8",
+    grad: "linear-gradient(135deg, #5b8cff 0%, #2F63E8 100%)",
     titulo: "Licitación nueva — calce 91",
     detalle: "2239-45-LP26 · Suministro de insumos médicos",
   },
   {
-    Icon: Timer,
-    tinte: "#d97706",
+    Icon: AlarmClock,
+    grad: "linear-gradient(135deg, #fbbf24 0%, #d97706 100%)",
     titulo: "Cierre en 48 horas",
     detalle: "1057-412-LP25 · MINSAL",
   },
   {
-    Icon: ReceiptText,
-    tinte: "#0882f7",
+    Icon: BadgeDollarSign,
+    grad: "linear-gradient(135deg, #38bdf8 0%, #0882f7 100%)",
     titulo: "Precio real calculado",
     detalle: "Mediana pagada por el organismo: $139,9M",
   },
   {
     Icon: Trophy,
-    tinte: "#16a34a",
+    grad: "linear-gradient(135deg, #4ade80 0%, #16a34a 100%)",
     titulo: "Adjudicación publicada",
     detalle: "$84,2M · 12 oferentes · ganó el 2° más barato",
   },
   {
-    Icon: MessageSquareDot,
-    tinte: "#7c3aed",
+    Icon: MessagesSquare,
+    grad: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)",
     titulo: "Respuesta en el foro",
     detalle: "El organismo amplió el plazo de entrega",
   },
@@ -153,10 +160,10 @@ const ListaRadar = () => {
         >
           <div className="flex flex-row items-center gap-3">
             <div
-              className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-2xl"
-              style={{ background: aviso.tinte }}
+              className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-2xl shadow-[inset_0_-3px_6px_rgba(0,0,0,0.18),0_2px_6px_-2px_rgba(13,21,48,0.35)]"
+              style={{ background: aviso.grad }}
             >
-              <aviso.Icon className="h-[18px] w-[18px] text-white" strokeWidth={2} />
+              <aviso.Icon className="h-[18px] w-[18px] text-white drop-shadow-sm" strokeWidth={2} />
             </div>
             <div className="flex min-w-0 flex-col overflow-hidden">
               <figcaption className="flex flex-row items-center gap-1.5 truncate text-[13.5px] font-medium text-cream-50">
@@ -172,77 +179,125 @@ const ListaRadar = () => {
   );
 };
 
-/* ── 3 · Beams que convergen en Lici (tema oscuro) ────────── */
+/* ── 3 · Beams que convergen en Lici (tarjeta blanca) ─────── */
 
-/* Coordenadas compartidas entre los nodos HTML (en %) y los paths
-   del SVG (viewBox 0 0 600 300, preserveAspectRatio none): así los
-   beams nacen y mueren exactamente en cada nodo. */
+/* Clon fiel del AnimatedBeam de MagicUI: fondo blanco, nodos
+   circulares con sombra, y un degradado azul que viaja por cada
+   línea (animando las coordenadas del gradiente con SMIL, igual
+   que hace el original con framer-motion). */
+
+const IconoWhatsApp = () => (
+  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
+    <path
+      fill="#25D366"
+      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+    />
+  </svg>
+);
+
+const IconoTelegram = () => (
+  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
+    <path
+      fill="#26A5E4"
+      d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+    />
+  </svg>
+);
 
 const ENTRADAS = [
-  { label: "Licitaciones", y: 14 },
-  { label: "Órdenes de compra", y: 38 },
-  { label: "Adjudicaciones", y: 62 },
-  { label: "Proveedores", y: 86 },
+  { label: "Licitaciones", y: 14, nodo: <FileSearch className="h-[18px] w-[18px] text-[#2F63E8]" strokeWidth={1.9} /> },
+  { label: "Órdenes de compra", y: 38, nodo: <ReceiptText className="h-[18px] w-[18px] text-[#0882f7]" strokeWidth={1.9} /> },
+  { label: "Adjudicaciones", y: 62, nodo: <Trophy className="h-[18px] w-[18px] text-[#d97706]" strokeWidth={1.9} /> },
+  { label: "Proveedores", y: 86, nodo: <Landmark className="h-[18px] w-[18px] text-[#64748b]" strokeWidth={1.9} /> },
 ];
 
 const SALIDAS = [
-  { label: "WhatsApp", y: 25 },
-  { label: "Correo", y: 50 },
-  { label: "Telegram", y: 75 },
+  { label: "WhatsApp", y: 25, nodo: <IconoWhatsApp /> },
+  { label: "Correo", y: 50, nodo: <Mail className="h-5 w-5 text-[#EA4335]" strokeWidth={1.9} /> },
+  { label: "Telegram", y: 75, nodo: <IconoTelegram /> },
 ];
 
-const XI = 16; // % columna de entradas
-const XO = 84; // % columna de salidas
+const XI = 14; // % columna de entradas
+const XO = 86; // % columna de salidas
 
 const BeamsLici = () => {
-  const pathsIn = ENTRADAS.map(
-    (n) => `M ${XI * 6} ${n.y * 3} C ${XI * 6 + 110} ${n.y * 3}, 190 150, 300 150`
+  // SMIL no respeta prefers-reduced-motion: los <animate> solo se
+  // montan si el visitante no lo pidió.
+  const [animar] = useState(
+    () =>
+      typeof window === "undefined" ||
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
-  const pathsOut = SALIDAS.map(
-    (n) => `M 300 150 C 410 150, ${XO * 6 - 110} ${n.y * 3}, ${XO * 6} ${n.y * 3}`
-  );
+
+  const rutas = [
+    ...ENTRADAS.map((n) => ({
+      d: `M ${XI * 6} ${n.y * 3} C ${XI * 6 + 110} ${n.y * 3}, 190 150, 300 150`,
+      x0: XI * 6,
+      x1: 300,
+    })),
+    ...SALIDAS.map((n) => ({
+      d: `M 300 150 C 410 150, ${XO * 6 - 110} ${n.y * 3}, ${XO * 6} ${n.y * 3}`,
+      x0: 300,
+      x1: XO * 6,
+    })),
+  ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Fondo Lici: el degradado institucional + la trama de puntos */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, #000115 0%, #000324 16%, #000a37 36%, #001560 62%, #002494 100%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "radial-gradient(rgba(85,180,248,0.16) 1px, transparent 1px)",
-          backgroundSize: "16px 16px",
-        }}
-      />
-
-      {/* Diagrama: deja aire abajo para el bloque de texto de la tarjeta */}
-      <div className="absolute inset-x-4 top-4 bottom-[168px] md:inset-x-8 md:top-5 md:bottom-[110px]">
+    <div className="absolute inset-0 overflow-hidden bg-white">
+      <div className="absolute inset-x-4 top-3 bottom-[196px] md:inset-x-8 md:top-5 md:bottom-[110px]">
         <svg
           className="absolute inset-0 h-full w-full"
           viewBox="0 0 600 300"
           preserveAspectRatio="none"
           aria-hidden
         >
-          {[...pathsIn, ...pathsOut].map((d, i) => (
-            <path key={`base-${i}`} d={d} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="1.4" />
+          <defs>
+            {rutas.map((r, i) => (
+              <linearGradient
+                key={i}
+                id={`beamGrad-${i}`}
+                gradientUnits="userSpaceOnUse"
+                x1={r.x0 - 90}
+                y1="0"
+                x2={r.x0}
+                y2="0"
+              >
+                <stop stopColor="#55b4f8" stopOpacity="0" />
+                <stop offset="0.35" stopColor="#55b4f8" />
+                <stop offset="0.7" stopColor="#2F63E8" />
+                <stop offset="1" stopColor="#2F63E8" stopOpacity="0" />
+                {animar && (
+                  <>
+                    <animate
+                      attributeName="x1"
+                      values={`${r.x0 - 90};${r.x1 + 30}`}
+                      dur="3.6s"
+                      begin={`${(i % 7) * 0.5}s`}
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="x2"
+                      values={`${r.x0};${r.x1 + 120}`}
+                      dur="3.6s"
+                      begin={`${(i % 7) * 0.5}s`}
+                      repeatCount="indefinite"
+                    />
+                  </>
+                )}
+              </linearGradient>
+            ))}
+          </defs>
+          {rutas.map((r, i) => (
+            <path key={`base-${i}`} d={r.d} fill="none" stroke="rgba(13,21,48,0.12)" strokeWidth="1.4" />
           ))}
-          {[...pathsIn, ...pathsOut].map((d, i) => (
+          {rutas.map((r, i) => (
             <path
               key={`beam-${i}`}
-              d={d}
+              d={r.d}
               fill="none"
-              stroke="#55b4f8"
-              strokeWidth="1.8"
+              stroke={`url(#beamGrad-${i})`}
+              strokeWidth="2"
               strokeLinecap="round"
-              strokeDasharray="42 458"
-              className="bento-beam"
-              style={{ animationDelay: `${(i % 7) * 0.55}s` }}
             />
           ))}
         </svg>
@@ -250,37 +305,49 @@ const BeamsLici = () => {
         {ENTRADAS.map((n) => (
           <span
             key={n.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg border border-white/15 bg-white/[0.06] px-2.5 py-1.5
-              font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/75 backdrop-blur-sm"
+            className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1"
             style={{ left: `${XI}%`, top: `${n.y}%` }}
           >
-            {n.label}
+            <span className="grid h-9 w-9 place-items-center rounded-full border border-[var(--hairline-strong)] bg-white shadow-[0_2px_10px_-2px_rgba(13,21,48,0.22)] md:h-11 md:w-11">
+              {n.nodo}
+            </span>
+            <span className="hidden whitespace-nowrap rounded bg-white px-1 font-mono text-[7.5px] uppercase tracking-[0.12em] text-cream-300 md:inline-block">
+              {n.label}
+            </span>
           </span>
         ))}
 
+        {/* Lici al centro: el ícono real de la app (L de tinta con el
+            punto azul) sobre el círculo blanco, con un aura que late */}
         <span
-          className="absolute -translate-x-1/2 -translate-y-1/2"
+          className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
           style={{ left: "50%", top: "50%" }}
         >
-          <span className="relative grid h-16 w-16 place-items-center rounded-full border border-[#55b4f8]/40 bg-[#55b4f8]/15 shadow-[0_0_40px_rgba(85,180,248,0.35)]">
-            <LiciGlifo alto={28} />
+          <span className="relative grid h-[52px] w-[52px] place-items-center rounded-full border-2 border-[var(--hairline-strong)] bg-white shadow-[0_4px_24px_-6px_rgba(47,99,232,0.45)] md:h-16 md:w-16">
+            <span aria-hidden className="lici-aura absolute inset-0 rounded-full border-2 border-brand-300" />
+            <span className="md:hidden"><LiciGlifo alto={24} tinta="#0A0A0A" /></span>
+            <span className="hidden md:inline"><LiciGlifo alto={30} tinta="#0A0A0A" /></span>
           </span>
         </span>
 
         {SALIDAS.map((n) => (
           <span
             key={n.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg border border-white/15 bg-white/[0.06] px-2.5 py-1.5
-              font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/75 backdrop-blur-sm"
+            className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1"
             style={{ left: `${XO}%`, top: `${n.y}%` }}
           >
-            {n.label}
+            <span className="grid h-9 w-9 place-items-center rounded-full border border-[var(--hairline-strong)] bg-white shadow-[0_2px_10px_-2px_rgba(13,21,48,0.22)] md:h-11 md:w-11">
+              {n.nodo}
+            </span>
+            <span className="hidden whitespace-nowrap rounded bg-white px-1 font-mono text-[7.5px] uppercase tracking-[0.12em] text-cream-300 md:inline-block">
+              {n.label}
+            </span>
           </span>
         ))}
       </div>
 
-      {/* Velo inferior para que el texto de la tarjeta se lea siempre */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#000115]/90 via-[#000115]/45 to-transparent" />
+      {/* Velo inferior blanco para que el texto de la tarjeta respire */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/70 to-transparent" />
     </div>
   );
 };
@@ -343,7 +410,6 @@ type Tarjeta = {
   href: string;
   cta: string;
   clase: string;
-  oscura?: boolean;
   fondo: ReactNode;
 };
 
@@ -375,7 +441,6 @@ const TARJETAS: Tarjeta[] = [
     href: "/lici",
     cta: "Conoce a Lici",
     clase: "col-span-3 lg:col-span-2",
-    oscura: true,
     fondo: <BeamsLici />,
   },
   {
@@ -390,9 +455,8 @@ const TARJETAS: Tarjeta[] = [
 ];
 
 const CtaTarjeta = ({ t }: { t: Tarjeta }) => {
-  const clases = `pointer-events-auto inline-flex items-center gap-1 font-sans text-[13.5px] font-medium ${
-    t.oscura ? "text-[#55b4f8] hover:text-white" : "text-brand-600 hover:text-cream-50"
-  } transition-colors`;
+  const clases =
+    "pointer-events-auto inline-flex items-center gap-1 font-sans text-[13.5px] font-medium text-brand-600 hover:text-cream-50 transition-colors";
   const contenido = (
     <>
       {t.cta}
@@ -414,9 +478,7 @@ const BentoCard = ({ t }: { t: Tarjeta }) => (
   <div
     className={[
       "group relative flex transform-gpu flex-col justify-end overflow-hidden rounded-2xl",
-      t.oscura
-        ? "border border-white/10 shadow-[0_24px_60px_-24px_rgba(0,20,80,0.5)]"
-        : "border border-[var(--hairline-strong)] bg-white shadow-[0_14px_40px_-18px_rgba(13,21,48,0.18)]",
+      "border border-[var(--hairline-strong)] bg-white shadow-[0_14px_40px_-18px_rgba(13,21,48,0.18)]",
       t.clase,
     ].join(" ")}
   >
@@ -424,25 +486,15 @@ const BentoCard = ({ t }: { t: Tarjeta }) => (
 
     {/* Texto: en desktop sube al hacer hover y deja aparecer el CTA;
         en móvil (sin hover) queda arriba de un CTA siempre visible. */}
-    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 pb-12 transition-all duration-300 md:pb-6 md:group-hover:-translate-y-9">
-      <t.Icon
-        className={`h-9 w-9 origin-left transform-gpu transition-all duration-300 ease-in-out md:group-hover:scale-75 ${
-          t.oscura ? "text-[#55b4f8]" : "text-cream-100"
-        }`}
-        strokeWidth={1.5}
-      />
-      <h3
-        className={`font-display text-[20px] font-medium tracking-[-0.02em] ${
-          t.oscura ? "text-white" : "text-cream-50"
-        }`}
-      >
+    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1.5 p-6 pb-12 transition-all duration-300 md:pb-6 md:group-hover:-translate-y-9">
+      {/* Loseta del ícono en tinte de marca, no el trazo pelado */}
+      <span className="grid h-10 w-10 origin-left transform-gpu place-items-center rounded-xl border border-brand-100 bg-brand-50 transition-all duration-300 ease-in-out md:group-hover:scale-90">
+        <t.Icon className="h-5 w-5 text-brand-600" strokeWidth={1.8} />
+      </span>
+      <h3 className="mt-1 font-display text-[20px] font-medium tracking-[-0.02em] text-cream-50">
         {t.nombre}
       </h3>
-      <p
-        className={`max-w-lg font-sans text-[13.5px] leading-[1.5] ${
-          t.oscura ? "text-white/60" : "text-cream-200"
-        }`}
-      >
+      <p className="max-w-lg font-sans text-[13.5px] leading-[1.5] text-cream-200">
         {t.descripcion}
       </p>
     </div>
@@ -454,11 +506,7 @@ const BentoCard = ({ t }: { t: Tarjeta }) => (
       <CtaTarjeta t={t} />
     </div>
 
-    <div
-      className={`pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 ${
-        t.oscura ? "md:group-hover:bg-white/[0.04]" : "md:group-hover:bg-[#0d1530]/[0.03]"
-      }`}
-    />
+    <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 md:group-hover:bg-[#0d1530]/[0.03]" />
   </div>
 );
 
@@ -481,14 +529,14 @@ export default function MotorBento() {
         @keyframes avisoIn {
           from { opacity: 0; transform: translateY(-14px) scale(0.96); }
         }
-        .bento-beam { animation: beamRun 3.4s linear infinite; }
-        @keyframes beamRun {
-          from { stroke-dashoffset: 500; }
-          to { stroke-dashoffset: -500; }
+        .lici-aura { animation: liciAura 2.4s ease-out infinite; }
+        @keyframes liciAura {
+          from { transform: scale(1); opacity: 0.55; }
+          to { transform: scale(1.6); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .bento-marquee, .aviso-in { animation: none; }
-          .bento-beam { animation: none; opacity: 0; }
+          .bento-marquee, .aviso-in, .lici-aura { animation: none; }
+          .lici-aura { opacity: 0; }
         }
       `}</style>
     </div>
