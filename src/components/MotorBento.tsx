@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -135,10 +135,27 @@ const HORAS = ["ahora", "hace 2 min", "hace 9 min", "hace 16 min"];
 
 const ListaRadar = () => {
   const [total, setTotal] = useState(3);
+  const cajaRef = useRef<HTMLDivElement>(null);
 
+  // El loop solo corre con la tarjeta en pantalla: cada aviso nuevo
+  // es un repintado, y fuera de vista sería trabajo perdido.
   useEffect(() => {
-    const id = window.setInterval(() => setTotal((t) => t + 1), 2000);
-    return () => window.clearInterval(id);
+    const caja = cajaRef.current;
+    if (!caja) return;
+    let id = 0;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !id) {
+        id = window.setInterval(() => setTotal((t) => t + 1), 2000);
+      } else if (!e.isIntersecting && id) {
+        window.clearInterval(id);
+        id = 0;
+      }
+    });
+    obs.observe(caja);
+    return () => {
+      obs.disconnect();
+      if (id) window.clearInterval(id);
+    };
   }, []);
 
   // Los últimos 4 avisos, el más nuevo arriba. La key es el número de
@@ -150,6 +167,7 @@ const ListaRadar = () => {
 
   return (
     <div
+      ref={cajaRef}
       className="absolute right-2 top-2 flex h-[185px] w-full transform-gpu flex-col gap-2.5 overflow-hidden p-2 md:top-4 md:h-[300px]
         scale-90 [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-95"
     >
@@ -244,6 +262,24 @@ const BeamsLici = () => {
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 
+  // Los beams repintan el SVG en cada frame: fuera de pantalla se
+  // pausan con pauseAnimations() para no ralentizar el scroll.
+  const svgRef = useRef<SVGSVGElement>(null);
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg || !animar) return;
+    const obs = new IntersectionObserver(([e]) => {
+      try {
+        if (e.isIntersecting) svg.unpauseAnimations();
+        else svg.pauseAnimations();
+      } catch {
+        /* navegadores sin pauseAnimations: se quedan corriendo */
+      }
+    });
+    obs.observe(svg);
+    return () => obs.disconnect();
+  }, [animar]);
+
   const rutas = [
     ...ENTRADAS.map((n) => ({
       d: `M ${XI * 6} ${n.y * 3} C ${XI * 6 + 110} ${n.y * 3}, 190 150, 300 150`,
@@ -261,6 +297,7 @@ const BeamsLici = () => {
     <div className="absolute inset-0 overflow-hidden bg-white">
       <div className="absolute inset-x-4 top-3 bottom-[196px] md:inset-x-8 md:top-5 md:bottom-[110px]">
         <svg
+          ref={svgRef}
           className="absolute inset-0 h-full w-full"
           viewBox="0 0 600 300"
           preserveAspectRatio="none"
@@ -552,11 +589,13 @@ export default function MotorBento() {
           from { opacity: 0; transform: translateY(-14px) scale(0.96); }
         }
         /* backwards: invisible durante el retardo, y al terminar vuelve
-           al estado base (idéntico al final) sin bloquear los hovers */
+           al estado base (idéntico al final) sin bloquear los hovers.
+           Solo opacity + transform (compositor): animar blur sobre
+           tarjetas grandes ralentizaba el scroll en el teléfono. */
         .bento-in { animation: bentoIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
         @keyframes bentoIn {
-          from { opacity: 0; transform: translateY(28px) scale(0.97); filter: blur(10px); }
-          to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+          from { opacity: 0; transform: translateY(28px) scale(0.97); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .lici-aura { animation: liciAura 2.4s ease-out infinite; }
         @keyframes liciAura {
