@@ -17,6 +17,7 @@ import WhatsAppButton from "../components/ui/WhatsAppButton";
 import VortexLicitaciones from "../components/VortexLicitaciones";
 import LiciGlifo from "../components/LiciGlifo";
 import AsciiRain from "../components/AsciiRain";
+import OrbitaLici from "../components/OrbitaLici";
 import Footer from "../components/Footer";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 import useInView from "../hooks/useInView";
@@ -761,9 +762,19 @@ export default function LiciPage() {
         {/* ═══════════════════════════════
             FINAL CTA — crema, botones GET/ACCESS y specs
         ═══════════════════════════════ */}
-        <section className="bg-[#F2F0EA] text-[#0A0A0A] py-28 md:py-36">
-          <div className="container-edge">
-            <div className="max-w-[820px]">
+        <section className="relative bg-[#F2F0EA] text-[#0A0A0A] py-28 md:py-36 overflow-hidden">
+          {/* Órbitas de Lici (clon de ruixen), recortadas al costado
+              derecho como el original; en el teléfono van abajo,
+              recortadas por el borde inferior de la sección */}
+          <div
+            aria-hidden
+            className="pointer-events-none hidden lg:block absolute top-1/2 -translate-y-1/2 -right-[14rem] xl:-right-[9rem] 2xl:-right-[5rem]"
+          >
+            <OrbitaLici />
+          </div>
+
+          <div className="container-edge relative">
+            <div className="max-w-[820px] lg:max-w-[560px] xl:max-w-[640px]">
               <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/60">
                 Tu próxima licitación ya se publicó.
               </div>
@@ -801,6 +812,14 @@ export default function LiciPage() {
                   Respuesta en 24h
                   <span className="inline-block w-[7px] h-[13px] bg-[#0A0A0A] ml-1.5 align-middle animate-blink" />
                 </span>
+              </div>
+            </div>
+
+            {/* Versión móvil de las órbitas: centradas bajo el texto
+                y recortadas por abajo */}
+            <div aria-hidden className="lg:hidden pointer-events-none relative h-[250px] mt-12 -mb-28">
+              <div className="absolute left-1/2 -translate-x-1/2 top-0 scale-[0.58] origin-top">
+                <OrbitaLici />
               </div>
             </div>
           </div>
