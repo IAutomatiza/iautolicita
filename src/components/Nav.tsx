@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import WhatsAppButton from "./ui/WhatsAppButton";
 
@@ -31,6 +31,11 @@ const flatLinks: {
 ];
 
 export default function Nav() {
+  // Las secciones viven en el home: fuera de él, un "#faq" pelado
+  // no lleva a ninguna parte, así que se resuelven contra "/".
+  const enHome = useLocation().pathname === "/";
+  const aSeccion = (href: string) => (enHome ? href : `/${href}`);
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
@@ -62,14 +67,14 @@ export default function Nav() {
     >
       <div className="container-edge flex h-16 items-center justify-between gap-6">
         {/* Logo */}
-        <a href="#top" className="flex items-baseline gap-2 group shrink-0">
+        <Link to={aSeccion("#top")} className="flex items-baseline gap-2 group shrink-0">
           <span className="font-display font-medium text-[22px] tracking-tightest leading-none text-cream-50">
             <span className="text-amber-400">IA</span>utoLicita<span className="text-amber-400">.</span>
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-400 hidden sm:inline">
             by iautomatiza
           </span>
-        </a>
+        </Link>
 
         {/* Left-center nav (Wrangle layout) */}
         <nav className="hidden lg:flex items-center gap-1 flex-1 pl-6">
@@ -105,9 +110,9 @@ export default function Nav() {
             >
               <div className="p-2 rounded-xl bg-ink-950 border border-[var(--hairline-strong)] shadow-[0_20px_60px_-20px_rgba(10,10,10,0.18),0_4px_12px_rgba(10,10,10,0.06)]">
                 {productLinks.map((l) => (
-                  <a
+                  <Link
                     key={l.href}
-                    href={l.href}
+                    to={aSeccion(l.href)}
                     onClick={() => setProductOpen(false)}
                     className="block px-3 py-2.5 rounded-lg hover:bg-amber-400/[0.06] transition-colors group/item"
                   >
@@ -117,7 +122,7 @@ export default function Nav() {
                     <div className="mt-0.5 text-[11.5px] font-mono text-cream-400 leading-tight">
                       {l.desc}
                     </div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -133,13 +138,13 @@ export default function Nav() {
                 {l.label}
               </Link>
             ) : (
-              <a
+              <Link
                 key={l.href}
-                href={l.href}
+                to={aSeccion(l.href)}
                 className="px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans text-cream-200 hover:text-cream-50 transition-colors"
               >
                 {l.label}
-              </a>
+              </Link>
             )
           )}
         </nav>
@@ -175,14 +180,14 @@ export default function Nav() {
               Producto
             </div>
             {productLinks.map((l) => (
-              <a
+              <Link
                 key={l.href}
-                href={l.href}
+                to={aSeccion(l.href)}
                 onClick={() => setMobileOpen(false)}
                 className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-100"
               >
                 {l.title}
-              </a>
+              </Link>
             ))}
             <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-cream-400 pt-4 pb-2">
               Más
@@ -198,14 +203,14 @@ export default function Nav() {
                   {l.label}
                 </Link>
               ) : (
-                <a
+                <Link
                   key={l.href}
-                  href={l.href}
+                  to={aSeccion(l.href)}
                   onClick={() => setMobileOpen(false)}
                   className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-100"
                 >
                   {l.label}
-                </a>
+                </Link>
               )
             )}
             <a

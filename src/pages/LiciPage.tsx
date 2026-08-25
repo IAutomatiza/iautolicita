@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import WhatsAppButton from "../components/ui/WhatsAppButton";
+import MarketTicker from "../components/MarketTicker";
+import Nav from "../components/Nav";
 import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
 import OrbitaLici from "../components/OrbitaLici";
@@ -31,38 +31,13 @@ export default function LiciPage() {
 
   return (
     <>
-      {/* ═══ NAV — blanca, como el hero ═══ */}
-      <header className="fixed inset-x-0 top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-black/[0.07]">
-        <div className="container-edge flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-baseline gap-2 shrink-0">
-            <span className="font-display font-medium text-[22px] tracking-tightest leading-none text-[#0A0A0A]">
-              <span className="text-[#0064E0]">IA</span>utoLicita
-              <span className="text-[#0064E0]">.</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link
-              to="/"
-              className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-[#0A0A0A]/55 hover:text-[#0A0A0A] transition-colors"
-            >
-              Plataforma
-            </Link>
-            <a
-              href="https://app.iautolicita.cl"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-[#0A0A0A]/55 hover:text-[#0A0A0A] transition-colors"
-            >
-              Iniciar sesión
-            </a>
-            <WhatsAppButton variant="primary" label="Probar Lici" />
-          </div>
-        </div>
-      </header>
+      {/* La misma barra del home: ticker en vivo + menú */}
+      <MarketTicker />
+      <Nav />
 
       <main className="bg-white text-[#0A0A0A]">
         {/* ═══ HERO — órbitas de ruixen, recortadas al costado ═══ */}
-        <section className="relative min-h-[100svh] overflow-hidden flex items-center pt-16">
+        <section className="relative min-h-[100svh] overflow-hidden flex items-center pt-24">
           {/* Trama de puntos de fondo, desvanecida hacia los bordes */}
           <DotPattern
             cr={1}
