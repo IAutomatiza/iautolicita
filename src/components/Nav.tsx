@@ -24,9 +24,12 @@ const flatLinks: {
   href: string;
   label: React.ReactNode;
   isRoute?: boolean;
+  externo?: boolean;
 }[] = [
   { href: "/lici", label: <LiciWordmark />, isRoute: true },
-  { href: "#planes", label: "Planes" },
+  // Precios vive en la app, no en la web: apuntar a una pregunta del
+  // FAQ era lo más cerca que había antes de que existiera /precios.
+  { href: "https://app.iautolicita.cl/precios", label: "Planes", externo: true },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -137,6 +140,16 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
               >
                 {l.label}
               </Link>
+            ) : l.externo ? (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans text-cream-200 hover:text-cream-50 transition-colors"
+              >
+                {l.label}
+              </a>
             ) : (
               <Link
                 key={l.href}
@@ -202,6 +215,17 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
                 >
                   {l.label}
                 </Link>
+              ) : l.externo ? (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-100"
+                >
+                  {l.label}
+                </a>
               ) : (
                 <Link
                   key={l.href}
