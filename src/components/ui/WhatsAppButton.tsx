@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { buildWAUrl, MSG_DEMO } from "../../lib/whatsapp";
+import { buildWAUrl, MSG_PRUEBA } from "../../lib/whatsapp";
 
 type Variant = "primary" | "ghost" | "huge";
 
@@ -19,7 +19,7 @@ interface Props {
  */
 export default function WhatsAppButton({
   label = "Agendar demo",
-  message = MSG_DEMO,
+  message = MSG_PRUEBA,
   variant = "primary",
   className = "",
 }: Props) {

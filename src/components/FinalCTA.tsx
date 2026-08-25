@@ -1,5 +1,5 @@
 import { ArrowUpRight, MessageCircle } from "lucide-react";
-import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
+import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
 import LiveDot from "./ui/LiveDot";
 
 /* ════════════════════════════════════════════════════════════
@@ -15,10 +15,10 @@ export default function FinalCTA() {
           className="relative overflow-hidden rounded-3xl px-5 md:px-16 py-12 md:py-28"
           style={{
             background:
-              "radial-gradient(ellipse at 30% 0%, rgba(0,100,224,0.18) 0%, transparent 55%), radial-gradient(ellipse at 70% 100%, rgba(0,100,224,0.10) 0%, transparent 50%), #0A0A0A",
-            border: "1px solid rgba(255,255,255,0.08)",
+              "radial-gradient(ellipse 80% 90% at 30% 0%, #4D95FF 0%, #0B72F5 42%, #0064E0 72%, #0050C4 100%)",
+            border: "1px solid rgba(255,255,255,0.16)",
             boxShadow:
-              "0 30px 100px -30px rgba(0,100,224,0.30), inset 0 1px 0 rgba(255,255,255,0.05)",
+              "0 40px 110px -34px rgba(0,80,196,0.55), inset 0 1px 0 rgba(255,255,255,0.18)",
           }}
         >
           {/* Decorative grid pattern */}
@@ -42,7 +42,7 @@ export default function FinalCTA() {
               left: "20%",
               width: "1.5px",
               background:
-                "linear-gradient(to bottom, transparent 0%, rgba(0,100,224,0.7) 35%, rgba(255,255,255,0.95) 50%, rgba(0,100,224,0.7) 65%, transparent 100%)",
+                "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.45) 35%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.45) 65%, transparent 100%)",
               animation: "cta-beam-1 11s ease-in-out infinite",
               filter: "blur(0.5px)",
             }}
@@ -55,7 +55,7 @@ export default function FinalCTA() {
               width: "60px",
               marginLeft: "-30px",
               background:
-                "linear-gradient(to bottom, transparent 0%, rgba(0,100,224,0.35) 50%, transparent 100%)",
+                "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.30) 50%, transparent 100%)",
               animation: "cta-beam-1 11s ease-in-out infinite",
               filter: "blur(20px)",
             }}
@@ -67,7 +67,7 @@ export default function FinalCTA() {
               right: "16%",
               width: "1.5px",
               background:
-                "linear-gradient(to bottom, transparent 0%, rgba(0,100,224,0.6) 35%, rgba(255,255,255,0.85) 50%, rgba(0,100,224,0.6) 65%, transparent 100%)",
+                "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.4) 35%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.4) 65%, transparent 100%)",
               animation: "cta-beam-2 14s ease-in-out infinite",
               filter: "blur(0.5px)",
             }}
@@ -79,14 +79,14 @@ export default function FinalCTA() {
             <div
               className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full mb-8 md:mb-10 border"
               style={{
-                background: "rgba(0,100,224,0.08)",
-                borderColor: "rgba(0,100,224,0.25)",
+                background: "rgba(255,255,255,0.12)",
+                borderColor: "rgba(255,255,255,0.28)",
               }}
             >
               <LiveDot size={7} />
               <span
                 className="font-mono text-[10.5px] uppercase tracking-[0.20em] font-medium"
-                style={{ color: "#5790F5" }}
+                style={{ color: "rgba(255,255,255,0.92)" }}
               >
                 Mientras lees esto · 42 licitaciones nuevas
               </span>
@@ -102,13 +102,13 @@ export default function FinalCTA() {
               </span>
               <span
                 className="block font-display font-medium text-[44px] md:text-[66px] lg:text-[86px] mt-1 tracking-[-0.025em]"
-                style={{ color: "#5790F5" }}
+                style={{ color: "#BFDBFE" }}
               >
                 ya se publicó.
               </span>
               <span
                 className="block text-[28px] md:text-[34px] lg:text-[42px] mt-4 font-normal"
-                style={{ color: "rgba(255,255,255,0.65)" }}
+                style={{ color: "rgba(255,255,255,0.78)" }}
               >
                 ¿La vas a leer mañana, o ahora?
               </span>
@@ -117,9 +117,9 @@ export default function FinalCTA() {
             {/* Sub */}
             <p
               className="mt-10 font-sans text-[16px] md:text-[18px] leading-[1.55] max-w-[620px] mx-auto"
-              style={{ color: "rgba(255,255,255,0.70)" }}
+              style={{ color: "rgba(255,255,255,0.85)" }}
             >
-              Una demo de 20 minutos por WhatsApp. Te mostramos las licitaciones que matcheás <em className="not-italic" style={{ color: "#FFFFFF" }}>hoy mismo</em> y cómo verlas todos los días sin que tu equipo abra el portal.
+              Pruébalo gratis con tus propias licitaciones: escribes por WhatsApp y en minutos ves las que <em className="not-italic" style={{ color: "#FFFFFF" }}>calzan contigo hoy</em>, con su precio sugerido. Sin tarjeta y sin instalar nada.
             </p>
 
             {/* CTAs */}
@@ -129,22 +129,22 @@ export default function FinalCTA() {
                 <span
                   aria-hidden
                   className="absolute inset-0 rounded-lg blur-2xl opacity-60 animate-halo-pulse pointer-events-none"
-                  style={{ background: "#0064E0" }}
+                  style={{ background: "#FFFFFF" }}
                 />
                 <a
-                  href={buildWAUrl(MSG_DEMO)}
+                  href={buildWAUrl(MSG_PRUEBA)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center gap-2 h-14 px-7 text-[15px] font-medium rounded-lg transition-all duration-200 ease-out hover:-translate-y-[1px] active:translate-y-0"
                   style={{
-                    background: "#0064E0",
-                    color: "#FFFFFF",
+                    background: "#FFFFFF",
+                    color: "#0050C4",
                     boxShadow:
-                      "inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(10,10,10,0.10), 0 1px 2px rgba(10,10,10,0.10), 0 8px 28px -6px rgba(0,100,224,0.55)",
+                      "inset 0 -1px 0 rgba(10,21,48,0.08), 0 1px 2px rgba(10,21,48,0.12), 0 10px 30px -8px rgba(3,32,84,0.5)",
                   }}
                 >
                   <MessageCircle className="h-4 w-4" strokeWidth={2} />
-                  Agendar demo · 20 min
+                  ¡Pruébalo gratis!
                   <ArrowUpRight
                     className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     strokeWidth={2}
@@ -159,8 +159,8 @@ export default function FinalCTA() {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 h-14 px-6 text-[14.5px] font-medium rounded-lg transition-colors duration-200 hover:bg-white/[0.04]"
                 style={{
-                  color: "rgba(255,255,255,0.85)",
-                  border: "1px solid rgba(255,255,255,0.14)",
+                  color: "rgba(255,255,255,0.95)",
+                  border: "1px solid rgba(255,255,255,0.35)",
                 }}
               >
                 Conocer iautomatiza.cl
@@ -174,21 +174,21 @@ export default function FinalCTA() {
             {/* Trust line — micro signals, not big stats */}
             <div className="mt-12 md:mt-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 font-mono text-[10.5px] uppercase tracking-[0.18em]">
               {[
-                "Setup en 30 min",
-                "Primer match en 24h",
-                "Sin instalación",
-                "WhatsApp directo",
+                "Gratis para partir",
+                "Sin tarjeta",
+                "Sin instalar nada",
+                "Por WhatsApp",
               ].map((t, i, arr) => (
                 <span
                   key={t}
                   className="flex items-center gap-3"
-                  style={{ color: "rgba(255,255,255,0.50)" }}
+                  style={{ color: "rgba(255,255,255,0.72)" }}
                 >
                   <span>{t}</span>
                   {i < arr.length - 1 && (
                     <span
                       className="h-1 w-1 rounded-full"
-                      style={{ background: "rgba(255,255,255,0.20)" }}
+                      style={{ background: "rgba(255,255,255,0.35)" }}
                     />
                   )}
                 </span>

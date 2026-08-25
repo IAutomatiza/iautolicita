@@ -7,7 +7,7 @@ import OrbitaLici from "../components/OrbitaLici";
 import LiciRejilla from "../components/LiciRejilla";
 import DotPattern from "../components/ui/DotPattern";
 import Footer from "../components/Footer";
-import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
+import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
 
 /* ════════════════════════════════════════════════════════════
    /lici — página reiniciada desde cero: por ahora solo el hero,
@@ -114,7 +114,7 @@ export default function LiciPage() {
 
               <div className="mt-10 flex items-center gap-1.5">
                 <a
-                  href={buildWAUrl(MSG_DEMO)}
+                  href={buildWAUrl(MSG_PRUEBA)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"

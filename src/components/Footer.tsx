@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Globe } from "lucide-react";
 import { IconoWhatsApp } from "./ui/LogosCanales";
-import { buildWAUrl, MSG_DEMO, MSG_INFO } from "../lib/whatsapp";
+import { buildWAUrl, MSG_PRUEBA, MSG_INFO } from "../lib/whatsapp";
 
 /* ════════════════════════════════════════════════════════════
    Footer — patrón footer-7 de shadcnblocks: a la izquierda la
@@ -53,7 +53,7 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
       { label: "hola@iautomatiza.cl", href: "mailto:hola@iautomatiza.cl" },
       { label: "Iniciar sesión", href: "https://app.iautolicita.cl", externo: true },
       { label: "Hablar por WhatsApp", href: buildWAUrl(MSG_INFO), externo: true },
-      { label: "Probar gratis", href: buildWAUrl(MSG_DEMO), externo: true },
+      { label: "Probar gratis", href: buildWAUrl(MSG_PRUEBA), externo: true },
     ],
   },
 ];
