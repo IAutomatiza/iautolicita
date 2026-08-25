@@ -70,7 +70,7 @@ export default function LiciPage() {
           </div>
 
           <div className="container-edge relative w-full">
-            <div className="max-w-[660px] py-20 lg:py-0">
+            <div className="max-w-[760px] py-20 lg:py-0">
               <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/50">
                 Tu analista de licitaciones.
               </div>
@@ -87,16 +87,19 @@ export default function LiciPage() {
                 </span>
               </div>
 
-              <h1 className="mt-8 font-display font-semibold text-[42px] md:text-[56px] xl:text-[64px] leading-[1.03] tracking-[-0.03em]">
+              <h1 className="mt-8 font-display font-semibold text-[50px] md:text-[70px] xl:text-[84px] leading-[1.01] tracking-[-0.035em]">
                 Tu próxima adjudicación
                 <br />
                 <span className="text-[#0064E0]">
                   ya está{" "}
-                  <LineShadowText shadowColor="#0A0A0A">publicada</LineShadowText>.
+                  <LineShadowText className="italic pr-[0.06em]" shadowColor="#0A0A0A">
+                    publicada
+                  </LineShadowText>
+                  .
                 </span>
               </h1>
 
-              <p className="mt-7 font-sans text-[16px] md:text-[17px] leading-[1.6] text-[#0A0A0A]/60 max-w-[480px]">
+              <p className="mt-8 font-sans text-[17px] md:text-[18px] leading-[1.6] text-[#0A0A0A]/60 max-w-[520px]">
                 Lici la encuentra entre todo lo que el Estado publica cada
                 día, se lee las bases completas y te dice el precio para
                 ganarla — antes de que tu competencia termine de leer.
