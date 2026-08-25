@@ -68,7 +68,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="py-16 md:py-28 relative bg-ink-900/40 border-y border-[var(--hairline)]"
+      className="scroll-mt-28 py-16 md:py-28 relative bg-ink-900/40 border-y border-[var(--hairline)]"
     >
       <div className="container-edge">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
@@ -103,7 +103,7 @@ export default function FAQ() {
                       <div className="flex items-start gap-4 md:gap-6">
                         <span
                           className={`mt-2 md:mt-3 shrink-0 font-mono text-[11px] tabular-nums transition-colors duration-300 ${
-                            activa ? "text-amber-400" : "text-cream-50/25 group-hover:text-cream-50/45"
+                            activa ? "text-amber-400" : "text-cream-50/50 group-hover:text-cream-50/75"
                           }`}
                         >
                           {String(i + 1).padStart(2, "0")}
@@ -112,7 +112,7 @@ export default function FAQ() {
                           className={`font-display font-medium uppercase leading-[0.95] tracking-[-0.03em] text-[26px] md:text-[42px] transition-colors duration-300 ${
                             activa
                               ? "text-amber-400"
-                              : "text-cream-50/25 group-hover:text-cream-50/50"
+                              : "text-cream-50/50 group-hover:text-cream-50/80"
                           }`}
                         >
                           {f.q}

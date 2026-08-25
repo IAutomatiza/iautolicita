@@ -452,7 +452,7 @@ const TARJETAS: Tarjeta[] = [
     nombre: "Radar 24/7 con score",
     descripcion:
       "Cada licitación nueva se compara con tu perfil y recibe un puntaje 0–100. Las que calzan llegan solas.",
-    href: "#como-funciona",
+    href: "#como",
     cta: "Ver cómo funciona",
     clase: "col-span-3 lg:col-span-2",
     fondo: <ListaRadar />,
@@ -471,7 +471,7 @@ const TARJETAS: Tarjeta[] = [
     Icon: CalendarDays,
     nombre: "Ningún cierre te pilla",
     descripcion: "Los plazos que te importan, marcados y con aviso antes de que venzan.",
-    href: "#como-funciona",
+    href: "#como",
     cta: "Ver cómo funciona",
     clase: "col-span-3 lg:col-span-1",
     fondo: <CalendarioCierres />,

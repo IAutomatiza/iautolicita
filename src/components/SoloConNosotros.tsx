@@ -83,7 +83,7 @@ export default function SoloConNosotros() {
   const [ref, enVista] = useInView<HTMLDivElement>(0.1);
 
   return (
-    <section id="ventajas" className="bg-ink-900 border-y border-[var(--hairline)]">
+    <section id="ventajas" className="scroll-mt-28 bg-ink-900 border-y border-[var(--hairline)]">
       <div className="container-edge py-16 md:py-28">
         <div className="grid md:grid-cols-2 md:gap-10 xl:gap-16">
           {/* Columna fija */}

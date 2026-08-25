@@ -76,7 +76,7 @@ export default function CapacidadesLici() {
   const [ref, enVista] = useInView<HTMLDivElement>(0.25);
 
   return (
-    <section id="capacidades" className="py-16 md:py-28">
+    <section id="capacidades" className="scroll-mt-28 py-16 md:py-28">
       <div className="container-edge">
         <div ref={ref} className="max-w-[860px] mx-auto text-center">
           <Eyebrow className={enVista ? "bento-in" : ""}>

@@ -28,6 +28,10 @@ jobs:
       # SPA fallback: GitHub Pages serves 404.html for unknown deep links,
       # which loads the app and lets React Router handle the route.
       - run: cp dist/index.html dist/404.html
+      # /lici llegaba por ese fallback y respondía HTTP 404, lo que la
+      # deja fuera del índice y rompe la vista previa al compartirla.
+      # Con su propio index.html la ruta devuelve 200.
+      - run: mkdir -p dist/lici && cp dist/index.html dist/lici/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

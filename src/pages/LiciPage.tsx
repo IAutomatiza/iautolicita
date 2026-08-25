@@ -20,6 +20,13 @@ import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 export default function LiciPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
+    // La SPA comparte el <title> del index; sin esto /lici se
+    // indexa y se comparte con el titular del home.
+    const previo = document.title;
+    document.title = "Lici — tu analista de licitaciones | IAutoLicita";
+    return () => {
+      document.title = previo;
+    };
   }, []);
 
   return (
@@ -71,7 +78,7 @@ export default function LiciPage() {
 
           <div className="container-edge relative w-full">
             <div className="max-w-[760px] py-20 lg:py-0">
-              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/50">
+              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/60">
                 Tu analista de licitaciones.
               </div>
 
@@ -99,7 +106,7 @@ export default function LiciPage() {
                 </span>
               </h1>
 
-              <p className="mt-8 font-sans text-[17px] md:text-[18px] leading-[1.6] text-[#0A0A0A]/60 max-w-[520px]">
+              <p className="mt-8 font-sans text-[17px] md:text-[18px] leading-[1.6] text-[#0A0A0A]/70 max-w-[520px]">
                 Lici la encuentra entre todo lo que el Estado publica cada
                 día, se lee las bases completas y te dice el precio para
                 ganarla — antes de que tu competencia termine de leer.
@@ -125,7 +132,7 @@ export default function LiciPage() {
                 </a>
               </div>
 
-              <div className="mt-12 font-mono text-[11px] uppercase tracking-[0.06em] text-[#0A0A0A]/50 flex flex-wrap gap-x-8 gap-y-1.5">
+              <div className="mt-12 font-mono text-[11px] uppercase tracking-[0.06em] text-[#0A0A0A]/60 flex flex-wrap gap-x-8 gap-y-1.5">
                 <span>441K licitaciones</span>
                 <span>7,2M adjudicaciones</span>
                 <span>

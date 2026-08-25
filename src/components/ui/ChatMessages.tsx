@@ -75,8 +75,11 @@ export default function ChatMessages({
   useEffect(() => {
     if (!activo) return;
 
+    // Al reiniciar, el primer mensaje entra de inmediato: si no,
+    // la tarjeta se queda con un rectángulo en blanco hasta que
+    // arranca la vuelta siguiente.
     if (visibles >= mensajes.length) {
-      const t = window.setTimeout(() => setVisibles(0), esperaLoop);
+      const t = window.setTimeout(() => setVisibles(1), esperaLoop);
       return () => window.clearTimeout(t);
     }
 
@@ -121,7 +124,7 @@ export default function ChatMessages({
           <h3 className="font-display font-medium text-[13.5px] leading-none text-[#0A0A0A]">
             Lici
           </h3>
-          <p className="mt-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#0A1530]/45">
+          <p className="mt-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#0A1530]/60">
             <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
             En línea
           </p>
@@ -177,7 +180,7 @@ export default function ChatMessages({
       {/* Barra de entrada (decorativa: es una demo) */}
       <div className="border-t border-[#0A1530]/[0.08] p-3">
         <div className="flex items-center gap-2 rounded-xl border border-[#0A1530]/10 bg-[#FBFCFD] px-3.5 py-2.5">
-          <span className="flex-1 font-sans text-[12.5px] text-[#0A1530]/35">
+          <span className="flex-1 font-sans text-[12.5px] text-[#0A1530]/50">
             Pregúntale por WhatsApp…
           </span>
           <Send className="h-3.5 w-3.5 shrink-0 text-[#0A1530]/30" strokeWidth={1.8} />

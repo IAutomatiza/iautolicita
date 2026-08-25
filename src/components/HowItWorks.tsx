@@ -71,7 +71,7 @@ export default function HowItWorks() {
   const [shotRef, shotInView] = useInView<HTMLDivElement>(0.2);
 
   return (
-    <section id="como" className="py-16 md:py-28 relative">
+    <section id="como" className="scroll-mt-28 py-16 md:py-28 relative">
       <div className="container-edge">
         <div className="text-center mb-16 max-w-[680px] mx-auto">
           <Eyebrow>Cómo funciona</Eyebrow>
@@ -150,6 +150,8 @@ export default function HowItWorks() {
                 <img
                   src={`${import.meta.env.BASE_URL}app-lici-escritorio-v2.png`}
                   alt="Lici dentro de IAutoLicita: resumen de bases, documentos a presentar, calce 87/100 y cuánto conviene ofertar"
+                  width={2880}
+                  height={1440}
                   className="w-full h-auto block"
                   loading="lazy"
                 />

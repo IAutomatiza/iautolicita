@@ -14,10 +14,10 @@ const COLUMNAS = [
   {
     titulo: "Producto",
     links: [
-      { label: "Capacidades", href: "#capacidades" },
-      { label: "Cómo funciona", href: "#como" },
-      { label: "Con y sin IAutoLicita", href: "#resultados" },
-      { label: "Preguntas frecuentes", href: "#faq" },
+      { label: "Capacidades", href: "#capacidades", seccion: true },
+      { label: "Cómo funciona", href: "#como", seccion: true },
+      { label: "Con y sin IAutoLicita", href: "#resultados", seccion: true },
+      { label: "Preguntas frecuentes", href: "#faq", seccion: true },
     ],
   },
   {
@@ -49,9 +49,20 @@ const COLUMNAS = [
 export default function Footer() {
   const year = new Date().getFullYear();
 
-  const enlace = (l: { label: string; href: string; externo?: boolean; interno?: boolean }) =>
-    l.interno ? (
-      <Link to={l.href} className="text-cream-100 hover:text-amber-400 transition-colors">
+  const enlace = (l: {
+    label: string;
+    href: string;
+    externo?: boolean;
+    interno?: boolean;
+    seccion?: boolean;
+  }) =>
+    // Las secciones viven en el home: desde /lici un "#faq" pelado
+    // no lleva a ninguna parte, así que se resuelven contra "/".
+    l.interno || l.seccion ? (
+      <Link
+        to={l.seccion ? `/${l.href}` : l.href}
+        className="text-cream-100 hover:text-amber-400 transition-colors"
+      >
         {l.label}
       </Link>
     ) : (

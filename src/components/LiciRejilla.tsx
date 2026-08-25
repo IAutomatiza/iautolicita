@@ -4,6 +4,7 @@ import { IconoWhatsApp, IconoPdf, IconoDrive } from "./ui/LogosCanales";
 import ChatMessages from "./ui/ChatMessages";
 import type { MensajeChat } from "./ui/ChatMessages";
 import DotPattern from "./ui/DotPattern";
+import Eyebrow from "./ui/Eyebrow";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -88,9 +89,7 @@ export default function LiciRejilla() {
 
       <div ref={ref} className="relative mx-auto max-w-[1080px] px-6">
         <div className="max-w-[640px]" style={entrada(0)}>
-          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A1530]/45">
-            Qué hace Lici
-          </div>
+          <Eyebrow align="left">Qué hace Lici</Eyebrow>
           <h2 className="mt-5 font-display font-medium text-[30px] md:text-[42px] leading-[1.07] tracking-[-0.03em] text-[#0A0A0A]">
             Cuatro cosas que dejas de hacer{" "}
             <span className="text-[#0064E0]">a mano.</span>
@@ -102,10 +101,10 @@ export default function LiciRejilla() {
           <div className="sm:col-span-3 flex" style={entrada(90)}>
           <div className={`${TARJETA} w-full rounded-xl sm:rounded-none sm:rounded-tl-xl`}>
             <div className="p-6 md:p-10 md:pb-6">
-              <p className="font-display font-medium text-[19px] tracking-[-0.02em] text-[#0A0A0A]">
+              <h3 className="font-display font-medium text-[21px] tracking-[-0.025em] text-[#0A0A0A]">
                 Se lee las bases completas
-              </p>
-              <p className="mt-3 max-w-sm font-sans text-[14px] leading-[1.6] text-[#0A1530]/55">
+              </h3>
+              <p className="mt-3 max-w-sm font-sans text-[14px] leading-[1.6] text-[#0A1530]/70">
                 Le pasas la licitación y te devuelve objeto, plazos, garantías y
                 documentos exigidos — sin que abras el PDF de 80 páginas.
               </p>
@@ -137,9 +136,9 @@ export default function LiciRejilla() {
           {/* ── 2 · La conversación real (col-span-2) ─────── */}
           <div className="sm:col-span-2 flex" style={entrada(180)}>
           <div className={`${TARJETA} w-full rounded-xl sm:rounded-none sm:rounded-tr-xl flex flex-col`}>
-            <p className="mx-auto mb-5 mt-6 max-w-md text-balance px-6 text-center font-display font-medium text-[19px] sm:text-[23px] leading-[1.2] tracking-[-0.02em] text-[#0A0A0A] md:px-8">
+            <h3 className="mb-5 mt-6 max-w-md text-balance px-6 font-display font-medium text-[21px] leading-[1.25] tracking-[-0.025em] text-[#0A0A0A] md:px-8">
               Responde con datos, no con opiniones.
-            </p>
+            </h3>
 
             <div className="mt-auto px-4 pb-4 md:px-6 md:pb-6">
               <ChatMessages mensajes={CONVERSACION} className="h-[420px]" />
@@ -149,20 +148,20 @@ export default function LiciRejilla() {
 
           {/* ── 3 · Vive en WhatsApp (col-span-2) ──────────── */}
           <div className="sm:col-span-2 flex" style={entrada(270)}>
-          <div className={`${TARJETA} w-full rounded-xl p-6 sm:rounded-none sm:rounded-bl-xl md:p-12 flex flex-col justify-center`}>
-            <p className="mx-auto mb-10 max-w-md text-balance text-center font-display font-medium text-[19px] sm:text-[23px] leading-[1.2] tracking-[-0.02em] text-[#0A0A0A]">
+          <div className={`${TARJETA} w-full rounded-xl p-6 sm:rounded-none sm:rounded-bl-xl md:p-10 flex flex-col justify-center`}>
+            <h3 className="mb-10 max-w-md text-balance font-display font-medium text-[21px] leading-[1.25] tracking-[-0.025em] text-[#0A0A0A]">
               Le preguntas por WhatsApp, como a un colega.
-            </p>
+            </h3>
 
-            <div className="flex justify-center gap-6">
+            <div className="flex gap-6">
               <div className="relative flex aspect-square size-16 items-center rounded-[9px] border border-[#0A1530]/12 bg-[#0A1530]/[0.03] p-3 shadow-[0_6px_16px_-8px_rgba(10,21,48,0.35)] ring-1 ring-inset ring-white">
-                <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/40">
+                <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/60">
                   tú
                 </span>
                 <IconoWhatsApp className="mt-auto h-5 w-5" />
               </div>
               <div className="relative flex aspect-square size-16 items-center justify-center rounded-[9px] border border-[#0A1530]/12 bg-[#0A1530]/[0.03] p-3 shadow-[0_6px_16px_-8px_rgba(10,21,48,0.35)] ring-1 ring-inset ring-white">
-                <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/40">
+                <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/60">
                   ella
                 </span>
                 <LiciGlifo alto={26} conBorde />
@@ -179,10 +178,10 @@ export default function LiciRejilla() {
           <div className="sm:col-span-3 flex" style={entrada(360)}>
           <div className={`${TARJETA} w-full rounded-xl sm:rounded-none sm:rounded-br-xl`}>
             <div className="p-6 md:p-12 md:pb-6">
-              <p className="font-display font-medium text-[19px] tracking-[-0.02em] text-[#0A0A0A]">
+              <h3 className="font-display font-medium text-[21px] tracking-[-0.025em] text-[#0A0A0A]">
                 Las alertas salen donde trabaja tu equipo
-              </p>
-              <p className="mt-2 max-w-sm font-sans text-[14px] leading-[1.6] text-[#0A1530]/55">
+              </h3>
+              <p className="mt-2 max-w-sm font-sans text-[14px] leading-[1.6] text-[#0A1530]/70">
                 Cierres, riesgos y documentos exigidos llegan al canal que ya usan
                 — sin entrar a la plataforma.
               </p>

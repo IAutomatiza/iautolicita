@@ -52,7 +52,7 @@ export default function DosFinales() {
   });
 
   return (
-    <section id="resultados" className="px-3 md:px-5 py-8 md:py-12">
+    <section id="resultados" className="scroll-mt-28 px-3 md:px-5 py-8 md:py-12">
       <div className="rounded-[2rem] md:rounded-[2.5rem] bg-white px-6 py-16 md:px-12 lg:px-16 md:py-24">
         <div ref={ref} className="max-w-[1240px] mx-auto w-full">
           <div style={entrada(0, 0)}>
