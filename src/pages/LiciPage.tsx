@@ -4,6 +4,7 @@ import WhatsAppButton from "../components/ui/WhatsAppButton";
 import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
 import OrbitaLici from "../components/OrbitaLici";
+import LiciRejilla from "../components/LiciRejilla";
 import Footer from "../components/Footer";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 
@@ -133,6 +134,9 @@ export default function LiciPage() {
             </div>
           </div>
         </section>
+
+        {/* ═══ QUÉ HACE LICI — rejilla de capacidades ═══ */}
+        <LiciRejilla />
       </main>
 
       <Footer />
