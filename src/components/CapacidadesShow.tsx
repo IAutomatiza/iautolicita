@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { CalendarClock, ShieldCheck, FileWarning, FileText } from "lucide-react";
+import LiciGlifo from "./LiciGlifo";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -129,13 +130,7 @@ const VisorPrecio = ({ activo }: VisorProps) => (
 const VisorCita = ({ activo }: VisorProps) => (
   <div className="rounded-2xl border border-white/[0.08] bg-[#0A101B] p-5 md:p-6">
     <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
-      <svg width="13" height="13" viewBox="0 0 32 32" fill="none" aria-hidden>
-        <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#2a4a66" />
-        <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-        <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
-        <rect x="20.4" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-        <rect x="25.2" y="13" width="2.6" height="6" rx="1.3" fill="#2a4a66" />
-      </svg>
+      <LiciGlifo alto={16} />
       Respuesta de Lici
     </div>
     <p className="mt-3.5 font-sans text-[14px] leading-[1.7] text-white/75">

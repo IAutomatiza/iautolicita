@@ -8,7 +8,6 @@ import {
   ChevronRight,
   CheckCircle2,
   Send,
-  MessageSquare,
   TrendingUp,
   Users,
   Bell,
@@ -172,9 +171,7 @@ function LiciChatPanel() {
         {/* Header */}
         <div className="px-6 pt-6 pb-4 border-b border-white/[0.06]">
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-9 w-9 rounded-xl bg-brand-500/20 grid place-items-center">
-              <MessageSquare className="h-4.5 w-4.5 text-brand-400" strokeWidth={1.8} />
-            </div>
+            <LiciGlifo alto={36} />
             <div>
               <h3 className="font-display font-medium text-[16px] text-white/90 tracking-[-0.01em]">
                 Pregúntale a Lici
@@ -265,15 +262,7 @@ function LiciChatPanel() {
 
                 {/* Lici response */}
                 <div className="flex gap-2.5">
-                  <div className="h-7 w-7 rounded-lg bg-brand-500/15 grid place-items-center shrink-0">
-                    <svg width="15" height="15" viewBox="0 0 32 32" fill="none">
-                      <rect x="6" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
-                      <rect x="10.8" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-                      <rect x="15.6" y="5.5" width="2.6" height="21" rx="1.3" fill="#55b4f8" />
-                      <rect x="20.4" y="9" width="2.6" height="14" rx="1.3" fill="#55b4f8" />
-                      <rect x="25.2" y="13" width="2.6" height="6" rx="1.3" fill="#e0f6ff" />
-                    </svg>
-                  </div>
+                  <LiciGlifo alto={28} className="shrink-0" />
                   <div className="flex-1 min-w-0">
                     <span className="text-[10px] font-mono text-brand-400/60 uppercase tracking-[0.1em]">Lici</span>
                     <div className="mt-1 text-[13px] text-white/65 leading-[1.65] whitespace-pre-line">
