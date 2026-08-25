@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Send, RotateCcw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Send } from "lucide-react";
 import LiciGlifo from "../LiciGlifo";
 
 /* ════════════════════════════════════════════════════════════
@@ -28,17 +28,17 @@ type Props = {
   pausa?: number;
   /** Cuánto se muestra el indicador de tipeo antes de cada respuesta. */
   tipeo?: number;
-  /** Botón para volver a reproducir la conversación. */
-  conRepetir?: boolean;
+  /** Cuánto queda la conversación completa antes de reiniciarse. */
+  esperaLoop?: number;
   className?: string;
 };
 
 const Tipeando = () => (
-  <div className="inline-flex items-center gap-1.5 rounded-2xl rounded-tl-md border border-white/10 bg-white/[0.06] px-4 py-3">
+  <div className="inline-flex items-center gap-1.5 rounded-2xl rounded-tl-md border border-[#0A1530]/[0.09] bg-[#F4F6F9] px-4 py-3">
     {[0, 1, 2].map((i) => (
       <span
         key={i}
-        className="chat-punto h-1.5 w-1.5 rounded-full bg-white/60"
+        className="chat-punto h-1.5 w-1.5 rounded-full bg-[#0A1530]/40"
         style={{ animationDelay: `${i * 0.15}s` }}
       />
     ))}
@@ -49,7 +49,7 @@ export default function ChatMessages({
   mensajes,
   pausa = 2200,
   tipeo = 1300,
-  conRepetir = true,
+  esperaLoop = 4500,
   className = "",
 }: Props) {
   const [visibles, setVisibles] = useState(0);
@@ -69,27 +69,31 @@ export default function ChatMessages({
     return () => obs.disconnect();
   }, []);
 
-  // Un paso por mensaje: el de Lici primero muestra el tipeo.
+  // Un paso por mensaje: el de Lici primero muestra el tipeo. Al
+  // llegar al final espera y vuelve a empezar — la conversación
+  // corre en loop, sin que haya que pedirla.
   useEffect(() => {
-    if (!activo || visibles >= mensajes.length) return;
+    if (!activo) return;
+
+    if (visibles >= mensajes.length) {
+      const t = window.setTimeout(() => setVisibles(0), esperaLoop);
+      return () => window.clearTimeout(t);
+    }
+
     const siguiente = mensajes[visibles];
-    let t2 = 0;
 
     if (siguiente.de === "lici") {
       setTipeando(true);
-      const t1 = window.setTimeout(() => {
+      const t = window.setTimeout(() => {
         setTipeando(false);
         setVisibles((v) => v + 1);
       }, tipeo);
-      return () => {
-        window.clearTimeout(t1);
-        window.clearTimeout(t2);
-      };
+      return () => window.clearTimeout(t);
     }
 
-    t2 = window.setTimeout(() => setVisibles((v) => v + 1), pausa * 0.55);
-    return () => window.clearTimeout(t2);
-  }, [activo, visibles, mensajes, pausa, tipeo]);
+    const t = window.setTimeout(() => setVisibles((v) => v + 1), pausa * 0.55);
+    return () => window.clearTimeout(t);
+  }, [activo, visibles, mensajes, pausa, tipeo, esperaLoop]);
 
   // El hilo sigue siempre el último mensaje.
   useEffect(() => {
@@ -103,41 +107,25 @@ export default function ChatMessages({
     });
   }, [visibles, tipeando]);
 
-  const repetir = useCallback(() => {
-    setTipeando(false);
-    setVisibles(0);
-  }, []);
 
-  const terminado = visibles >= mensajes.length;
 
   return (
     <div
       ref={cajaRef}
-      className={`chat-lici relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0A101B] shadow-[0_24px_64px_-24px_rgba(0,0,0,0.55)] ${className}`}
+      className={`chat-lici relative flex flex-col overflow-hidden rounded-2xl border border-[#0A1530]/10 bg-white shadow-[0_18px_44px_-26px_rgba(10,21,48,0.4)] ${className}`}
     >
       {/* Cabecera */}
-      <div className="flex items-center justify-between border-b border-white/[0.07] px-4 py-3">
-        <div className="flex items-center gap-2.5">
-          <LiciGlifo alto={28} />
-          <div>
-            <h3 className="font-display font-medium text-[13.5px] leading-none text-white/90">
-              Lici
-            </h3>
-            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/35">
-              En línea
-            </p>
-          </div>
+      <div className="flex items-center gap-2.5 border-b border-[#0A1530]/[0.08] bg-[#FBFCFD] px-4 py-3">
+        <LiciGlifo alto={28} conBorde />
+        <div>
+          <h3 className="font-display font-medium text-[13.5px] leading-none text-[#0A0A0A]">
+            Lici
+          </h3>
+          <p className="mt-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#0A1530]/45">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
+            En línea
+          </p>
         </div>
-        {conRepetir && terminado && (
-          <button
-            onClick={repetir}
-            aria-label="Repetir la conversación"
-            className="flex items-center gap-1.5 rounded-lg bg-white/[0.06] px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] text-white/50 transition-colors hover:bg-white/10 hover:text-white/80"
-          >
-            <RotateCcw className="h-3 w-3" strokeWidth={2} />
-            Repetir
-          </button>
-        )}
       </div>
 
       {/* Hilo */}
@@ -164,7 +152,7 @@ export default function ChatMessages({
                   className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 font-sans text-[13px] leading-[1.55] ${
                     mio
                       ? "rounded-tr-md bg-[#0064E0] text-white"
-                      : "rounded-tl-md border border-white/10 bg-white/[0.06] text-white/80"
+                      : "rounded-tl-md border border-[#0A1530]/[0.09] bg-[#F4F6F9] text-[#0A1530]/85"
                   }`}
                 >
                   {m.texto}
@@ -187,20 +175,20 @@ export default function ChatMessages({
       </div>
 
       {/* Barra de entrada (decorativa: es una demo) */}
-      <div className="border-t border-white/[0.07] p-3">
-        <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5">
-          <span className="flex-1 font-sans text-[12.5px] text-white/25">
+      <div className="border-t border-[#0A1530]/[0.08] p-3">
+        <div className="flex items-center gap-2 rounded-xl border border-[#0A1530]/10 bg-[#FBFCFD] px-3.5 py-2.5">
+          <span className="flex-1 font-sans text-[12.5px] text-[#0A1530]/35">
             Pregúntale por WhatsApp…
           </span>
-          <Send className="h-3.5 w-3.5 shrink-0 text-white/25" strokeWidth={1.8} />
+          <Send className="h-3.5 w-3.5 shrink-0 text-[#0A1530]/30" strokeWidth={1.8} />
         </div>
       </div>
 
       <style>{`
-        .chat-hilo { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.14) transparent; }
+        .chat-hilo { scrollbar-width: thin; scrollbar-color: rgba(10,21,48,0.14) transparent; }
         .chat-hilo::-webkit-scrollbar { width: 4px; }
         .chat-hilo::-webkit-scrollbar-track { background: transparent; }
-        .chat-hilo::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 2px; }
+        .chat-hilo::-webkit-scrollbar-thumb { background: rgba(10,21,48,0.14); border-radius: 2px; }
         .chat-burbuja { animation: chatEntra 0.38s cubic-bezier(0.22,1,0.36,1) backwards; }
         @keyframes chatEntra {
           from { opacity: 0; transform: translateY(10px) scale(0.97); }

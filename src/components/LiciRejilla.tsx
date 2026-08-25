@@ -19,8 +19,14 @@ import useInView from "../hooks/useInView";
    Entrada escalonada al hacer scroll, solo opacity/transform.
 ═══════════════════════════════════════════════════════════════ */
 
+/* Las tarjetas se levantan al pasar el cursor: sombra más honda,
+   un pelo hacia arriba y por encima de sus vecinas (van pegadas,
+   así que sin el z-10 la sombra quedaría cortada). */
 const TARJETA =
-  "relative overflow-hidden border border-[#0A1530]/[0.09] bg-white shadow-[0_10px_30px_-22px_rgba(10,21,48,0.35)]";
+  "group/tarjeta relative overflow-hidden border border-[#0A1530]/[0.09] bg-white " +
+  "shadow-[0_10px_30px_-22px_rgba(10,21,48,0.35)] transition-[transform,box-shadow,border-color] duration-300 ease-out " +
+  "hover:z-10 hover:-translate-y-1.5 hover:border-[#0A1530]/[0.14] hover:shadow-[0_28px_60px_-28px_rgba(10,21,48,0.4)] " +
+  "motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
 /* La conversación de muestra recorre la decisión completa: si
    conviene postular, qué exigen las bases, cuánto ofertar y
@@ -86,10 +92,8 @@ export default function LiciRejilla() {
 
         <div className="mt-12 grid gap-2 sm:grid-cols-5">
           {/* ── 1 · Lee las bases (col-span-3) ─────────────── */}
-          <div
-            className={`${TARJETA} rounded-xl sm:col-span-3 sm:rounded-none sm:rounded-tl-xl`}
-            style={entrada(90)}
-          >
+          <div className="sm:col-span-3 flex" style={entrada(90)}>
+          <div className={`${TARJETA} w-full rounded-xl sm:rounded-none sm:rounded-tl-xl`}>
             <div className="p-6 md:p-10 md:pb-6">
               <p className="font-display font-medium text-[19px] tracking-[-0.02em] text-[#0A0A0A]">
                 Se lee las bases completas
@@ -111,22 +115,21 @@ export default function LiciRejilla() {
               />
               <div className="overflow-hidden rounded-tl-lg border-l border-t border-[#0A1530]/10 bg-white pl-2 pt-2">
                 <img
-                  src={`${import.meta.env.BASE_URL}app-lici-escritorio-v2.png`}
-                  alt="Lici dentro de IAutoLicita resumiendo una licitación: objeto, plazo de cierre y garantía exigida"
-                  width={1207}
-                  height={929}
+                  src={`${import.meta.env.BASE_URL}app-lici-seccion.png`}
+                  alt="La sección Lici de IAutoLicita con una licitación abierta: resumen de bases con objeto, cierre y garantía, la cita a la página exacta y el precio sugerido"
+                  width={1120}
+                  height={700}
                   loading="lazy"
-                  className="w-full rounded-tl-md"
+                  className="w-full rounded-tl-md transition-transform duration-500 ease-out group-hover/tarjeta:scale-[1.015]"
                 />
               </div>
             </div>
           </div>
+          </div>
 
           {/* ── 2 · La conversación real (col-span-2) ─────── */}
-          <div
-            className={`${TARJETA} rounded-xl sm:col-span-2 sm:rounded-none sm:rounded-tr-xl flex flex-col`}
-            style={entrada(180)}
-          >
+          <div className="sm:col-span-2 flex" style={entrada(180)}>
+          <div className={`${TARJETA} w-full rounded-xl sm:rounded-none sm:rounded-tr-xl flex flex-col`}>
             <p className="mx-auto mb-5 mt-6 max-w-md text-balance px-6 text-center font-display font-medium text-[19px] sm:text-[23px] leading-[1.2] tracking-[-0.02em] text-[#0A0A0A] md:px-8">
               Responde con datos, no con opiniones.
             </p>
@@ -135,12 +138,11 @@ export default function LiciRejilla() {
               <ChatMessages mensajes={CONVERSACION} className="h-[420px]" />
             </div>
           </div>
+          </div>
 
           {/* ── 3 · Vive en WhatsApp (col-span-2) ──────────── */}
-          <div
-            className={`${TARJETA} rounded-xl p-6 sm:col-span-2 sm:rounded-none sm:rounded-bl-xl md:p-12 flex flex-col justify-center`}
-            style={entrada(270)}
-          >
+          <div className="sm:col-span-2 flex" style={entrada(270)}>
+          <div className={`${TARJETA} w-full rounded-xl p-6 sm:rounded-none sm:rounded-bl-xl md:p-12 flex flex-col justify-center`}>
             <p className="mx-auto mb-10 max-w-md text-balance text-center font-display font-medium text-[19px] sm:text-[23px] leading-[1.2] tracking-[-0.02em] text-[#0A0A0A]">
               Le preguntas por WhatsApp, como a un colega.
             </p>
@@ -164,12 +166,11 @@ export default function LiciRejilla() {
               Responde en menos de 3 s
             </p>
           </div>
+          </div>
 
           {/* ── 4 · Las alertas salen solas (col-span-3) ───── */}
-          <div
-            className={`${TARJETA} rounded-xl sm:col-span-3 sm:rounded-none sm:rounded-br-xl`}
-            style={entrada(360)}
-          >
+          <div className="sm:col-span-3 flex" style={entrada(360)}>
+          <div className={`${TARJETA} w-full rounded-xl sm:rounded-none sm:rounded-br-xl`}>
             <div className="p-6 md:p-12 md:pb-6">
               <p className="font-display font-medium text-[19px] tracking-[-0.02em] text-[#0A0A0A]">
                 Las alertas salen donde trabaja tu equipo
@@ -195,6 +196,7 @@ export default function LiciRejilla() {
                 ))}
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
