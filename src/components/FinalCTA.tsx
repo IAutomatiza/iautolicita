@@ -119,7 +119,7 @@ export default function FinalCTA() {
               className="mt-10 font-sans text-[16px] md:text-[18px] leading-[1.55] max-w-[620px] mx-auto"
               style={{ color: "rgba(255,255,255,0.70)" }}
             >
-              Pruébalo gratis con tus propias licitaciones: escribes por WhatsApp y en minutos ves las que <em className="not-italic" style={{ color: "#FFFFFF" }}>calzan contigo hoy</em>, con su precio sugerido. Sin tarjeta y sin instalar nada.
+              Pruébalo gratis con tus propias licitaciones: te abrimos la cuenta y en minutos ves en la plataforma las que <em className="not-italic" style={{ color: "#FFFFFF" }}>calzan contigo hoy</em>, con su precio sugerido. Sin tarjeta y sin instalar nada.
             </p>
 
             {/* CTAs */}
@@ -177,7 +177,7 @@ export default function FinalCTA() {
                 "Gratis para partir",
                 "Sin tarjeta",
                 "Sin instalar nada",
-                "Por WhatsApp",
+                "Desde el navegador",
               ].map((t, i, arr) => (
                 <span
                   key={t}

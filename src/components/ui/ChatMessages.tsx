@@ -181,7 +181,7 @@ export default function ChatMessages({
       <div className="border-t border-[#0A1530]/[0.08] p-3">
         <div className="flex items-center gap-2 rounded-xl border border-[#0A1530]/10 bg-[#FBFCFD] px-3.5 py-2.5">
           <span className="flex-1 font-sans text-[12.5px] text-[#0A1530]/50">
-            Pregúntale por WhatsApp…
+            Escríbele a Lici…
           </span>
           <Send className="h-3.5 w-3.5 shrink-0 text-[#0A1530]/30" strokeWidth={1.8} />
         </div>

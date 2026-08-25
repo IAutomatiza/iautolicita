@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, MessageSquare } from "lucide-react";
 import LiciGlifo from "./LiciGlifo";
 import { IconoWhatsApp, IconoPdf, IconoDrive } from "./ui/LogosCanales";
 import ChatMessages from "./ui/ChatMessages";
@@ -146,11 +146,11 @@ export default function LiciRejilla() {
           </div>
           </div>
 
-          {/* ── 3 · Vive en WhatsApp (col-span-2) ──────────── */}
+          {/* ── 3 · Vive dentro de la app (col-span-2) ─────── */}
           <div className="sm:col-span-2 flex" style={entrada(270)}>
           <div className={`${TARJETA} w-full rounded-xl p-6 sm:rounded-none sm:rounded-bl-xl md:p-10 flex flex-col justify-center`}>
             <h3 className="mb-10 max-w-md text-balance font-display font-medium text-[21px] leading-[1.25] tracking-[-0.025em] text-[#0A0A0A]">
-              Le preguntas por WhatsApp, como a un colega.
+              Le preguntas en la app, como a un colega.
             </h3>
 
             <div className="flex gap-6">
@@ -158,7 +158,7 @@ export default function LiciRejilla() {
                 <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/60">
                   tú
                 </span>
-                <IconoWhatsApp className="mt-auto h-5 w-5" />
+                <MessageSquare className="mt-auto h-5 w-5 text-[#0064E0]" strokeWidth={1.9} />
               </div>
               <div className="relative flex aspect-square size-16 items-center justify-center rounded-[9px] border border-[#0A1530]/12 bg-[#0A1530]/[0.03] p-3 shadow-[0_6px_16px_-8px_rgba(10,21,48,0.35)] ring-1 ring-inset ring-white">
                 <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/60">

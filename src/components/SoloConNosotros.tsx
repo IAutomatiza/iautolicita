@@ -62,11 +62,11 @@ const VENTAJAS = [
   {
     id: "alertas",
     Icon: Send,
-    titulo: "Llega donde ya trabajas",
+    titulo: "La app avisa, no espera",
     texto:
-      "Cierres y documentos por WhatsApp, correo, PDF o Drive. Sin entrar a ninguna plataforma.",
-    dato: "Cuatro canales a la vez",
-    resto: "El resto te hace entrar a revisar.",
+      "Tu equipo trabaja en la plataforma y los cierres te alcanzan igual: WhatsApp, correo, PDF o Drive.",
+    dato: "Cuatro canales de aviso",
+    resto: "El resto te deja revisando a mano.",
   },
   {
     id: "multi",

@@ -37,7 +37,7 @@ const faqs: { q: string; a: string; ancla?: string }[] = [
   },
   {
     q: "¿Se me puede pasar un cierre?",
-    a: "Para eso está. Cada fecha, documento y riesgo te llega con días de anticipación por WhatsApp, correo o donde ya trabaje tu equipo. Nadie tiene que acordarse de entrar a revisar.",
+    a: "Para eso está la app: vigila cada fecha, documento y riesgo de las licitaciones que sigues, y te avisa con días de anticipación — en la plataforma y, si quieres, también por WhatsApp o correo. Nadie tiene que acordarse de revisar.",
   },
   {
     // El enlace "Planes" de la nav apunta acá: es lo único que
