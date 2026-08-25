@@ -21,19 +21,19 @@ export default function LiciPage() {
 
   return (
     <>
-      {/* ═══ NAV ═══ */}
-      <header className="fixed inset-x-0 top-0 z-40 bg-[#000115]/90 backdrop-blur-xl border-b border-white/[0.06]">
+      {/* ═══ NAV — blanca, como el hero ═══ */}
+      <header className="fixed inset-x-0 top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-black/[0.07]">
         <div className="container-edge flex h-16 items-center justify-between">
           <Link to="/" className="flex items-baseline gap-2 shrink-0">
-            <span className="font-display font-medium text-[22px] tracking-tightest leading-none text-white">
-              <span className="text-brand-400">IA</span>utoLicita
-              <span className="text-brand-400">.</span>
+            <span className="font-display font-medium text-[22px] tracking-tightest leading-none text-[#0A0A0A]">
+              <span className="text-[#0064E0]">IA</span>utoLicita
+              <span className="text-[#0064E0]">.</span>
             </span>
           </Link>
           <div className="flex items-center gap-3">
             <Link
               to="/"
-              className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-white/50 hover:text-white/80 transition-colors"
+              className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-[#0A0A0A]/55 hover:text-[#0A0A0A] transition-colors"
             >
               Plataforma
             </Link>
@@ -41,7 +41,7 @@ export default function LiciPage() {
               href="https://app.iautolicita.cl"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-white/50 hover:text-white/80 transition-colors"
+              className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-[#0A0A0A]/55 hover:text-[#0A0A0A] transition-colors"
             >
               Iniciar sesión
             </a>
@@ -50,7 +50,7 @@ export default function LiciPage() {
         </div>
       </header>
 
-      <main className="bg-[#F2F0EA] text-[#0A0A0A]">
+      <main className="bg-white text-[#0A0A0A]">
         {/* ═══ HERO — órbitas de ruixen, recortadas al costado ═══ */}
         <section className="relative min-h-[100svh] overflow-hidden flex items-center pt-16">
           {/* Órbitas recortadas por la derecha, como el original */}
@@ -80,15 +80,15 @@ export default function LiciPage() {
               </div>
 
               <h1 className="mt-8 font-display font-semibold text-[42px] md:text-[56px] xl:text-[64px] leading-[1.03] tracking-[-0.03em]">
-                Deja de leer bases.
+                Tu próxima adjudicación
                 <br />
-                <span className="text-[#0064E0]">Empieza a ganarlas.</span>
+                <span className="text-[#0064E0]">ya está publicada.</span>
               </h1>
 
               <p className="mt-7 font-sans text-[16px] md:text-[17px] leading-[1.6] text-[#0A0A0A]/60 max-w-[480px]">
-                Lici se lee las 80 páginas por ti, calcula el precio para
-                ganar y te avisa antes de cada cierre — entrenada sobre 6,4
-                millones de órdenes de compra de ChileCompra.
+                Lici la encuentra entre todo lo que el Estado publica cada
+                día, se lee las bases completas y te dice el precio para
+                ganarla — antes de que tu competencia termine de leer.
               </p>
 
               <div className="mt-10 flex items-center gap-1.5">
