@@ -1,6 +1,8 @@
-import { Mail, FileText } from "lucide-react";
+import { Mail } from "lucide-react";
 import LiciGlifo from "./LiciGlifo";
 import { IconoWhatsApp, IconoPdf, IconoDrive } from "./ui/LogosCanales";
+import ChatMessages from "./ui/ChatMessages";
+import type { MensajeChat } from "./ui/ChatMessages";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -19,6 +21,37 @@ import useInView from "../hooks/useInView";
 
 const TARJETA =
   "relative overflow-hidden border border-[#0A1530]/[0.09] bg-white shadow-[0_10px_30px_-22px_rgba(10,21,48,0.35)]";
+
+/* La conversación de muestra recorre la decisión completa: si
+   conviene postular, qué exigen las bases, cuánto ofertar y
+   contra quién se compite. Cada respuesta trae su cifra. */
+const CONVERSACION: MensajeChat[] = [
+  {
+    id: "1",
+    de: "usuario",
+    texto: "¿Me conviene postular a la 2239-45-LP26?",
+  },
+  {
+    id: "2",
+    de: "lici",
+    texto:
+      "Calza 91/100 con lo que vendes. Cierra en 6 días y exige boleta de garantía por el 10% del monto — bases administrativas, pág. 47.",
+  },
+  { id: "3", de: "usuario", texto: "¿Cuánto debería ofertar?" },
+  {
+    id: "4",
+    de: "lici",
+    texto:
+      "Este organismo pagó una mediana de $139,9M por lo mismo. Bajo $132M ganas por precio; sobre $148M te quedas fuera.",
+  },
+  { id: "5", de: "usuario", texto: "¿Contra quién compito?" },
+  {
+    id: "6",
+    de: "lici",
+    texto:
+      "Comercial Médica SpA se adjudicó 4 de las últimas 7 en este rubro, ofertando en promedio 8% bajo el presupuesto.",
+  },
+];
 
 /* Los canales del último panel: alternan celda punteada y logo,
    igual que la grilla de integraciones del original. */
@@ -89,40 +122,17 @@ export default function LiciRejilla() {
             </div>
           </div>
 
-          {/* ── 2 · Citas a la página exacta (col-span-2) ──── */}
+          {/* ── 2 · La conversación real (col-span-2) ─────── */}
           <div
             className={`${TARJETA} rounded-xl sm:col-span-2 sm:rounded-none sm:rounded-tr-xl flex flex-col`}
             style={entrada(180)}
           >
-            <p className="mx-auto my-6 max-w-md text-balance px-6 text-center font-display font-medium text-[19px] sm:text-[23px] leading-[1.2] tracking-[-0.02em] text-[#0A0A0A] md:p-8">
-              Cada respuesta trae la página exacta de las bases.
+            <p className="mx-auto mb-5 mt-6 max-w-md text-balance px-6 text-center font-display font-medium text-[19px] sm:text-[23px] leading-[1.2] tracking-[-0.02em] text-[#0A0A0A] md:px-8">
+              Responde con datos, no con opiniones.
             </p>
 
-            <div className="mt-auto px-6 pb-6">
-              <div className="relative">
-                {/* Mini panel de respuesta, en el oscuro de la app */}
-                <div className="overflow-hidden rounded-r-lg border border-[#0A1530]/10 bg-[#0A101B] p-5">
-                  <div className="flex items-center gap-2">
-                    <LiciGlifo alto={16} />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
-                      Lici
-                    </span>
-                  </div>
-                  <p className="mt-3 font-sans text-[13px] leading-[1.65] text-white/75">
-                    La boleta de garantía se exige por el{" "}
-                    <span className="rounded bg-[#55b4f8]/[0.18] px-1 py-0.5 text-white">
-                      10% del monto ofertado
-                    </span>
-                    , con vigencia mínima de 90 días.
-                  </p>
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2">
-                    <FileText className="h-3.5 w-3.5 text-[#55b4f8]" strokeWidth={1.8} />
-                    <span className="font-mono text-[10.5px] text-white/60">
-                      Bases administrativas · pág. 47
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div className="mt-auto px-4 pb-4 md:px-6 md:pb-6">
+              <ChatMessages mensajes={CONVERSACION} className="h-[420px]" />
             </div>
           </div>
 
