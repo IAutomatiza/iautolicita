@@ -27,9 +27,7 @@ const flatLinks: {
   externo?: boolean;
 }[] = [
   { href: "/lici", label: <LiciWordmark />, isRoute: true },
-  // Precios vive en la app, no en la web: apuntar a una pregunta del
-  // FAQ era lo más cerca que había antes de que existiera /precios.
-  { href: "https://app.iautolicita.cl/precios", label: "Planes", externo: true },
+  { href: "#planes", label: "Planes" },
   { href: "#faq", label: "FAQ" },
 ];
 

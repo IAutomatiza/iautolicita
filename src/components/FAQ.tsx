@@ -42,9 +42,8 @@ const faqs: { q: string; a: string; ancla?: string }[] = [
   {
     // El enlace "Planes" de la nav apunta acá: es lo único que
     // el sitio dice hoy sobre planes y precios.
-    ancla: "planes",
     q: "¿Cuánto cuesta?",
-    a: "Un plan único, con todo incluido y sin límite de uso: todas tus empresas, todos los módulos y soporte directo con nosotros. Escríbenos por WhatsApp y te contamos el precio en dos minutos.",
+    a: "Hay un plan gratis para siempre, y los de pago parten en $79.000 + IVA al mes. Pagando el año se pagan 10 meses y se usan 12. Sin permanencia: cancelas cuando quieras. Los tienes todos más arriba, en Planes.",
   },
 ];
 
