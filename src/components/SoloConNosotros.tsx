@@ -1,10 +1,10 @@
 import {
-  BadgeDollarSign,
-  FileSearch,
-  ScanSearch,
-  Landmark,
-  Bell,
-  Building2,
+  Scale,
+  BookOpenCheck,
+  Radar,
+  Fingerprint,
+  Send,
+  Boxes,
 } from "lucide-react";
 import { ContainerScroll, CardSticky } from "./ui/CardsStack";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
@@ -23,57 +23,57 @@ import useInView from "../hooks/useInView";
 const VENTAJAS = [
   {
     id: "precio",
-    Icon: BadgeDollarSign,
-    titulo: "El precio real, ítem por ítem",
+    Icon: Scale,
+    titulo: "El precio que sí ganó",
     texto:
-      "Lo que el Estado efectivamente pagó por lo mismo, con percentiles p25/p50/p75 calculados sobre las órdenes de compra. Ofertas sabiendo dónde está la mediana, no adivinando.",
-    dato: "6,4M de órdenes de compra analizadas",
-    resto: "El resto solo muestra el monto estimado de las bases.",
+      "Cuánto pagó el Estado por lo mismo que tú vendes. Ofertas con la cifra al lado, no a ojo.",
+    dato: "6,4 millones de compras revisadas",
+    resto: "El resto solo te muestra el presupuesto.",
   },
   {
     id: "bases",
-    Icon: FileSearch,
-    titulo: "Lici se lee las bases enteras",
+    Icon: BookOpenCheck,
+    titulo: "Las bases, ya leídas",
     texto:
-      "Objeto, plazos, garantías, anexos y causales de inadmisibilidad extraídos en segundos — y cada respuesta llega con la cita a la página exacta para que puedas verificarla.",
-    dato: "Respuesta en menos de 3 segundos",
-    resto: "El resto te entrega el PDF y te desea suerte.",
+      "Plazos, garantías y anexos en segundos — y te muestra la página exacta donde lo dice.",
+    dato: "212 páginas en menos de 3 segundos",
+    resto: "El resto te pasa el PDF y suerte.",
   },
   {
     id: "radar",
-    Icon: ScanSearch,
-    titulo: "Radar puntuado desde el día 1",
+    Icon: Radar,
+    titulo: "Te avisa el primer día",
     texto:
-      "Cada licitación nueva se puntúa 0–100 contra tu perfil apenas se publica, armado con tu RUT y tu historial real de adjudicaciones. Las que calzan llegan solas.",
-    dato: "441K licitaciones y 7,2M adjudicaciones",
-    resto: "El resto manda alertas por palabra clave.",
+      "Cada licitación nueva llega con nota, según lo que vendes y lo que ya has ganado.",
+    dato: "441 mil licitaciones vigiladas",
+    resto: "El resto avisa por palabra clave.",
   },
   {
     id: "organismo",
-    Icon: Landmark,
-    titulo: "Sabes con quién te estás metiendo",
+    Icon: Fingerprint,
+    titulo: "Conoces al comprador",
     texto:
-      "Historial del comprador antes de postular: cuánto adjudica, a quiénes, qué tan rápido paga y qué porcentaje de sus procesos termina desierto — señal de bases mal armadas.",
-    dato: "4 KPIs y top 5 proveedores por organismo",
-    resto: "El resto no perfila al comprador.",
+      "Cuánto adjudica, a quién le compra, si paga rápido y cuántas veces deja la licitación desierta.",
+    dato: "Ficha de cada organismo del Estado",
+    resto: "El resto no te dice nada de él.",
   },
   {
     id: "alertas",
-    Icon: Bell,
-    titulo: "Las alertas llegan donde ya trabajas",
+    Icon: Send,
+    titulo: "Llega donde ya trabajas",
     texto:
-      "Cierres, riesgos y documentos exigidos salen por WhatsApp, correo, informes PDF o Google Drive. Tu equipo se entera sin entrar a la plataforma.",
-    dato: "Cuatro canales de salida, en paralelo",
-    resto: "El resto te obliga a entrar a revisar.",
+      "Cierres y documentos por WhatsApp, correo, PDF o Drive. Sin entrar a ninguna plataforma.",
+    dato: "Cuatro canales a la vez",
+    resto: "El resto te hace entrar a revisar.",
   },
   {
     id: "multi",
-    Icon: Building2,
-    titulo: "Varias razones sociales, una cuenta",
+    Icon: Boxes,
+    titulo: "Todas tus empresas juntas",
     texto:
-      "Cada empresa con su propio perfil, equipo, notas y conversaciones — con los datos aislados a nivel de base de datos. Ideal si operas con más de un RUT.",
-    dato: "Multi-organización nativo",
-    resto: "El resto cobra una cuenta por empresa.",
+      "Varios RUT en una sola cuenta, cada uno con su equipo y sus datos por separado.",
+    dato: "Sin pagar una cuenta por empresa",
+    resto: "El resto cobra por cada una.",
   },
 ];
 
@@ -100,10 +100,9 @@ export default function SoloConNosotros() {
                 Seis cosas que la competencia{" "}
                 <span className="serif-em text-amber-400">no puede darte</span>.
               </h2>
-              <p className="mt-6 font-sans text-[15.5px] md:text-[16.5px] leading-[1.6] text-cream-200 max-w-[440px]">
-                No es un buscador con alertas: es la base de datos completa de
-                ChileCompra, leída y cruzada por IA. Cada punto de acá tiene su
-                cifra detrás — y ninguno existe en el resto del mercado.
+              <p className="mt-6 font-sans text-[15.5px] md:text-[16.5px] leading-[1.6] text-cream-200 max-w-[420px]">
+                No es un buscador con alertas. Es todo lo que compra el Estado,
+                leído por una IA que trabaja para ti.
               </p>
 
               <a
@@ -112,13 +111,8 @@ export default function SoloConNosotros() {
                 rel="noopener noreferrer"
                 className="mt-9 inline-flex items-center h-12 px-6 rounded-full bg-brand-600 font-sans font-medium text-[14.5px] text-white hover:bg-brand-700 transition-colors"
               >
-                Lo quiero todo
+                Verlo con mis licitaciones
               </a>
-
-              <div className="mt-10 hidden md:flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.16em] text-cream-400">
-                <span className="h-px w-6 bg-cream-400/40" />
-                Desliza para verlas
-              </div>
             </div>
           </div>
 
