@@ -22,12 +22,16 @@ const LiciWordmark = () => (
 
 const flatLinks: {
   href: string;
-  label: React.ReactNode;
+  /** Ruta propia (se navega tal cual) o ancla de una sección. */
   isRoute?: boolean;
-  externo?: boolean;
+  /** La marca va con más peso; el resto en el gris del menú.
+      Antes lo decidía isRoute, y al agregar /precios «Planes»
+      heredó el tratamiento de Lici y parecía otra marca. */
+  marca?: boolean;
+  label: React.ReactNode;
 }[] = [
-  { href: "/lici", label: <LiciWordmark />, isRoute: true },
-  { href: "#planes", label: "Planes" },
+  { href: "/lici", label: <LiciWordmark />, isRoute: true, marca: true },
+  { href: "/precios", label: "Planes", isRoute: true },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -134,20 +138,14 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
               <Link
                 key={l.href}
                 to={l.href}
-                className="px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans text-cream-50 hover:text-amber-400 transition-colors"
+                className={`px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans transition-colors ${
+                  l.marca
+                    ? "text-cream-50 hover:text-amber-400"
+                    : "text-cream-200 hover:text-cream-50"
+                }`}
               >
                 {l.label}
               </Link>
-            ) : l.externo ? (
-              <a
-                key={l.href}
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans text-cream-200 hover:text-cream-50 transition-colors"
-              >
-                {l.label}
-              </a>
             ) : (
               <Link
                 key={l.href}
@@ -209,21 +207,12 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
                   key={l.href}
                   to={l.href}
                   onClick={() => setMobileOpen(false)}
-                  className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-100"
+                  className={`py-2.5 border-b border-[var(--hairline)] text-[14px] ${
+                    l.marca ? "text-cream-100" : "text-cream-200"
+                  }`}
                 >
                   {l.label}
                 </Link>
-              ) : l.externo ? (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileOpen(false)}
-                  className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-100"
-                >
-                  {l.label}
-                </a>
               ) : (
                 <Link
                   key={l.href}

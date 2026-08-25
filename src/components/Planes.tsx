@@ -4,11 +4,14 @@ import Eyebrow from "./ui/Eyebrow";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
-   Planes — los mismos tres planes que cobra la app, mostrados
-   acá para que el visitante sepa cuánto cuesta antes de salir
-   del sitio. Hasta ahora "Planes" en el menú llevaba a una
-   pregunta del FAQ; después, a app.iautolicita.cl/precios. Un
-   salto de dominio para ver un precio es una fuga.
+   Planes — las tres tarjetas que cobra la app. El marco (menú,
+   trama, cierre) lo pone PreciosPage: acá vive solo el bloque,
+   para que se pueda reusar como sección si algún día vuelve al
+   home.
+
+   "Planes" en el menú llevaba a una pregunta del FAQ, después a
+   app.iautolicita.cl/precios, y ahora a /precios en este sitio:
+   un salto de dominio para ver un precio es una fuga.
 
    LOS PRECIOS SON UN ESPEJO, NO LA FUENTE. La fuente es la
    tabla `planes` de la app, y la página que manda es
@@ -93,16 +96,32 @@ const PLANES: Plan[] = [
   },
 ];
 
-export default function Planes() {
+export default function Planes({
+  /** En /precios el bloque es la página: el título va más grande
+      y se agrega la bajada larga. Como sección del home iría
+      compacto — hoy solo lo usa la página. */
+  conEncabezado = false,
+}: {
+  conEncabezado?: boolean;
+} = {}) {
   const [anual, setAnual] = useState(false);
   const [ref, enVista] = useInView<HTMLDivElement>(0.1);
 
   return (
-    <section id="planes" className="scroll-mt-28 py-16 md:py-28">
+    <section
+      id="planes"
+      className={`scroll-mt-28 ${conEncabezado ? "pt-12 pb-16 md:pt-20 md:pb-24" : "py-16 md:py-28"}`}
+    >
       <div className="container-edge">
         <div ref={ref} className="text-center">
           <Eyebrow>Planes</Eyebrow>
-          <h2 className="mt-5 font-display font-medium text-[36px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
+          <h2
+            className={`mt-5 font-display font-medium leading-[1.02] tracking-[-0.04em] text-cream-50 ${
+              conEncabezado
+                ? "text-[42px] md:text-[64px]"
+                : "text-[36px] md:text-[52px]"
+            }`}
+          >
             Cuesta menos que perder{" "}
             <span className="italic text-brand-600">una licitación</span>
           </h2>
