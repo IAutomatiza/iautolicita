@@ -30,7 +30,7 @@ const flatLinks: {
   { href: "#faq", label: "FAQ" },
 ];
 
-export default function Nav() {
+export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) {
   // Las secciones viven en el home: fuera de él, un "#faq" pelado
   // no lleva a ninguna parte, así que se resuelven contra "/".
   const enHome = useLocation().pathname === "/";
@@ -59,7 +59,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-8 z-40 transition-all duration-300 ${
+      className={`fixed inset-x-0 ${conTicker ? "top-8" : "top-0"} z-40 transition-all duration-300 ${
         scrolled
           ? "bg-ink-950/85 backdrop-blur-md border-b border-[var(--hairline)]"
           : "bg-transparent"

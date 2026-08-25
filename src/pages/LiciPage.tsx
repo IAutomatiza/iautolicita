@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import MarketTicker from "../components/MarketTicker";
 import Nav from "../components/Nav";
 import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
@@ -31,13 +30,13 @@ export default function LiciPage() {
 
   return (
     <>
-      {/* La misma barra del home: ticker en vivo + menú */}
-      <MarketTicker />
-      <Nav />
+      {/* El mismo menú del home; el ticker en vivo queda solo
+          en la portada, acá distrae del producto */}
+      <Nav conTicker={false} />
 
       <main className="bg-white text-[#0A0A0A]">
         {/* ═══ HERO — órbitas de ruixen, recortadas al costado ═══ */}
-        <section className="relative min-h-[100svh] overflow-hidden flex items-center pt-24">
+        <section className="relative min-h-[100svh] overflow-hidden flex items-center pt-16">
           {/* Trama de puntos de fondo, desvanecida hacia los bordes */}
           <DotPattern
             cr={1}
