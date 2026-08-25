@@ -24,8 +24,8 @@ const flatLinks: {
   label: React.ReactNode;
   isRoute?: boolean;
 }[] = [
-  { href: "#resultados", label: "Resultados" },
   { href: "/lici", label: <LiciWordmark />, isRoute: true },
+  { href: "#planes", label: "Planes" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -153,13 +153,7 @@ export default function Nav() {
           >
             Iniciar sesión
           </a>
-          <a
-            href="#contacto"
-            className="hidden lg:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-cream-200 hover:text-cream-50 transition-colors"
-          >
-            Hablar con ventas
-          </a>
-          <WhatsAppButton variant="primary" label="Agendar demo" />
+          <WhatsAppButton variant="primary" label="¡Prueba gratis!" />
 
           <button
             type="button"
@@ -217,16 +211,9 @@ export default function Nav() {
               href="https://app.iautolicita.cl"
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-100"
-            >
-              Iniciar sesión
-            </a>
-            <a
-              href="#contacto"
-              onClick={() => setMobileOpen(false)}
               className="py-2.5 text-[14px] text-cream-100"
             >
-              Hablar con ventas
+              Iniciar sesión
             </a>
           </div>
         </nav>

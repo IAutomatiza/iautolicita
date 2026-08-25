@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 
-const faqs = [
+const faqs: { q: string; a: string; ancla?: string }[] = [
   {
     q: "¿Cómo se conecta IAutoLicita con ChileCompra?",
     a: "Pipeline en producción: 441K licitaciones, 7.2M adjudicaciones y 6.4M órdenes de compra. Crons nocturnos refrescan los 8 data marts precalculados; las oportunidades vivas se actualizan cada 2 horas. Triggers en Postgres normalizan y explotan automáticamente los ítems de cada licitación.",
@@ -27,6 +27,9 @@ const faqs = [
     a: "Notas TipTap con tipos (decisión/riesgo/tarea/idea/general), hilos, reacciones (👍 ❤️ ✅ ⚠️ 🔥), pin/unpin, menciones @usuario con notificaciones realtime. Las tareas se sincronizan automáticamente al Kanban del CRM. Resumen IA de notas con 1 click. Pipeline configurable: Detectada → Evaluando → Postulando → Adjudicada → Descartada.",
   },
   {
+    // El enlace "Planes" de la nav apunta acá: es lo único que
+    // el sitio dice hoy sobre planes y precios.
+    ancla: "planes",
     q: "¿Qué incluye el plan? ¿Hay precios públicos?",
     a: "Trabajamos con plan único multi-organización. Incluye sincronización completa, enriquecimiento IA ilimitado, todos los módulos (matching multimodal, chat IA, OCs, inteligencia del organismo, gestión por equipo, análisis de mercado) y soporte directo. Para pricing y demo personalizada, contáctanos por WhatsApp.",
   },
@@ -34,6 +37,20 @@ const faqs = [
 
 export default function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+  // Al llegar por un ancla (hoy "#planes"), esa pregunta se abre
+  // sola: si no, el visitante aterriza en un acordeón cerrado.
+  useEffect(() => {
+    const abrirPorHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+      const i = faqs.findIndex((f) => f.ancla === hash);
+      if (i !== -1) setOpenIdx(i);
+    };
+    abrirPorHash();
+    window.addEventListener("hashchange", abrirPorHash);
+    return () => window.removeEventListener("hashchange", abrirPorHash);
+  }, []);
 
   return (
     <section id="faq" className="py-16 md:py-32 relative bg-ink-900/40 border-y border-[var(--hairline)]">
@@ -59,7 +76,11 @@ export default function FAQ() {
               {faqs.map((f, i) => {
                 const open = openIdx === i;
                 return (
-                  <div key={i} className="border-b border-[var(--hairline)]">
+                  <div
+                    key={i}
+                    id={f.ancla}
+                    className="border-b border-[var(--hairline)] scroll-mt-28"
+                  >
                     <button
                       type="button"
                       onClick={() => setOpenIdx(open ? null : i)}
