@@ -18,6 +18,7 @@ import VortexLicitaciones from "../components/VortexLicitaciones";
 import LiciGlifo from "../components/LiciGlifo";
 import AsciiRain from "../components/AsciiRain";
 import OrbitaLici from "../components/OrbitaLici";
+import CapacidadesShow from "../components/CapacidadesShow";
 import Footer from "../components/Footer";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 import useInView from "../hooks/useInView";
@@ -105,26 +106,26 @@ const liciChatQuestions = [
   {
     icon: FileText,
     category: "Bases",
-    question: "¿Cuales son los criterios de evaluacion de esta licitacion?",
-    answer: "He analizado las bases de la licitacion 4500-12-LP24. Los criterios son:\n\n• Oferta tecnica: 40% (experiencia 15%, equipo 15%, metodologia 10%)\n• Oferta economica: 35%\n• Cumplimiento administrativo: 25%\n\nPlazo de entrega maximo: 45 dias corridos. Se requiere boleta de garantia por el 10% del monto ofertado.",
+    question: "¿Cuáles son los criterios de evaluación de esta licitación?",
+    answer: "He analizado las bases de la licitación 4500-12-LP24. Los criterios son:\n\n• Oferta técnica: 40% (experiencia 15%, equipo 15%, metodología 10%)\n• Oferta económica: 35%\n• Cumplimiento administrativo: 25%\n\nPlazo de entrega máximo: 45 días corridos. Se requiere boleta de garantía por el 10% del monto ofertado.",
   },
   {
     icon: TrendingUp,
     category: "Precios",
-    question: "¿Que precios pagan las instituciones por notebooks en 2024?",
-    answer: "Basado en 12.847 ordenes de compra de notebooks en 2024:\n\n• Precio promedio: $487.320 CLP\n• Rango p25-p75: $389.000 — $612.000\n• Mejor precio por volumen (>50 uds): $421.500\n\nLos 3 proveedores con mejores precios adjudicados son Comercial Ing SpA, TecnoGlobal y PC Factory Empresas.",
+    question: "¿Qué precios pagan las instituciones por notebooks en 2025?",
+    answer: "Basado en 12.847 órdenes de compra de notebooks en 2025:\n\n• Precio promedio: $487.320 CLP\n• Rango p25-p75: $389.000 — $612.000\n• Mejor precio por volumen (>50 uds): $421.500\n\nLos 3 proveedores con mejores precios adjudicados son Comercial Ing SpA, TecnoGlobal y PC Factory Empresas.",
   },
   {
     icon: Users,
     category: "Competencia",
-    question: "¿Quienes son mis competidores en licitaciones de MINSAL?",
-    answer: "En los ultimos 12 meses, MINSAL ha adjudicado 847 licitaciones en tu rubro. Los 5 competidores principales:\n\n1. Comercial Medica SpA — 34% adjudicaciones\n2. HealthSupply Ltda — 21% adjudicaciones\n3. MediTech Chile — 14% adjudicaciones\n4. BioEquipos SA — 9% adjudicaciones\n5. Tu empresa — 7% adjudicaciones\n\nOportunidad: MINSAL adjudica un 23% mas en Q1.",
+    question: "¿Quiénes son mis competidores en licitaciones de MINSAL?",
+    answer: "En los últimos 12 meses, MINSAL ha adjudicado 847 licitaciones en tu rubro. Los 5 competidores principales:\n\n1. Comercial Médica SpA — 34% adjudicaciones\n2. HealthSupply Ltda — 21% adjudicaciones\n3. MediTech Chile — 14% adjudicaciones\n4. BioEquipos SA — 9% adjudicaciones\n5. Tu empresa — 7% adjudicaciones\n\nOportunidad: MINSAL adjudica un 23% más en Q1.",
   },
   {
     icon: Bell,
     category: "Alertas",
-    question: "Configurame alertas para licitaciones de TI sobre $50M",
-    answer: "Alerta configurada exitosamente:\n\n• Rubros: Tecnologia de la informacion, Software, Hardware\n• Monto minimo: $50.000.000 CLP\n• Organismos: Todos los organismos publicos\n• Frecuencia: Tiempo real + resumen diario 8:00 AM\n\nActualmente hay 3 licitaciones activas que coinciden con estos criterios. ¿Quieres que las analice?",
+    question: "Configúrame alertas para licitaciones de TI sobre $50M",
+    answer: "Alerta configurada exitosamente:\n\n• Rubros: Tecnología de la información, Software, Hardware\n• Monto mínimo: $50.000.000 CLP\n• Organismos: Todos los organismos públicos\n• Frecuencia: Tiempo real + resumen diario 8:00 AM\n\nActualmente hay 3 licitaciones activas que coinciden con estos criterios. ¿Quieres que las analice?",
   },
 ];
 
@@ -176,7 +177,7 @@ function LiciChatPanel() {
             </div>
             <div>
               <h3 className="font-display font-medium text-[16px] text-white/90 tracking-[-0.01em]">
-                Preguntale a Lici
+                Pregúntale a Lici
               </h3>
               <p className="text-[11px] text-white/35 font-sans mt-0.5">
                 Inteligencia de mercado en tiempo real
@@ -293,7 +294,7 @@ function LiciChatPanel() {
           <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06]">
             <Sparkles className="h-4 w-4 text-white/15 shrink-0" strokeWidth={1.6} />
             <span className="flex-1 text-[13px] text-white/20 font-sans">
-              Preguntale algo a Lici...
+              Pregúntale algo a Lici...
             </span>
             <Send className="h-4 w-4 text-white/15 shrink-0" strokeWidth={1.8} />
           </div>
@@ -309,11 +310,11 @@ function LiciChatPanel() {
 
 const vsItems = [
   { label: "Lectura de bases con IA", lici: true, others: "Parcial" },
-  { label: "Precio real pagado por item (OC)", lici: true, others: "No" },
-  { label: "Analisis competitivo automatico", lici: true, others: "No" },
-  { label: "Cobertura historica completa", lici: true, others: "Limitada" },
-  { label: "Busqueda semantica", lici: true, others: "Keyword" },
-  { label: "Recomendacion de precio optimo", lici: true, others: "No" },
+  { label: "Precio real pagado por ítem (OC)", lici: true, others: "No" },
+  { label: "Análisis competitivo automático", lici: true, others: "No" },
+  { label: "Cobertura histórica completa", lici: true, others: "Limitada" },
+  { label: "Búsqueda semántica", lici: true, others: "Keyword" },
+  { label: "Recomendación de precio óptimo", lici: true, others: "No" },
 ];
 
 /* ═══════════════════════════════════════════════════
@@ -362,7 +363,7 @@ export default function LiciPage() {
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-white/50 hover:text-white/80 transition-colors"
             >
-              Iniciar sesion
+              Iniciar sesión
             </a>
             <WhatsAppButton variant="primary" label="Probar Lici" />
           </div>
@@ -540,14 +541,14 @@ export default function LiciPage() {
                 </h2>
 
                 <p className="mt-6 font-sans text-[15px] md:text-[17px] leading-[1.65] text-white/40 max-w-[480px]">
-                  Analiza bases de licitacion, consulta precios historicos, identifica
-                  competidores y configura alertas inteligentes — todo desde una conversacion
+                  Analiza bases de licitación, consulta precios históricos, identifica
+                  competidores y configura alertas inteligentes — todo desde una conversación
                   natural con tu asistente de inteligencia de mercado.
                 </p>
 
                 <div className="mt-10 grid grid-cols-2 gap-4">
                   {[
-                    { icon: FileText, label: "Bases de licitacion", sub: "Criterios, plazos y requisitos" },
+                    { icon: FileText, label: "Bases de licitación", sub: "Criterios, plazos y requisitos" },
                     { icon: TrendingUp, label: "Precios de mercado", sub: "Historial real de OC" },
                     { icon: Users, label: "Competidores", sub: "Adjudicaciones y patrones" },
                     { icon: Bell, label: "Alertas IA", sub: "Notificaciones contextuales" },
@@ -577,55 +578,13 @@ export default function LiciPage() {
             secciones oscuras del original
         ═══════════════════════════════ */}
         <section className="relative py-28 md:py-40 bg-[#05070d] overflow-hidden border-y border-white/[0.06]">
-          <AsciiRain opacidad={0.085} />
+          <AsciiRain opacidad={0.04} />
           <div className="container-edge relative">
             <h2 className="max-w-[760px] font-display font-semibold text-[38px] md:text-[58px] leading-[1.04] tracking-[-0.03em] text-white">
               Cada licitación ya viene leída. Tú solo decides.
             </h2>
 
-            <div className="mt-20 md:mt-28 space-y-16 md:space-y-20">
-              {[
-                {
-                  n: "001",
-                  t: "Radar con score de calce",
-                  d: "Cada licitación nueva se puntúa 0–100 contra tu perfil apenas se publica. Las que calzan llegan solas; el resto ni lo ves.",
-                  ml: "",
-                },
-                {
-                  n: "002",
-                  t: "El precio real, ítem por ítem",
-                  d: "Lo que el Estado efectivamente pagó por lo mismo, calculado sobre 6,4 millones de órdenes de compra. Ofertas sabiendo dónde está la mediana.",
-                  ml: "md:ml-[24%]",
-                },
-                {
-                  n: "003",
-                  t: "Citas a la página exacta",
-                  d: "Cada respuesta trae su fuente: página, sección y texto original de las bases. Nada que confiar a ciegas — todo verificable.",
-                  ml: "md:ml-[7%]",
-                },
-                {
-                  n: "004",
-                  t: "Competencia mapeada",
-                  d: "Quién gana en tu rubro, con qué precios y ante qué organismos. La cancha completa antes de entrar a jugar.",
-                  ml: "md:ml-[32%]",
-                },
-                {
-                  n: "005",
-                  t: "Alertas antes del cierre",
-                  d: "Fechas, riesgos y documentos exigidos, avisados con días de ventaja. Ninguna se cierra sin que lo sepas.",
-                  ml: "md:ml-[14%]",
-                },
-              ].map((f) => (
-                <div key={f.n} className={`max-w-[380px] ${f.ml}`}>
-                  <div className="font-mono text-[13px] uppercase tracking-[0.12em] text-white">
-                    {f.n} / {f.t}
-                  </div>
-                  <p className="mt-3 font-sans text-[14.5px] leading-[1.65] text-white/55">
-                    {f.d}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <CapacidadesShow />
           </div>
         </section>
 
