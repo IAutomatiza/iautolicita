@@ -99,7 +99,7 @@ export default function Hero() {
               licitaciones" tal como la ve un cliente. */}
           <div className="relative max-w-[1180px] mx-auto">
             <img
-              src={`${import.meta.env.BASE_URL}app-mis-licitaciones.png`}
+              src={`${import.meta.env.BASE_URL}app-mis-licitaciones-v2.png`}
               width={1680}
               height={1050}
               alt="Pantalla Mis licitaciones de IAutoLicita: cada licitación con su score, fecha de cierre y estado de gestión"
