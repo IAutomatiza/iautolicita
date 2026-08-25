@@ -388,10 +388,10 @@ const BeamsLici = () => {
           className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
           style={{ left: "50%", top: "50%" }}
         >
-          <span className="relative grid h-[52px] w-[52px] place-items-center rounded-full border-2 border-[var(--hairline-strong)] bg-white shadow-[0_4px_24px_-6px_rgba(47,99,232,0.45)] md:h-16 md:w-16">
-            <span aria-hidden className="lici-aura absolute inset-0 rounded-full border-2 border-brand-300" />
-            <span className="md:hidden"><LiciGlifo alto={24} tinta="#0A0A0A" /></span>
-            <span className="hidden md:inline"><LiciGlifo alto={30} tinta="#0A0A0A" /></span>
+          <span className="relative grid h-[52px] w-[52px] place-items-center md:h-16 md:w-16">
+            <span aria-hidden className="lici-aura absolute inset-0 rounded-[30%] rounded-bl-[8%] border-2 border-brand-300" />
+            <span className="md:hidden drop-shadow-[0_4px_18px_rgba(0,100,224,0.4)]"><LiciGlifo alto={52} conBorde /></span>
+            <span className="hidden md:inline drop-shadow-[0_4px_24px_rgba(0,100,224,0.4)]"><LiciGlifo alto={64} conBorde /></span>
           </span>
         </span>
 

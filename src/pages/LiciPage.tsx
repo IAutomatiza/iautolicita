@@ -413,9 +413,7 @@ export default function LiciPage() {
 
               {/* La marca en grande, como la cabecera del módulo en la app */}
               <div className="mt-7 flex items-center gap-3.5">
-                <span className="grid place-items-center h-12 w-12 rounded-xl border border-white/25 bg-white/[0.04]">
-                  <LiciGlifo alto={27} />
-                </span>
+                <LiciGlifo alto={48} className="drop-shadow-[0_6px_20px_rgba(0,100,224,0.35)]" />
                 <span className="font-display font-bold text-[34px] tracking-[-0.02em] leading-none">
                   Lici<span className="text-[#55b4f8]">.</span>
                 </span>

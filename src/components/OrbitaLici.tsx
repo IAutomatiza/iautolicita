@@ -126,8 +126,8 @@ export default function OrbitaLici() {
       className="orbita-lici relative w-[36rem] h-[36rem] flex items-center justify-center"
     >
       {/* Lici, al centro */}
-      <div className="relative z-10 grid place-items-center h-[92px] w-[92px] rounded-full bg-white shadow-[0_18px_44px_-14px_rgba(10,10,10,0.35)] ring-1 ring-black/[0.06]">
-        <LiciGlifo alto={40} tinta="#0A0A0A" />
+      <div className="relative z-10 drop-shadow-[0_18px_34px_rgba(10,10,10,0.3)]">
+        <LiciGlifo alto={92} conBorde />
       </div>
 
       {ANILLOS.map((a, ai) => (
