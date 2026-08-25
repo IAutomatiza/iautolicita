@@ -152,7 +152,7 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
         {/* Right: 3-CTA cascade */}
         <div className="flex items-center gap-1 lg:gap-2">
           <a
-            href="https://app.iautolicita.cl"
+            href="https://app.iautolicita.cl/login"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-cream-200 hover:text-cream-50 transition-colors"
@@ -214,7 +214,7 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
               )
             )}
             <a
-              href="https://app.iautolicita.cl"
+              href="https://app.iautolicita.cl/login"
               target="_blank"
               rel="noopener noreferrer"
               className="py-2.5 text-[14px] text-cream-100"
