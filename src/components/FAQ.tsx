@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Eyebrow from "./ui/Eyebrow";
 
 /* ════════════════════════════════════════════════════════════
    FAQ con el acordeón de Ali Imam (accordion-05): las preguntas
@@ -15,35 +16,35 @@ import { useEffect, useState } from "react";
 
 const faqs: { q: string; a: string; ancla?: string }[] = [
   {
-    q: "¿Cómo se conecta con ChileCompra?",
-    a: "Pipeline en producción: 441K licitaciones, 7.2M adjudicaciones y 6.4M órdenes de compra. Crons nocturnos refrescan los 8 data marts precalculados; las oportunidades vivas se actualizan cada 2 horas. Triggers en Postgres normalizan y explotan automáticamente los ítems de cada licitación.",
+    q: "¿De dónde salen los datos?",
+    a: "De ChileCompra, completo: 441 mil licitaciones, 7,2 millones de adjudicaciones y 6,4 millones de órdenes de compra. Todo se actualiza solo, varias veces al día — cuando entras, ya está al día.",
   },
   {
     q: "¿Necesito instalar algo?",
-    a: "No. IAutoLicita es 100% SaaS, accedes desde el navegador. Si ya tienes RUT con historial en ChileCompra, tu perfil se auto-genera leyendo tus adjudicaciones pasadas: top categorías ganadas, organismos compradores frecuentes y keywords detectados. En 1 click queda pre-cargado el motor matching.",
+    a: "Nada. Entras desde el navegador y listo. Con tu RUT basta: leemos lo que ya has ganado y tu perfil queda armado en un clic — qué vendes, dónde ganas y quién te compra.",
   },
   {
     q: "¿Qué los hace distintos?",
-    a: "Cuatro cosas que no encontrarás en la competencia: (1) precio real pagado por ítem vía OC con p25/p50/p75 — sabes a qué precio se está cerrando cada producto o servicio; (2) flujo CLP región compradora → región proveedora (matriz 16×16) para detectar dónde se queda el gasto; (3) inteligencia del organismo: 4 KPIs históricos + top 5 proveedores + insights automáticos (>30% desiertas = ⚠️ bases mal armadas); (4) plataforma multi-módulo: Mercado Público + CRM + cobranza + facturación + agenda + WhatsApp con agente IA cross-módulo.",
+    a: "Que sabemos cuánto pagó el Estado de verdad por lo que tú vendes, no el presupuesto que dicen las bases. Con eso Lici te sugiere el precio para ganar, se lee las bases enteras y te muestra la página exacta donde dice cada cosa.",
   },
   {
     q: "¿Sirve para varias empresas?",
-    a: "Sí, multi-organización es nativo. Cada razón social tiene su propio perfil de matching, equipo, notas, oportunidades y chat IA — con datos aislados a nivel de base de datos vía Row Level Security de Postgres. Una sola cuenta, varios proyectos.",
+    a: "Sí. Manejas todos tus RUT desde una sola cuenta, cada uno con su equipo, sus alertas y su información separada. Sin pagar una cuenta por empresa.",
   },
   {
-    q: "¿Cómo lee las bases?",
-    a: "El chat por licitación tiene acceso a 4 capas de contexto: datos públicos de la licitación + texto completo de las bases (PDFs y DOCs parseados) + notas del equipo + inteligencia del organismo comprador. Puede responder preguntas como “¿este organismo paga rápido?” con cifras reales del histórico. Retención de conversación 90 días.",
+    q: "¿Y si no entiendo de licitaciones?",
+    a: "Mejor todavía: le preguntas a Lici en tu idioma — “¿me conviene?”, “¿cuánto ofertar?” — y responde en simple, con las cifras al lado. La experiencia la pone ella.",
   },
   {
-    q: "¿Y el trabajo en equipo?",
-    a: "Notas con tipos (decisión, riesgo, tarea, idea, general), hilos, reacciones, pin y menciones @usuario con notificaciones en tiempo real. Las tareas se sincronizan automáticamente al Kanban del CRM. Resumen IA de notas con 1 click. Pipeline configurable: Detectada → Evaluando → Postulando → Adjudicada → Descartada.",
+    q: "¿Se me puede pasar un cierre?",
+    a: "Para eso está. Cada fecha, documento y riesgo te llega con días de anticipación por WhatsApp, correo o donde ya trabaje tu equipo. Nadie tiene que acordarse de entrar a revisar.",
   },
   {
     // El enlace "Planes" de la nav apunta acá: es lo único que
     // el sitio dice hoy sobre planes y precios.
     ancla: "planes",
     q: "¿Cuánto cuesta?",
-    a: "Trabajamos con plan único multi-organización. Incluye sincronización completa, enriquecimiento IA ilimitado, todos los módulos (matching multimodal, chat IA, órdenes de compra, inteligencia del organismo, gestión por equipo, análisis de mercado) y soporte directo. Para el precio y una demo personalizada, escríbenos por WhatsApp.",
+    a: "Un plan único, con todo incluido y sin límite de uso: todas tus empresas, todos los módulos y soporte directo con nosotros. Escríbenos por WhatsApp y te contamos el precio en dos minutos.",
   },
 ];
 
@@ -67,14 +68,12 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="py-16 md:py-32 relative bg-ink-900/40 border-y border-[var(--hairline)]"
+      className="py-16 md:py-28 relative bg-ink-900/40 border-y border-[var(--hairline)]"
     >
       <div className="container-edge">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
           <div className="lg:col-span-4">
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-400">
-              FAQ
-            </span>
+            <Eyebrow align="left">Preguntas frecuentes</Eyebrow>
             <h2 className="mt-5 font-display font-medium text-[40px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
               Preguntas que{" "}
               <span className="serif-em text-amber-400">recibimos</span>.

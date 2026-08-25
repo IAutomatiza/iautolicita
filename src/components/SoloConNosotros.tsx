@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { ContainerScroll, CardSticky } from "./ui/CardsStack";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
+import Eyebrow from "./ui/Eyebrow";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -83,7 +84,7 @@ export default function SoloConNosotros() {
 
   return (
     <section id="ventajas" className="bg-ink-900 border-y border-[var(--hairline)]">
-      <div className="container-edge py-16 md:py-24">
+      <div className="container-edge py-16 md:py-28">
         <div className="grid md:grid-cols-2 md:gap-10 xl:gap-16">
           {/* Columna fija */}
           <div ref={ref} className="md:sticky md:top-0 md:h-svh md:flex md:flex-col md:justify-center">
@@ -94,9 +95,7 @@ export default function SoloConNosotros() {
                 transition: "opacity 0.6s ease, transform 0.75s cubic-bezier(0.16,1,0.3,1)",
               }}
             >
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-400">
-                Solo acá lo tienes
-              </span>
+              <Eyebrow align="left">Solo acá lo tienes</Eyebrow>
               <h2 className="mt-5 font-display font-medium text-[36px] md:text-[52px] leading-[1.02] tracking-[-0.04em] text-cream-50">
                 Seis cosas que la competencia{" "}
                 <span className="serif-em text-amber-400">no puede darte</span>.

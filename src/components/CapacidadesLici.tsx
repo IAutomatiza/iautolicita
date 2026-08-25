@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MotorBento from "./MotorBento";
+import Eyebrow from "./ui/Eyebrow";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -78,13 +79,9 @@ export default function CapacidadesLici() {
     <section id="capacidades" className="py-16 md:py-28">
       <div className="container-edge">
         <div ref={ref} className="max-w-[860px] mx-auto text-center">
-          <div
-            className={`flex items-center justify-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream-300 ${enVista ? "bento-in" : ""}`}
-          >
-            <span className="h-px w-8 bg-cream-300/30" />
-            <span>El motor, por dentro</span>
-            <span className="h-px w-8 bg-cream-300/30" />
-          </div>
+          <Eyebrow className={enVista ? "bento-in" : ""}>
+            El motor, por dentro
+          </Eyebrow>
 
           <h2
             style={{ animationDelay: "0.1s" }}

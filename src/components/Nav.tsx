@@ -10,6 +10,7 @@ const productLinks = [
   { href: "#capacidades", title: "Capacidades", desc: "Detección, precio real, comprador y alertas" },
   { href: "#como",        title: "Cómo funciona", desc: "El flujo end-to-end" },
   { href: "#resultados",  title: "Con y sin IAutoLicita", desc: "Lo que cambia cuando conoces el precio real" },
+  { href: "#ventajas",    title: "Solo acá lo tienes", desc: "Seis cosas que la competencia no puede darte" },
 ];
 
 // "Lici." va como wordmark —negrita con el punto azul— igual que en la app.

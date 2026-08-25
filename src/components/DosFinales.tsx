@@ -1,4 +1,5 @@
 import { X, Check } from "lucide-react";
+import Eyebrow from "./ui/Eyebrow";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -54,6 +55,10 @@ export default function DosFinales() {
     <section id="resultados" className="px-3 md:px-5 py-8 md:py-12">
       <div className="rounded-[2rem] md:rounded-[2.5rem] bg-white px-6 py-16 md:px-12 lg:px-16 md:py-24">
         <div ref={ref} className="max-w-[1240px] mx-auto w-full">
+          <div style={entrada(0, 0)}>
+            <Eyebrow className="mb-12 md:mb-16">Con y sin IAutoLicita</Eyebrow>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-x-10 gap-y-14 items-stretch">
             {/* ── ANTES — quieto y apagado ──────────────────── */}
             <div className="flex flex-col" style={entrada(0, -28)}>

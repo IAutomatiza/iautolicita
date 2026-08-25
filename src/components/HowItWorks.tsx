@@ -1,4 +1,5 @@
 import useInView from "../hooks/useInView";
+import Eyebrow from "./ui/Eyebrow";
 
 /* ════════════════════════════════════════════════════════════
    Cómo funciona — cuatro pasos donde el usuario pone uno solo.
@@ -70,15 +71,10 @@ export default function HowItWorks() {
   const [shotRef, shotInView] = useInView<HTMLDivElement>(0.2);
 
   return (
-    <section id="como" className="py-16 md:py-32 relative">
+    <section id="como" className="py-16 md:py-28 relative">
       <div className="container-edge">
         <div className="text-center mb-16 max-w-[680px] mx-auto">
-          {/* Mismo eyebrow entre líneas que "El motor, por dentro" */}
-          <div className="flex items-center justify-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream-300">
-            <span className="h-px w-8 bg-cream-300/30" />
-            <span>Cómo funciona</span>
-            <span className="h-px w-8 bg-cream-300/30" />
-          </div>
+          <Eyebrow>Cómo funciona</Eyebrow>
           <h2 className="mt-6 font-display font-medium text-[40px] md:text-[60px] leading-[1] tracking-tightest text-cream-50">
             Cuatro pasos.{" "}
             <span className="serif-em text-amber-400">
