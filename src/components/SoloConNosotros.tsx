@@ -5,6 +5,7 @@ import {
   Fingerprint,
   Send,
   Boxes,
+  ChevronRight,
 } from "lucide-react";
 import { ContainerScroll, CardSticky } from "./ui/CardsStack";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
@@ -105,13 +106,22 @@ export default function SoloConNosotros() {
                 leído por una IA que trabaja para ti.
               </p>
 
+              {/* La GradientPill de ClickUp, que antes vivía en "El
+                  motor, por dentro": borde orbitado por el cometa de
+                  degradado e interior blanco. Acá cierra el argumento
+                  de la sección. */}
               <a
                 href={buildWAUrl(MSG_DEMO)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-9 inline-flex items-center h-12 px-6 rounded-full bg-brand-600 font-sans font-medium text-[14.5px] text-white hover:bg-brand-700 transition-colors"
+                className="pill-brain mt-9"
               >
-                Verlo con mis licitaciones
+                <span className="pill-brain-inner">
+                  <span className="font-sans font-bold text-[15px] text-[#202020]">
+                    ¡Comienza ahora!
+                  </span>
+                  <ChevronRight className="h-4 w-4 text-[#202020]" strokeWidth={2.2} />
+                </span>
               </a>
             </div>
           </div>

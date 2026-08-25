@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
 import MotorBento from "./MotorBento";
 import useInView from "../hooks/useInView";
 
@@ -106,24 +104,6 @@ export default function CapacidadesLici() {
               ))}
             </dl>
           </div>
-          {/* La GradientPill de clickup.com ("The Best AI is Brain²"),
-              clonada con Lici en el rol de Brain: borde orbitado por el
-              cometa de degradado, interior blanco, wordmark y chevron. */}
-          <Link
-            to="/lici"
-            style={{ animationDelay: "0.32s" }}
-            className={`pill-brain mt-7 ${enVista ? "bento-in" : ""}`}
-          >
-            <span className="pill-brain-inner">
-              <span className="font-sans font-medium text-[15px] text-[#202020]">
-                Conoce a
-              </span>
-              <span className="font-sans font-bold text-[15px] text-[#202020]">
-                Lici<span className="text-amber-400">.</span>
-              </span>
-              <ChevronRight className="h-4 w-4 text-[#202020]" strokeWidth={2.2} />
-            </span>
-          </Link>
         </div>
 
         {/* El bento MagicUI, adaptado a licitaciones */}
