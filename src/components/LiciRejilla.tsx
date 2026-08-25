@@ -81,7 +81,10 @@ export default function LiciRejilla() {
   return (
     <section className="relative overflow-hidden bg-[#F7F8FA] py-16 md:py-28 border-t border-[#0A1530]/[0.07]">
       {/* La misma trama del hero, aún más tenue sobre el gris */}
-      <DotPattern className="fill-[#0A1530]/15 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000_10%,transparent_70%)]" />
+      <DotPattern
+        opacidad={0.16}
+        className="[mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000_10%,transparent_70%)]"
+      />
 
       <div ref={ref} className="relative mx-auto max-w-[1080px] px-6">
         <div className="max-w-[640px]" style={entrada(0)}>

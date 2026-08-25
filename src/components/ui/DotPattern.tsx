@@ -22,6 +22,10 @@ type Props = {
   cx?: number;
   cy?: number;
   cr?: number;
+  /** Opacidad del punto. Va como atributo y no como clase: dos
+      `fill-[…]/x` arbitrarias tienen la misma especificidad y la
+      que gana depende del orden del CSS generado. */
+  opacidad?: number;
   className?: string;
 };
 
@@ -33,6 +37,7 @@ export default function DotPattern({
   cx = 1,
   cy = 1,
   cr = 1,
+  opacidad = 0.25,
   className = "",
 }: Props) {
   const id = useId();
@@ -40,7 +45,8 @@ export default function DotPattern({
   return (
     <svg
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 h-full w-full fill-[#0A1530]/25 ${className}`}
+      fill={`rgba(10,21,48,${opacidad})`}
+      className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
     >
       <defs>
         <pattern
