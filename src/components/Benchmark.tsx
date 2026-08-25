@@ -4,7 +4,7 @@ const competitors = [
   { name: "AlertasMP", score: 14, tier: 2, note: "alertas tiempo real" },
   { name: "Vendify", score: 16, tier: 1, note: "automatización postulación" },
   { name: "LicitaFast", score: 17, tier: 1, note: "alertas en 4h" },
-  { name: "LicitaLAB", score: 18, tier: 1, note: "OCs sin implementar" },
+  { name: "Competidor líder", score: 18, tier: 1, note: "OCs sin implementar" },
   { name: "MB Web Services", score: 12, tier: 3, note: "OC en roadmap" },
   { name: "LicitXpert (Arkho)", score: 11, tier: 2, note: "consultora enterprise" },
   { name: "Licitaciones.com", score: 10, tier: 2, note: "buscador tradicional" },
@@ -61,7 +61,7 @@ export default function Benchmark() {
               18
             </div>
             <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-cream-400">
-              LicitaLAB · líder benchmark
+              Competidor líder · benchmark
             </div>
           </div>
         </div>
