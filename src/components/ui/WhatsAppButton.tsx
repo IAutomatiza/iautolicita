@@ -18,7 +18,7 @@ interface Props {
  *  - On hover the halo intensifies and the button lifts 1px.
  */
 export default function WhatsAppButton({
-  label = "Agendar demo",
+  label = "¡Pruébalo gratis!",
   message = MSG_PRUEBA,
   variant = "primary",
   className = "",

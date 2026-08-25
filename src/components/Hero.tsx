@@ -59,7 +59,7 @@ export default function Hero() {
           {/* Los CTA usan los mismos componentes y radios que el resto del
               sitio (el azul es el mismo botón del menú, en grande). */}
           <div className="mt-9 flex flex-col items-center sm:flex-row gap-3 justify-center reveal">
-            <WhatsAppButton variant="huge" label="Agendar demo" />
+            <WhatsAppButton variant="huge" label="¡Pruébalo gratis!" />
             <a
               href="#capacidades"
               className="group inline-flex items-center justify-center gap-2 h-14 px-7 text-[15px] font-medium font-sans rounded-full
