@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import WhatsAppButton from "../components/ui/WhatsAppButton";
+import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
 import OrbitaLici from "../components/OrbitaLici";
 import Footer from "../components/Footer";
@@ -82,7 +83,10 @@ export default function LiciPage() {
               <h1 className="mt-8 font-display font-semibold text-[42px] md:text-[56px] xl:text-[64px] leading-[1.03] tracking-[-0.03em]">
                 Tu próxima adjudicación
                 <br />
-                <span className="text-[#0064E0]">ya está publicada.</span>
+                <span className="text-[#0064E0]">
+                  ya está{" "}
+                  <LineShadowText shadowColor="#0A0A0A">publicada</LineShadowText>.
+                </span>
               </h1>
 
               <p className="mt-7 font-sans text-[16px] md:text-[17px] leading-[1.6] text-[#0A0A0A]/60 max-w-[480px]">

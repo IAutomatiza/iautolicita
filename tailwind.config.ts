@@ -111,6 +111,7 @@ export default {
         "scroll-y": "scrollY 18s linear infinite",
         "halo-pulse": "haloPulse 3s ease-in-out infinite",
         "cinematic-fade-in": "cinematicFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "line-shadow": "lineShadow 15s linear infinite",
       },
       keyframes: {
         fadeUp: {
@@ -143,6 +144,10 @@ export default {
         haloPulse: {
           "0%, 100%": { opacity: "0.45", transform: "scale(1)" },
           "50%": { opacity: "0.85", transform: "scale(1.08)" },
+        },
+        lineShadow: {
+          "0%": { backgroundPosition: "0 0" },
+          "100%": { backgroundPosition: "100% -100%" },
         },
         cinematicFadeIn: {
           "0%": { opacity: "0", transform: "translateY(16px) scale(0.97)", filter: "blur(6px)" },
