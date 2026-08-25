@@ -5,6 +5,7 @@ import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
 import OrbitaLici from "../components/OrbitaLici";
 import LiciRejilla from "../components/LiciRejilla";
+import DotPattern from "../components/ui/DotPattern";
 import Footer from "../components/Footer";
 import { buildWAUrl, MSG_DEMO } from "../lib/whatsapp";
 
@@ -55,6 +56,11 @@ export default function LiciPage() {
       <main className="bg-white text-[#0A0A0A]">
         {/* ═══ HERO — órbitas de ruixen, recortadas al costado ═══ */}
         <section className="relative min-h-[100svh] overflow-hidden flex items-center pt-16">
+          {/* Trama de puntos de fondo, desvanecida hacia los bordes */}
+          <DotPattern
+            cr={1}
+            className="[mask-image:radial-gradient(ellipse_75%_65%_at_35%_45%,#000_10%,transparent_75%)]"
+          />
           {/* Órbitas recortadas por la derecha, como el original */}
           <div
             aria-hidden

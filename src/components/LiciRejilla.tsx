@@ -3,6 +3,7 @@ import LiciGlifo from "./LiciGlifo";
 import { IconoWhatsApp, IconoPdf, IconoDrive } from "./ui/LogosCanales";
 import ChatMessages from "./ui/ChatMessages";
 import type { MensajeChat } from "./ui/ChatMessages";
+import DotPattern from "./ui/DotPattern";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -78,8 +79,11 @@ export default function LiciRejilla() {
   });
 
   return (
-    <section className="bg-[#F7F8FA] py-16 md:py-28 border-t border-[#0A1530]/[0.07]">
-      <div ref={ref} className="mx-auto max-w-[1080px] px-6">
+    <section className="relative overflow-hidden bg-[#F7F8FA] py-16 md:py-28 border-t border-[#0A1530]/[0.07]">
+      {/* La misma trama del hero, aún más tenue sobre el gris */}
+      <DotPattern className="fill-[#0A1530]/15 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000_10%,transparent_70%)]" />
+
+      <div ref={ref} className="relative mx-auto max-w-[1080px] px-6">
         <div className="max-w-[640px]" style={entrada(0)}>
           <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A1530]/45">
             Qué hace Lici
