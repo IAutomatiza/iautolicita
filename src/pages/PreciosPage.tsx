@@ -16,7 +16,6 @@ import Footer from "../components/Footer";
 
 export default function PreciosPage() {
   useEffect(() => {
-    window.scrollTo(0, 0);
     // La SPA comparte el <title> del index; sin esto /precios se
     // indexa y se comparte con el titular del home.
     const previo = document.title;
@@ -28,9 +27,7 @@ export default function PreciosPage() {
 
   return (
     <>
-      {/* Como en /lici: el mismo menú del home, sin el ticker en
-          vivo — acá el visitante viene a decidir, no a mirar. */}
-      <Nav conTicker={false} />
+      <Nav />
 
       <main className="pt-16">
         <Planes />

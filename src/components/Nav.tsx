@@ -37,7 +37,7 @@ const flatLinks: {
   { href: "#faq", label: "FAQ" },
 ];
 
-export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) {
+export default function Nav() {
   // Las secciones viven en el home: fuera de él, un "#faq" pelado
   // no lleva a ninguna parte, así que se resuelven contra "/".
   const enHome = useLocation().pathname === "/";
@@ -66,7 +66,10 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
 
   return (
     <header
-      className={`fixed inset-x-0 ${conTicker ? "top-8" : "top-0"} z-40 transition-all duration-300 ${
+      // Siempre top-0: antes bajaba 32px en el home para dejarle el
+      // borde superior al ticker, y el menú saltaba de altura al
+      // cambiar de página. Ahora el ticker va debajo del nav.
+      className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
         scrolled
           ? "bg-ink-950/85 backdrop-blur-md border-b border-[var(--hairline)]"
           : "bg-transparent"

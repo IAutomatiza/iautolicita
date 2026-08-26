@@ -1,10 +1,45 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LiciPage from "./pages/LiciPage";
 import PreciosPage from "./pages/PreciosPage";
 
+/* React Router navega pero NO hace scroll: un Link a "#faq" cambia
+   la URL y deja la página donde estaba, y al cambiar de ruta se
+   conserva la posición anterior. Este gestor hace lo que el visitante
+   espera: con ancla, baja hasta la sección (reintentando mientras la
+   página se monta); sin ancla, toda ruta abre arriba. */
+function GestorScroll() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const id = hash.slice(1);
+      let intentos = 0;
+      const buscar = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else if (intentos++ < 30) {
+          // La sección puede no estar montada aún al llegar de otra ruta.
+          requestAnimationFrame(buscar);
+        }
+      };
+      buscar();
+    } else {
+      // "instant" a propósito: el scroll-behavior:smooth global haría
+      // un viaje animado hasta arriba en cada cambio de página.
+      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
+
 export default function App() {
   return (
+    <>
+    <GestorScroll />
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/lici" element={<LiciPage />} />
@@ -14,5 +49,6 @@ export default function App() {
       {/* El asistente se llamaba ARIA: los enlaces que ya circulan siguen llegando. */}
       <Route path="/aria" element={<Navigate to="/lici" replace />} />
     </Routes>
+    </>
   );
 }

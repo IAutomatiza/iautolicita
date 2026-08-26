@@ -21,7 +21,6 @@ import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
 
 export default function LiciPage() {
   useEffect(() => {
-    window.scrollTo(0, 0);
     // La SPA comparte el <title> del index; sin esto /lici se
     // indexa y se comparte con el titular del home.
     const previo = document.title;
@@ -33,9 +32,7 @@ export default function LiciPage() {
 
   return (
     <>
-      {/* El mismo menú del home; el ticker en vivo queda solo
-          en la portada, acá distrae del producto */}
-      <Nav conTicker={false} />
+      <Nav />
 
       <main className="bg-white text-[#0A0A0A]">
         {/* ═══ HERO — órbitas de ruixen, recortadas al costado ═══ */}
