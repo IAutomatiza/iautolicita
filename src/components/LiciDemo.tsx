@@ -25,29 +25,33 @@ type Pregunta = {
 };
 
 const PREGUNTAS: Pregunta[] = [
+  // Ninguna repite lo que ya cuenta la página: el chat de la
+  // rejilla ya muestra el calce, la mediana pagada y la
+  // competencia. Estas cuatro son capacidades que no aparecen en
+  // ninguna otra sección.
   {
-    id: "precio",
-    chip: "¿Cuánto pagó el Estado por lo que vendo?",
+    id: "perdida",
+    chip: "¿Por qué perdí la última?",
     respuesta:
-      "En tu rubro, la mediana pagada fue $139,9M en las últimas 24 adjudicaciones — el presupuesto decía $180M. Bajo $132M ganas por precio; sobre $148M te quedas fuera.",
+      "Quedaste segundo por $3,8M — un 2,6% de tu oferta. Lo técnico lo tenías ganado: se definió solo por precio. El ganador viene bajando 5% en cada postulación; la próxima vez conviene partir de su último precio, no del tuyo.",
   },
   {
-    id: "conviene",
-    chip: "¿Me conviene esta licitación?",
+    id: "pago",
+    chip: "¿Este organismo paga a tiempo?",
     respuesta:
-      "Calza 91/100 contigo: pide exactamente lo que vendes, el organismo te ha comprado antes y la garantía es del 10%. Cierra en 6 días — alcanzas a preparar la oferta.",
+      "Paga a 43 días en promedio, mejor que la media del Estado (54). Ojo con diciembre: se estira sobre 70. De sus últimas 200 órdenes de compra, solo 4 terminaron en reclamo.",
   },
   {
-    id: "competencia",
-    chip: "¿Contra quién compito?",
+    id: "riesgo",
+    chip: "¿Qué letra chica tienen estas bases?",
     respuesta:
-      "Comercial Médica SpA se adjudicó 4 de las últimas 7 en este rubro, ofertando en promedio 8% bajo el presupuesto. Los otros dos oferentes frecuentes no pasan la evaluación técnica.",
+      "Dos cláusulas duras: multa de 1 UF por día de atraso con tope del 8%, y exigen 5 años de experiencia certificada — eso descarta a la mitad de los oferentes habituales. Tú acreditas 9, así que juega a tu favor.",
   },
   {
-    id: "documentos",
-    chip: "¿Qué documentos me van a pedir?",
+    id: "balance",
+    chip: "¿Cómo voy este año?",
     respuesta:
-      "Declaración jurada simple, Anexo N°5 y garantía de seriedad por el 10% del monto ofertado. Está en las bases administrativas, página 47, sección 8.3 — te la dejo abierta.",
+      "Llevas 6 de 14: 43% de adjudicación, contra el 31% típico de tu rubro. Las dos derrotas evitables fueron por la garantía mal emitida — corrigiendo eso, estarías cerca del 57%.",
   },
 ];
 
