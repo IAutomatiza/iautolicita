@@ -37,17 +37,6 @@ const flatLinks: {
   { href: "#faq", label: "FAQ" },
 ];
 
-/** Los 32px del ticker, para las páginas que no lo llevan: sin esto
-    el menú salta de altura al navegar entre el home y el resto. */
-export function TickerEspaciador() {
-  return (
-    <div
-      aria-hidden
-      className="fixed inset-x-0 top-0 z-[60] h-8 bg-[#0A0A0A] border-b border-white/10"
-    />
-  );
-}
-
 export default function Nav() {
   // Las secciones viven en el home: fuera de él, un "#faq" pelado
   // no lleva a ninguna parte, así que se resuelven contra "/".
@@ -77,11 +66,9 @@ export default function Nav() {
 
   return (
     <header
-      // El ticker vive arriba de todo en el home, así que el nav va
-      // siempre en top-8: en las páginas sin ticker, TickerEspaciador
-      // ocupa esos 32px para que los enlaces queden a la misma altura
-      // al cambiar de página.
-      className={`fixed inset-x-0 top-8 z-40 transition-all duration-300 ${
+      // Bajo el ticker solo en el home; en el resto, pegado arriba.
+      // La franja negra es de la portada, no del sitio.
+      className={`fixed inset-x-0 ${enHome ? "top-8" : "top-0"} z-40 transition-all duration-300 ${
         scrolled
           ? "bg-ink-950/85 backdrop-blur-md border-b border-[var(--hairline)]"
           : "bg-transparent"

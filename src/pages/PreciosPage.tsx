@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Nav, { TickerEspaciador } from "../components/Nav";
+import Nav from "../components/Nav";
 import Planes from "../components/Planes";
 import Footer from "../components/Footer";
 
@@ -27,7 +27,6 @@ export default function PreciosPage() {
 
   return (
     <>
-      <TickerEspaciador />
       <Nav />
 
       <main className="pt-16">
