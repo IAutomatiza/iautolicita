@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Check, Star } from "lucide-react";
 import Eyebrow from "./ui/Eyebrow";
+import NumeroRodante from "./ui/NumeroRodante";
 import useInView from "../hooks/useInView";
+import confeti from "../lib/confeti";
 
 /* ════════════════════════════════════════════════════════════
    Planes — las tres tarjetas que cobra la app. El marco (menú,
@@ -96,6 +98,24 @@ const PLANES: Plan[] = [
   },
 ];
 
+/** El abanico 3D es solo de escritorio: en el teléfono las
+    tarjetas van una bajo otra y girarlas las deja ilegibles. Es
+    el mismo isDesktop del bloque original. */
+function useEscritorio() {
+  const [esc, setEsc] = useState(
+    typeof window !== "undefined"
+      ? window.matchMedia("(min-width: 768px)").matches
+      : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onCambio = () => setEsc(mq.matches);
+    mq.addEventListener("change", onCambio);
+    return () => mq.removeEventListener("change", onCambio);
+  }, []);
+  return esc;
+}
+
 export default function Planes({
   /** En /precios el bloque es la página: el título va más grande
       y se agrega la bajada larga. Como sección del home iría
@@ -106,6 +126,22 @@ export default function Planes({
 } = {}) {
   const [anual, setAnual] = useState(false);
   const [ref, enVista] = useInView<HTMLDivElement>(0.1);
+  const escritorio = useEscritorio();
+  const interruptor = useRef<HTMLButtonElement>(null);
+
+  // El estallido sale del interruptor y solo al ENCENDER el cobro
+  // anual: es una celebración del ahorro, no un parpadeo en cada
+  // clic. Igual que en el bloque original.
+  const alternar = (nuevo: boolean) => {
+    setAnual(nuevo);
+    if (!nuevo || !interruptor.current) return;
+    const r = interruptor.current.getBoundingClientRect();
+    confeti({
+      x: (r.left + r.width / 2) / window.innerWidth,
+      y: (r.top + r.height / 2) / window.innerHeight,
+      colores: ["#0064E0", "#0A0A0A", "#5790F5", "#737373"],
+    });
+  };
 
   return (
     <section
@@ -135,7 +171,7 @@ export default function Planes({
           <div className="mt-8 inline-flex items-center gap-3">
             <button
               type="button"
-              onClick={() => setAnual(false)}
+              onClick={() => alternar(false)}
               className={`font-sans text-[13.5px] transition-colors ${
                 anual ? "text-cream-400" : "text-cream-50 font-medium"
               }`}
@@ -148,7 +184,8 @@ export default function Planes({
               role="switch"
               aria-checked={anual}
               aria-label="Cobrar por año"
-              onClick={() => setAnual((v) => !v)}
+              ref={interruptor}
+              onClick={() => alternar(!anual)}
               className="relative h-6 w-11 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
               style={{ backgroundColor: anual ? "#0064E0" : "#D6D3D1" }}
             >
@@ -163,7 +200,7 @@ export default function Planes({
 
             <button
               type="button"
-              onClick={() => setAnual(true)}
+              onClick={() => alternar(true)}
               className={`font-sans text-[13.5px] transition-colors ${
                 anual ? "text-cream-50 font-medium" : "text-cream-400"
               }`}
@@ -176,19 +213,42 @@ export default function Planes({
           </div>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3 md:items-stretch">
-          {PLANES.map((p, i) => (
-            <div
-              key={p.codigo}
-              style={{
-                opacity: enVista ? 1 : 0,
-                transform: enVista ? "translateY(0)" : "translateY(18px)",
-                transition: `opacity 0.6s ease ${i * 90}ms, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${i * 90}ms`,
-              }}
-            >
-              <Tarjeta plan={p} anual={anual} />
-            </div>
-          ))}
+        {/* Entrada en abanico del bloque original: las laterales
+            entran giradas y hundidas hacia el centro, la destacada
+            queda al frente y un poco más arriba. La perspectiva va
+            en el contenedor; sin ella el rotateY no se ve. */}
+        <div
+          className="mt-12 grid gap-5 md:grid-cols-3 md:items-stretch"
+          style={{ perspective: "1200px" }}
+        >
+          {PLANES.map((p, i) => {
+            const lateral = escritorio && !p.destacado;
+            const reposo = !escritorio
+              ? "none"
+              : p.destacado
+                ? "translateY(-20px)"
+                : `translateX(${i === 0 ? 30 : -30}px) translateZ(-50px) rotateY(${i === 0 ? 10 : -10}deg) scale(0.94)`;
+
+            return (
+              <div
+                key={p.codigo}
+                className={p.destacado ? "z-10" : "z-0"}
+                style={{
+                  transformOrigin: lateral
+                    ? i === 0
+                      ? "right center"
+                      : "left center"
+                    : "center",
+                  opacity: enVista ? 1 : 0,
+                  transform: enVista ? reposo : "translateY(50px)",
+                  transition:
+                    "opacity 0.5s ease 0.4s, transform 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s",
+                }}
+              >
+                <Tarjeta plan={p} anual={anual} />
+              </div>
+            );
+          })}
         </div>
 
         <p className="mt-8 text-center font-sans text-[13px] text-cream-400">
@@ -222,27 +282,30 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
 
   return (
     <div
-      className={`h-full flex flex-col rounded-2xl p-7 transition-transform duration-300 hover:-translate-y-1 ${
+      className={`relative h-full flex flex-col overflow-hidden rounded-2xl p-7 transition-transform duration-300 hover:-translate-y-1 ${
         plan.destacado
           ? "border-2 border-brand-600 bg-white shadow-[0_24px_60px_-30px_rgba(0,100,224,0.45)]"
           : "border border-[var(--hairline)] bg-white"
       }`}
     >
-      <div className="flex items-center justify-between gap-3">
-        <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-cream-300">
-          {plan.nombre}
-        </h3>
-        {plan.destacado && (
-          <span className="rounded-full bg-brand-600 px-2.5 py-1 font-sans text-[10.5px] font-medium uppercase tracking-[0.12em] text-white">
-            El más elegido
-          </span>
-        )}
-      </div>
+      {/* La chapa del original: pegada a la esquina, con la
+          estrella rellena y el redondeo solo en dos vértices. */}
+      {plan.destacado && (
+        <span className="absolute top-0 right-0 flex items-center gap-1 rounded-bl-xl rounded-tr-[15px] bg-brand-600 px-2.5 py-1 font-sans text-[11px] font-semibold text-white">
+          <Star className="h-3.5 w-3.5 fill-current" aria-hidden />
+          El más elegido
+        </span>
+      )}
+
+      <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-cream-300">
+        {plan.nombre}
+      </h3>
 
       <div className="mt-5 flex items-baseline gap-1.5">
-        <span className="font-display font-medium text-[40px] leading-none tracking-[-0.04em] text-cream-50">
-          {gratis ? "$0" : clp(mensualMostrado)}
-        </span>
+        <NumeroRodante
+          texto={gratis ? "$0" : clp(mensualMostrado)}
+          className="font-display font-medium text-[40px] leading-none tracking-[-0.04em] text-cream-50"
+        />
         <span className="font-sans text-[13px] text-cream-300">
           {gratis ? "para siempre" : "+ IVA / mes"}
         </span>
@@ -275,18 +338,24 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
         ))}
       </ul>
 
-      {/* mt-auto pega el botón al piso: las tres tarjetas tienen
+      {/* mt-auto pega el bloque al piso: las tres tarjetas tienen
           distinto número de líneas y los CTA deben quedar alineados. */}
-      <a
-        href={plan.destino}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-auto pt-7"
-      >
-        <span className="flex h-11 w-full items-center justify-center rounded-full bg-cream-50 font-sans text-[14px] font-medium text-white transition-opacity hover:opacity-90">
-          {plan.cta}
-        </span>
-      </a>
+      <div className="mt-auto pt-7">
+        <hr className="mb-5 border-[var(--hairline)]" />
+        <a
+          href={plan.destino}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block"
+        >
+          {/* El hover del original: el anillo del acento separado
+              del botón por un pelo, con transform-gpu para que la
+              transición no salte. */}
+          <span className="flex h-11 w-full transform-gpu items-center justify-center rounded-full bg-cream-50 font-sans text-[14px] font-medium text-white ring-offset-2 ring-offset-white transition-all duration-300 ease-out group-hover:bg-brand-600 group-hover:ring-2 group-hover:ring-brand-600">
+            {plan.cta}
+          </span>
+        </a>
+      </div>
     </div>
   );
 }
