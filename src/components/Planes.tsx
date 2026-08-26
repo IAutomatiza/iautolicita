@@ -1,4 +1,7 @@
+import { useRef, useState } from "react";
 import { Check, MoveRight } from "lucide-react";
+import NumeroRodante from "./ui/NumeroRodante";
+import confeti from "../lib/confeti";
 
 /* ════════════════════════════════════════════════════════════
    Planes — clon del bloque pricing-cards: encabezado centrado
@@ -112,6 +115,23 @@ const PLANES: Plan[] = [
 ];
 
 export default function Planes() {
+  const [anual, setAnual] = useState(false);
+  const interruptor = useRef<HTMLButtonElement>(null);
+
+  // El estallido sale del interruptor y solo al ENCENDER el cobro
+  // anual: es una celebración del ahorro, no un parpadeo en cada
+  // clic.
+  const alternar = (nuevo: boolean) => {
+    setAnual(nuevo);
+    if (!nuevo || !interruptor.current) return;
+    const r = interruptor.current.getBoundingClientRect();
+    confeti({
+      x: (r.left + r.width / 2) / window.innerWidth,
+      y: (r.top + r.height / 2) / window.innerHeight,
+      colores: ["#0064E0", "#0A0A0A", "#5790F5", "#737373"],
+    });
+  };
+
   return (
     <section id="planes" className="w-full scroll-mt-28 py-20 lg:py-32">
       <div className="container-edge">
@@ -129,9 +149,38 @@ export default function Planes() {
             </p>
           </div>
 
-          <div className="grid w-full grid-cols-1 items-stretch gap-8 pt-20 text-left lg:grid-cols-3">
+          {/* Mensual o por año. El año no es otro precio: son los
+              mismos 10 meses que cobra la app. */}
+          <div className="mt-6 flex items-center justify-center">
+            <button
+              type="button"
+              role="switch"
+              aria-checked={anual}
+              aria-label="Contratar por un año"
+              ref={interruptor}
+              onClick={() => alternar(!anual)}
+              className="relative h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
+              style={{ backgroundColor: anual ? "#0064E0" : "#D6D3D1" }}
+            >
+              <span
+                // left-0 explícito: sin él la posición estática del
+                // pulgar cae al borde derecho y se sale del riel.
+                className="pointer-events-none absolute left-0 top-0 block h-5 w-5 rounded-full bg-white shadow-lg transition-transform"
+                style={{ transform: `translateX(${anual ? 20 : 0}px)` }}
+              />
+            </button>
+
+            <span className="ml-2 font-sans text-[15px] font-semibold text-cream-50">
+              Contratar por un año{" "}
+              <span className="text-brand-600">
+                ({12 - MESES_QUE_SE_PAGAN} meses gratis)
+              </span>
+            </span>
+          </div>
+
+          <div className="grid w-full grid-cols-1 items-stretch gap-8 pt-16 text-left lg:grid-cols-3">
             {PLANES.map((plan) => (
-              <Tarjeta key={plan.codigo} plan={plan} />
+              <Tarjeta key={plan.codigo} plan={plan} anual={anual} />
             ))}
           </div>
 
@@ -144,9 +193,15 @@ export default function Planes() {
   );
 }
 
-function Tarjeta({ plan }: { plan: Plan }) {
+function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
   const gratis = plan.neto === 0;
   const alAno = plan.neto * MESES_QUE_SE_PAGAN;
+  const ahorro = plan.neto * (12 - MESES_QUE_SE_PAGAN);
+
+  // El número grande sigue siendo el mensual —real o prorrateado—
+  // para que los tres planes se comparen con la misma unidad. Lo
+  // que se cobra de verdad va en la línea de abajo.
+  const mensualMostrado = anual ? Math.round(alAno / 12) : plan.neto;
 
   return (
     <div
@@ -170,9 +225,12 @@ function Tarjeta({ plan }: { plan: Plan }) {
         <div className="flex flex-1 flex-col justify-start gap-8">
           <div>
             <p className="flex flex-row items-center gap-2 font-sans text-[20px] text-cream-50">
-              <span className="font-display text-[36px] leading-none">
-                {gratis ? "$0" : clp(plan.neto)}
-              </span>
+              {/* Los dígitos ruedan al cambiar de periodicidad, para
+                  que se note qué número se movió. */}
+              <NumeroRodante
+                texto={gratis ? "$0" : clp(mensualMostrado)}
+                className="font-display text-[36px] leading-none"
+              />
               <span className="font-sans text-[14px] text-cream-300">
                 {gratis ? "/ para siempre" : "+ IVA / mes"}
               </span>
@@ -184,6 +242,11 @@ function Tarjeta({ plan }: { plan: Plan }) {
             <p className="mt-2 font-sans text-[13px] text-cream-400">
               {gratis ? (
                 "sin tarjeta y sin fecha de término"
+              ) : anual ? (
+                <>
+                  {clp(alAno)} + IVA al año —{" "}
+                  <span className="text-brand-600">ahorras {clp(ahorro)}</span>
+                </>
               ) : (
                 <>
                   o {clp(alAno)} + IVA al año —{" "}
