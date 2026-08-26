@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import WhatsAppButton from "./ui/WhatsAppButton";
-import BotonBordeMovil from "./ui/BotonBordeMovil";
 
 // Wrangle-inspired IA: one grouped dropdown for the product surface,
 // two flat trust-signal links, and a 3-tier CTA cascade on the right.
@@ -31,14 +30,10 @@ const flatLinks: {
   marca?: boolean;
   /** Vive fuera del sitio: se abre en pestaña nueva. */
   externo?: boolean;
-  /** Se dibuja como botón con el borde recorrido por una luz. */
-  bordeMovil?: boolean;
   label: React.ReactNode;
 }[] = [
   { href: "/lici", label: <LiciWordmark />, isRoute: true, marca: true },
-  // Planes es la decisión que queremos que se tome: va con el borde
-  // recorrido por una luz, no como un enlace más del menú.
-  { href: "/precios", label: "Planes", isRoute: true, bordeMovil: true },
+  { href: "/precios", label: "Planes", isRoute: true },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -141,16 +136,7 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
           </div>
 
           {flatLinks.map((l) =>
-            l.bordeMovil ? (
-              <Link key={l.href} to={l.href} className="mx-1.5">
-                <BotonBordeMovil
-                  radio="9999px"
-                  claseInterior="h-9 px-4 bg-ink-950 border border-[var(--hairline)] text-[13.5px] font-sans font-medium text-cream-50"
-                >
-                  {l.label}
-                </BotonBordeMovil>
-              </Link>
-            ) : l.externo ? (
+            l.externo ? (
               <a
                 key={l.href}
                 href={l.href}
@@ -226,22 +212,7 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
               Más
             </div>
             {flatLinks.map((l) =>
-              l.bordeMovil ? (
-                <Link
-                  key={l.href}
-                  to={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="py-2.5 border-b border-[var(--hairline)]"
-                >
-                  <BotonBordeMovil
-                    radio="9999px"
-                    className="w-full"
-                    claseInterior="h-10 px-4 bg-ink-950 border border-[var(--hairline)] text-[14px] font-sans font-medium text-cream-50"
-                  >
-                    {l.label}
-                  </BotonBordeMovil>
-                </Link>
-              ) : l.externo ? (
+              l.externo ? (
                 <a
                   key={l.href}
                   href={l.href}

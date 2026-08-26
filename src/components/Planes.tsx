@@ -3,6 +3,7 @@ import { Check, MoveRight } from "lucide-react";
 import NumeroRodante from "./ui/NumeroRodante";
 import LineShadowText from "./ui/LineShadowText";
 import DotPattern from "./ui/DotPattern";
+import BotonBordeMovil from "./ui/BotonBordeMovil";
 import confeti from "../lib/confeti";
 
 /* ════════════════════════════════════════════════════════════
@@ -148,9 +149,15 @@ export default function Planes() {
 
       <div className="container-edge relative">
         <div className="flex flex-col items-center justify-center gap-4 text-center">
-          <span className="inline-flex items-center rounded-full border border-transparent bg-brand-600 px-2.5 py-0.5 font-sans text-[12px] font-semibold text-white">
+          {/* La chapa que corona el hero, con el moving-border: una
+              luz recorre su borde sin parar. */}
+          <BotonBordeMovil
+            radio="9999px"
+            duracion={2400}
+            claseInterior="h-8 px-4 bg-ink-950 border border-[var(--hairline)] font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-cream-50"
+          >
             Planes
-          </span>
+          </BotonBordeMovil>
 
           <div className="flex flex-col gap-4">
             <h1 className="max-w-[16ch] text-center font-display text-[42px] font-semibold leading-[1.02] tracking-[-0.035em] text-cream-50 md:text-[76px]">
