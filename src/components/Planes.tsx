@@ -101,6 +101,14 @@ const PLANES: Plan[] = [
 /** El abanico 3D es solo de escritorio: en el teléfono las
     tarjetas van una bajo otra y girarlas las deja ilegibles. Es
     el mismo isDesktop del bloque original. */
+/** Quien pidió menos movimiento ve las tarjetas puestas, no entrando. */
+function sinMovimiento() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 function useEscritorio() {
   const [esc, setEsc] = useState(
     typeof window !== "undefined"
@@ -127,6 +135,7 @@ export default function Planes({
   const [anual, setAnual] = useState(false);
   const [ref, enVista] = useInView<HTMLDivElement>(0.1);
   const escritorio = useEscritorio();
+  const quieto = sinMovimiento();
   const interruptor = useRef<HTMLButtonElement>(null);
 
   // El estallido sale del interruptor y solo al ENCENDER el cobro
@@ -241,8 +250,9 @@ export default function Planes({
                     : "center",
                   opacity: enVista ? 1 : 0,
                   transform: enVista ? reposo : "translateY(50px)",
-                  transition:
-                    "opacity 0.5s ease 0.4s, transform 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s",
+                  transition: quieto
+                    ? "none"
+                    : "opacity 0.5s ease 0.4s, transform 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s",
                 }}
               >
                 <Tarjeta plan={p} anual={anual} />

@@ -20,14 +20,17 @@ export default function NumeroRodante({
   texto,
   duracion = 500,
   className = "",
+  style,
 }: {
   /** Ya formateado, por ejemplo "$79.000". */
   texto: string;
   duracion?: number;
   className?: string;
+  /** Para el color, que puede venir de la marca y no de una clase. */
+  style?: React.CSSProperties;
 }) {
   return (
-    <span className={`inline-flex tabular-nums ${className}`}>
+    <span className={`inline-flex tabular-nums ${className}`} style={style}>
       <span className="sr-only">{texto}</span>
       {texto.split("").map((c, i) =>
         /\d/.test(c) ? (
