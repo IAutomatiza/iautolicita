@@ -4,6 +4,7 @@ import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
 import OrbitaLici from "../components/OrbitaLici";
 import LiciRejilla from "../components/LiciRejilla";
+import LiciAManoVsLici from "../components/LiciAManoVsLici";
 import DotPattern from "../components/ui/DotPattern";
 import Footer from "../components/Footer";
 import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
@@ -125,6 +126,9 @@ export default function LiciPage() {
 
         {/* ═══ QUÉ HACE LICI — rejilla de capacidades ═══ */}
         <LiciRejilla />
+
+        {/* ═══ A MANO VS. CON LICI — la comparación ═══ */}
+        <LiciAManoVsLici />
       </main>
 
       <Footer />
