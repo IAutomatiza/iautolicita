@@ -25,13 +25,17 @@ const flatLinks: {
   /** Ruta propia (se navega tal cual) o ancla de una sección. */
   isRoute?: boolean;
   /** La marca va con más peso; el resto en el gris del menú.
-      Antes lo decidía isRoute, y al agregar /precios «Planes»
-      heredó el tratamiento de Lici y parecía otra marca. */
+      Antes lo decidía isRoute, y al agregar «Planes» heredó el
+      tratamiento de Lici y parecía otra marca. */
   marca?: boolean;
+  /** Vive fuera del sitio: se abre en pestaña nueva. */
+  externo?: boolean;
   label: React.ReactNode;
 }[] = [
   { href: "/lici", label: <LiciWordmark />, isRoute: true, marca: true },
-  { href: "/precios", label: "Planes", isRoute: true },
+  // El precio lo publica la app: es la página que exige Flow y la
+  // única que lee los valores de la base.
+  { href: "https://app.iautolicita.cl/precios", label: "Planes", externo: true },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -134,7 +138,17 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
           </div>
 
           {flatLinks.map((l) =>
-            l.isRoute ? (
+            l.externo ? (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 h-9 inline-flex items-center rounded-md text-[13.5px] font-sans text-cream-200 hover:text-cream-50 transition-colors"
+              >
+                {l.label}
+              </a>
+            ) : l.isRoute ? (
               <Link
                 key={l.href}
                 to={l.href}
@@ -202,7 +216,18 @@ export default function Nav({ conTicker = true }: { conTicker?: boolean } = {}) 
               Más
             </div>
             {flatLinks.map((l) =>
-              l.isRoute ? (
+              l.externo ? (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2.5 border-b border-[var(--hairline)] text-[14px] text-cream-200"
+                >
+                  {l.label}
+                </a>
+              ) : l.isRoute ? (
                 <Link
                   key={l.href}
                   to={l.href}
