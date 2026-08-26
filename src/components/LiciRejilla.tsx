@@ -150,19 +150,19 @@ export default function LiciRejilla() {
           <div className="sm:col-span-2 flex" style={entrada(270)}>
           <div className={`${TARJETA} w-full rounded-xl p-6 sm:rounded-none sm:rounded-bl-xl md:p-10 flex flex-col justify-center`}>
             <h3 className="mb-10 max-w-md text-balance font-display font-medium text-[21px] leading-[1.25] tracking-[-0.025em] text-[#0A0A0A]">
-              Le preguntas en la app, como a un colega.
+              Le preguntas en la app, en tus palabras.
             </h3>
 
             <div className="flex gap-6">
-              <div className="relative flex aspect-square size-16 items-center rounded-[9px] border border-[#0A1530]/12 bg-[#0A1530]/[0.03] p-3 shadow-[0_6px_16px_-8px_rgba(10,21,48,0.35)] ring-1 ring-inset ring-white">
+              <div className="relative flex aspect-square size-16 items-center justify-center rounded-[9px] border border-[#0A1530]/12 bg-[#0A1530]/[0.03] p-3 shadow-[0_6px_16px_-8px_rgba(10,21,48,0.35)] ring-1 ring-inset ring-white">
                 <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/60">
                   tú
                 </span>
-                <MessageSquare className="mt-auto h-5 w-5 text-[#0064E0]" strokeWidth={1.9} />
+                <MessageSquare className="h-5 w-5 text-[#0064E0]" strokeWidth={1.9} />
               </div>
               <div className="relative flex aspect-square size-16 items-center justify-center rounded-[9px] border border-[#0A1530]/12 bg-[#0A1530]/[0.03] p-3 shadow-[0_6px_16px_-8px_rgba(10,21,48,0.35)] ring-1 ring-inset ring-white">
                 <span className="absolute right-2 top-1.5 font-mono text-[10px] text-[#0A1530]/60">
-                  ella
+                  Lici
                 </span>
                 <LiciGlifo alto={26} conBorde />
               </div>
@@ -188,16 +188,16 @@ export default function LiciRejilla() {
             </div>
 
             <div className="relative h-fit px-6 pb-6 md:px-12 md:pb-12">
-              <div className="grid grid-cols-4 gap-2 md:grid-cols-8">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {CANALES.map((c) => (
-                  <div key={c.nombre} className="contents">
-                    <div className="aspect-square rounded-lg border border-dashed border-[#0A1530]/15" />
-                    <div
-                      title={c.nombre}
-                      className="flex aspect-square items-center justify-center rounded-lg border border-[#0A1530]/10 bg-[#0A1530]/[0.03] p-3"
-                    >
-                      {c.icono}
-                    </div>
+                  <div
+                    key={c.nombre}
+                    className="flex flex-col items-center justify-center gap-2 rounded-lg border border-[#0A1530]/10 bg-[#0A1530]/[0.03] px-3 py-5"
+                  >
+                    {c.icono}
+                    <span className="font-sans text-[12px] text-[#0A1530]/70">
+                      {c.nombre}
+                    </span>
                   </div>
                 ))}
               </div>
