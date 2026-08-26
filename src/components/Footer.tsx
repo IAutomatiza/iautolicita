@@ -34,7 +34,7 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
       { label: "Cómo funciona", href: "#como", seccion: true },
       { label: "Con y sin IAutoLicita", href: "#resultados", seccion: true },
       { label: "Solo acá lo tienes", href: "#ventajas", seccion: true },
-      { label: "Planes", href: "https://app.iautolicita.cl/precios", externo: true },
+      { label: "Planes", href: "/precios", interno: true },
     ],
   },
   {

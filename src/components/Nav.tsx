@@ -33,9 +33,7 @@ const flatLinks: {
   label: React.ReactNode;
 }[] = [
   { href: "/lici", label: <LiciWordmark />, isRoute: true, marca: true },
-  // El precio lo publica la app: es la página que exige Flow y la
-  // única que lee los valores de la base.
-  { href: "https://app.iautolicita.cl/precios", label: "Planes", externo: true },
+  { href: "/precios", label: "Planes", isRoute: true },
   { href: "#faq", label: "FAQ" },
 ];
 
