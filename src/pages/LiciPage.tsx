@@ -97,8 +97,6 @@ export default function LiciPage() {
                 </a>
                 <a
                   href="https://app.iautolicita.cl/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="relative inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
                 >
                   Acceder

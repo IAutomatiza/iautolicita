@@ -51,7 +51,7 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
     links: [
       { label: "IAutomatiza", href: "https://iautomatiza.cl", externo: true },
       { label: "hola@iautomatiza.cl", href: "mailto:hola@iautomatiza.cl" },
-      { label: "Iniciar sesión", href: "https://app.iautolicita.cl/login", externo: true },
+      { label: "Iniciar sesión", href: "https://app.iautolicita.cl/login" },
       { label: "Hablar por WhatsApp", href: buildWAUrl(MSG_INFO), externo: true },
       { label: "Probar gratis", href: buildWAUrl(MSG_PRUEBA), externo: true },
     ],
