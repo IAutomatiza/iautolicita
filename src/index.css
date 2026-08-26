@@ -180,3 +180,18 @@
 @media (prefers-reduced-motion: reduce) {
   .chip-flotante, .chip-flotante-b { animation: none; }
 }
+
+/* Haces de luz de los cierres oscuros (FinalCTA y LiciCierre).
+   Vivían en un <style> dentro de FinalCTA: en /lici, que no lo
+   monta, los haces quedaban quietos. */
+@keyframes cta-beam-1 {
+  0%, 100% { transform: translateX(0); opacity: 0.7; }
+  50% { transform: translateX(40px); opacity: 1; }
+}
+@keyframes cta-beam-2 {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(-50px); opacity: 0.95; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*="cta-beam"] { animation: none !important; }
+}

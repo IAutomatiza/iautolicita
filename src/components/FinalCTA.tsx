@@ -198,16 +198,6 @@ export default function FinalCTA() {
         </div>
       </div>
 
-      <style>{`
-        @keyframes cta-beam-1 {
-          0%, 100% { transform: translateX(0); opacity: 0.7; }
-          50% { transform: translateX(40px); opacity: 1; }
-        }
-        @keyframes cta-beam-2 {
-          0%, 100% { transform: translateX(0); opacity: 0.5; }
-          50% { transform: translateX(-50px); opacity: 0.95; }
-        }
-      `}</style>
     </section>
   );
 }

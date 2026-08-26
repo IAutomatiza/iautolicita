@@ -5,6 +5,8 @@ import LiciGlifo from "../components/LiciGlifo";
 import OrbitaLici from "../components/OrbitaLici";
 import LiciRejilla from "../components/LiciRejilla";
 import LiciAManoVsLici from "../components/LiciAManoVsLici";
+import LiciDemo from "../components/LiciDemo";
+import LiciCierre from "../components/LiciCierre";
 import DotPattern from "../components/ui/DotPattern";
 import Footer from "../components/Footer";
 import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
@@ -129,6 +131,12 @@ export default function LiciPage() {
 
         {/* ═══ A MANO VS. CON LICI — la comparación ═══ */}
         <LiciAManoVsLici />
+
+        {/* ═══ PRUÉBALA TÚ — el demo interactivo ═══ */}
+        <LiciDemo />
+
+        {/* ═══ CIERRE — el CTA que faltaba ═══ */}
+        <LiciCierre />
       </main>
 
       <Footer />
