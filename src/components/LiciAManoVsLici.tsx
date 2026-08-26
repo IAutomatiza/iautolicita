@@ -1,4 +1,5 @@
 import { MoveRight } from "lucide-react";
+import LineShadowText from "./ui/LineShadowText";
 import useInView from "../hooks/useInView";
 
 /* ════════════════════════════════════════════════════════════
@@ -65,12 +66,35 @@ export default function LiciAManoVsLici() {
             ref={refTexto}
             className="mx-auto mt-10 flex max-w-[546px] flex-col items-start gap-4 md:mx-0 md:mt-0"
           >
+            {/* El encabezado con el lenguaje del hero de la página:
+                eyebrow en mono, titular grande con «a mano» tachado
+                en gris —la columna que se abandona— y «perdiendo» en
+                el azul con la sombra de rayas. */}
             <div style={entrada(0)}>
-              <h2 className="font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[#0A0A0A] md:text-[40px] md:leading-[1.25]">
-                Licitar a mano
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/60">
+                Antes y después
+              </p>
+              <h2 className="mt-4 font-display text-[36px] font-semibold leading-[1.06] tracking-[-0.03em] text-[#0A0A0A] md:text-[54px]">
+                Licitar{" "}
+                <span className="text-[#0A1530]/35 line-through decoration-[#0A1530]/30 decoration-[3px]">
+                  a mano
+                </span>
                 <br />
-                ya es competir perdiendo.
+                es competir{" "}
+                <span className="text-[#0064E0]">
+                  <LineShadowText
+                    className="italic pr-[0.06em]"
+                    shadowColor="#0A0A0A"
+                  >
+                    perdiendo
+                  </LineShadowText>
+                  .
+                </span>
               </h2>
+              <p className="mt-5 max-w-[44ch] font-sans text-[15px] leading-[1.6] text-[#0A1530]/60 md:text-[16px]">
+                Las tres tareas que se comen la semana, lado a lado: lo que
+                cuestan hoy y lo que tardan con Lici.
+              </p>
             </div>
 
             {/* Las tres comparaciones: la tarea, cómo era y cómo es.
@@ -104,7 +128,10 @@ export default function LiciAManoVsLici() {
               className="mt-2 font-sans text-[14px] leading-6 text-[#0A1530]/55 md:text-[15px]"
               style={entrada(400)}
             >
-              Tu competencia sigue en la columna tachada. Esa es la ventaja.
+              Tu competencia sigue en la columna tachada.{" "}
+              <span className="font-medium text-[#0A0A0A]">
+                Esa es la ventaja.
+              </span>
             </p>
           </div>
 
