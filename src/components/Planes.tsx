@@ -175,50 +175,36 @@ export default function Planes({
             partes el mismo día.
           </p>
 
-          {/* Mensual / anual. El anual no es otro precio: son los
-              mismos 10 meses que cobra la app. */}
-          <div className="mt-8 inline-flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => alternar(false)}
-              className={`font-sans text-[13.5px] transition-colors ${
-                anual ? "text-cream-400" : "text-cream-50 font-medium"
-              }`}
-            >
-              Mensual
-            </button>
-
+          {/* Como el original: el interruptor primero y una sola
+              etiqueta a su derecha, no Mensual · switch · Anual. El
+              anual no es otro precio, son los mismos 10 meses que
+              cobra la app. */}
+          <div className="mt-10 flex items-center justify-center">
             <button
               type="button"
               role="switch"
               aria-checked={anual}
-              aria-label="Cobrar por año"
+              aria-label="Cobro anual"
               ref={interruptor}
               onClick={() => alternar(!anual)}
-              className="relative h-6 w-11 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
+              className="relative h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
               style={{ backgroundColor: anual ? "#0064E0" : "#D6D3D1" }}
             >
               <span
                 // left-0 explícito: sin él la posición estática del
                 // pulgar cae al borde derecho del botón y se sale
-                // encima de la palabra "Anual".
-                className="absolute left-0 top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform"
-                style={{ transform: `translateX(${anual ? 22 : 2}px)` }}
+                // fuera del riel.
+                className="pointer-events-none absolute left-0 top-0 block h-5 w-5 rounded-full bg-white shadow-lg transition-transform"
+                style={{ transform: `translateX(${anual ? 20 : 0}px)` }}
               />
             </button>
 
-            <button
-              type="button"
-              onClick={() => alternar(true)}
-              className={`font-sans text-[13.5px] transition-colors ${
-                anual ? "text-cream-50 font-medium" : "text-cream-400"
-              }`}
-            >
-              Anual{" "}
+            <span className="ml-2 font-sans text-[15px] font-semibold text-cream-50">
+              Cobro anual{" "}
               <span className="text-brand-600">
                 ({12 - MESES_QUE_SE_PAGAN} meses gratis)
               </span>
-            </button>
+            </span>
           </div>
         </div>
 
@@ -284,87 +270,90 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
   // siendo el mensual, para que las tres tarjetas se comparen
   // con la misma unidad.
   const netoAnual = plan.neto * MESES_QUE_SE_PAGAN;
-  const mensualMostrado = anual
-    ? Math.round(netoAnual / 12)
-    : plan.neto;
+  const mensualMostrado = anual ? Math.round(netoAnual / 12) : plan.neto;
   const conIva = Math.round(mensualMostrado * (1 + IVA));
   const ahorro = plan.neto * (12 - MESES_QUE_SE_PAGAN);
 
   return (
+    // El original centra la tarjeta entera y deja alineada a la
+    // izquierda solo la lista de características. Las que no van
+    // destacadas bajan mt-5, que es lo que abre el escalón.
     <div
-      className={`relative h-full flex flex-col overflow-hidden rounded-2xl p-7 transition-transform duration-300 hover:-translate-y-1 ${
+      className={`relative flex h-full flex-col rounded-2xl p-6 text-center ${
         plan.destacado
           ? "border-2 border-brand-600 bg-white shadow-[0_24px_60px_-30px_rgba(0,100,224,0.45)]"
-          : "border border-[var(--hairline)] bg-white"
+          : "border border-[var(--hairline)] bg-white md:mt-5"
       }`}
     >
-      {/* La chapa del original: pegada a la esquina, con la
-          estrella rellena y el redondeo solo en dos vértices. */}
+      {/* La chapa pegada a la esquina, con la estrella rellena y el
+          redondeo solo en dos vértices. */}
       {plan.destacado && (
-        <span className="absolute top-0 right-0 flex items-center gap-1 rounded-bl-xl rounded-tr-[15px] bg-brand-600 px-2.5 py-1 font-sans text-[11px] font-semibold text-white">
-          <Star className="h-3.5 w-3.5 fill-current" aria-hidden />
-          El más elegido
-        </span>
+        <div className="absolute right-0 top-0 flex items-center rounded-bl-xl rounded-tr-xl bg-brand-600 px-2 py-0.5">
+          <Star className="h-4 w-4 fill-current text-white" aria-hidden />
+          <span className="ml-1 font-sans text-[13px] font-semibold text-white">
+            Popular
+          </span>
+        </div>
       )}
 
-      <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-cream-300">
-        {plan.nombre}
-      </h3>
+      <div className="flex flex-1 flex-col">
+        <p className="font-sans text-[16px] font-semibold text-cream-300">
+          {plan.nombre}
+        </p>
 
-      <div className="mt-5 flex items-baseline gap-1.5">
-        <NumeroRodante
-          texto={gratis ? "$0" : clp(mensualMostrado)}
-          className="font-display font-medium text-[40px] leading-none tracking-[-0.04em] text-cream-50"
-        />
-        <span className="font-sans text-[13px] text-cream-300">
-          {gratis ? "para siempre" : "+ IVA / mes"}
-        </span>
-      </div>
-
-      <p className="mt-2 min-h-[20px] font-sans text-[12.5px] text-cream-400">
-        {gratis
-          ? "Sin tarjeta"
-          : anual
-            ? `${clp(plan.neto * MESES_QUE_SE_PAGAN)} + IVA al año · ahorras ${clp(ahorro)}`
-            : `${clp(conIva)} con IVA incluido`}
-      </p>
-
-      <p className="mt-5 font-sans text-[14px] leading-[1.55] text-cream-200">
-        {plan.gancho}
-      </p>
-
-      <ul className="mt-6 space-y-2.5">
-        {plan.incluye.map((f) => (
-          <li key={f} className="flex items-start gap-2.5">
-            <Check
-              className="mt-[3px] h-4 w-4 shrink-0 text-brand-600"
-              strokeWidth={2.5}
-              aria-hidden
-            />
-            <span className="font-sans text-[13.5px] leading-[1.5] text-cream-200">
-              {f}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      {/* mt-auto pega el bloque al piso: las tres tarjetas tienen
-          distinto número de líneas y los CTA deben quedar alineados. */}
-      <div className="mt-auto pt-7">
-        <hr className="mb-5 border-[var(--hairline)]" />
-        <a
-          href={plan.destino}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group block"
-        >
-          {/* El hover del original: el anillo del acento separado
-              del botón por un pelo, con transform-gpu para que la
-              transición no salte. */}
-          <span className="flex h-11 w-full transform-gpu items-center justify-center rounded-full bg-cream-50 font-sans text-[14px] font-medium text-white ring-offset-2 ring-offset-white transition-all duration-300 ease-out group-hover:bg-brand-600 group-hover:ring-2 group-hover:ring-brand-600">
-            {plan.cta}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-2">
+          <NumeroRodante
+            texto={gratis ? "$0" : clp(mensualMostrado)}
+            className="font-display text-[48px] font-bold leading-none tracking-tight text-cream-50"
+          />
+          <span className="whitespace-nowrap font-sans text-[14px] font-semibold leading-6 tracking-wide text-cream-300">
+            {gratis ? "/ siempre" : "+ IVA / mes"}
           </span>
-        </a>
+        </div>
+
+        <p className="mt-1 font-sans text-[12px] leading-5 text-cream-400">
+          {gratis
+            ? "sin tarjeta"
+            : anual
+              ? `cobro anual · ${clp(netoAnual)} + IVA al año, ahorras ${clp(ahorro)}`
+              : `cobro mensual · ${clp(conIva)} con IVA incluido`}
+        </p>
+
+        <ul className="mt-5 flex flex-col gap-2">
+          {plan.incluye.map((f) => (
+            <li key={f} className="flex items-start gap-2">
+              <Check
+                className="mt-1 h-4 w-4 flex-shrink-0 text-brand-600"
+                aria-hidden
+              />
+              <span className="text-left font-sans text-[14px] leading-[1.5] text-cream-200">
+                {f}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* mt-auto pega el pie de la tarjeta al piso: las tres tienen
+            distinto número de líneas y los CTA deben quedar parejos. */}
+        <div className="mt-auto">
+          <hr className="my-4 w-full border-[var(--hairline)]" />
+
+          <a
+            href={plan.destino}
+            target="_blank"
+            rel="noopener noreferrer"
+            // El hover del original: el anillo del acento separado del
+            // botón por un pelo, con transform-gpu para que la
+            // transición no salte.
+            className="group relative flex w-full transform-gpu items-center justify-center gap-2 overflow-hidden rounded-md bg-cream-50 px-4 py-2.5 font-sans text-[18px] font-semibold tracking-tighter text-white ring-offset-2 ring-offset-white transition-all duration-300 ease-out hover:bg-brand-600 hover:ring-2 hover:ring-brand-600"
+          >
+            {plan.cta}
+          </a>
+
+          <p className="mt-6 font-sans text-[12px] leading-5 text-cream-400">
+            {plan.gancho}
+          </p>
+        </div>
       </div>
     </div>
   );
