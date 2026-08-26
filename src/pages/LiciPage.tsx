@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Nav from "../components/Nav";
+import Nav, { TickerEspaciador } from "../components/Nav";
 import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
 import OrbitaLici from "../components/OrbitaLici";
@@ -32,6 +32,7 @@ export default function LiciPage() {
 
   return (
     <>
+      <TickerEspaciador />
       <Nav />
 
       <main className="bg-white text-[#0A0A0A]">

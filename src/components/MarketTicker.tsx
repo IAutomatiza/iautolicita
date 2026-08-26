@@ -69,7 +69,7 @@ function Item({ item }: { item: TickerItem }) {
 export default function MarketTicker() {
   return (
     <div
-      className="fixed inset-x-0 top-16 z-30 h-8 bg-[#0A0A0A] border-b border-white/10 overflow-hidden"
+      className="fixed inset-x-0 top-0 z-[60] h-8 bg-[#0A0A0A] border-b border-white/10 overflow-hidden"
       role="region"
       aria-label="Licitaciones en tiempo real desde ChileCompra"
     >
