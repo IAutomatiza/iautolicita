@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { Check, MoveRight } from "lucide-react";
 import NumeroRodante from "./ui/NumeroRodante";
+import LineShadowText from "./ui/LineShadowText";
+import DotPattern from "./ui/DotPattern";
 import confeti from "../lib/confeti";
 
 /* ════════════════════════════════════════════════════════════
@@ -133,20 +135,48 @@ export default function Planes() {
   };
 
   return (
-    <section id="planes" className="w-full scroll-mt-28 py-20 lg:py-32">
-      <div className="container-edge">
+    <section
+      id="planes"
+      className="relative w-full scroll-mt-28 overflow-hidden py-20 lg:py-32"
+    >
+      {/* La misma trama de /lici, desvanecida sobre el encabezado. */}
+      <DotPattern
+        cr={1}
+        opacidad={0.06}
+        className="[mask-image:radial-gradient(ellipse_65%_45%_at_50%_12%,#000_10%,transparent_75%)]"
+      />
+
+      <div className="container-edge relative">
         <div className="flex flex-col items-center justify-center gap-4 text-center">
           <span className="inline-flex items-center rounded-full border border-transparent bg-brand-600 px-2.5 py-0.5 font-sans text-[12px] font-semibold text-white">
             Planes
           </span>
 
-          <div className="flex flex-col gap-2">
-            <h1 className="max-w-xl text-center font-display text-[30px] font-normal tracking-tighter text-cream-50 md:text-[48px]">
-              Precios que se entienden
+          <div className="flex flex-col gap-4">
+            <h1 className="max-w-[16ch] text-center font-display text-[42px] font-semibold leading-[1.02] tracking-[-0.035em] text-cream-50 md:text-[76px]">
+              Cuesta menos que perder{" "}
+              <span className="text-brand-600">
+                <LineShadowText
+                  className="italic pr-[0.06em]"
+                  shadowColor="#0A0A0A"
+                >
+                  una
+                </LineShadowText>{" "}
+                licitación.
+              </span>
             </h1>
-            <p className="max-w-xl text-center font-sans text-[18px] leading-relaxed tracking-tight text-cream-300">
-              Presentarse a una licitación ya es bastante trabajo.
+            <p className="mx-auto max-w-[46ch] text-center font-sans text-[17px] leading-relaxed tracking-tight text-cream-300 md:text-[19px]">
+              Partes gratis y sin tarjeta. Cuando veas lo que hay para ti,
+              eliges plan — y lo cancelas cuando quieras.
             </p>
+          </div>
+
+          {/* Las cifras que respaldan el precio, en el mismo tono que el
+              hero de /lici: el visitante ve contra qué está pagando. */}
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-x-8 gap-y-1.5 font-mono text-[11px] uppercase tracking-[0.06em] text-cream-400">
+            <span>441K licitaciones vigiladas</span>
+            <span>7,2M adjudicaciones</span>
+            <span>Sin permanencia</span>
           </div>
 
           {/* Mensual o por año. El año no es otro precio: son los
