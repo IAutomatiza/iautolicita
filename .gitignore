@@ -7,3 +7,11 @@ dist
 .vite
 .netlify
 *.tsbuildinfo
+
+# ── Documentos internos ─────────────────────────────────────────
+# El repo es PÚBLICO. Estos llevan estrategia comercial, ventajas
+# competitivas y la batería de ataques a Lici: no se publican.
+# Viven en el disco de Carlos, no en GitHub.
+PLAN-SEO-Y-CAPTACION.md
+FUNCIONALIDADES-APP.md
+probar-lici.ts

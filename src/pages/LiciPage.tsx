@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Nav from "../components/Nav";
 import LineShadowText from "../components/ui/LineShadowText";
 import LiciGlifo from "../components/LiciGlifo";
@@ -6,10 +5,11 @@ import OrbitaLici from "../components/OrbitaLici";
 import LiciRejilla from "../components/LiciRejilla";
 import LiciAManoVsLici from "../components/LiciAManoVsLici";
 import LiciDemo from "../components/LiciDemo";
+import Seo from "../components/Seo";
 import LiciCierre from "../components/LiciCierre";
 import DotPattern from "../components/ui/DotPattern";
 import Footer from "../components/Footer";
-import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
+import { APP_URL } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
    /lici — página reiniciada desde cero: por ahora solo el hero,
@@ -20,18 +20,9 @@ import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
 ═══════════════════════════════════════════════════════════════ */
 
 export default function LiciPage() {
-  useEffect(() => {
-    // La SPA comparte el <title> del index; sin esto /lici se
-    // indexa y se comparte con el titular del home.
-    const previo = document.title;
-    document.title = "Lici — tu analista de licitaciones | IAutoLicita";
-    return () => {
-      document.title = previo;
-    };
-  }, []);
-
   return (
     <>
+      <Seo ruta="/lici" />
       <Nav />
 
       <main className="bg-white text-[#0A0A0A]">
@@ -88,9 +79,7 @@ export default function LiciPage() {
 
               <div className="mt-10 flex items-center gap-1.5">
                 <a
-                  href={buildWAUrl(MSG_PRUEBA)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={APP_URL}
                   className="inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
                 >
                   Probar Lici

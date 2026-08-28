@@ -3,6 +3,10 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LiciPage from "./pages/LiciPage";
 import PreciosPage from "./pages/PreciosPage";
+import LiciWidget from "./components/LiciWidget";
+import LegalPage from "./pages/LegalPage";
+import ContactoPage from "./pages/ContactoPage";
+import { PRIVACIDAD, TERMINOS } from "./lib/legal";
 
 /* React Router navega pero NO hace scroll: un Link a "#faq" cambia
    la URL y deja la página donde estaba, y al cambiar de ruta se
@@ -48,7 +52,13 @@ export default function App() {
       <Route path="/planes" element={<Navigate to="/precios" replace />} />
       {/* El asistente se llamaba ARIA: los enlaces que ya circulan siguen llegando. */}
       <Route path="/aria" element={<Navigate to="/lici" replace />} />
+      <Route path="/contacto" element={<ContactoPage />} />
+      <Route path="/privacidad" element={<LegalPage doc={PRIVACIDAD} />} />
+      <Route path="/terminos" element={<LegalPage doc={TERMINOS} />} />
     </Routes>
+    {/* Lici acompaña todas las páginas: es el canal de conversación
+        del sitio desde que salió WhatsApp. */}
+    <LiciWidget />
     </>
   );
 }

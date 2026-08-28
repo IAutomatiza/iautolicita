@@ -1,11 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
-import { buildWAUrl, MSG_PRUEBA } from "../../lib/whatsapp";
+import { APP_URL } from "../../lib/cta";
 
 type Variant = "primary" | "ghost" | "huge";
 
 interface Props {
   label?: string;
-  message?: string;
+  href?: string;
   variant?: Variant;
   className?: string;
 }
@@ -16,10 +16,14 @@ interface Props {
  *    `halo-pulse` (opacity 0.45 → 0.85, scale 1 → 1.08, 3s loop).
  *  - The button itself stays crisp solid blue with white text.
  *  - On hover the halo intensifies and the button lifts 1px.
+ *
+ * Antes era WhatsAppButton y abría `wa.me` en una pestaña nueva. Desde
+ * el 28-ago-2026 lleva a la app, que es donde se abre la cuenta gratis.
+ * La apariencia no cambió en nada.
  */
-export default function WhatsAppButton({
+export default function CtaButton({
   label = "¡Pruébalo gratis!",
-  message = MSG_PRUEBA,
+  href = APP_URL,
   variant = "primary",
   className = "",
 }: Props) {
@@ -58,10 +62,8 @@ export default function WhatsAppButton({
         />
       )}
       <a
-        href={buildWAUrl(message)}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${label} por WhatsApp`}
+        href={href}
+        aria-label={label}
         className={`${base} ${styles[variant]} ${className}`}
       >
         <span>{label}</span>

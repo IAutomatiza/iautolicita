@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Deployed to GitHub Pages at /iautolicita/ — base only applies to production
-// builds so local dev (and previews) stay at the root.
-export default defineConfig(({ command }) => ({
-  base: command === "build" ? "/iautolicita/" : "/",
+// El sitio se despliega en Vercel, en la raíz del dominio, así que la
+// base es "/" en todos lados. Antes era "/iautolicita/" porque GitHub
+// Pages lo servía en un subdirectorio; eso se terminó el 28-ago-2026.
+export default defineConfig(() => ({
+  base: "/",
   plugins: [react()],
   server: {
     port: 5173,
