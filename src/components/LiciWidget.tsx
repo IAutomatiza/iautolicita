@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Send, X } from "lucide-react";
 import LiciGlifo from "./LiciGlifo";
-import { CHIPS_INICIALES, SALUDO, responder } from "../lib/liciConocimiento";
+import { CHIPS_INICIALES, SALUDO } from "../lib/liciConocimiento";
+import { preguntarALici } from "../lib/liciChat";
 import { APP_URL } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
@@ -14,9 +15,10 @@ import { APP_URL } from "../lib/cta";
    `lici:abrir` y este componente lo escucha. Así hay un solo lugar
    donde se conversa, y sumar otro botón en el futuro es una línea.
 
-   ⚠️ HOY el cerebro es el emparejador local de `liciConocimiento`.
-   En la Fase 5 se reemplaza por la llamada a la edge function —
-   este componente no cambia, solo de dónde sale `responder()`.
+   El cerebro vive en la edge function `lici-web-chat`: ahí están el
+   modelo, el conocimiento que se edita en la tabla sin desplegar, y
+   los guardrails. Si esa llamada falla, `liciChat` cae solo al
+   emparejador local — el chat nunca se queda mudo.
 ═══════════════════════════════════════════════════════════════ */
 
 type Mensaje = { de: "lici" | "usuario"; texto: string };
@@ -90,6 +92,7 @@ export default function LiciWidget() {
   ]);
   const [borrador, setBorrador] = useState("");
   const [tipeando, setTipeando] = useState(false);
+  const [cerrado, setCerrado] = useState(false);
   const sid = useRef<string | null>(null);
   if (sid.current === null) sid.current = idSesion();
   const finRef = useRef<HTMLDivElement>(null);
@@ -120,18 +123,18 @@ export default function LiciWidget() {
     if (abierto) entradaRef.current?.focus();
   }, [abierto]);
 
-  const preguntar = (texto: string) => {
+  const preguntar = async (texto: string) => {
     const limpio = texto.trim();
-    if (!limpio || tipeando) return;
+    if (!limpio || tipeando || cerrado) return;
     setMensajes((m) => [...m, { de: "usuario", texto: limpio }]);
     setBorrador("");
     setTipeando(true);
-    // La pausa es de cortesía: una respuesta instantánea se lee como
-    // un formulario, no como alguien contestando.
-    window.setTimeout(() => {
-      setMensajes((m) => [...m, { de: "lici", texto: responder(limpio) }]);
-      setTipeando(false);
-    }, 700);
+    const r = await preguntarALici(sid.current, limpio);
+    setMensajes((m) => [...m, { de: "lici", texto: r.respuesta }]);
+    setTipeando(false);
+    // La conversación llegó a su tope: se cierra la entrada, pero la
+    // última respuesta ya trae las dos salidas útiles.
+    if (r.fin) setCerrado(true);
   };
 
   const mostrarChips = mensajes.length === 1 && !tipeando;
@@ -234,13 +237,14 @@ export default function LiciWidget() {
               value={borrador}
               onChange={(e) => setBorrador(e.target.value)}
               maxLength={500}
-              placeholder="Pregúntame lo que quieras…"
+              disabled={cerrado}
+              placeholder={cerrado ? "Conversación cerrada" : "Pregúntame lo que quieras…"}
               aria-label="Escribe tu pregunta"
               className="min-w-0 flex-1 rounded-full border border-[#0A1530]/12 bg-[#F7F8FA] px-4 py-2.5 font-sans text-[14px] text-[#0A0A0A] outline-none transition-colors placeholder:text-[#0A1530]/40 focus:border-[#0064E0]/50 focus:bg-white"
             />
             <button
               type="submit"
-              disabled={!borrador.trim() || tipeando}
+              disabled={!borrador.trim() || tipeando || cerrado}
               aria-label="Enviar"
               className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-white transition-opacity disabled:opacity-30"
               style={{ background: AZUL }}
