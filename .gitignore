@@ -15,3 +15,6 @@ dist
 PLAN-SEO-Y-CAPTACION.md
 FUNCIONALIDADES-APP.md
 probar-lici.ts
+
+# Vercel: IDs del proyecto, no van al repo público
+.vercel

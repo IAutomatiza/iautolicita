@@ -40,8 +40,13 @@ const { render, PAGINAS, SITIO, OG_IMAGEN, jsonLdDe } = await import(
 );
 
 const BASE = (process.env.SITE_URL || SITIO).replace(/\/$/, "");
+/* Una vista previa NO se indexa: si Google la toma, compite con el
+   sitio real por las mismas palabras. `SITIO_NOINDEX` lo fuerza a
+   mano, porque un despliegue temporal de Vercel llega con
+   VERCEL_ENV=production y sin esto pasaría por definitivo. */
 const esPreview =
-  !!process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production";
+  !!process.env.SITIO_NOINDEX ||
+  (!!process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production");
 
 const plantilla = readFileSync(join(DIST, "index.html"), "utf8");
 const escapar = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
