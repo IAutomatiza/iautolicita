@@ -99,12 +99,18 @@ export const CHIPS_INICIALES = [
    solo: cuando alguien cuenta a qué viene, casi siempre dice de
    pasada qué vende.
 
-   Y ojo con lo que NO promete: nada de "te digo cuánto paga el
-   Estado". Eso lo bloquea el guardrail de datos, y un saludo que
-   ofrece lo que el agente tiene que negar es la peor entrada
-   posible. */
-export const SALUDO =
-  "Hola, soy Lici. ¿En qué te puedo ayudar? Cuéntame qué necesitas y vemos si esto te sirve.";
+   🚨 Y NADA de sembrar la duda. Una versión anterior cerraba con
+   "y vemos si esto te sirve": eso es decirle «a lo mejor esto no es
+   para ti» antes de que abra la boca. Ningún vendedor abre poniendo
+   su propio producto en duda.
+
+   Tampoco promete lo que después hay que negar — nada de "te digo
+   cuánto paga el Estado", que lo bloquea el guardrail de datos.
+
+   Queda corto a propósito: los cinco chips que van justo abajo ya
+   muestran qué se puede preguntar. Repetirlo en el saludo solo
+   diluye la pregunta. */
+export const SALUDO = "Hola, soy Lici. ¿En qué te puedo ayudar?";
 
 export const FICHAS: Ficha[] = [
   /* ── Producto ─────────────────────────────────────────────── */
