@@ -73,18 +73,29 @@ export type Ficha = {
   respuesta: string;
 };
 
-/** Lo que se ofrece de entrada, antes de que escriban nada. */
+/* Lo que se ofrece antes de que escriban nada.
+
+   Están escritos desde el DOLOR del visitante, no desde nuestro
+   producto: «¿Qué hace exactamente?» es una pregunta que se hace
+   quien ya decidió mirar; «Se me pasan licitaciones» es la frase
+   que trae a alguien a la página. Cinco y no seis: en el panel
+   angosto, seis se comen media pantalla antes del saludo. */
 export const CHIPS_INICIALES = [
-  "¿Qué hace exactamente?",
-  "¿Cuánto cuesta?",
   "¿Sirve para lo que yo vendo?",
-  "¿En qué se diferencian?",
-  "¿Es gratis de verdad?",
-  "¿Cómo empiezo?",
+  "¿Cuánto cuesta?",
+  "Se me pasan licitaciones",
+  "No sé a qué precio ofertar",
+  "Nunca he licitado",
 ];
 
+/* Una sola pregunta, y la más fácil de contestar.
+
+   El saludo anterior hacía dos ("¿qué vendes, y ya le vendes al
+   Estado?") en un párrafo de cuatro líneas. Nadie contesta dos
+   preguntas de un desconocido. Con una corta, la conversación
+   arranca — y la respuesta ya califica. */
 export const SALUDO =
-  "Hola. Soy Lici. Te cuento cómo funciona IAutoLicita y qué te conviene — sin vueltas. ¿Qué vendes, y ya le vendes al Estado o todavía no?";
+  "Hola, soy Lici. Te digo en simple si IAutoLicita te sirve, sin vueltas. ¿Qué vende tu empresa?";
 
 export const FICHAS: Ficha[] = [
   /* ── Producto ─────────────────────────────────────────────── */
@@ -114,7 +125,7 @@ export const FICHAS: Ficha[] = [
   {
     id: "alertas",
     categoria: "modulo",
-    claves: ["alerta", "alertas", "aviso", "avisan", "avisa", "avisar", "notificacion", "cuando sale", "sale una", "cierre", "llego tarde", "enterarme", "me entero"],
+    claves: ["alerta", "alertas", "aviso", "avisan", "avisa", "avisar", "notificacion", "cuando sale", "sale una", "cierre", "llego tarde", "enterarme", "me entero", "se me pasan", "se me pasa", "me pierdo", "no me entero"],
     respuesta:
       "Te avisamos apenas se publica, por correo y WhatsApp — no cuando ya quedan tres días. En licitaciones llegar primero es medio negocio. El plan gratis recibe un resumen diario; las alertas al instante vienen desde el plan Pro.",
   },
