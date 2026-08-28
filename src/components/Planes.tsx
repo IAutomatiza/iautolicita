@@ -19,12 +19,15 @@ import confeti from "../lib/confeti";
    por una página: las tarjetas son el mismo marcado con las
    clases ya resueltas, en la paleta del sitio.
 
-   LOS PRECIOS SON UN ESPEJO. La fuente es la tabla `planes` de
-   la app, y app.iautolicita.cl/precios los arma desde la base.
-   Acá están escritos a mano porque este sitio es estático y no
-   habla con Supabase: si cambia un precio, se cambia en la base
-   Y en esta constante.
+   LOS PRECIOS SALEN DE LA BASE. La fuente es la tabla `planes`
+   de la app. Estaban escritos a mano acá —y en otros tres
+   lugares— porque el sitio es estático; desde el 28-ago-2026 los
+   trae `src/lib/planes.ts`, que genera `npm run sync:planes`.
+   Si cambias un precio en /admin/planes: corre ese script y
+   commitea. El copy de cada plan sí se escribe a mano.
 ═══════════════════════════════════════════════════════════════ */
+
+import { PLAN } from "../lib/planes";
 
 const APP_REGISTRO = "https://app.iautolicita.cl/login";
 
@@ -60,11 +63,11 @@ const PLANES: Plan[] = [
         detalle: "Todo lo que publica el Estado, al día y buscable.",
       },
       {
-        titulo: "5 preguntas a Lici al día",
+        titulo: `${PLAN.free.preguntasDia} preguntas a Lici al día`,
         detalle: "Le preguntas en tu idioma y responde con las cifras al lado.",
       },
       {
-        titulo: "1 usuario",
+        titulo: `${PLAN.free.usuarios} usuario`,
         detalle: "Tu cuenta, con tu RUT y tu perfil armado en un clic.",
       },
     ],
@@ -75,7 +78,7 @@ const PLANES: Plan[] = [
     nombre: "Pro",
     descripcion:
       "Para la empresa que se presenta todos los meses y quiere ganar más de las que presenta.",
-    neto: 79000,
+    neto: PLAN.pro.neto,
     caracteristicas: [
       {
         titulo: "Lici sin límite",
@@ -86,7 +89,7 @@ const PLANES: Plan[] = [
         detalle: "Cada licitación nueva llega con nota, según lo que vendes.",
       },
       {
-        titulo: "3 usuarios",
+        titulo: `${PLAN.pro.usuarios} usuarios`,
         detalle: "Tu equipo trabajando sobre la misma información.",
       },
     ],
@@ -98,7 +101,7 @@ const PLANES: Plan[] = [
     nombre: "Max",
     descripcion:
       "Para el equipo que vive de licitar y maneja varias empresas a la vez.",
-    neto: 149000,
+    neto: PLAN.max.neto,
     caracteristicas: [
       {
         titulo: "Todo lo de Pro",

@@ -1,8 +1,7 @@
 import type { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Globe } from "lucide-react";
-import { IconoWhatsApp } from "./ui/LogosCanales";
-import { buildWAUrl, MSG_PRUEBA, MSG_INFO } from "../lib/whatsapp";
+import { APP_URL } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
    Footer — patrón footer-7 de shadcnblocks: a la izquierda la
@@ -12,7 +11,7 @@ import { buildWAUrl, MSG_PRUEBA, MSG_INFO } from "../lib/whatsapp";
 
    Adaptado al stack propio: el logo es el wordmark tipográfico
    del sitio (no hay archivo de imagen), los iconos vienen de
-   lucide y del SVG oficial de WhatsApp en vez de react-icons, y
+   lucide en vez de react-icons, y
    los enlaces de sección se resuelven contra el home para que
    también funcionen desde /lici.
 ═══════════════════════════════════════════════════════════════ */
@@ -24,6 +23,8 @@ type Enlace = {
   interno?: boolean;
   /** Ancla de una sección del home (#faq, #capacidades…). */
   seccion?: boolean;
+  /** No navega: abre el chat de Lici. */
+  abreLici?: boolean;
 };
 
 const SECCIONES: { titulo: string; links: Enlace[] }[] = [
@@ -52,19 +53,14 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
       { label: "IAutomatiza", href: "https://iautomatiza.cl", externo: true },
       { label: "hola@iautomatiza.cl", href: "mailto:hola@iautomatiza.cl" },
       { label: "Iniciar sesión", href: "https://app.iautolicita.cl/login" },
-      { label: "Hablar por WhatsApp", href: buildWAUrl(MSG_INFO), externo: true },
-      { label: "Probar gratis", href: buildWAUrl(MSG_PRUEBA), externo: true },
+      { label: "Pedir una reunión", href: "/contacto", interno: true },
+      { label: "Hablar con Lici", href: "#", abreLici: true },
+      { label: "Probar gratis", href: APP_URL },
     ],
   },
 ];
 
 const REDES: { icon: ReactElement; href: string; label: string; externo?: boolean }[] = [
-  {
-    icon: <IconoWhatsApp className="h-[19px] w-[19px]" />,
-    href: buildWAUrl(MSG_INFO),
-    label: "Escríbenos por WhatsApp",
-    externo: true,
-  },
   {
     icon: <Mail className="h-[19px] w-[19px]" strokeWidth={1.8} />,
     href: "mailto:hola@iautomatiza.cl",
@@ -78,11 +74,12 @@ const REDES: { icon: ReactElement; href: string; label: string; externo?: boolea
   },
 ];
 
-/* El footer-7 trae una fila legal con términos y privacidad. El
-   sitio todavía no tiene esas páginas, y enlazar a una que no
-   existe es peor que no enlazar: la fila queda armada y se
-   llena sola en cuanto haya URLs reales. */
-const LEGALES: Enlace[] = [];
+/* La fila legal del footer-7. Las páginas ya existen — y Google
+   Ads exige la de privacidad publicada antes de aprobar avisos. */
+const LEGALES: Enlace[] = [
+  { label: "Política de privacidad", href: "/privacidad", interno: true },
+  { label: "Términos y condiciones", href: "/terminos", interno: true },
+];
 
 export default function Footer() {
   const año = new Date().getFullYear();
@@ -90,7 +87,16 @@ export default function Footer() {
   const clase = "text-cream-200 hover:text-amber-400 transition-colors";
 
   const enlace = (l: Enlace, cn = clase) =>
-    // Las secciones viven en el home: desde /lici un "#faq" pelado
+    // Hablar es abrir a Lici, no navegar a ninguna parte.
+    l.abreLici ? (
+      <button
+        type="button"
+        onClick={() => window.dispatchEvent(new CustomEvent("lici:abrir"))}
+        className={`${cn} text-left`}
+      >
+        {l.label}
+      </button>
+    ) : // Las secciones viven en el home: desde /lici un "#faq" pelado
     // no lleva a ninguna parte, así que se resuelven contra "/".
     l.interno || l.seccion ? (
       <Link to={l.seccion ? `/${l.href}` : l.href} className={cn}>

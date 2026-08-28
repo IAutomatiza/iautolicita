@@ -8,7 +8,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { ContainerScroll, CardSticky } from "./ui/CardsStack";
-import { buildWAUrl, MSG_PRUEBA } from "../lib/whatsapp";
+import { APP_URL } from "../lib/cta";
 import Eyebrow from "./ui/Eyebrow";
 import useInView from "../hooks/useInView";
 
@@ -110,9 +110,7 @@ export default function SoloConNosotros() {
                   degradado e interior blanco. Acá cierra el argumento
                   de la sección. */}
               <a
-                href={buildWAUrl(MSG_PRUEBA)}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={APP_URL}
                 className="pill-brain mt-9"
               >
                 <span className="pill-brain-inner">

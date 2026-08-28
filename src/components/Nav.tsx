@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-import WhatsAppButton from "./ui/WhatsAppButton";
+import CtaButton from "./ui/CtaButton";
 
 // Wrangle-inspired IA: one grouped dropdown for the product surface,
 // two flat trust-signal links, and a 3-tier CTA cascade on the right.
@@ -180,7 +180,7 @@ export default function Nav() {
           >
             Iniciar sesión
           </a>
-          <WhatsAppButton variant="primary" label="¡Prueba gratis!" />
+          <CtaButton variant="primary" label="¡Prueba gratis!" />
 
           <button
             type="button"

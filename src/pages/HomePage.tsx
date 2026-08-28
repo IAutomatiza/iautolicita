@@ -8,10 +8,12 @@ import SoloConNosotros from "../components/SoloConNosotros";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
 import Footer from "../components/Footer";
+import Seo from "../components/Seo";
 
 export default function HomePage() {
   return (
     <>
+      <Seo ruta="/" />
       <MarketTicker />
       <Nav />
       <main>
