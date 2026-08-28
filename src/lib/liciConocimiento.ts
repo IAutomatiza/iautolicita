@@ -88,14 +88,22 @@ export const CHIPS_INICIALES = [
   "Nunca he licitado",
 ];
 
-/* Una sola pregunta, y la más fácil de contestar.
+/* Corto, una pregunta, y con una razón para contestarla.
 
-   El saludo anterior hacía dos ("¿qué vendes, y ya le vendes al
-   Estado?") en un párrafo de cuatro líneas. Nadie contesta dos
-   preguntas de un desconocido. Con una corta, la conversación
-   arranca — y la respuesta ya califica. */
+   Tres cosas que tenía mal el anterior:
+   · repetía el subtítulo de la cabecera — "te digo si te sirve"
+     aparecía dos veces en dos líneas;
+   · "sin vueltas" es una muletilla: un vendedor que anuncia que no
+     va a dar vueltas ya dio una;
+   · la pregunta no daba ningún motivo para responderla, y una
+     pregunta sin motivo se lee como un formulario.
+
+   Y ojo con lo que NO promete: nada de "te digo cuánto paga el
+   Estado". Eso lo bloquea el guardrail de datos, y un saludo que
+   ofrece lo que el agente tiene que negar es la peor entrada
+   posible. Promete criterio, que sí puede dar. */
 export const SALUDO =
-  "Hola, soy Lici. Te digo en simple si IAutoLicita te sirve, sin vueltas. ¿Qué vende tu empresa?";
+  "Hola, soy Lici. ¿Qué vende tu empresa? Así te cuento lo que te sirve y nos saltamos el discurso genérico.";
 
 export const FICHAS: Ficha[] = [
   /* ── Producto ─────────────────────────────────────────────── */

@@ -157,7 +157,7 @@ export default function LiciWidget() {
                 Lici
               </div>
               <div className="font-sans text-[12.5px] leading-tight text-[#0A1530]/55">
-                Te digo si te sirve
+                Del producto y los planes
               </div>
             </div>
             <button
