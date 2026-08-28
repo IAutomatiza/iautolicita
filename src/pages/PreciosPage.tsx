@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import Nav from "../components/Nav";
 import Planes from "../components/Planes";
 import Footer from "../components/Footer";
+import Seo from "../components/Seo";
 
 /* ════════════════════════════════════════════════════════════
    /precios — los planes viven en el sitio, en su propia página
@@ -15,18 +15,9 @@ import Footer from "../components/Footer";
 ═══════════════════════════════════════════════════════════════ */
 
 export default function PreciosPage() {
-  useEffect(() => {
-    // La SPA comparte el <title> del index; sin esto /precios se
-    // indexa y se comparte con el titular del home.
-    const previo = document.title;
-    document.title = "Planes y precios | IAutoLicita";
-    return () => {
-      document.title = previo;
-    };
-  }, []);
-
   return (
     <>
+      <Seo ruta="/precios" />
       <Nav />
 
       <main className="pt-16">

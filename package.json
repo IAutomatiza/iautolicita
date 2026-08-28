@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node prerender.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "build:solo": "tsc -b && vite build",
+    "probar:lici": "npx esbuild probar-lici.ts --bundle --format=esm --platform=node --outfile=.probar-lici.mjs --log-level=error && node .probar-lici.mjs && rm -f .probar-lici.mjs",
+    "sync:planes": "node sincronizar-planes.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",
