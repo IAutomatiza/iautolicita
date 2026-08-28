@@ -24,17 +24,19 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Pages sirve en un subdirectorio: sin esto los assets dan 404.
+      # SITE_URL deja el canonical y el sitemap apuntando al sitio real.
       - run: npm run build
-      # SPA fallback: GitHub Pages serves 404.html for unknown deep links,
-      # which loads the app and lets React Router handle the route.
+        env:
+          BASE_SITIO: /iautolicita/
+          SITE_URL: https://pipex360.github.io/iautolicita
+      # SPA fallback: Pages sirve 404.html en cualquier ruta que no
+      # exista como archivo, y ahí React Router se hace cargo.
       - run: cp dist/index.html dist/404.html
-      # /lici y /precios llegaban por ese fallback y respondían HTTP
-      # 404, lo que las deja fuera del índice y rompe la vista previa
-      # al compartirlas. Con su propio index.html devuelven 200.
-      - run: |
-          for ruta in lici precios; do
-            mkdir -p "dist/$ruta" && cp dist/index.html "dist/$ruta/index.html"
-          done
+      # El prerenderizado (dentro de `npm run build`) ya deja cada ruta
+      # con su propio index.html — antes esto se hacía a mano acá para
+      # lici y precios. Ahora son seis y salen con su HTML de verdad,
+      # no con una copia del home.
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

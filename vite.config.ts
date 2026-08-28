@@ -1,11 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// El sitio se despliega en Vercel, en la raíz del dominio, así que la
-// base es "/" en todos lados. Antes era "/iautolicita/" porque GitHub
-// Pages lo servía en un subdirectorio; eso se terminó el 28-ago-2026.
+/* La ruta base sale del entorno, porque hoy hay DOS destinos:
+
+   · Vercel y el dominio propio sirven en la raíz  →  "/"
+   · GitHub Pages sirve en un subdirectorio        →  "/iautolicita/"
+
+   Si esto quedara fijo en "/", una publicación a Pages saldría en
+   blanco: los assets apuntarían a pipex360.github.io/assets/… y
+   darían 404. El workflow de Pages pasa BASE_SITIO; todo lo demás
+   —Vercel, el dev server, el prerenderizado— usa la raíz. */
 export default defineConfig(() => ({
-  base: "/",
+  base: process.env.BASE_SITIO || "/",
   plugins: [react()],
   server: {
     port: 5173,
