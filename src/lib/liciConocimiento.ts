@@ -88,22 +88,23 @@ export const CHIPS_INICIALES = [
   "Nunca he licitado",
 ];
 
-/* Corto, una pregunta, y con una razón para contestarla.
+/* Saluda, se ofrece, y pregunta ABIERTO.
 
-   Tres cosas que tenía mal el anterior:
-   · repetía el subtítulo de la cabecera — "te digo si te sirve"
-     aparecía dos veces en dos líneas;
-   · "sin vueltas" es una muletilla: un vendedor que anuncia que no
-     va a dar vueltas ya dio una;
-   · la pregunta no daba ningún motivo para responderla, y una
-     pregunta sin motivo se lee como un formulario.
+   El anterior abría con "¿Qué vende tu empresa?" — que es NUESTRA
+   agenda, no la suya. Quien llega al chat viene con algo en la
+   cabeza; preguntarle por su rubro antes de dejarlo hablar se lee
+   como un formulario de entrada.
+
+   Primero entender qué necesita. Calificar viene después, y sale
+   solo: cuando alguien cuenta a qué viene, casi siempre dice de
+   pasada qué vende.
 
    Y ojo con lo que NO promete: nada de "te digo cuánto paga el
    Estado". Eso lo bloquea el guardrail de datos, y un saludo que
    ofrece lo que el agente tiene que negar es la peor entrada
-   posible. Promete criterio, que sí puede dar. */
+   posible. */
 export const SALUDO =
-  "Hola, soy Lici. ¿Qué vende tu empresa? Así te cuento lo que te sirve y nos saltamos el discurso genérico.";
+  "Hola, soy Lici. ¿En qué te puedo ayudar? Cuéntame qué necesitas y vemos si esto te sirve.";
 
 export const FICHAS: Ficha[] = [
   /* ── Producto ─────────────────────────────────────────────── */
