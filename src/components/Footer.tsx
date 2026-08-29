@@ -51,7 +51,7 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
     titulo: "Empresa",
     links: [
       { label: "IAutomatiza", href: "https://iautomatiza.cl", externo: true },
-      { label: "hola@iautomatiza.cl", href: "mailto:hola@iautomatiza.cl" },
+      { label: "contacto@iautolicita.cl", href: "mailto:contacto@iautolicita.cl" },
       { label: "Iniciar sesión", href: "https://app.iautolicita.cl/login" },
       { label: "Pedir una reunión", href: "/contacto", interno: true },
       { label: "Hablar con Lici", href: "#", abreLici: true },
@@ -63,7 +63,7 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
 const REDES: { icon: ReactElement; href: string; label: string; externo?: boolean }[] = [
   {
     icon: <Mail className="h-[19px] w-[19px]" strokeWidth={1.8} />,
-    href: "mailto:hola@iautomatiza.cl",
+    href: "mailto:contacto@iautolicita.cl",
     label: "Escríbenos por correo",
   },
   {

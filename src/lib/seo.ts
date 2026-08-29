@@ -79,7 +79,7 @@ export const jsonLdOrganizacion = () => ({
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "ventas",
-    email: "hola@iautomatiza.cl",
+    email: "contacto@iautolicita.cl",
     availableLanguage: ["Spanish"],
   },
 });

@@ -31,7 +31,7 @@ export const PRIVACIDAD: Documento = {
     {
       titulo: "Quiénes somos",
       parrafos: [
-        "IAutoLicita es un producto de IAutomatiza, con domicilio en Santiago de Chile. Para cualquier tema de privacidad puedes escribirnos a hola@iautomatiza.cl.",
+        "IAutoLicita es un producto de IAutomatiza, con domicilio en Santiago de Chile. Para cualquier tema de privacidad puedes escribirnos a contacto@iautolicita.cl.",
       ],
     },
     {
@@ -77,7 +77,7 @@ export const PRIVACIDAD: Documento = {
       titulo: "Tus derechos",
       parrafos: [
         "Puedes pedirnos en cualquier momento que te digamos qué datos tuyos tenemos, que los corrijamos si están errados, o que los eliminemos.",
-        "Escríbenos a hola@iautomatiza.cl y te respondemos. No cobramos por esto y no necesitas explicar por qué.",
+        "Escríbenos a contacto@iautolicita.cl y te respondemos. No cobramos por esto y no necesitas explicar por qué.",
       ],
     },
     {

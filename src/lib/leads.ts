@@ -35,7 +35,7 @@ export type Resultado =
 const ENDPOINT =
   (import.meta.env.VITE_LEADS_ENDPOINT as string | undefined) ??
   "https://yqpmthievjsxbtsndsft.supabase.co/functions/v1/web-lead";
-const CORREO = "hola@iautomatiza.cl";
+const CORREO = "contacto@iautolicita.cl";
 
 function comoTexto(l: Lead) {
   return [

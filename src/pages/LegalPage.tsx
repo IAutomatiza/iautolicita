@@ -54,10 +54,10 @@ export default function LegalPage({ doc }: { doc: Documento }) {
             <p className="mt-14 border-t border-[var(--hairline)] pt-7 font-sans text-[14.5px] leading-[1.6] text-cream-300">
               ¿Alguna duda sobre esto? Escríbenos a{" "}
               <a
-                href="mailto:hola@iautomatiza.cl"
+                href="mailto:contacto@iautolicita.cl"
                 className="text-amber-400 hover:underline"
               >
-                hola@iautomatiza.cl
+                contacto@iautolicita.cl
               </a>
               .
             </p>
