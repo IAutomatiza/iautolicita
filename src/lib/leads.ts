@@ -30,7 +30,11 @@ export type Resultado =
   | { ok: true; via: "servidor" | "correo" }
   | { ok: false; error: string };
 
-const ENDPOINT = import.meta.env.VITE_LEADS_ENDPOINT as string | undefined;
+/* La edge function `web-lead`: guarda en `web_leads` y avisa por correo.
+   Se puede sobreescribir con VITE_LEADS_ENDPOINT si algún día cambia. */
+const ENDPOINT =
+  (import.meta.env.VITE_LEADS_ENDPOINT as string | undefined) ??
+  "https://yqpmthievjsxbtsndsft.supabase.co/functions/v1/web-lead";
 const CORREO = "hola@iautomatiza.cl";
 
 function comoTexto(l: Lead) {
@@ -60,6 +64,11 @@ export async function enviarLead(lead: Lead): Promise<Resultado> {
           ...lead,
           pagina: window.location.pathname,
           referencia: document.referrer || null,
+          // Si venía conversando con Lici, la solicitud queda unida a
+          // esa conversación.
+          sid: (() => {
+            try { return sessionStorage.getItem("lici_sid"); } catch { return null; }
+          })(),
         }),
       });
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
