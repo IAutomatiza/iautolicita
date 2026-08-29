@@ -11,7 +11,12 @@ import { PLAN, enPesos } from "./planes";
    Antes cada página cambiaba `document.title` a mano y la
    descripción nunca cambiaba: las tres decían la misma. */
 
-export const SITIO = "https://iautolicita.cl";
+/* El sitio vive en www, no en el dominio pelado.
+
+   No es un capricho de estilo: con www el sitio se sirve por CNAME,
+   y el registro A del dominio raíz —del que cuelga el correo— no
+   hay que tocarlo. La raíz redirige a www. */
+export const SITIO = "https://www.iautolicita.cl";
 export const NOMBRE = "IAutoLicita";
 export const OG_IMAGEN = `${SITIO}/og.png`;
 
