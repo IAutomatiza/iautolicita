@@ -25,11 +25,17 @@ jobs:
           cache: npm
       - run: npm ci
       # Pages sirve en un subdirectorio: sin esto los assets dan 404.
-      # SITE_URL deja el canonical y el sitemap apuntando al sitio real.
+      #
+      # Desde que el sitio vive en www.iautolicita.cl (Vercel), esta
+      # copia es SOLO vista previa. SITIO_NOINDEX la saca de Google:
+      # deja robots.txt en Disallow y cada página con noindex.
+      # Sin esto habría dos copias del mismo texto compitiendo entre
+      # sí, y Google puede quedarse con la de github.io.
       - run: npm run build
         env:
           BASE_SITIO: /iautolicita/
-          SITE_URL: https://pipex360.github.io/iautolicita
+          SITE_URL: https://iautomatiza.github.io/iautolicita
+          SITIO_NOINDEX: "1"
       # SPA fallback: Pages sirve 404.html en cualquier ruta que no
       # exista como archivo, y ahí React Router se hace cargo.
       - run: cp dist/index.html dist/404.html

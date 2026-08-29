@@ -18,3 +18,6 @@ probar-lici.ts
 
 # Vercel: IDs del proyecto, no van al repo público
 .vercel
+
+# Lo deja el CLI de Deno al trabajar las edge functions; no es del sitio.
+deno.lock
