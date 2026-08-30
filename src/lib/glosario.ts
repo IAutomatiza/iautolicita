@@ -640,6 +640,97 @@ export const TERMINOS: Termino[] = [
     vecinos: ["ley-19886", "ley-21634", "tipos-de-licitacion-l1-le-lp"],
   },
 
+  /* ══ Tanda 2 · las que destapó el Planificador ════════════════
+     Ninguna estaba en la lista original de 52. «Licitación qué es»
+     tiene 5.000 búsquedas al mes con competencia baja: es la mejor
+     página individual del proyecto y se nos había pasado por medir
+     el vocabulario técnico y no la pregunta del que recién llega. */
+
+  {
+    slug: "que-es-una-licitacion-publica",
+    termino: "Licitación pública",
+    familia: "Tipos de proceso",
+    definicion:
+      "Es el procedimiento por el que un organismo del Estado publica lo que necesita comprar, cualquier proveedor puede ofertar, y gana la oferta que obtiene más puntaje según reglas escritas de antemano.",
+    cuerpo: [
+      "La idea de fondo es que la plata es de todos, así que la compra tiene que ser abierta y comparable. Por eso el organismo publica: qué necesita, con qué características, hasta cuándo se reciben ofertas y con qué fórmula va a decidir. Todo eso queda escrito antes de que llegue la primera oferta y no se puede cambiar después.",
+      "Cualquier empresa o persona con inicio de actividades puede ofertar. No hace falta ser grande, ni tener contactos, ni haber vendido antes al Estado. Lo que sí hace falta es cumplir lo que piden las bases: si un requisito no se cumple, la oferta queda fuera aunque el precio sea el mejor.",
+      "Todo pasa por Mercado Público, la plataforma de ChileCompra. Ahí se publica la licitación, se hacen las preguntas, se suben las ofertas, se abre el proceso y se publica quién ganó y por qué. Es público: cualquiera puede mirar cómo se decidió.",
+      "El tamaño cambia las reglas. Una licitación chica puede cerrar en cinco días y sin garantías; una grande da veinte o treinta días y exige boleta y antecedentes. El código de dos letras al final del ID —L1, LE, LP, LQ, LR— dice en qué tramo está.",
+      "No es el único camino. El Estado también compra por convenio marco, por Compra Ágil y, en los casos que la ley permite, por trato directo. Pero la licitación pública es la regla general: todo lo demás es excepción.",
+    ],
+    paraTi: [
+      "Se puede partir sin experiencia previa. Los tramos chicos y la Compra Ágil casi nunca piden historial, y ahí es donde se construye el primero.",
+      "No se gana por ser el más barato. Se gana por puntaje, y el precio suele pesar entre 40% y 80% según el rubro. Leer los criterios antes de cotizar cambia el precio que pones.",
+      "Perder también sirve. El cuadro comparativo se publica con el puntaje de todos, así que puedes ver exactamente en qué línea te ganaron.",
+    ],
+    error:
+      "Postular a todo lo que suene parecido a lo que vendes. Preparar una oferta cuesta días; postular a tres que calzan de verdad rinde más que a veinte que calzan a medias.",
+    cierre: {
+      texto:
+        "Con tu RUT armamos tu perfil y te mostramos qué licitaciones calzan con lo que vendes hoy — sin que tengas que revisar el portal.",
+      boton: "Ver las que calzan contigo",
+    },
+    vecinos: ["tipos-de-licitacion-l1-le-lp", "compras-publicas", "compra-agil"],
+  },
+
+  {
+    slug: "compras-publicas",
+    termino: "Compras públicas",
+    familia: "El proceso",
+    definicion:
+      "Es todo lo que el Estado compra para funcionar: desde insumos de un consultorio hasta obras y servicios profesionales. En Chile se rige por la Ley 19.886 y pasa casi todo por Mercado Público.",
+    cuerpo: [
+      "Cada organismo público —ministerios, municipalidades, hospitales, universidades estatales, Fuerzas Armadas— necesita comprar para operar. Como esa plata sale de impuestos, la ley obliga a que las compras sean transparentes, comparables y abiertas a quien quiera participar.",
+      "El sistema tiene cuatro puertas. La licitación pública es la regla general. El convenio marco funciona como un catálogo donde ChileCompra ya licitó y los organismos compran directo. La Compra Ágil resuelve lo chico con tres cotizaciones. Y el trato directo es la excepción, sólo en las causales que la ley señala.",
+      "Todo se publica. Qué se compró, a quién, por cuánto y con qué fundamento: eso es información pública y cualquiera puede consultarla. Es una de las diferencias grandes con vender al sector privado.",
+      "El volumen es alto y constante. Se publican miles de procesos al día en todo el país, en todos los rubros imaginables, y el Estado sigue comprando aunque la economía se enfríe. Es de los pocos clientes que no desaparece.",
+      "También hay reglas de pago. La normativa fija plazos, y desde la reforma de 2025 se reforzó ese punto, que históricamente ha sido el dolor más grande de los proveedores.",
+    ],
+    paraTi: [
+      "Es un cliente distinto al privado: no negocias, cumples reglas. A cambio, el proceso es predecible y quien lo entiende compite en igualdad con empresas mucho más grandes.",
+      "La información pública juega a tu favor. Puedes ver a qué precio se adjudicó antes lo mismo que vas a ofertar, y con quién trabaja habitualmente cada organismo.",
+      "No todos los organismos pagan igual de bien ni de rápido. Antes de comprometer capital de trabajo, vale la pena mirar el historial del comprador.",
+    ],
+    error:
+      "Tratarlo como una venta comercial normal. Acá no hay reunión que resuelva un requisito faltante: lo que dicen las bases es lo que manda, y se aplica igual para todos.",
+    cierre: {
+      texto:
+        "Puedes ver todo lo que el Estado publica filtrado por lo que tú vendes, y con el precio al que se adjudicó antes lo mismo.",
+      boton: "Ver el mercado",
+    },
+    vecinos: ["que-es-una-licitacion-publica", "convenio-marco", "orden-de-compra"],
+  },
+
+  {
+    slug: "orden-de-compra",
+    termino: "Orden de compra",
+    nombreLargo: "OC",
+    familia: "El proceso",
+    definicion:
+      "Es el documento que emite el organismo y que formaliza la compra. Hay que aceptarlo en Mercado Público, y recién ahí queda autorizado entregar y facturar.",
+    cuerpo: [
+      "Es el paso que más gente se salta mentalmente. Ganar una licitación no es vender: la adjudicación declara al ganador, pero lo que autoriza a entregar y a facturar es la orden de compra emitida y aceptada.",
+      "Llega a tu cuenta de Mercado Público y hay que aceptarla ahí. Si no la aceptas dentro del plazo, el sistema la puede dejar sin efecto — y hay proveedores que han perdido negocios ya ganados simplemente por no revisar la plataforma.",
+      "Antes de aceptar, conviene leerla. Lleva el detalle de lo que se compra, el monto, el plazo de entrega y las condiciones. Si algo no calza con lo que ofertaste, el momento de decirlo es antes de aceptar, no después de despachar.",
+      "No sólo salen de licitaciones. Compra Ágil, convenio marco y trato directo también terminan en una orden de compra: es el documento común a todos los canales.",
+      "Después de entregar viene la recepción conforme del organismo, y eso es lo que habilita el pago. La orden de compra aceptada es el respaldo de todo el ciclo.",
+    ],
+    paraTi: [
+      "Revisa la plataforma aunque no estés esperando nada. Una orden de compra que nadie aceptó es un negocio ganado que se pierde solo.",
+      "No produzcas ni despaches antes de tener la OC aceptada. Sin ella no hay respaldo formal de lo que estás gastando.",
+      "Tu historial de órdenes de compra es tu currículum ante el Estado: queda público y es lo que otros organismos miran para saber si cumples.",
+    ],
+    error:
+      "Confundir adjudicación con venta. Entre una y otra pueden pasar semanas, y hay casos donde la adjudicación se deja sin efecto antes de que llegue la orden.",
+    cierre: {
+      texto:
+        "Tus órdenes de compra se siguen desde la misma pantalla donde detectaste la licitación, sin saltar entre el portal y tu planilla.",
+      boton: "Ver cómo se siguen",
+    },
+    vecinos: ["adjudicacion", "compras-publicas", "compra-agil"],
+  },
+
   /* ── 2 · Un término de la ley nueva ───────────────────────────
      La Ley 21.634 rige desde 2025. Sus figuras tienen poco más de un
      año de vida y casi nadie las ha escrito: el volcado grande del
