@@ -7,6 +7,7 @@ import {
   tituloTermino,
   descripcionTermino,
 } from "./glosario";
+import { COMERCIALES, rutaComercial } from "./comerciales";
 
 /* Todo lo que Google y las redes leen de cada página, en un lugar.
 
@@ -82,6 +83,17 @@ export const PAGINAS: Record<string, MetaPagina> = {
      `glosario.ts`, su ruta queda prerenderizada y en el sitemap sin
      tocar nada acá — que es justo lo que evita que una entrada
      quede publicada pero invisible para Google. */
+  ...Object.fromEntries(
+    COMERCIALES.map((c) => [
+      rutaComercial(c.slug),
+      {
+        ruta: rutaComercial(c.slug),
+        titulo: c.tituloSeo,
+        descripcion: c.descripcion,
+      },
+    ]),
+  ),
+
   ...Object.fromEntries(
     TERMINOS.map((t) => [
       rutaTermino(t.slug),
@@ -222,7 +234,27 @@ const jsonLdMigas = (slug: string) => {
   };
 };
 
+/* Las comerciales declaran sus preguntas frecuentes.
+
+   No es adorno: Google puede mostrarlas desplegables dentro del
+   propio resultado de búsqueda, y eso ocupa el doble de alto en la
+   pantalla que el resultado del vecino. En una búsqueda donde
+   competimos contra sitios con años de ventaja, ganar espacio
+   visual vale tanto como ganar una posición. */
+const jsonLdFaqDe = (faqs: { q: string; a: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
+
 export function jsonLdDe(ruta: string): object[] {
+  const com = COMERCIALES.find((c) => rutaComercial(c.slug) === ruta);
+  if (com) return [jsonLdOrganizacion(), jsonLdFaqDe(com.faqs)];
+
   if (ruta === "/") return [jsonLdOrganizacion(), jsonLdProducto(), jsonLdFaq()];
   if (ruta === "/precios") return [jsonLdProducto()];
   if (ruta === RUTA_GLOSARIO) return [jsonLdGlosario()];

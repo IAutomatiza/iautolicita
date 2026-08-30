@@ -1663,7 +1663,12 @@ export const rutaTermino = (slug: string) => `${RUTA_GLOSARIO}/${slug}`;
 export function tituloTermino(t: Termino): string {
   const base = `${t.termino} en Mercado Público`;
   const conMarca = `${base} — IAutoLicita`;
-  return conMarca.length <= 60 ? conMarca : `${base}: qué es`;
+  // Tres escalones, del más completo al más corto. El nombre del
+  // sitio es lo primero que se sacrifica: vale más la palabra que la
+  // marca cuando Google sólo muestra sesenta caracteres.
+  if (conMarca.length <= 60) return conMarca;
+  if (base.length <= 60) return base;
+  return t.termino;
 }
 
 export function descripcionTermino(t: Termino): string {

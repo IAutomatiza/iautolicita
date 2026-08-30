@@ -8,6 +8,9 @@ import { enlaceApp } from "../lib/cta";
 // two flat trust-signal links, and a 3-tier CTA cascade on the right.
 
 const productLinks = [
+  { href: "/compra-agil",           title: "Compra Ágil",           desc: "El canal rápido bajo 100 UTM", ruta: true },
+  { href: "/licitaciones-publicas", title: "Licitaciones públicas", desc: "Todo el mercado, filtrado por lo que vendes", ruta: true },
+  { href: "/buscador-licitaciones", title: "Buscador con IA",       desc: "Busca por producto, no por palabras", ruta: true },
   { href: "#capacidades", title: "Capacidades", desc: "Detección, precio real, comprador y alertas" },
   { href: "#como",        title: "Cómo funciona", desc: "El flujo end-to-end" },
   { href: "#resultados",  title: "Con y sin IAutoLicita", desc: "Lo que cambia cuando conoces el precio real" },
@@ -147,7 +150,7 @@ export default function Nav() {
                 {productLinks.map((l) => (
                   <Link
                     key={l.href}
-                    to={aSeccion(l.href)}
+                    to={"ruta" in l && l.ruta ? l.href : aSeccion(l.href)}
                     onClick={() => setProductOpen(false)}
                     className="block px-3 py-2.5 rounded-lg hover:bg-amber-400/[0.06] transition-colors group/item"
                   >

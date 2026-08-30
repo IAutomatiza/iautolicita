@@ -9,6 +9,8 @@ import LegalPage from "./pages/LegalPage";
 import ContactoPage from "./pages/ContactoPage";
 import GlosarioPage from "./pages/GlosarioPage";
 import GlosarioTerminoPage from "./pages/GlosarioTerminoPage";
+import ComercialPage from "./pages/ComercialPage";
+import { COMERCIALES } from "./lib/comerciales";
 import { PRIVACIDAD, TERMINOS } from "./lib/legal";
 
 /* React Router navega pero NO hace scroll: un Link a "#faq" cambia
@@ -75,6 +77,13 @@ export default function App() {
       <Route path="/contacto" element={<ContactoPage />} />
       <Route path="/glosario" element={<GlosarioPage />} />
       <Route path="/glosario/:slug" element={<GlosarioTerminoPage />} />
+      {/* Las comerciales viven en la raíz —/compra-agil, no
+          /paginas/compra-agil— porque una URL corta pesa en el
+          resultado de búsqueda y estas páginas están hechas para
+          aparecer ahí. */}
+      {COMERCIALES.map((c) => (
+        <Route key={c.slug} path={`/${c.slug}`} element={<ComercialPage slug={c.slug} />} />
+      ))}
       <Route path="/privacidad" element={<LegalPage doc={PRIVACIDAD} />} />
       <Route path="/terminos" element={<LegalPage doc={TERMINOS} />} />
     </Routes>
