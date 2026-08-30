@@ -40,7 +40,7 @@ export const PAGINAS: Record<string, MetaPagina> = {
   "/": {
     ruta: "/",
     titulo:
-      "Alertas de licitaciones de Mercado Público — IAutoLicita",
+      "Licitaciones de Mercado Público — IAutoLicita",
     descripcion:
       "Vigilamos Mercado Público y te avisamos solo las licitaciones que calzan con lo que vendes. Te leemos las bases y te decimos a qué precio se adjudicó antes. Plan gratis, sin tarjeta.",
   },
