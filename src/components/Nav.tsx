@@ -29,6 +29,11 @@ const productLinks = [
    es peor que un menú corto. */
 const recursosLinks = [
   {
+    href: "/guias",
+    title: "Guías",
+    desc: "Los procesos completos, de principio a fin",
+  },
+  {
     href: "/glosario",
     title: "Glosario",
     desc: "Qué significa cada palabra de una licitación",

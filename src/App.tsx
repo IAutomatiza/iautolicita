@@ -11,6 +11,9 @@ import GlosarioPage from "./pages/GlosarioPage";
 import GlosarioTerminoPage from "./pages/GlosarioTerminoPage";
 import ComercialPage from "./pages/ComercialPage";
 import { COMERCIALES } from "./lib/comerciales";
+import GuiasPage from "./pages/GuiasPage";
+import GuiaPage from "./pages/GuiaPage";
+import { GUIAS } from "./lib/guias";
 import { PRIVACIDAD, TERMINOS } from "./lib/legal";
 
 /* React Router navega pero NO hace scroll: un Link a "#faq" cambia
@@ -81,6 +84,10 @@ export default function App() {
           /paginas/compra-agil— porque una URL corta pesa en el
           resultado de búsqueda y estas páginas están hechas para
           aparecer ahí. */}
+      <Route path="/guias" element={<GuiasPage />} />
+      {GUIAS.map((g) => (
+        <Route key={g.slug} path={`/guias/${g.slug}`} element={<GuiaPage slug={g.slug} />} />
+      ))}
       {COMERCIALES.map((c) => (
         <Route key={c.slug} path={`/${c.slug}`} element={<ComercialPage slug={c.slug} />} />
       ))}

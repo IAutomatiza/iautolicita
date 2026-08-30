@@ -8,6 +8,7 @@ import {
   descripcionTermino,
 } from "./glosario";
 import { COMERCIALES, rutaComercial } from "./comerciales";
+import { GUIAS, RUTA_GUIAS, rutaGuia } from "./guias";
 
 /* Todo lo que Google y las redes leen de cada página, en un lugar.
 
@@ -83,6 +84,20 @@ export const PAGINAS: Record<string, MetaPagina> = {
      `glosario.ts`, su ruta queda prerenderizada y en el sitemap sin
      tocar nada acá — que es justo lo que evita que una entrada
      quede publicada pero invisible para Google. */
+  [RUTA_GUIAS]: {
+    ruta: RUTA_GUIAS,
+    titulo: "Guías de licitaciones — IAutoLicita",
+    descripcion:
+      "Los procesos completos de venta al Estado explicados de principio a fin: qué hacer, en qué orden, cuánto demora cada trámite y dónde se pierde la mayoría.",
+  },
+
+  ...Object.fromEntries(
+    GUIAS.map((g) => [
+      rutaGuia(g.slug),
+      { ruta: rutaGuia(g.slug), titulo: g.tituloSeo, descripcion: g.descripcion },
+    ]),
+  ),
+
   ...Object.fromEntries(
     COMERCIALES.map((c) => [
       rutaComercial(c.slug),
@@ -254,6 +269,8 @@ const jsonLdFaqDe = (faqs: { q: string; a: string }[]) => ({
 export function jsonLdDe(ruta: string): object[] {
   const com = COMERCIALES.find((c) => rutaComercial(c.slug) === ruta);
   if (com) return [jsonLdOrganizacion(), jsonLdFaqDe(com.faqs)];
+  const gui = GUIAS.find((g) => rutaGuia(g.slug) === ruta);
+  if (gui) return [jsonLdOrganizacion(), jsonLdFaqDe(gui.faqs)];
 
   if (ruta === "/") return [jsonLdOrganizacion(), jsonLdProducto(), jsonLdFaq()];
   if (ruta === "/precios") return [jsonLdProducto()];
