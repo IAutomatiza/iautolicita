@@ -171,7 +171,7 @@ export const TERMINOS: Termino[] = [
         "Puedes ver el movimiento del convenio marco y las licitaciones al mismo tiempo, sin tener que revisar dos lugares distintos.",
       boton: "Ver los dos canales",
     },
-    vecinos: ["trato-directo", "compra-agil", "tipos-de-licitacion-l1-le-lp"],
+    vecinos: ["gran-compra", "trato-directo", "compra-agil"],
   },
 
   {
@@ -198,7 +198,7 @@ export const TERMINOS: Termino[] = [
         "Los tratos directos de un organismo se pueden revisar igual que sus licitaciones: con quién compra, en qué y cada cuánto.",
       boton: "Mirar un organismo",
     },
-    vecinos: ["convenio-marco", "compra-agil", "ley-19886"],
+    vecinos: ["licitacion-privada", "convenio-marco", "compra-agil"],
   },
 
   {
@@ -499,7 +499,7 @@ export const TERMINOS: Termino[] = [
         "Puedes ver contra quién competiste, por cuánto se adjudicó y qué diferencia hubo con tu oferta — para que la próxima llegues con el precio calibrado.",
       boton: "Ver adjudicaciones",
     },
-    vecinos: ["criterios-de-evaluacion", "licitacion-desierta", "garantia-de-fiel-cumplimiento"],
+    vecinos: ["readjudicacion", "criterios-de-evaluacion", "licitacion-desierta"],
   },
 
   {
@@ -553,7 +553,7 @@ export const TERMINOS: Termino[] = [
         "Puedes ver qué licitaciones exigen acreditación y cuáles no, antes de decidir si te conviene pagarla.",
       boton: "Ver qué exigen",
     },
-    vecinos: ["declaracion-jurada", "bases-administrativas", "compra-agil"],
+    vecinos: ["certificado-de-inscripcion", "declaracion-jurada", "bases-administrativas"],
   },
 
   {
@@ -582,7 +582,7 @@ export const TERMINOS: Termino[] = [
         "No necesitas saberte la ley para vender al Estado: Lici lee las bases de cada licitación y te dice en castellano qué te están exigiendo.",
       boton: "Que Lici lo lea",
     },
-    vecinos: ["ley-21634", "decreto-661", "trato-directo"],
+    vecinos: ["reglamento-ds-250", "ley-21634", "decreto-661"],
   },
 
   {
@@ -610,7 +610,7 @@ export const TERMINOS: Termino[] = [
         "Los procedimientos nuevos aparecen mezclados con todo lo demás en el portal. Puedes recibirlos identificados y aparte.",
       boton: "Ver cómo llegan",
     },
-    vecinos: ["ley-19886", "dialogo-competitivo", "decreto-661"],
+    vecinos: ["subasta-inversa-electronica", "ley-19886", "dialogo-competitivo"],
   },
 
   {
@@ -637,7 +637,7 @@ export const TERMINOS: Termino[] = [
         "No necesitas seguir la normativa al día: cada licitación llega con sus plazos y exigencias ya leídos y en castellano.",
       boton: "Ver una licitación",
     },
-    vecinos: ["ley-19886", "ley-21634", "tipos-de-licitacion-l1-le-lp"],
+    vecinos: ["tribunal-de-contratacion-publica", "ley-19886", "ley-21634"],
   },
 
   /* ══ Tanda 2 · las que destapó el Planificador ════════════════
@@ -728,7 +728,7 @@ export const TERMINOS: Termino[] = [
         "Tus órdenes de compra se siguen desde la misma pantalla donde detectaste la licitación, sin saltar entre el portal y tu planilla.",
       boton: "Ver cómo se siguen",
     },
-    vecinos: ["adjudicacion", "compras-publicas", "compra-agil"],
+    vecinos: ["multas-y-sanciones", "adjudicacion", "compras-publicas"],
   },
 
   /* ══ Tanda 3 · el cluster de proveedores ══════════════════════
@@ -820,7 +820,7 @@ export const TERMINOS: Termino[] = [
         "Puedes seguir a las unidades que te compran y enterarte cuando publican algo nuevo de tu rubro.",
       boton: "Seguir a mis compradores",
     },
-    vecinos: ["organismo-comprador", "tipos-de-licitacion-l1-le-lp", "orden-de-compra"],
+    vecinos: ["id-de-licitacion", "organismo-comprador", "tipos-de-licitacion-l1-le-lp"],
   },
 
   {
@@ -903,7 +903,684 @@ export const TERMINOS: Termino[] = [
         "Con tu RUT deducimos tus productos y sus códigos solos, a partir de lo que ya le has vendido al Estado.",
       boton: "Ver mi perfil",
     },
-    vecinos: ["bases-tecnicas", "proveedor-del-estado", "plan-anual-de-compras"],
+    vecinos: ["rubro", "bases-tecnicas", "proveedor-del-estado"],
+  },
+
+  {
+    slug: "bases-tipo",
+    termino: "Bases tipo",
+    familia: "Documentos",
+    definicion:
+      "Son bases ya aprobadas por Contraloría que los organismos pueden usar tal cual para comprar cosas frecuentes, sin tener que redactarlas ni mandarlas a revisar cada vez.",
+    cuerpo: [
+      "Redactar bases desde cero es lento y cada juego nuevo puede tener que pasar por toma de razón en Contraloría. Para las compras que se repiten en todo el Estado —aseo, alimentación, vigilancia, suministros de oficina— se aprobaron plantillas listas.",
+      "Cuando un organismo las usa, el proceso se acelera mucho: no hay redacción propia ni revisión previa, y la licitación sale antes.",
+      "Para el proveedor tienen una ventaja enorme que casi nadie aprovecha: son siempre iguales. Los requisitos, los anexos, la forma de evaluar y los plazos no cambian entre un organismo y otro.",
+      "Eso significa que la primera vez que preparas una oferta contra bases tipo haces el trabajo completo; de ahí en adelante, reutilizas. Y el organismo puede agregar anexos específicos, pero el cuerpo se mantiene.",
+    ],
+    paraTi: [
+      "Si tu rubro tiene bases tipo, arma tu carpeta una vez y bien. Cada licitación siguiente te va a costar una fracción del tiempo.",
+      "Revisa igual los anexos propios del organismo. Es ahí donde meten lo específico, y es lo único que cambia entre un proceso y otro.",
+      "Como el formato es conocido, la competencia también lo tiene resuelto. La diferencia se juega en precio y en los criterios que suman puntos, no en armar bien los papeles.",
+    ],
+    error:
+      "Asumir que por ser tipo son idénticas y no leerlas. Se actualizan, y hay versiones distintas según el año y el rubro.",
+    cierre: {
+      texto:
+        "Lici te dice si una licitación usa bases tipo y qué anexos propios agregó el organismo, sin que tengas que leerlas de nuevo.",
+      boton: "Revisar una licitación",
+    },
+    vecinos: ["bases-administrativas", "anexos", "bases-tecnicas"],
+  },
+
+  {
+    slug: "anexos",
+    termino: "Anexos",
+    familia: "Documentos",
+    definicion:
+      "Son los formularios que el organismo adjunta a las bases y que hay que llenar, firmar y subir junto con la oferta. Un anexo mal llenado o faltante deja la oferta fuera.",
+    cuerpo: [
+      "Las bases dicen qué se pide; los anexos son donde tú lo respondes. Suelen incluir la identificación del oferente, la declaración jurada de inhabilidades, el detalle de la experiencia, la oferta económica en su formato y a veces certificados específicos del rubro.",
+      "Vienen numerados —Anexo 1, Anexo 2, y así— y las bases dicen cuáles son obligatorios y cuáles opcionales. Los opcionales normalmente suman puntaje: no llenarlos no descalifica, pero regala puntos.",
+      "El formato importa. Muchas bases exigen usar el formulario exacto que entregó el organismo; presentar la misma información en un documento propio se puede rechazar por forma aunque el contenido sea correcto.",
+      "Y hay que revisar quién firma. Normalmente el representante legal según la escritura vigente, y a veces con firma electrónica avanzada. Un anexo firmado por quien no correspondía es un anexo inválido.",
+    ],
+    paraTi: [
+      "Es la causa más frecuente y más evitable de quedar fuera. No se pierde por precio ni por técnica: se pierde por un formulario.",
+      "Haz la lista de anexos antes de empezar a cotizar. Si alguno pide algo que no tienes —una certificación, un balance auditado— mejor saberlo el primer día.",
+      "Los opcionales que suman puntaje son la forma más barata de subir. Muchos competidores los dejan en blanco por apuro.",
+    ],
+    error:
+      "Dejar los anexos para el final. Se llenan rápido sólo si todo está a mano; si falta una firma o un certificado, ya no hay tiempo.",
+    cierre: {
+      texto:
+        "Lici lee las bases y te lista los anexos que piden, cuáles son obligatorios y cuáles suman puntos.",
+      boton: "Ver qué anexos piden",
+    },
+    vecinos: ["bases-administrativas", "declaracion-jurada", "bases-tipo"],
+  },
+
+  {
+    slug: "oferta-tecnica",
+    termino: "Oferta técnica",
+    familia: "Documentos",
+    definicion:
+      "Es la parte de tu propuesta que describe qué vas a entregar y cómo: características del producto o servicio, plazos, equipo, metodología y todo lo que las bases técnicas pidan demostrar.",
+    cuerpo: [
+      "Se evalúa aparte de la económica y muchas veces antes. En procesos grandes hay apertura técnica primero: si tu oferta técnica no pasa, la económica ni se abre — nadie llega a mirar tu precio.",
+      "Lo primero que se revisa es la admisibilidad: si cumples las especificaciones excluyentes. Ahí no hay puntaje parcial, es sí o no. Recién después se puntúa el resto.",
+      "Lo que suma varía según el rubro: experiencia comprobable en trabajos similares, plazo de entrega más corto que el máximo, certificaciones, composición del equipo, o una metodología mejor explicada.",
+      "Y hay una regla que sorprende a quien viene del mundo privado: lo que no está escrito no existe. Si tienes diez años de experiencia pero no adjuntaste los certificados que las bases piden como respaldo, para la evaluación esa experiencia no cuenta.",
+    ],
+    paraTi: [
+      "Documenta todo lo que afirmes, en el formato que pidan. La comisión evalúa papeles, no confianza.",
+      "Si hay especificaciones excluyentes que no cumples, es mejor no postular: perder tiempo armando una oferta inadmisible cuesta más que dejarla pasar.",
+      "Ofrecer más de lo pedido no siempre suma. Si el criterio no premia esa mejora, es margen regalado.",
+    ],
+    error:
+      "Escribirla pensando en convencer, como una propuesta comercial. La comisión no evalúa persuasión: revisa si cumples cada punto que las bases enumeran.",
+    cierre: {
+      texto:
+        "Lici te dice qué exige la oferta técnica de una licitación y qué documentos hay que adjuntar para respaldarla.",
+      boton: "Ver qué exigen",
+    },
+    vecinos: ["bases-tecnicas", "oferta-economica", "criterios-de-evaluacion"],
+  },
+
+  {
+    slug: "oferta-economica",
+    termino: "Oferta económica",
+    familia: "Documentos",
+    definicion:
+      "Es el precio que ofreces, presentado en el formato que exijan las bases. Se evalúa con una fórmula publicada de antemano y casi nunca decide sola: pesa junto a los otros criterios.",
+    cuerpo: [
+      "El primer punto que confunde es si el precio va neto o con IVA. Las bases lo dicen, y equivocarse cambia tu oferta en un 19%: puedes quedar fuera por caro o ganar con un precio que no te da el margen que calculaste.",
+      "También hay que revisar qué incluye. Despacho, instalación, capacitación, garantía extendida: si las bases lo piden y tú no lo incluiste, ese costo lo vas a poner igual, sólo que de tu bolsillo.",
+      "La fórmula de evaluación importa tanto como el número. No es lo mismo que el puntaje se reparta en proporción al precio que se calcule dividiendo el menor precio ofertado entre el tuyo — en la segunda, bajar mucho da menos ventaja de la que uno cree.",
+      "Y existe el precio demasiado bajo. Muchas bases permiten al organismo pedir explicaciones o rechazar una oferta que parece inviable, porque un proveedor que no puede cumplir a ese precio es un problema para el contrato.",
+    ],
+    paraTi: [
+      "Antes de fijar el precio, lee la fórmula. Si el precio pesa 40%, bajarlo agresivamente sacrifica margen a cambio de pocos puntos.",
+      "Mete el costo de postular en el precio: garantías, tiempo de preparación y los procesos que no vas a ganar. Si ganas uno de cada cinco, ese es el costo real de cada venta.",
+      "Mira a qué precio se adjudicó lo mismo antes. Es información pública y es la mejor referencia que existe para no ofertar a ciegas.",
+    ],
+    error:
+      "Cotizar como al sector privado, dejando espacio para negociar. Acá no hay negociación posterior: el precio que pones es el que se evalúa y con el que quedas.",
+    cierre: {
+      texto:
+        "Puedes ver a qué precio se adjudicó antes lo mismo que vas a ofertar, con su rango real, antes de decidir el tuyo.",
+      boton: "Ver el precio real",
+    },
+    vecinos: ["oferta-tecnica", "criterios-de-evaluacion", "adjudicacion"],
+  },
+
+  {
+    slug: "certificado-de-inscripcion",
+    termino: "Certificado de inscripción",
+    familia: "Documentos",
+    definicion:
+      "Es el documento que emite ChileProveedores acreditando que estás inscrito y en qué estado. Varias licitaciones lo piden como respaldo, y algunas lo exigen vigente al momento de adjudicar.",
+    cuerpo: [
+      "Se descarga desde la plataforma y muestra tu identificación, tu estado en el registro y los rubros en que estás inscrito. Sirve para que el organismo verifique tus antecedentes sin pedírtelos uno por uno.",
+      "Tiene fecha de emisión, y ahí está lo importante: muchas bases exigen que sea reciente —treinta o sesenta días— así que uno de hace medio año se puede rechazar aunque tu registro esté al día.",
+      "No es lo mismo que estar hábil. El certificado dice cuál es tu estado; si ese estado es «no hábil» porque un documento venció, el certificado lo va a mostrar tal cual.",
+      "En procesos chicos y en Compra Ágil normalmente no se pide. Aparece en licitaciones donde el organismo quiere respaldo formal antes de adjudicar.",
+    ],
+    paraTi: [
+      "Descárgalo el mismo día que armas la oferta, no antes. Así la fecha de emisión siempre queda dentro del plazo que exijan.",
+      "Revisa que los rubros que aparecen incluyan el de la licitación. Si no está, el organismo puede cuestionar que estés inscrito para eso.",
+      "Si sale «no hábil», ahí tienes el aviso: hay un documento vencido que hay que renovar antes de seguir.",
+    ],
+    error:
+      "Guardar uno y reutilizarlo en varias licitaciones durante meses. La fecha de emisión lo delata y las bases suelen exigir que sea reciente.",
+    cierre: {
+      texto:
+        "Puedes ver de antemano qué licitaciones exigen certificado y con qué antigüedad, antes de comprometerte a postular.",
+      boton: "Ver qué exigen",
+    },
+    vecinos: ["chileproveedores", "acreditacion", "anexos"],
+  },
+
+  {
+    slug: "foro-de-aclaraciones",
+    termino: "Foro de aclaraciones",
+    familia: "El proceso",
+    definicion:
+      "Es la instancia formal donde los proveedores hacen preguntas sobre una licitación y el organismo responde por escrito. Las respuestas son públicas y pasan a formar parte de las bases.",
+    cuerpo: [
+      "Tiene un plazo acotado que las bases fijan: unos días desde la publicación para preguntar, y otros para que el organismo responda. Pasado eso, se cierra y ya no se admiten consultas.",
+      "Lo que se responde ahí tiene peso legal. Si el organismo aclara que una especificación se puede cumplir de otra forma, esa aclaración manda igual que las bases originales — y aplica para todos.",
+      "Todas las preguntas y respuestas son públicas, sin identificar quién preguntó. Eso significa dos cosas: que puedes leer lo que preguntaron los demás, y que lo que tú preguntes lo van a leer ellos.",
+      "Es la única vía formal. Llamar por teléfono al organismo no sirve: lo que no está en el foro no obliga a nadie y no se puede invocar después.",
+    ],
+    paraTi: [
+      "Léelo aunque no vayas a preguntar. Las respuestas suelen aclarar exactamente lo que a ti también te daba dudas, y a veces revelan que un requisito era más flexible de lo que parecía.",
+      "Si una especificación parece hecha a la medida de un proveedor —una marca sin «o equivalente», una certificación rarísima— el foro es donde se cuestiona. A veces el organismo corrige.",
+      "Cuidado con lo que preguntas. Una pregunta muy específica le muestra a la competencia por dónde vas.",
+    ],
+    error:
+      "Dejarlo pasar por apuro. Es gratis, toma minutos, y es la única oportunidad de que el organismo aclare por escrito algo que después puede costarte la oferta.",
+    cierre: {
+      texto:
+        "Te avisamos cuando se abre y cuando se cierra el foro de una licitación que estás siguiendo, para que no se te pase el plazo.",
+      boton: "Que me avisen",
+    },
+    vecinos: ["bases-administrativas", "publicacion", "apertura-de-ofertas"],
+  },
+
+  {
+    slug: "apertura-de-ofertas",
+    termino: "Apertura de ofertas",
+    familia: "El proceso",
+    definicion:
+      "Es el momento en que se abren las ofertas recibidas y se hace visible quién participó. En procesos grandes hay dos: primero la técnica y después, sólo para quienes pasaron, la económica.",
+    cuerpo: [
+      "Es un acto electrónico en la plataforma, a la hora exacta que dicen las bases. No hay prórroga ni tolerancia: una oferta subida un minuto después no entra, aunque el sistema estuviera lento.",
+      "En la apertura técnica se revisa la admisibilidad —si cumples los requisitos y presentaste todo— y ahí queda visible la lista de oferentes. Es el primer momento en que sabes contra quiénes estás compitiendo.",
+      "La apertura económica viene después y sólo incluye a los que pasaron la técnica. Ahí se hacen públicos los precios de todos.",
+      "En procesos chicos las dos aperturas ocurren juntas. Y todo queda en un acta pública que cualquiera puede consultar, incluidas las observaciones de por qué alguna oferta quedó inadmisible.",
+    ],
+    paraTi: [
+      "Sube tu oferta con horas de anticipación, no minutos. La plataforma se pone lenta cerca del cierre de procesos grandes, y esa es una excusa que no existe.",
+      "Después de la apertura, mira el acta aunque hayas perdido: ver quién ofertó y por cuánto es información que no se paga en ninguna parte.",
+      "Si una oferta quedó inadmisible, el acta dice por qué. Esas razones son la mejor lista de errores a no repetir.",
+    ],
+    error:
+      "Calcular el plazo hasta la hora de cierre. Hay que calcularlo hasta unas horas antes: subir documentos pesados toma tiempo y no se puede correr la hora.",
+    cierre: {
+      texto:
+        "Los cierres y las aperturas de las licitaciones que sigues quedan en un calendario, con aviso antes de que corra el plazo.",
+      boton: "Ver el calendario",
+    },
+    vecinos: ["foro-de-aclaraciones", "evaluacion-de-ofertas", "adjudicacion"],
+  },
+
+  {
+    slug: "evaluacion-de-ofertas",
+    termino: "Evaluación de ofertas",
+    familia: "El proceso",
+    definicion:
+      "Es la etapa en que la comisión revisa las ofertas admisibles y les asigna puntaje según los criterios publicados en las bases. De ahí sale el orden que define quién gana.",
+    cuerpo: [
+      "Se hace en dos pasos. Primero admisibilidad: quién cumple los requisitos formales y las especificaciones excluyentes. Las ofertas que no pasan quedan fuera y ya no se evalúan.",
+      "Después el puntaje. Cada criterio tiene su peso y su forma de calcularse, y todo eso estaba publicado antes de recibir ofertas. La comisión no puede inventar criterios nuevos ni cambiar los pesos.",
+      "El resultado queda en un informe de evaluación con el detalle de cada oferente en cada criterio. Ese cuadro se publica junto con la adjudicación y es información pública.",
+      "Durante la evaluación el organismo puede pedir aclaraciones o documentos que faltaban, siempre que no alteren la oferta. Se puede completar un certificado; no se puede cambiar el precio.",
+    ],
+    paraTi: [
+      "El cuadro comparativo es gratis y es la mejor escuela que hay. Cuando pierdas, léelo: te dice si fue por precio, por un criterio en blanco o por algo que no podías cumplir.",
+      "Si te piden una aclaración, responde rápido y exactamente lo que preguntan. Es una oportunidad de arreglar algo, no de mejorar la oferta.",
+      "Perder por poco margen en un criterio que sí podías cumplir es la señal más clara de dónde mejorar para la próxima.",
+    ],
+    error:
+      "No revisar el resultado cuando pierdes. Ahí está escrito exactamente por qué, y es la única forma de que la siguiente oferta sea mejor.",
+    cierre: {
+      texto:
+        "Puedes ver contra quién competiste, por cuánto ganó el adjudicado y qué diferencia hubo con tu oferta.",
+      boton: "Ver el resultado",
+    },
+    vecinos: ["criterios-de-evaluacion", "comision-evaluadora", "adjudicacion"],
+  },
+
+  {
+    slug: "comision-evaluadora",
+    termino: "Comisión evaluadora",
+    familia: "El proceso",
+    definicion:
+      "Es el grupo de funcionarios que evalúa las ofertas y propone a quién adjudicar. Sus integrantes se designan antes de abrir las ofertas y sus decisiones quedan en un acta pública.",
+    cuerpo: [
+      "Se conforma para dar garantías: que no sea una sola persona la que decide, y que quede constancia escrita de cómo se llegó al resultado. En procesos grandes suele ser obligatoria.",
+      "Sus integrantes se designan antes de conocer las ofertas, justamente para que la designación no dependa de quién se presentó.",
+      "Tienen obligaciones de probidad: si alguien tiene conflicto de interés con un oferente —parentesco, relación comercial, participación en la empresa— debe inhabilitarse. La Ley 21.634 reforzó bastante este punto.",
+      "Su decisión es una propuesta, no la adjudicación misma. La autoridad del organismo es la que adjudica formalmente, normalmente siguiendo la recomendación.",
+    ],
+    paraTi: [
+      "Que exista comisión te conviene: significa que hay un acta escrita explicando por qué ganó quien ganó, y eso lo puedes leer.",
+      "Si crees que hubo un conflicto de interés, hay vía formal para reclamar. No es habitual, pero existe y tiene plazos cortos.",
+      "El acta también muestra el criterio con que interpretaron las bases, y eso sirve para futuras licitaciones del mismo organismo.",
+    ],
+    error:
+      "Suponer que la evaluación la hace una persona a la que se puede convencer. Es un grupo, con acta, evaluando contra una pauta escrita antes de que existieran las ofertas.",
+    cierre: {
+      texto:
+        "Puedes revisar cómo evalúa cada organismo mirando sus procesos anteriores: qué pesó, qué observaciones hicieron y a quién adjudicaron.",
+      boton: "Mirar un organismo",
+    },
+    vecinos: ["evaluacion-de-ofertas", "criterios-de-evaluacion", "ley-21634"],
+  },
+
+  {
+    slug: "publicacion",
+    termino: "Publicación",
+    familia: "El proceso",
+    definicion:
+      "Es el momento en que la licitación aparece en Mercado Público y empieza a correr el plazo para ofertar. Desde ahí las bases son públicas y cualquiera puede participar.",
+    cuerpo: [
+      "El plazo mínimo depende del tramo. En una L1 pueden ser cinco días corridos; desde LE hacia arriba, diez o más; en los tramos grandes, veinte o treinta. Ese mínimo es legal: el organismo puede dar más tiempo, nunca menos.",
+      "Ese plazo es el tiempo real que tienes para todo: leer las bases, hacer preguntas en el foro, cotizar con tus proveedores, sacar la garantía si corresponde, llenar los anexos y subir la oferta.",
+      "El organismo puede modificar las bases después de publicar, y cuando lo hace suele ampliar el plazo. Esas modificaciones se publican y hay que revisarlas: cambian las reglas del proceso en curso.",
+      "También puede haber prórrogas, sobre todo si en el foro aparecieron dudas que obligan a aclarar algo importante.",
+    ],
+    paraTi: [
+      "Enterarse el día uno o el día siete cambia todo. Con diez días de plazo, llegar al quinto significa la mitad del tiempo para hacer lo mismo.",
+      "Revisa si hubo modificaciones antes de subir tu oferta. Preparar contra una versión antigua de las bases es un error caro y silencioso.",
+      "Cuenta hacia atrás desde el cierre: si necesitas garantía, resta una semana; si necesitas cotizar con un proveedor, resta lo que él tarde.",
+    ],
+    error:
+      "Empezar a trabajar la oferta cuando quedan dos días. La mayoría de las cosas que hacen falta —garantías, certificados, cotizaciones— dependen de terceros que no corren a tu ritmo.",
+    cierre: {
+      texto:
+        "Te avisamos el mismo día que se publica algo que calza contigo, no cuando ya quedan dos días.",
+      boton: "Que me avisen a tiempo",
+    },
+    vecinos: ["licitacion-revocada", "foro-de-aclaraciones", "apertura-de-ofertas"],
+  },
+
+  {
+    slug: "readjudicacion",
+    termino: "Readjudicación",
+    familia: "El proceso",
+    definicion:
+      "Es cuando el organismo deja sin efecto la adjudicación y se la da al oferente que quedó en segundo lugar, normalmente porque el ganador no cumplió los pasos posteriores.",
+    cuerpo: [
+      "Ganar no es el final. Después hay que entregar la garantía de fiel cumplimiento, firmar el contrato cuando corresponde y aceptar la orden de compra. Si el adjudicado no hace alguno de esos pasos en plazo, el organismo puede dejar sin efecto la adjudicación.",
+      "También ocurre si el ganador se desiste, si se descubre que estaba inhábil, o si no puede cumplir lo que ofertó.",
+      "En esos casos las bases suelen permitir readjudicar al siguiente en el orden de evaluación, sin repetir el proceso. Se hace por resolución fundada y se publica igual que la adjudicación original.",
+      "Para el que se desiste hay costo: pierde la garantía de seriedad, y el incumplimiento queda registrado en su historial.",
+    ],
+    paraTi: [
+      "Quedar segundo no es perder del todo. La readjudicación pasa más seguido de lo que la gente cree, sobre todo cuando el ganador ofertó demasiado barato.",
+      "No cierres el caso ni liberes el stock apenas se publica la adjudicación. Vale la pena esperar a que el ganador acepte la orden de compra.",
+      "Y si el que gana eres tú, cumple los plazos posteriores con la misma seriedad que la oferta: perder ahí cuesta la garantía y el historial.",
+    ],
+    error:
+      "Olvidarse de una licitación apenas se adjudica a otro. Si quedaste segundo, sigue publicada la posibilidad de que te llegue a ti.",
+    cierre: {
+      texto:
+        "Las licitaciones que sigues quedan en tu tablero con su estado, así que si algo cambia después de la adjudicación te enteras.",
+      boton: "Ver cómo se siguen",
+    },
+    vecinos: ["adjudicacion", "garantia-de-fiel-cumplimiento", "licitacion-desierta"],
+  },
+
+  {
+    slug: "licitacion-revocada",
+    termino: "Licitación revocada",
+    familia: "El proceso",
+    definicion:
+      "Es cuando el organismo deja sin efecto una licitación en curso por decisión propia, antes de adjudicar. Es distinto de declararla desierta, que ocurre por falta de ofertas admisibles.",
+    cuerpo: [
+      "Las razones son del organismo, no del mercado: se le acabó el presupuesto, cambió la necesidad, detectó un error en las bases, o una instrucción superior le cambió la prioridad.",
+      "Se hace por resolución fundada y se publica. Puede ocurrir antes o después del cierre de ofertas, pero siempre antes de adjudicar.",
+      "La diferencia con desierta importa. Desierta significa que el proceso llegó hasta el final y no hubo oferta adjudicable; revocada significa que el organismo lo detuvo. Y hay una consecuencia práctica: quedar desierta habilita causales de trato directo, revocarla no.",
+      "Si ya habías entregado garantía de seriedad, se devuelve.",
+    ],
+    paraTi: [
+      "Es frustrante porque el trabajo ya está hecho, pero la oferta no se pierde: si el organismo republica —y suele hacerlo cuando fue por un error de bases— llegas con todo listo.",
+      "Cuando se revoca por error en las bases, la republicación suele venir corregida. Vale la pena leer qué cambió: ahí está lo que el mercado le hizo notar.",
+      "Pide la devolución de la garantía. No siempre vuelve sola.",
+    ],
+    error:
+      "Confundirla con desierta. Son cosas distintas, con causas distintas y con consecuencias distintas para lo que viene después.",
+    cierre: {
+      texto:
+        "Te avisamos si una licitación que estabas trabajando se revoca o se republica, sin que tengas que revisar el portal.",
+      boton: "Que me avisen",
+    },
+    vecinos: ["licitacion-desierta", "publicacion", "adjudicacion"],
+  },
+
+  {
+    slug: "multas-y-sanciones",
+    termino: "Multas y sanciones",
+    familia: "El proceso",
+    definicion:
+      "Son las consecuencias de incumplir un contrato público: descuentos sobre lo facturado, cobro de la garantía, término anticipado y, en los casos graves, quedar inhabilitado para contratar con el Estado.",
+    cuerpo: [
+      "Las multas están en las bases y suelen ser por atraso: un porcentaje del valor por cada día hábil de retraso, con un tope. También las hay por entregar algo distinto a lo ofertado o por incumplir condiciones del servicio.",
+      "Se descuentan de lo que te van a pagar, o se cobran de la garantía de fiel cumplimiento si el descuento no alcanza.",
+      "En incumplimientos graves el organismo puede terminar el contrato anticipadamente, cobrar la garantía completa y dejar constancia en el registro. Esa constancia es pública.",
+      "Y ahí está el costo mayor, que no es el dinero: un historial con incumplimientos pesa en las evaluaciones futuras de todos los organismos, no sólo del que te sancionó.",
+    ],
+    paraTi: [
+      "Antes de ofertar, lee las multas y calcula el peor escenario. Un plazo apretado con multa diaria alta puede convertir un buen negocio en pérdida.",
+      "Si vas a atrasarte, avisa antes y por escrito. Muchas bases permiten justificar atrasos por causas no imputables, pero sólo si se informan a tiempo.",
+      "El historial vale más que cualquier contrato individual. Cumplir un contrato chico bien vale más que ganar uno grande y quedar mal.",
+    ],
+    error:
+      "Comprometer plazos optimistas para ganar puntaje. El plazo ofertado es exigible, y las multas se calculan sobre él, no sobre lo que era razonable.",
+    cierre: {
+      texto:
+        "Lici te dice qué multas contempla una licitación y sobre qué se calculan, antes de que comprometas un plazo.",
+      boton: "Revisar antes de ofertar",
+    },
+    vecinos: ["bases-administrativas", "garantia-de-fiel-cumplimiento", "orden-de-compra"],
+  },
+
+  {
+    slug: "gran-compra",
+    termino: "Gran compra",
+    familia: "Tipos de proceso",
+    definicion:
+      "Es la mini-licitación que se hace dentro del convenio marco cuando el monto supera cierto tope: en vez de comprar directo del catálogo, el organismo invita a competir a los proveedores que ya están adentro.",
+    cuerpo: [
+      "El convenio marco funciona como catálogo: el organismo elige y compra. Pero cuando el monto es alto, dejarlo a elección libre sería demasiada discrecionalidad, así que la ley obliga a competir.",
+      "El organismo publica su requerimiento dentro del convenio y los proveedores del catálogo presentan su oferta. Se evalúa con criterios publicados y se adjudica al mejor puntaje.",
+      "Es más rápido que una licitación pública normal —no hay que hacer todo el proceso desde cero— pero más exigente que comprar del catálogo.",
+      "Sólo pueden participar los que ya están en el convenio marco de ese rubro. Es una competencia cerrada al grupo que ganó su cupo en su momento.",
+    ],
+    paraTi: [
+      "Si estás en el convenio marco, las grandes compras son de los negocios más interesantes que hay: montos altos y competencia limitada a los del catálogo.",
+      "Hay que estar atento, porque se publican dentro del convenio y no aparecen mezcladas con las licitaciones normales. Muchos proveedores del catálogo se las pierden por no mirar ahí.",
+      "El precio del catálogo es tu punto de partida, pero en una gran compra puedes mejorarlo. Ahí es donde se define.",
+    ],
+    error:
+      "Estar en el convenio marco y no revisar las grandes compras. Es plata que se reparte entre pocos y se pierde por no mirar el lugar correcto.",
+    cierre: {
+      texto:
+        "Las grandes compras del convenio marco llegan junto con las licitaciones y las Compras Ágiles, en un solo lugar.",
+      boton: "Ver todos los canales",
+    },
+    vecinos: ["convenio-marco", "compra-agil", "tipos-de-licitacion-l1-le-lp"],
+  },
+
+  {
+    slug: "subasta-inversa-electronica",
+    termino: "Subasta inversa electrónica",
+    familia: "Tipos de proceso",
+    definicion:
+      "Es un procedimiento de la Ley 21.634 donde los proveedores compiten bajando el precio en vivo, en una sesión con hora de inicio y de término, y gana el precio más bajo al cerrar.",
+    cuerpo: [
+      "Al revés de una subasta común, acá no sube: baja. El organismo define qué compra y con qué especificaciones, y los proveedores van mejorando su oferta durante la sesión, viendo si están arriba o abajo.",
+      "Sirve para productos estandarizados donde lo único que diferencia es el precio: insumos, materiales, equipamiento común. No sirve para servicios complejos, donde la calidad de la propuesta importa.",
+      "Antes de la subasta hay una etapa de admisibilidad: el organismo verifica que cumples las especificaciones. Sólo los admisibles participan en la puja.",
+      "Es una de las figuras que trajo la reforma de 2025, así que todavía se usa poco y muchos proveedores no saben que existe.",
+    ],
+    paraTi: [
+      "Antes de entrar, define tu piso y no lo cruces. En vivo y viendo que te pasan, la tentación de bajar «un poquito más» es enorme, y ahí se pierde el margen.",
+      "Conocer el precio histórico del producto es la mejor preparación posible: te dice hasta dónde puede llegar la puja antes de dejar de tener sentido para todos.",
+      "Como es un procedimiento nuevo, hay menos competencia preparada. Eso es una ventaja mientras dure.",
+    ],
+    error:
+      "Entrar sin haber calculado el costo real. En una subasta el precio se define en minutos, y no hay tiempo de rehacer los números mientras corre.",
+    cierre: {
+      texto:
+        "Los procedimientos nuevos de la Ley 21.634 aparecen mezclados con todo lo demás en el portal. Puedes recibirlos identificados y aparte.",
+      boton: "Ver cómo llegan",
+    },
+    vecinos: ["ley-21634", "dialogo-competitivo", "oferta-economica"],
+  },
+
+  {
+    slug: "licitacion-privada",
+    termino: "Licitación privada",
+    familia: "Tipos de proceso",
+    definicion:
+      "Es una licitación en que el organismo invita a participar a proveedores determinados en vez de publicarla abierta. Sólo procede en los casos que la ley señala y hay que fundamentarla.",
+    cuerpo: [
+      "El nombre confunde: no tiene nada de privado en el sentido de secreto. Se publica igual en Mercado Público y el resultado es público; lo que cambia es que sólo pueden ofertar los invitados.",
+      "Procede en situaciones acotadas: cuando una licitación pública quedó desierta, cuando hay pocos proveedores capaces de proveer lo que se necesita, o en las causales que el reglamento enumera.",
+      "El organismo debe invitar a un mínimo de proveedores y justificar por escrito por qué usa esta vía y por qué eligió a esos. Esa resolución es pública.",
+      "Se evalúa igual que una pública: con criterios definidos antes, comisión evaluadora cuando corresponde, y adjudicación fundada.",
+    ],
+    paraTi: [
+      "Para que te inviten tienen que conocerte. Y te conocen por el historial: haberle vendido antes a ese organismo o tener antecedentes visibles en tu rubro.",
+      "Si una licitación pública de tu rubro queda desierta, es probable que venga una privada. Ese es el momento de estar visible para ese organismo.",
+      "El registro completo y al día en ChileProveedores también ayuda: es donde miran cuando arman la lista.",
+    ],
+    error:
+      "Creer que las invitaciones se consiguen conversando. Se consiguen apareciendo en el historial del rubro y del organismo — o sea, habiendo participado antes aunque no ganaras.",
+    cierre: {
+      texto:
+        "Puedes ver qué licitaciones de tu rubro quedaron desiertas, que es donde suele aparecer después una privada.",
+      boton: "Ver las desiertas",
+    },
+    vecinos: ["licitacion-desierta", "trato-directo", "que-es-una-licitacion-publica"],
+  },
+
+  {
+    slug: "poliza-de-seguro",
+    termino: "Póliza de seguro de ejecución inmediata",
+    familia: "Garantías",
+    definicion:
+      "Es una alternativa a la boleta bancaria: una aseguradora emite un documento que el organismo puede cobrar de inmediato si incumples. Sale más rápido que la boleta y no inmoviliza plata.",
+    cuerpo: [
+      "Cumple la misma función que la boleta —respaldar tu oferta o tu contrato— y las bases suelen aceptar cualquiera de las dos. La diferencia está en cómo se consigue y qué te cuesta.",
+      "Con la boleta, el banco te pide respaldo y normalmente inmoviliza el monto completo si no tienes línea de crédito. Con la póliza pagas una prima —un porcentaje del monto garantizado— y no congelas capital.",
+      "Los plazos también difieren. Una póliza puede salir en uno o dos días; una boleta, si es tu primera vez en ese banco, puede tomar una semana.",
+      "El costo es distinto en naturaleza: la prima no se recupera nunca, mientras que la plata tomada de la boleta vuelve cuando se libera. Cuál conviene depende de cuánta liquidez tengas y de cuántas garantías necesites a la vez.",
+    ],
+    paraTi: [
+      "Si no tienes línea bancaria, esta suele ser la vía. Muchas pymes trabajan sólo con pólizas justamente por eso.",
+      "Si vas a postular a varias licitaciones al mismo tiempo, la póliza gana: cuatro boletas simultáneas inmovilizan mucho capital de trabajo.",
+      "Revisa siempre qué formas acepta cada licitación. Algunas bases exigen boleta bancaria y punto.",
+    ],
+    error:
+      "Comparar sólo el precio. La boleta parece más barata porque la plata vuelve, pero el costo real incluye no poder usarla durante meses.",
+    cierre: {
+      texto:
+        "Lici lee las bases y te dice qué formas de garantía acepta cada licitación, por cuánto y hasta cuándo.",
+      boton: "Ver qué aceptan",
+    },
+    vecinos: ["que-es-una-boleta-de-garantia", "certificado-de-fianza", "garantia-de-seriedad-de-la-oferta"],
+  },
+
+  {
+    slug: "certificado-de-fianza",
+    termino: "Certificado de fianza",
+    familia: "Garantías",
+    definicion:
+      "Es una garantía emitida por una sociedad de garantía recíproca. Funciona como la boleta pero sin banco: la sociedad responde por ti, y tú pagas una comisión.",
+    cuerpo: [
+      "Las sociedades de garantía recíproca existen justamente para esto: dar respaldo financiero a empresas chicas que no tienen acceso fácil al crédito bancario.",
+      "Para el organismo el efecto es el mismo que una boleta: si incumples, cobra el certificado y le pagan. Por eso las bases suelen aceptarlo entre las formas válidas.",
+      "Para ti la diferencia es el acceso. No necesitas línea de crédito ni inmovilizar el monto: la sociedad evalúa tu empresa y, si te aprueba, emite. A cambio pagas una comisión que no se recupera.",
+      "Suele ser la vía más accesible para quien está partiendo, y varias de estas sociedades tienen convenios con organismos públicos de fomento que abaratan el costo.",
+    ],
+    paraTi: [
+      "Si el banco te dijo que no o te pidió inmovilizar plata que no tienes, esta es la puerta que queda.",
+      "Vale la pena tener la relación abierta antes de necesitarla. La primera evaluación toma tiempo; las siguientes emisiones son rápidas.",
+      "Compara la comisión contra el costo de tener el capital inmovilizado. Si postulas seguido, casi siempre conviene.",
+    ],
+    error:
+      "Descubrir que existe el día que el banco te rechazó la boleta y quedan tres días para el cierre. La relación se abre antes, no durante.",
+    cierre: {
+      texto:
+        "Lici te dice qué garantía te piden en cada licitación y con cuánta anticipación conviene empezar el trámite.",
+      boton: "Ver qué piden",
+    },
+    vecinos: ["poliza-de-seguro", "que-es-una-boleta-de-garantia", "garantia-de-fiel-cumplimiento"],
+  },
+
+  {
+    slug: "reglamento-ds-250",
+    termino: "Reglamento DS 250",
+    nombreLargo: "Decreto Supremo 250",
+    familia: "Normativa",
+    definicion:
+      "Es el reglamento de la Ley 19.886: donde están los detalles operativos que la ley no dice. Plazos exactos por tramo, montos, reglas de garantías y procedimientos.",
+    cuerpo: [
+      "La ley fija los principios —licitar es la regla, el trato directo es excepción, todo se publica— y el reglamento dice cómo se aplican en la práctica.",
+      "Ahí están las respuestas que uno de verdad necesita: cuántos días mínimos de publicación tiene cada tramo, desde qué monto se exige garantía, cómo se calcula, qué plazos corren después de adjudicar, qué causales de trato directo existen y qué hay que fundamentar en cada una.",
+      "Es la norma que más se consulta y la que menos se nombra: cuando alguien discute un plazo en el foro de aclaraciones, casi siempre está discutiendo el reglamento.",
+      "Con la Ley 21.634 quedó desfasado en varias partes, y el Decreto 661 lo actualizó para incorporar los procedimientos nuevos. Hoy hay que leerlos juntos.",
+    ],
+    paraTi: [
+      "No hay que leerlo entero. Sirve saber que existe y en qué parte está lo tuyo: plazos por tramo y reglas de garantías es el 90% de lo que un proveedor consulta.",
+      "Es tu respaldo cuando algo no calza. Si un organismo exige algo que el reglamento no contempla, ahí está el fundamento para consultarlo formalmente.",
+      "Léelo junto con el Decreto 661. Guiarse sólo por el reglamento antiguo lleva a aplicar plazos que ya cambiaron.",
+    ],
+    error:
+      "Buscar los plazos en la ley. La ley no los tiene: están en el reglamento, y por eso mucha gente concluye que «no está normado» cuando sí lo está.",
+    cierre: {
+      texto:
+        "No necesitas seguir la normativa: cada licitación llega con sus plazos y exigencias ya leídos y en castellano.",
+      boton: "Que Lici lo lea",
+    },
+    vecinos: ["ley-19886", "decreto-661", "ley-21634"],
+  },
+
+  {
+    slug: "tribunal-de-contratacion-publica",
+    termino: "Tribunal de Contratación Pública",
+    familia: "Normativa",
+    definicion:
+      "Es el tribunal especial donde un proveedor puede reclamar contra actos ilegales o arbitrarios ocurridos en una licitación, entre la publicación y la adjudicación.",
+    cuerpo: [
+      "Lo creó la Ley 19.886 para que los proveedores tuvieran una vía real de reclamo, distinta de quejarse ante el propio organismo que tomó la decisión.",
+      "Su competencia está acotada en el tiempo: cubre lo que ocurre entre la publicación de las bases y la adjudicación. Lo que pasa después —problemas de ejecución del contrato, pagos atrasados— va por otras vías.",
+      "El plazo para reclamar es corto: diez días hábiles desde que conociste el acto que impugnas. Pasado eso, la vía se cierra aunque tengas razón.",
+      "Se puede reclamar contra bases que direccionan hacia un proveedor, contra una evaluación que no siguió los criterios publicados, o contra una adjudicación sin fundamento.",
+    ],
+    paraTi: [
+      "Existe y funciona, pero el plazo es el problema: diez días hábiles pasan rápido cuando uno está decidiendo si vale la pena pelear.",
+      "Antes de llegar acá está el foro de aclaraciones. Muchos problemas de bases se resuelven ahí, gratis y sin conflicto.",
+      "Reclamar tiene un costo relacional con ese organismo. Es legítimo y a veces necesario, pero conviene tenerlo presente.",
+    ],
+    error:
+      "Dejar pasar el plazo mientras se evalúa si conviene reclamar. Los diez días hábiles corren igual, y después ya no hay dónde ir.",
+    cierre: {
+      texto:
+        "Puedes revisar cómo evalúa y adjudica un organismo antes de postularle, y evitar los procesos donde el resultado se ve venir.",
+      boton: "Mirar un organismo",
+    },
+    vecinos: ["ley-19886", "foro-de-aclaraciones", "adjudicacion"],
+  },
+
+  {
+    slug: "rubro",
+    termino: "Rubro",
+    familia: "El proceso",
+    definicion:
+      "Es la categoría de productos o servicios en que te inscribes en Mercado Público. Define qué licitaciones te aparecen y en qué procesos puedes ofertar.",
+    cuerpo: [
+      "Al registrarte eliges los rubros que corresponden a lo que vendes. Esa elección se traduce internamente a códigos de producto, y de ahí sale lo que el sistema te muestra y lo que te notifica.",
+      "El problema es que la lista de rubros no siempre calza con cómo uno describe su negocio. Una empresa que vende uniformes puede tener que buscar entre vestuario, textiles, equipos de protección personal y confección, y ninguna categoría cubre todo lo que hace.",
+      "Elegir de menos deja fuera oportunidades que sí te calzaban. Elegir de más llena de ruido: llegan avisos de cosas que no vendes, y el ruido termina en que dejas de mirar los avisos, que es peor.",
+      "Se pueden modificar cuando quieras. No es una decisión permanente, aunque mucha gente los deja como los puso el primer día y nunca los revisa.",
+    ],
+    paraTi: [
+      "Revisa tus rubros mirando licitaciones reales que sí te calzaban: fíjate en qué categoría estaban clasificadas. Es la forma más directa de descubrir cuál te falta.",
+      "Un competidor que gana cosas que a ti no te llegan probablemente tiene un rubro que tú no declaraste.",
+      "Si te llega mucho ruido, el problema no es que la plataforma funcione mal: es que hay un rubro demasiado amplio en tu perfil.",
+    ],
+    error:
+      "Elegirlos el primer día y no volver a mirarlos. Es la causa más común de «Mercado Público no sirve para lo mío».",
+    cierre: {
+      texto:
+        "Con tu RUT deducimos tus rubros y productos solos, a partir de lo que ya le has vendido al Estado — sin que tengas que adivinar categorías.",
+      boton: "Ver mi perfil",
+    },
+    vecinos: ["unspsc", "proveedor-del-estado", "plan-anual-de-compras"],
+  },
+
+  {
+    slug: "adjudicatario",
+    termino: "Adjudicatario",
+    familia: "Quién es quién",
+    definicion:
+      "Es el proveedor que ganó una licitación. Su nombre, su RUT y el monto adjudicado son información pública desde el momento en que se publica la adjudicación.",
+    cuerpo: [
+      "Cuando un organismo adjudica, publica la resolución con el ganador y el cuadro comparativo de la evaluación. Eso significa que se puede saber quién ganó, por cuánto, y qué puntaje sacó cada oferente en cada criterio.",
+      "Esa transparencia es parte del diseño del sistema: la plata es pública, así que quién la recibe también lo es.",
+      "Ser adjudicatario abre obligaciones inmediatas: entregar la garantía de fiel cumplimiento, firmar el contrato cuando corresponde y aceptar la orden de compra dentro de los plazos. No cumplirlas puede costar la adjudicación y la garantía de seriedad.",
+      "Y el historial de adjudicaciones de una empresa queda visible. Es, en la práctica, su currículum ante el Estado.",
+    ],
+    paraTi: [
+      "Mirar quién gana habitualmente en tu rubro te dice contra quién compites de verdad, y a qué nivel de precio se está adjudicando.",
+      "Si un organismo le adjudica siempre al mismo proveedor hace años, eso es una señal: puede ser un incumbente difícil de mover, o puede ser que nadie más se presenta.",
+      "Tu propio historial también lo miran a ti. Cumplir bien es lo que hace que la segunda venta cueste menos que la primera.",
+    ],
+    error:
+      "Ignorar quién ganó cuando pierdes. Es información pública y gratuita que dice exactamente a qué precio y con qué puntaje se gana en tu rubro.",
+    cierre: {
+      texto:
+        "Puedes revisar las adjudicaciones de tu rubro: quién ganó, por cuánto y con qué diferencia respecto de las otras ofertas.",
+      boton: "Ver adjudicaciones",
+    },
+    vecinos: ["adjudicacion", "organismo-comprador", "competencia-en-licitaciones"],
+  },
+
+  {
+    slug: "precio-de-referencia",
+    termino: "Precio de referencia",
+    familia: "El proceso",
+    definicion:
+      "Es el precio al que se ha adjudicado antes un producto o servicio parecido en compras públicas. No es un precio oficial: es lo que el historial muestra que el Estado ha pagado.",
+    cuerpo: [
+      "En compras públicas el precio no se negocia: se oferta una vez y se evalúa. Por eso saber a cuánto se adjudicó antes lo mismo es la diferencia entre ofertar con criterio y ofertar a ciegas.",
+      "Toda esa historia es pública. Cada adjudicación y cada orden de compra dice qué se compró, a quién y por cuánto, y eso permite construir un rango: dónde está el precio bajo, la mediana y el alto.",
+      "El rango importa más que el promedio. Un promedio se distorsiona con una compra grande o con una unidad de medida distinta; el rango muestra dónde se mueve el mercado de verdad.",
+      "Y hay una trampa clásica: la cantidad. Cuando una compra dice «1 unidad» a veces esa unidad es un lote completo, no una pieza. Comparar precios sin mirar eso lleva a conclusiones equivocadas.",
+      "El precio también varía por región y por organismo. Lo mismo puede costar distinto en Santiago que en una zona extrema, y eso no siempre es sobreprecio: puede ser logística.",
+    ],
+    paraTi: [
+      "Ofertar sin mirar el histórico es la forma más rápida de dejar plata en la mesa o de perder por caro sin saber por cuánto.",
+      "Si tu costo está muy por encima del rango histórico, esa licitación no es tuya. Reconocerlo temprano ahorra días de trabajo.",
+      "Y si está muy por debajo, revisa: puede que estés omitiendo un costo que las bases exigen incluir.",
+    ],
+    error:
+      "Guiarse por un solo caso. Una adjudicación aislada puede tener condiciones particulares; lo que sirve es el rango de varias.",
+    cierre: {
+      texto:
+        "Puedes ver el rango real de precio de lo que vas a ofertar —mínimo, mediana y máximo— antes de decidir el tuyo.",
+      boton: "Ver el precio real",
+    },
+    vecinos: ["oferta-economica", "adjudicatario", "unspsc"],
+  },
+
+  {
+    slug: "competencia-en-licitaciones",
+    termino: "Competencia en licitaciones",
+    familia: "El proceso",
+    definicion:
+      "Es cuántos proveedores ofertan en un proceso. Es información pública que aparece en el acta de apertura, y varía muchísimo entre rubros, regiones y organismos.",
+    cuerpo: [
+      "Hay licitaciones con quince oferentes y otras con uno solo. La diferencia no es azar: depende del rubro, del tamaño del contrato, de qué tan exigentes son las bases y de cuántos proveedores hay en esa región.",
+      "Los procesos con pocos oferentes suelen tener una razón. A veces son requisitos que casi nadie cumple; a veces es un rubro con poca oferta; y a veces simplemente nadie se enteró.",
+      "Ese último caso es el interesante. Miles de procesos se publican al día y la mayoría de los proveedores mira sólo los que le aparecen por casualidad, así que hay licitaciones perfectamente ganables que reciben dos ofertas.",
+      "También pasa lo contrario: procesos muy visibles, de organismos conocidos, donde compiten diez y el precio se hunde. Ganar ahí a veces significa ganar un contrato que no deja margen.",
+    ],
+    paraTi: [
+      "Menos competencia no significa peor negocio: significa que hay que mirar por qué. Si es porque las bases piden algo que tú sí tienes, es tu licitación.",
+      "Los rubros y regiones donde hay poca oferta son los mejores lugares para empezar. Menos competencia y más chance de construir historial.",
+      "Mirar cuántos ofertaron en procesos anteriores del mismo organismo y rubro es la mejor forma de estimar contra cuántos vas a competir.",
+    ],
+    error:
+      "Perseguir sólo las licitaciones grandes y visibles. Son las que todos miran, y el precio se define ahí abajo.",
+    cierre: {
+      texto:
+        "Puedes ver cuántos suelen ofertar en tu rubro y en qué procesos hay menos competencia, antes de decidir dónde poner el esfuerzo.",
+      boton: "Ver la competencia",
+    },
+    vecinos: ["adjudicatario", "apertura-de-ofertas", "precio-de-referencia"],
+  },
+
+  {
+    slug: "id-de-licitacion",
+    termino: "ID de licitación",
+    familia: "El proceso",
+    definicion:
+      "Es el código único de cada proceso en Mercado Público, con la forma 1234-56-LE26. Identifica la unidad que compra, el número del proceso, su tipo y el año.",
+    cuerpo: [
+      "Cada bloque dice algo. El primero es el código de la unidad de compra que publicó; el segundo, el correlativo de ese proceso dentro de la unidad en el año; las dos letras, el tipo y tramo; y los dos últimos dígitos, el año.",
+      "Sirve para buscar. Si alguien te pasa un ID, con eso llegas directo a la ficha sin tener que adivinar el nombre del proceso.",
+      "También sirve para leer de un vistazo. Ver un ID que termina en LR26 dice, sin abrir nada, que es un proceso grande y de este año.",
+      "Las letras no siempre son de tramo: TD es trato directo, CO es cotización de Compra Ágil. En esos casos el código habla del mecanismo, no del monto.",
+    ],
+    paraTi: [
+      "Guarda el ID de las licitaciones que trabajas. Es la única referencia que no cambia y con la que siempre vas a poder volver a la ficha.",
+      "Al hacer seguimiento interno, ordenar por ID es más confiable que por nombre: los nombres se repiten y se parecen entre organismos.",
+      "El ID también te dice si dos procesos son del mismo organismo, aunque los títulos no se parezcan.",
+    ],
+    error:
+      "Referirse a una licitación por su nombre. Hay decenas llamadas «Adquisición de insumos» al año; el ID es el único que no se confunde.",
+    cierre: {
+      texto:
+        "Las licitaciones que sigues quedan con su ID en tu tablero, con su estado y sus fechas, sin planillas paralelas.",
+      boton: "Ver cómo se siguen",
+    },
+    vecinos: ["tipos-de-licitacion-l1-le-lp", "unidad-de-compra", "publicacion"],
   },
 
   /* ── 2 · Un término de la ley nueva ───────────────────────────
