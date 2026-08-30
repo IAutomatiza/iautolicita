@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { vistaPagina, escucharClicsALaApp } from "./lib/analitica";
 import HomePage from "./pages/HomePage";
 import LiciPage from "./pages/LiciPage";
 import PreciosPage from "./pages/PreciosPage";
@@ -43,6 +44,23 @@ function GestorScroll() {
 }
 
 export default function App() {
+  const ruta = useLocation().pathname;
+
+  /* Una vista por cambio de ruta, incluida la primera.
+
+     El `config` de gtag tiene `send_page_view: false` justamente para
+     que esto sea la única fuente: si mandaran los dos, cada carga
+     inicial contaría doble y las cifras quedarían infladas desde el
+     día uno. */
+  useEffect(() => {
+    vistaPagina(ruta);
+  }, [ruta]);
+
+  // Un solo oyente para todos los enlaces a la app, del sitio entero.
+  useEffect(() => {
+    escucharClicsALaApp();
+  }, []);
+
   return (
     <>
     <GestorScroll />

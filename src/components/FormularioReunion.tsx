@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { enviarLead, hayServidor, type Lead } from "../lib/leads";
+import { evento } from "../lib/analitica";
 
 /* Formulario de solicitud de reunión.
 
@@ -42,7 +43,13 @@ export default function FormularioReunion() {
     const lead: Lead = { ...datos, origen: "formulario" };
     const r = await enviarLead(lead);
     setEnviando(false);
-    if (r.ok) setListo(r.via);
+    if (r.ok) {
+      setListo(r.via);
+      // LA conversión del sitio. `via` distingue si el lead se guardó
+      // en la base o cayó al correo de respaldo: si un día suben los
+      // "mailto", es que la edge está fallando y nadie se enteraría.
+      evento("lead_formulario", { via: r.via, con_rut: Boolean(datos.rut) });
+    }
     else setError(r.error);
   };
 

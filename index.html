@@ -8,6 +8,24 @@
     <!-- iOS ignora el SVG: para "Añadir a pantalla de inicio" pide PNG. -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
+    <!-- Google Analytics 4 · G-T6H147Q2TG
+         Va en el index porque el prerenderizado lo copia a las 28
+         páginas: una sola etiqueta, sin repetirla por ruta.
+
+         `send_page_view: false` es a propósito. gtag mandaría la
+         primera vista solo, y en un sitio de una sola página eso
+         significa que navegar entre fichas del glosario no contaría
+         como visita: Google creería que todos entran y se quedan
+         donde cayeron. Las vistas las manda `vistaPagina()` en cada
+         cambio de ruta, incluida la primera. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6H147Q2TG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T6H147Q2TG', { send_page_view: false });
+    </script>
+
     <title>Alertas de licitaciones de Mercado Público — IAutoLicita</title>
     <meta
       name="description"

@@ -2,6 +2,8 @@ import Nav from "../components/Nav";
 import Planes from "../components/Planes";
 import Footer from "../components/Footer";
 import Seo from "../components/Seo";
+import { useEffect } from "react";
+import { evento } from "../lib/analitica";
 
 /* ════════════════════════════════════════════════════════════
    /precios — los planes viven en el sitio, en su propia página
@@ -15,6 +17,12 @@ import Seo from "../components/Seo";
 ═══════════════════════════════════════════════════════════════ */
 
 export default function PreciosPage() {
+  /* Mirar precios separa al interesado del curioso: es el paso más
+     cercano al registro que ocurre dentro del sitio. */
+  useEffect(() => {
+    evento("ver_precios");
+  }, []);
+
   return (
     <>
       <Seo ruta="/precios" />

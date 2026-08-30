@@ -3,6 +3,7 @@ import { Send, X } from "lucide-react";
 import LiciGlifo from "./LiciGlifo";
 import { CHIPS_INICIALES, SALUDO } from "../lib/liciConocimiento";
 import { preguntarALici } from "../lib/liciChat";
+import { evento } from "../lib/analitica";
 import { APP_URL, enlaceApp } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
@@ -91,6 +92,7 @@ export default function LiciWidget() {
   const [cerrado, setCerrado] = useState(false);
   const sid = useRef<string | null>(null);
   if (sid.current === null) sid.current = idSesion();
+  const medido = useRef(false);
   const finRef = useRef<HTMLDivElement>(null);
   const entradaRef = useRef<HTMLInputElement>(null);
 
@@ -100,6 +102,17 @@ export default function LiciWidget() {
     window.addEventListener("lici:abrir", abrir);
     return () => window.removeEventListener("lici:abrir", abrir);
   }, []);
+
+  /* Se mide una sola vez por pestaña: abrir y cerrar tres veces es la
+     misma persona, y contarlo tres veces inflaría justo la métrica
+     que dice si Lici sirve o sólo adorna. Observar `abierto` cubre
+     los dos caminos —el botón flotante y el evento `lici:abrir`— sin
+     tener que medir en cada uno. */
+  useEffect(() => {
+    if (!abierto || medido.current) return;
+    medido.current = true;
+    evento("abrir_lici", { pagina: window.location.pathname });
+  }, [abierto]);
 
   /* Escape cierra. */
   useEffect(() => {
