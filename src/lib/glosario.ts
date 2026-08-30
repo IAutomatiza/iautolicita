@@ -303,7 +303,7 @@ export const TERMINOS: Termino[] = [
         "Lici te resume las bases técnicas y te dice si lo que vendes calza con lo que están pidiendo.",
       boton: "Ver si calzas",
     },
-    vecinos: ["bases-administrativas", "criterios-de-evaluacion", "tipos-de-licitacion-l1-le-lp"],
+    vecinos: ["bases-administrativas", "criterios-de-evaluacion", "unspsc"],
   },
 
   {
@@ -729,6 +729,181 @@ export const TERMINOS: Termino[] = [
       boton: "Ver cómo se siguen",
     },
     vecinos: ["adjudicacion", "compras-publicas", "compra-agil"],
+  },
+
+  /* ══ Tanda 3 · el cluster de proveedores ══════════════════════
+     8.750 búsquedas/mes entre «chile proveedores», «registro de
+     proveedores», «mercado publico proveedores» y sus variantes, y
+     sólo teníamos ChileProveedores.
+
+     ⚠️ Intención mezclada: parte de ese tráfico son COMPRADORES
+     buscando a quién comprarle, no proveedores buscando herramienta.
+     Estas fichas le hablan al segundo sin prometerle nada al
+     primero. */
+
+  {
+    slug: "proveedor-del-estado",
+    termino: "Proveedor del Estado",
+    familia: "Quién es quién",
+    definicion:
+      "Es cualquier empresa o persona con inicio de actividades que le vende bienes o servicios a un organismo público. No es una categoría que se solicite: se es proveedor desde la primera venta.",
+    cuerpo: [
+      "Hay una confusión frecuente: mucha gente cree que «ser proveedor del Estado» es un título que hay que sacar, con requisitos y espera. No lo es. Basta tener inicio de actividades en el SII y registrarse gratis en Mercado Público para poder ofertar el mismo día.",
+      "Lo que sí existe es un registro adicional, ChileProveedores, que guarda tus documentos legales y financieros para no tener que subirlos en cada proceso. Tiene costo anual y algunas licitaciones lo exigen para adjudicar — pero no se necesita para empezar.",
+      "Tampoco hace falta ser una empresa grande. Personas naturales con boleta, empresas individuales y sociedades de cualquier tamaño pueden vender. Lo que decide es cumplir lo que piden las bases, no el tamaño.",
+      "Sí hay inhabilidades: no puede contratar quien tenga deudas laborales o previsionales impagas, quien haya sido condenado por prácticas antisindicales, o quien tenga un socio que sea funcionario del organismo que compra. Eso se declara bajo juramento al ofertar.",
+      "El historial se construye y queda público. Cada orden de compra cumplida es un antecedente visible, y es lo que otros organismos miran para saber si te conviene contratar.",
+    ],
+    paraTi: [
+      "Se puede partir la misma semana. Registro gratis en Mercado Público, elegir bien los rubros, y ya puedes cotizar Compra Ágil y postular a licitaciones chicas.",
+      "Los rubros que declaras deciden qué te llega. Es el error más común al empezar: elegir mal ahí significa no enterarse de lo que sí te calzaba.",
+      "El primer negocio es el más difícil, no por competencia sino por historial. Los tramos chicos y la Compra Ágil casi nunca piden experiencia previa: por ahí se entra.",
+    ],
+    error:
+      "Esperar a «estar listo» para empezar. No hay un trámite de habilitación: el registro es gratis y toma minutos, y la acreditación paga sólo se justifica cuando ya persigues procesos que la exigen.",
+    cierre: {
+      texto:
+        "Con tu RUT armamos tu perfil solo y te mostramos qué está publicado hoy que calce con lo que vendes.",
+      boton: "Ver qué hay para ti",
+    },
+    vecinos: ["chileproveedores", "acreditacion", "unspsc"],
+  },
+
+  {
+    slug: "organismo-comprador",
+    termino: "Organismo comprador",
+    familia: "Quién es quién",
+    definicion:
+      "Es la institución pública que compra: ministerios, municipalidades, hospitales, servicios de salud, universidades estatales, Fuerzas Armadas y todo el resto del aparato del Estado.",
+    cuerpo: [
+      "No compra «el Estado» como un bloque: compran más de mil organismos distintos, cada uno con su presupuesto, sus necesidades y su forma de trabajar. Un hospital regional y una municipalidad chica se comportan de manera completamente diferente aunque los dos compren lo mismo.",
+      "Cada uno decide qué canal usa. Hay organismos que licitan casi todo, otros que resuelven la mayor parte por convenio marco, y otros que usan mucho la Compra Ágil. Esa costumbre es estable en el tiempo y se puede observar.",
+      "Todo lo que compran es público: qué, a quién, por cuánto y con qué fundamento. Eso permite entender a un comprador antes de acercarse — con quién trabaja habitualmente, cuánto gasta en tu rubro, si suele adjudicar o dejar desierto.",
+      "También varían en cómo pagan. Los plazos están normados, pero en la práctica hay organismos más rápidos que otros, y eso es información que conviene tener antes de comprometer capital de trabajo.",
+    ],
+    paraTi: [
+      "Elegir a quién perseguir es tan importante como cotizar bien. Un organismo que compra tu rubro todos los meses vale más que diez que lo compraron una vez.",
+      "Mira su historial antes de invertir tiempo. Si siempre le adjudica al mismo proveedor y hace años que no cambia, tus posibilidades reales son bajas aunque la licitación esté abierta.",
+      "Las licitaciones que le quedan desiertas son una señal fuerte: significa que su necesidad no está siendo cubierta por el mercado actual.",
+    ],
+    error:
+      "Tratar a todos los organismos igual. Las bases, los plazos y hasta el nivel de exigencia documental cambian mucho entre uno y otro, y la costumbre de cada uno se aprende mirando lo que ya compró.",
+    cierre: {
+      texto:
+        "Puedes revisar cualquier organismo antes de postularle: en qué gasta, con quién trabaja y qué tan seguido deja licitaciones desiertas.",
+      boton: "Mirar un organismo",
+    },
+    vecinos: ["unidad-de-compra", "proveedor-del-estado", "compras-publicas"],
+  },
+
+  {
+    slug: "unidad-de-compra",
+    termino: "Unidad de compra",
+    familia: "Quién es quién",
+    definicion:
+      "Es cada oficina con autorización propia para comprar dentro de un organismo. Por eso un mismo ministerio aparece en Mercado Público con decenas de códigos distintos.",
+    cuerpo: [
+      "Un ministerio no compra desde un solo escritorio. Cada dirección regional, cada servicio dependiente, cada establecimiento tiene su unidad de compra con su propio código, su propio presupuesto y sus propias personas decidiendo.",
+      "El caso más claro es salud: un servicio de salud regional puede tener una unidad por hospital, más la del servicio central. Cada una publica por su cuenta y no necesariamente compran lo mismo ni de la misma forma.",
+      "El código de la unidad es el primer bloque del ID de una licitación. En `1234-56-LE26`, ese `1234` identifica la unidad que publicó.",
+      "Esto explica algo que confunde a quien empieza: haber vendido a «la municipalidad» no significa tener relación con todas sus unidades, y ganar en un hospital no abre puertas automáticas en el hospital de al lado.",
+    ],
+    paraTi: [
+      "Tu cliente real es la unidad, no la institución. Es ahí donde se decide, y es ahí donde el historial cuenta.",
+      "Si vendes a nivel nacional, mapear las unidades de tu rubro es más útil que mirar organismos: son más, son más chicas y compran más seguido.",
+      "Una unidad que te compró una vez es la más probable segunda venta que tienes. Vale más seguirla a ella que buscar clientes nuevos.",
+    ],
+    error:
+      "Contar «un cliente» cuando en realidad son unidades separadas del mismo organismo — o al revés, no volver a ofrecerle a una unidad porque «ya le vendimos a ese ministerio».",
+    cierre: {
+      texto:
+        "Puedes seguir a las unidades que te compran y enterarte cuando publican algo nuevo de tu rubro.",
+      boton: "Seguir a mis compradores",
+    },
+    vecinos: ["organismo-comprador", "tipos-de-licitacion-l1-le-lp", "orden-de-compra"],
+  },
+
+  {
+    slug: "acreditacion",
+    termino: "Acreditación",
+    familia: "Quién es quién",
+    definicion:
+      "Es tener los documentos legales, tributarios y financieros cargados y vigentes en ChileProveedores. Muchas licitaciones la exigen para poder adjudicar, aunque no para ofertar.",
+    cuerpo: [
+      "El registro tiene estados. Estar inscrito es una cosa; estar hábil o acreditado es otra: significa que tus documentos están arriba, vigentes y validados. Es lo que permite al organismo verificar tus antecedentes sin pedírtelos.",
+      "Los documentos vencen. Certificados de vigencia de la sociedad, antecedentes financieros, poderes del representante legal: todos tienen fecha, y cuando uno vence el estado cambia sin que nadie te avise en el momento justo.",
+      "Ahí está el riesgo real: puedes ganar una licitación y perderla porque al momento de adjudicar tu registro no estaba hábil. No es un tecnicismo — pasa, y el organismo tiene que readjudicar al segundo.",
+      "Las bases dicen cuándo se exige. Algunas piden estar hábil al ofertar, otras sólo al adjudicar. La diferencia importa: si lo piden al ofertar y no lo tienes, ni siquiera puedes participar.",
+    ],
+    paraTi: [
+      "Revisa el estado antes de cada postulación importante, no una vez al año. Un certificado vencido la semana pasada cuesta el negocio completo.",
+      "Si estás partiendo, no la necesitas: la Compra Ágil y muchas licitaciones chicas piden sólo estar inscrito, que es gratis.",
+      "Cuando ya persigues procesos que la exigen, ponle recordatorio a los vencimientos. Es de los costos más tontos que existen: perder por papeles, no por precio.",
+    ],
+    error:
+      "Acreditarse y darlo por resuelto. Es un estado que se mantiene, no un trámite que se hace una vez.",
+    cierre: {
+      texto:
+        "Puedes ver de antemano qué licitaciones exigen acreditación y cuáles no, y decidir si te conviene pagarla.",
+      boton: "Ver qué exigen",
+    },
+    vecinos: ["chileproveedores", "proveedor-del-estado", "declaracion-jurada"],
+  },
+
+  {
+    slug: "plan-anual-de-compras",
+    termino: "Plan Anual de Compras",
+    nombreLargo: "PAC",
+    familia: "El proceso",
+    definicion:
+      "Es el documento donde cada organismo público declara, a comienzos de año, qué piensa comprar, cuánto y en qué mes. Se publica en Mercado Público y cualquiera puede consultarlo.",
+    cuerpo: [
+      "La ley obliga a los organismos a planificar sus compras y a publicar ese plan. La idea era transparencia, pero para un proveedor es otra cosa: es la lista de lo que se va a licitar antes de que se licite.",
+      "Cada línea del plan trae el rubro, un monto estimado y el mes en que se espera comprar. No es un compromiso —los planes se modifican durante el año— pero indica la intención y el orden de magnitud.",
+      "Es información pública y gratuita, y aun así casi nadie la usa. La mayoría de los proveedores se entera de una licitación el día que se publica, cuando ya hay que correr; el plan permite saberlo meses antes.",
+      "Se puede contrastar con lo que el organismo lleva ejecutado. Si declaró comprar en marzo y estamos en julio sin que haya salido, esa compra está pendiente y probablemente salga pronto.",
+    ],
+    paraTi: [
+      "Es lo más cerca que vas a estar de ver el futuro. Si tu rubro aparece en el plan de un organismo, sabes que va a comprar y aproximadamente cuándo.",
+      "Sirve para preparar con tiempo: sacar la garantía sin apuro, tener los papeles al día, cotizar con tus proveedores antes de que corra el reloj.",
+      "También sirve para decidir a quién perseguir. Un organismo cuyo plan tiene tu rubro con monto alto vale más que diez que no lo mencionan.",
+    ],
+    error:
+      "Tomarlo como una promesa. Los planes se modifican, se atrasan y a veces la compra no se hace. Es una señal de intención, no un contrato.",
+    cierre: {
+      texto:
+        "El plan de compras de todo el país se puede revisar por rubro: qué declaró comprar cada institución y cuánto lleva ejecutado.",
+      boton: "Ver el plan de compras",
+    },
+    vecinos: ["organismo-comprador", "compras-publicas", "que-es-una-licitacion-publica"],
+  },
+
+  {
+    slug: "unspsc",
+    termino: "UNSPSC",
+    nombreLargo: "Código de producto",
+    familia: "El proceso",
+    definicion:
+      "Es el código internacional con que se clasifica cada producto y servicio en Mercado Público. Aparece en las fichas de licitación y define, en la práctica, qué avisos te llegan y cuáles no.",
+    cuerpo: [
+      "Es un estándar mundial de clasificación, con una estructura de cuatro niveles que va de lo general a lo específico: segmento, familia, clase y producto. Chile lo adoptó para que las compras públicas sean comparables y clasificables.",
+      "Cada ítem de una licitación lleva su código. Eso permite que el sistema —y cualquiera que lo consulte— sepa que dos compras de organismos distintos son del mismo producto aunque estén descritas con palabras diferentes.",
+      "Acá está la parte que afecta directamente a un proveedor: los rubros que declaras en tu perfil se traducen a estos códigos, y de ahí sale lo que te llega. Un rubro mal elegido significa no enterarse de licitaciones que sí te calzaban.",
+      "El problema práctico es que la clasificación no siempre calza con cómo la gente nombra las cosas. Un mismo producto puede estar en códigos distintos según quién lo cargó, y hay categorías amplias que agrupan cosas que no se parecen en nada.",
+    ],
+    paraTi: [
+      "Revisa qué códigos tienes declarados. Es la causa número uno de «no me llega nada» o «me llega todo lo que no vendo».",
+      "No basta con un código. La mayoría de las empresas vende cosas que caen en varios, y quedarse con uno solo deja fuera una parte del mercado.",
+      "Si buscas oportunidades a mano en el portal, buscar por código encuentra cosas que la búsqueda por palabras se pierde — y al revés.",
+    ],
+    error:
+      "Elegir el código más general pensando que así llega más. Llega más ruido, no más oportunidades, y el ruido termina haciendo que dejes de mirar los avisos.",
+    cierre: {
+      texto:
+        "Con tu RUT deducimos tus productos y sus códigos solos, a partir de lo que ya le has vendido al Estado.",
+      boton: "Ver mi perfil",
+    },
+    vecinos: ["bases-tecnicas", "proveedor-del-estado", "plan-anual-de-compras"],
   },
 
   /* ── 2 · Un término de la ley nueva ───────────────────────────
