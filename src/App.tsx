@@ -6,6 +6,8 @@ import PreciosPage from "./pages/PreciosPage";
 import LiciWidget from "./components/LiciWidget";
 import LegalPage from "./pages/LegalPage";
 import ContactoPage from "./pages/ContactoPage";
+import GlosarioPage from "./pages/GlosarioPage";
+import GlosarioTerminoPage from "./pages/GlosarioTerminoPage";
 import { PRIVACIDAD, TERMINOS } from "./lib/legal";
 
 /* React Router navega pero NO hace scroll: un Link a "#faq" cambia
@@ -53,6 +55,8 @@ export default function App() {
       {/* El asistente se llamaba ARIA: los enlaces que ya circulan siguen llegando. */}
       <Route path="/aria" element={<Navigate to="/lici" replace />} />
       <Route path="/contacto" element={<ContactoPage />} />
+      <Route path="/glosario" element={<GlosarioPage />} />
+      <Route path="/glosario/:slug" element={<GlosarioTerminoPage />} />
       <Route path="/privacidad" element={<LegalPage doc={PRIVACIDAD} />} />
       <Route path="/terminos" element={<LegalPage doc={TERMINOS} />} />
     </Routes>

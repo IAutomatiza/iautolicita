@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import CtaButton from "./ui/CtaButton";
+import { enlaceApp } from "../lib/cta";
 
 // Wrangle-inspired IA: one grouped dropdown for the product surface,
 // two flat trust-signal links, and a 3-tier CTA cascade on the right.
@@ -11,6 +12,24 @@ const productLinks = [
   { href: "#como",        title: "Cómo funciona", desc: "El flujo end-to-end" },
   { href: "#resultados",  title: "Con y sin IAutoLicita", desc: "Lo que cambia cuando conoces el precio real" },
   { href: "#ventajas",    title: "Solo acá lo tienes", desc: "Seis cosas que la competencia no puede darte" },
+];
+
+/* El segundo grupo del menú: lo que se lee, no lo que se compra.
+
+   Vive aparte de `productLinks` porque son cosas distintas —
+   «Producto» son secciones del home que venden; «Recursos» son
+   páginas propias que responden preguntas. Mezclarlas dejaba el
+   glosario escondido en el pie, que es donde nadie lo iba a ver.
+
+   A medida que se escriban las guías y el centro de ayuda, entran
+   acá. Se listan sólo las que existen: un enlace muerto en el menú
+   es peor que un menú corto. */
+const recursosLinks = [
+  {
+    href: "/glosario",
+    title: "Glosario",
+    desc: "Qué significa cada palabra de una licitación",
+  },
 ];
 
 // "Lici." va como wordmark —negrita con el punto azul— igual que en la app.
@@ -40,12 +59,19 @@ const flatLinks: {
 export default function Nav() {
   // Las secciones viven en el home: fuera de él, un "#faq" pelado
   // no lleva a ninguna parte, así que se resuelven contra "/".
-  const enHome = useLocation().pathname === "/";
+  const ruta = useLocation().pathname;
+  const enHome = ruta === "/";
+  /* El menú se corre 32px sólo si arriba va la barra LIVE; si no, se
+     le montaría encima. Antes esto miraba «¿estoy en el home?», y al
+     poner el ticker en el glosario los dos quedaron pisados. Ahora
+     mira lo que de verdad importa: si hay ticker o no. */
+  const conTicker = enHome || ruta.startsWith("/glosario");
   const aSeccion = (href: string) => (enHome ? href : `/${href}`);
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
+  const [recursosOpen, setRecursosOpen] = useState(false);
   const closeTimer = useRef<number | null>(null);
 
   useEffect(() => {
@@ -68,7 +94,7 @@ export default function Nav() {
     <header
       // Bajo el ticker solo en el home; en el resto, pegado arriba.
       // La franja negra es de la portada, no del sitio.
-      className={`fixed inset-x-0 ${enHome ? "top-8" : "top-0"} z-40 transition-all duration-300 ${
+      className={`fixed inset-x-0 ${conTicker ? "top-8" : "top-0"} z-40 transition-all duration-300 ${
         scrolled
           ? "bg-ink-950/85 backdrop-blur-md border-b border-[var(--hairline)]"
           : "bg-transparent"
@@ -137,6 +163,56 @@ export default function Nav() {
             </div>
           </div>
 
+          {/* Recursos: el glosario, y más adelante guías y ayuda */}
+          <div
+            className="relative"
+            onMouseEnter={() => setRecursosOpen(true)}
+            onMouseLeave={() => setRecursosOpen(false)}
+          >
+            <button
+              type="button"
+              onClick={() => setRecursosOpen((v) => !v)}
+              aria-expanded={recursosOpen}
+              className={`inline-flex items-center gap-1 px-3 h-9 rounded-md text-[13.5px] font-sans transition-colors ${
+                recursosOpen ? "text-amber-400" : "text-cream-200 hover:text-cream-50"
+              }`}
+            >
+              Recursos
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  recursosOpen ? "rotate-180" : ""
+                }`}
+                strokeWidth={2}
+              />
+            </button>
+
+            <div
+              className={`absolute left-0 top-[calc(100%+4px)] w-[340px] transition-all duration-150 ease-out ${
+                recursosOpen
+                  ? "opacity-100 translate-y-0 pointer-events-auto"
+                  : "opacity-0 -translate-y-1 pointer-events-none"
+              }`}
+            >
+              <div className="p-2 rounded-xl bg-ink-950 border border-[var(--hairline-strong)] shadow-[0_20px_60px_-20px_rgba(10,10,10,0.18),0_4px_12px_rgba(10,10,10,0.06)]">
+                {recursosLinks.map((l) => (
+                  <Link
+                    key={l.href}
+                    to={l.href}
+                    onClick={() => setRecursosOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg hover:bg-amber-400/[0.06] transition-colors group/item"
+                  >
+                    <div className="text-[13.5px] font-sans text-cream-50 group-hover/item:text-amber-400 transition-colors leading-tight">
+                      {l.title}
+                    </div>
+                    <div className="mt-0.5 text-[11.5px] font-mono text-cream-400 leading-tight">
+                      {l.desc}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {flatLinks.map((l) =>
             l.externo ? (
               <a
@@ -175,7 +251,7 @@ export default function Nav() {
         {/* Right: 3-CTA cascade */}
         <div className="flex items-center gap-1 lg:gap-2">
           <a
-            href="https://app.iautolicita.cl/login"
+            href={enlaceApp("nav")}
             className="hidden md:inline-flex items-center h-9 px-3 text-[13.5px] font-sans text-cream-200 hover:text-cream-50 transition-colors"
           >
             Iniciar sesión
@@ -248,7 +324,7 @@ export default function Nav() {
               )
             )}
             <a
-              href="https://app.iautolicita.cl/login"
+              href={enlaceApp("nav_movil")}
               className="py-2.5 text-[14px] text-cream-100"
             >
               Iniciar sesión

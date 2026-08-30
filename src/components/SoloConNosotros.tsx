@@ -8,7 +8,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { ContainerScroll, CardSticky } from "./ui/CardsStack";
-import { APP_URL } from "../lib/cta";
+import { enlaceApp } from "../lib/cta";
 import Eyebrow from "./ui/Eyebrow";
 import useInView from "../hooks/useInView";
 
@@ -110,7 +110,7 @@ export default function SoloConNosotros() {
                   degradado e interior blanco. Acá cierra el argumento
                   de la sección. */}
               <a
-                href={APP_URL}
+                href={enlaceApp("cuerpo")}
                 className="pill-brain mt-9"
               >
                 <span className="pill-brain-inner">

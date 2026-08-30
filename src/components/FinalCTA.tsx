@@ -1,5 +1,5 @@
 import { ArrowUpRight, MessageCircle } from "lucide-react";
-import { APP_URL } from "../lib/cta";
+import { enlaceApp } from "../lib/cta";
 import LiveDot from "./ui/LiveDot";
 
 /* ════════════════════════════════════════════════════════════
@@ -132,7 +132,7 @@ export default function FinalCTA() {
                   style={{ background: "#0064E0" }}
                 />
                 <a
-                  href={APP_URL}
+                  href={enlaceApp("cierre")}
                   className="group relative inline-flex items-center gap-2 h-14 px-7 text-[15px] font-medium rounded-lg transition-all duration-200 ease-out hover:-translate-y-[1px] active:translate-y-0"
                   style={{
                     background: "#0064E0",

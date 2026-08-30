@@ -28,8 +28,9 @@ import confeti from "../lib/confeti";
 ═══════════════════════════════════════════════════════════════ */
 
 import { PLAN } from "../lib/planes";
+import { enlaceApp } from "../lib/cta";
 
-const APP_REGISTRO = "https://app.iautolicita.cl/login";
+const APP_REGISTRO = enlaceApp("planes");
 
 /** Los mismos 10 meses que cobra la app: se pagan 10, se usan 12. */
 const MESES_QUE_SE_PAGAN = 10;

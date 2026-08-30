@@ -3,7 +3,7 @@ import { Send, X } from "lucide-react";
 import LiciGlifo from "./LiciGlifo";
 import { CHIPS_INICIALES, SALUDO } from "../lib/liciConocimiento";
 import { preguntarALici } from "../lib/liciChat";
-import { APP_URL } from "../lib/cta";
+import { APP_URL, enlaceApp } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
    LiciWidget — el chat de Lici en el sitio público.
@@ -51,11 +51,7 @@ function idSesion() {
 /** Al enlace de la app se le cuelga el origen y el id de conversación. */
 function conSeguimiento(href: string, sid: string | null) {
   if (!href.startsWith(APP_URL)) return href;
-  const u = new URL(href);
-  u.searchParams.set("utm_source", "lici_web");
-  u.searchParams.set("utm_medium", "chat");
-  if (sid) u.searchParams.set("sid", sid);
-  return u.toString();
+  return enlaceApp("chat", { sid });
 }
 
 /** Formato de las fichas: **negrita** y [texto](/ruta). */

@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import LiveDot from "./ui/LiveDot";
+import { enlaceApp } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
    Cierre de /lici — la página terminaba en la comparación y
@@ -84,7 +85,7 @@ export default function LiciCierre() {
 
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href="https://app.iautolicita.cl/login"
+                href={enlaceApp("cierre")}
                 className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#0064E0] px-7 font-sans text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-[#0A57BC]"
               >
                 Pregúntale gratis

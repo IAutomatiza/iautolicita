@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Globe } from "lucide-react";
-import { APP_URL } from "../lib/cta";
+import { enlaceApp } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
    Footer — patrón footer-7 de shadcnblocks: a la izquierda la
@@ -43,6 +43,10 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
     links: [
       { label: "Conoce a Lici", href: "/lici", interno: true },
       { label: "Preguntas frecuentes", href: "#faq", seccion: true },
+      /* Sin este enlace el glosario sólo existiría en el sitemap:
+         nadie llegaría navegando, y Google leería sus fichas como
+         páginas sueltas en vez de un cuerpo con dueño. */
+      { label: "Glosario", href: "/glosario", interno: true },
       { label: "Mercado Público", href: "https://www.mercadopublico.cl", externo: true },
       { label: "Estado del sistema", href: "https://status.iautolicita.cl", externo: true },
     ],
@@ -52,10 +56,10 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
     links: [
       { label: "IAutomatiza", href: "https://iautomatiza.cl", externo: true },
       { label: "contacto@iautolicita.cl", href: "mailto:contacto@iautolicita.cl" },
-      { label: "Iniciar sesión", href: "https://app.iautolicita.cl/login" },
+      { label: "Iniciar sesión", href: enlaceApp("login") },
       { label: "Pedir una reunión", href: "/contacto", interno: true },
       { label: "Hablar con Lici", href: "#", abreLici: true },
-      { label: "Probar gratis", href: APP_URL },
+      { label: "Probar gratis", href: enlaceApp("pie") },
     ],
   },
 ];
@@ -129,7 +133,7 @@ export default function Footer() {
             </Link>
 
             <p className="font-sans text-[14.5px] leading-[1.6] text-cream-300 max-w-[340px]">
-              Toda la base de ChileCompra leída por IA: te avisamos qué licitación
+              Toda la base de Mercado Público leída por IA: te avisamos qué licitación
               calza contigo, qué piden las bases y cuánto pagó el Estado por lo
               mismo.
             </p>

@@ -10,7 +10,7 @@ export type Faq = { q: string; a: string; ancla?: string };
 export const FAQS: Faq[] = [
   {
     q: "¿De dónde salen los datos?",
-    a: "De ChileCompra, completo: 441 mil licitaciones, 7,2 millones de adjudicaciones y 6,4 millones de órdenes de compra. Todo se actualiza solo, varias veces al día — cuando entras, ya está al día.",
+    a: "De Mercado Público (ChileCompra), completo: 441 mil licitaciones, 7,2 millones de adjudicaciones y 6,4 millones de órdenes de compra. Todo se actualiza solo, varias veces al día — cuando entras, ya está al día.",
   },
   {
     q: "¿Necesito instalar algo?",

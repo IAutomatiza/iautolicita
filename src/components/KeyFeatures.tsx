@@ -752,7 +752,7 @@ export default function KeyFeatures() {
           <Card
             index={0}
             Icon={Radar}
-            title="Sync en vivo con ChileCompra"
+            title="Sync en vivo con Mercado Público"
             body="13 workflows ingestan licitaciones nuevas. Captura completa de campos vía API oficial."
             tone="amber"
           >

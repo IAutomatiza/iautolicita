@@ -1,8 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0A0A0A"/>
-  <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle"
-        font-family="system-ui, sans-serif" font-weight="700"
-        font-size="14" letter-spacing="-0.5" fill="#FAFAF9">
-    <tspan fill="#0064E0">iA</tspan>L<tspan fill="#0064E0">.</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="IAutoLicita">
+  <!-- La marca de Lici (LiciGlifo) hecha favicon.
+
+       Antes acá había un cuadrado negro con el texto "iAL.". A 16 px
+       —el tamaño real de una pestaña— tres letras no se leen: se ven
+       como una mancha. Un símbolo sí.
+
+       La burbuja de Lici es blanca, y sola sobre una barra de
+       pestañas clara desaparecería. Por eso va dentro del cuadrado
+       oscuro que ya usábamos: se conserva el contraste en cualquier
+       tema del navegador y la identidad de Lici queda intacta. -->
+  <rect width="32" height="32" rx="7" fill="#0A0A0A"/>
+  <g transform="translate(4.6 4.6) scale(0.2)">
+    <!-- Burbuja: esquinas 34 y cola abajo-izquierda -->
+    <path fill="#FFFFFF"
+          d="M34 1H78A33 33 0 0 1 111 34V78A33 33 0 0 1 78 111H8A7 7 0 0 1 1 104V34A33 33 0 0 1 34 1Z"/>
+    <!-- L de dos barras -->
+    <rect x="30" y="26" width="15" height="60" rx="3" fill="#0C0C0C"/>
+    <rect x="30" y="71" width="34" height="15" rx="3" fill="#0C0C0C"/>
+    <!-- El punto azul de IAutoLicita -->
+    <circle cx="76.5" cy="79.5" r="6.5" fill="#0064E0"/>
+  </g>
 </svg>

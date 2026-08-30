@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { APP_URL } from "../../lib/cta";
+import { enlaceApp, type OrigenCta } from "../../lib/cta";
 
 type Variant = "primary" | "ghost" | "huge";
 
@@ -8,6 +8,8 @@ interface Props {
   href?: string;
   variant?: Variant;
   className?: string;
+  /** De dónde sale el clic: se cuelga como utm_medium. */
+  origen?: OrigenCta;
 }
 
 /**
@@ -23,10 +25,13 @@ interface Props {
  */
 export default function CtaButton({
   label = "¡Pruébalo gratis!",
-  href = APP_URL,
   variant = "primary",
   className = "",
+  origen = "cuerpo",
+  href,
 }: Props) {
+  // Sin href explícito va a la app, marcado. Con href, manda el que le pasen.
+  const destino = href ?? enlaceApp(origen);
   const base =
     "group relative inline-flex items-center justify-center gap-2 font-sans font-medium select-none whitespace-nowrap transition-all duration-200 ease-out";
 
@@ -62,7 +67,7 @@ export default function CtaButton({
         />
       )}
       <a
-        href={href}
+        href={destino}
         aria-label={label}
         className={`${base} ${styles[variant]} ${className}`}
       >

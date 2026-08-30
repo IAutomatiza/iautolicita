@@ -9,7 +9,7 @@ import Seo from "../components/Seo";
 import LiciCierre from "../components/LiciCierre";
 import DotPattern from "../components/ui/DotPattern";
 import Footer from "../components/Footer";
-import { APP_URL } from "../lib/cta";
+import { enlaceApp } from "../lib/cta";
 
 /* ════════════════════════════════════════════════════════════
    /lici — página reiniciada desde cero: por ahora solo el hero,
@@ -79,13 +79,13 @@ export default function LiciPage() {
 
               <div className="mt-10 flex items-center gap-1.5">
                 <a
-                  href={APP_URL}
+                  href={enlaceApp("cuerpo")}
                   className="inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
                 >
                   Probar Lici
                 </a>
                 <a
-                  href="https://app.iautolicita.cl/login"
+                  href={enlaceApp("hero")}
                   className="relative inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
                 >
                   Acceder
