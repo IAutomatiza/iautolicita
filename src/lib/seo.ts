@@ -9,6 +9,7 @@ import {
 } from "./glosario";
 import { COMERCIALES, rutaComercial } from "./comerciales";
 import { GUIAS, RUTA_GUIAS, rutaGuia } from "./guias";
+import { FICHAS, RUTA_AYUDA, rutaAyuda } from "./ayuda";
 
 /* Todo lo que Google y las redes leen de cada página, en un lugar.
 
@@ -84,6 +85,20 @@ export const PAGINAS: Record<string, MetaPagina> = {
      `glosario.ts`, su ruta queda prerenderizada y en el sitemap sin
      tocar nada acá — que es justo lo que evita que una entrada
      quede publicada pero invisible para Google. */
+  [RUTA_AYUDA]: {
+    ruta: RUTA_AYUDA,
+    titulo: "Centro de ayuda — IAutoLicita",
+    descripcion:
+      "Qué hay dentro de IAutoLicita: cada pantalla explicada por lo que responde. Los reportes de inteligencia de mercado y cómo se usa la plataforma.",
+  },
+
+  ...Object.fromEntries(
+    FICHAS.map((f) => [
+      rutaAyuda(f.slug),
+      { ruta: rutaAyuda(f.slug), titulo: f.tituloSeo, descripcion: f.descripcion },
+    ]),
+  ),
+
   [RUTA_GUIAS]: {
     ruta: RUTA_GUIAS,
     titulo: "Guías de licitaciones — IAutoLicita",

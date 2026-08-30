@@ -38,6 +38,11 @@ const recursosLinks = [
     title: "Glosario",
     desc: "Qué significa cada palabra de una licitación",
   },
+  {
+    href: "/ayuda",
+    title: "Centro de ayuda",
+    desc: "Qué hay dentro de la app, pantalla por pantalla",
+  },
 ];
 
 // "Lici." va como wordmark —negrita con el punto azul— igual que en la app.

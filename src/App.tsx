@@ -14,6 +14,9 @@ import { COMERCIALES } from "./lib/comerciales";
 import GuiasPage from "./pages/GuiasPage";
 import GuiaPage from "./pages/GuiaPage";
 import { GUIAS } from "./lib/guias";
+import AyudaPage from "./pages/AyudaPage";
+import AyudaFichaPage from "./pages/AyudaFichaPage";
+import { FICHAS } from "./lib/ayuda";
 import { PRIVACIDAD, TERMINOS } from "./lib/legal";
 
 /* React Router navega pero NO hace scroll: un Link a "#faq" cambia
@@ -85,6 +88,10 @@ export default function App() {
           resultado de búsqueda y estas páginas están hechas para
           aparecer ahí. */}
       <Route path="/guias" element={<GuiasPage />} />
+      <Route path="/ayuda" element={<AyudaPage />} />
+      {FICHAS.map((f) => (
+        <Route key={f.slug} path={`/ayuda/${f.slug}`} element={<AyudaFichaPage slug={f.slug} />} />
+      ))}
       {GUIAS.map((g) => (
         <Route key={g.slug} path={`/guias/${g.slug}`} element={<GuiaPage slug={g.slug} />} />
       ))}
