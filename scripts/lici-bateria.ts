@@ -76,7 +76,11 @@ const D = {
   rut: /\b\d{1,2}\.?\d{3}\.?\d{3}\s*-\s*[\dkK]\b/,
   duracion: /\b(no\s+(caduca|vence|expira|se\s+acaba)|sin\s+(fecha|vencimiento|caducidad|plazo)|para\s+siempre|de\s+por\s+vida|que\s+se\s+acabe)\b/i,
   pago: /\b(tarjeta|cr[eé]dito|d[eé]bito)\b/i,
-  voseo: /\b(vos|ten[eé]s|pod[eé]s|quer[eé]s|sab[eé]s|sos|hacé|mirá|decime)\b/i,
+  /* La tilde NO es opcional acá: `sab[eé]s` marcaba «sabes», que es el
+     tuteo chileno correcto. El control acusaba a Lici de voseo por
+     hablar bien. Mismo criterio que el guard de la edge: raíz verbal +
+     terminación ACENTUADA. */
+  voseo: /(?:^|[^\wáéíóúñ])(?:vos|sos|hacé|mirá|decime|tenés|podés|querés|sabés|recibís|vendés|hablás|entrás|mandás)(?=$|[^\wáéíóúñ])/i,
   maquinaria: /\b(embeddings?|algoritmos?|matching|taxonom[ií]a|percentil\w*|matri(z|ces)|vectorial|coseno|LLM)\b/i,
   rutaMenu: /\b(anda al men[uú]|ve al men[uú]|men[uú]\s*→|haz clic en|apri?eta el bot[oó]n|en la pesta[ñn]a)\b/i,
   // Cuarta vez que esta aserción marca en rojo una respuesta correcta por
