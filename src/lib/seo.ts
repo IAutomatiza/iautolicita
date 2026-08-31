@@ -42,7 +42,7 @@ export const PAGINAS: Record<string, MetaPagina> = {
     titulo:
       "Licitaciones de Mercado Público — IAutoLicita",
     descripcion:
-      "Vigilamos Mercado Público y te avisamos solo las licitaciones que calzan con lo que vendes. Te leemos las bases y te decimos a qué precio se adjudicó antes. Plan gratis, sin tarjeta.",
+      "Vigilamos Mercado Público y te avisamos solo las licitaciones que calzan con lo que vendes. Te leemos las bases y te decimos a qué precio se adjudicó antes. Plan gratis para partir.",
   },
   "/lici": {
     ruta: "/lici",
@@ -54,7 +54,7 @@ export const PAGINAS: Record<string, MetaPagina> = {
     ruta: "/precios",
     titulo: "Planes y precios — IAutoLicita",
     descripcion:
-      `Plan gratis para siempre y sin tarjeta. Pro ${enPesos(PLAN.pro.neto)} + IVA al mes con alertas al instante y Lici sin tope. Max ${enPesos(PLAN.max.neto)} con varias empresas, presupuestos y cobranza.`,
+      `Plan gratis para partir. Pro ${enPesos(PLAN.pro.neto)} + IVA al mes con alertas al instante y Lici sin tope. Max ${enPesos(PLAN.max.neto)} con varias empresas, presupuestos y cobranza.`,
   },
   "/contacto": {
     ruta: "/contacto",
@@ -174,7 +174,7 @@ export const jsonLdProducto = () => ({
       name: "Free",
       price: "0",
       priceCurrency: "CLP",
-      description: "Explorar el mercado completo y probar Lici. Sin tarjeta.",
+      description: "Explorar el mercado completo y probar Lici con tus propias licitaciones.",
     },
     {
       "@type": "Offer",

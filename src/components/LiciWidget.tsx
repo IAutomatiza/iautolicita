@@ -22,7 +22,7 @@ import { APP_URL, enlaceApp } from "../lib/cta";
    emparejador local — el chat nunca se queda mudo.
 ═══════════════════════════════════════════════════════════════ */
 
-type Mensaje = { de: "lici" | "usuario"; texto: string };
+type Mensaje = { de: "lici" | "usuario"; texto: string; degradado?: boolean };
 
 const AZUL = "#0064E0";
 
@@ -139,7 +139,10 @@ export default function LiciWidget() {
     setBorrador("");
     setTipeando(true);
     const r = await preguntarALici(sid.current, limpio);
-    setMensajes((m) => [...m, { de: "lici", texto: r.respuesta }]);
+    setMensajes((m) => [
+      ...m,
+      { de: "lici", texto: r.respuesta, degradado: r.degradado },
+    ]);
     setTipeando(false);
     // La conversación llegó a su tope: se cierra la entrada, pero la
     // última respuesta ya trae las dos salidas útiles.
@@ -186,6 +189,13 @@ export default function LiciWidget() {
                   <LiciGlifo alto={22} conBorde className="mt-0.5 shrink-0" />
                   <div className="max-w-[86%] rounded-2xl rounded-tl-md border border-[#0A1530]/[0.09] bg-[#F4F6F9] px-3.5 py-2.5 font-sans text-[14px] leading-[1.5] text-[#0A1530]/85">
                     {conFormato(m.texto, sid.current)}
+                    {m.degradado && (
+                      <p className="mt-2 border-t border-[#0A1530]/[0.08] pt-2 font-sans text-[12px] leading-[1.45] text-[#0A1530]/50">
+                        Respondí con lo básico: no pude conectarme para
+                        buscarte la respuesta completa. Si necesitas más
+                        detalle, <a href="/contacto" className="underline underline-offset-2">escríbenos</a>.
+                      </p>
+                    )}
                   </div>
                 </div>
               ) : (

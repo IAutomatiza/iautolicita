@@ -15,7 +15,7 @@
 
    ── EL OBJETIVO (decisión de Carlos, 28-ago-2026) ────────────
    Lici tiene UNA meta: que la persona entre a la app y la pruebe.
-   El plan gratis es $0 y sin tarjeta, así que el camino más corto
+   El plan gratis es $0, así que el camino más corto
    es la puerta, no una sala de espera.
 
    Lici NO agenda, NO captura datos y NO escribe en ninguna tabla.
@@ -192,7 +192,7 @@ export const FICHAS: Ficha[] = [
     categoria: "producto",
     claves: ["me sirve", "sirve para mi", "vendo", "mi rubro", "mi empresa", "nosotros vendemos", "somos", "me conviene"],
     respuesta:
-      "Casi seguro que sí: el Estado compra de todo, desde uniformes hasta software. La forma barata de salir de dudas es entrar con tu RUT — en minutos ves qué está comprando el Estado de lo tuyo, gratis y sin tarjeta.",
+      "Casi seguro que sí: el Estado compra de todo, desde uniformes hasta software. La forma barata de salir de dudas es entrar con tu RUT — en minutos ves qué está comprando el Estado de lo tuyo, y es gratis.",
   },
 
   {
@@ -287,14 +287,14 @@ export const FICHAS: Ficha[] = [
     categoria: "plan",
     claves: ["cuanto cuesta", "precio", "vale", "plan", "planes", "pagar", "tarifa", "valor"],
     respuesta:
-      `Tres planes. **Free** en $0, para mirar el mercado completo y probar — sin tarjeta y sin fecha de término. **Pro** a ${enPesos(PLAN.pro.neto)} + IVA al mes: alertas al instante, Lici sin tope y el gestor de propuestas, hasta ${PLAN.pro.usuarios} usuarios. **Max** a ${enPesos(PLAN.max.neto)} + IVA: suma presupuestos, cobranza y varias empresas, hasta ${PLAN.max.usuarios} usuarios.`,
+      `Tres planes. **Free** en $0, para mirar el mercado completo y probar con tus propias licitaciones. **Pro** a ${enPesos(PLAN.pro.neto)} + IVA al mes: alertas al instante, Lici sin tope y el gestor de propuestas, hasta ${PLAN.pro.usuarios} usuarios. **Max** a ${enPesos(PLAN.max.neto)} + IVA: suma presupuestos, cobranza y varias empresas, hasta ${PLAN.max.usuarios} usuarios.`,
   },
   {
     id: "gratis",
     categoria: "plan",
     claves: ["gratis", "free", "prueba", "probar", "tarjeta", "sin costo"],
     respuesta:
-      `El plan gratis no es una prueba de 14 días: es gratis de verdad y no caduca. Traes tu RUT, ves todo lo que el Estado publica, tienes los reportes de mercado y ${PLAN.free.preguntasDia} preguntas diarias a Lici. Sin tarjeta — [entra y pruébalo](${APP_URL}).`,
+      `El plan gratis no es una prueba de 14 días: es $0 y lo usas con tus propias licitaciones. Traes tu RUT, ves todo lo que el Estado publica, tienes los reportes de mercado y ${PLAN.free.preguntasDia} preguntas diarias a Lici. [Entra y pruébalo](${APP_URL}).`,
   },
 
   /* ── Ventajas ─────────────────────────────────────────────── */
@@ -318,7 +318,7 @@ export const FICHAS: Ficha[] = [
     categoria: "proceso",
     claves: ["reunion", "demo", "hablar", "contacto", "contactar", "llamada", "telefono", "correo", "mail", "agendar", "vendedor", "persona", "ejecutivo"],
     respuesta:
-      `Si quieres hablar con alguien del equipo, déjanos tus datos y coordinamos media hora: [pedir una reunión](/contacto). Aunque si es por curiosear, el plan gratis no necesita reunión ni tarjeta: [míralo tú mismo](${APP_URL}).`,
+      `Si quieres hablar con alguien del equipo, déjanos tus datos y coordinamos media hora: [pedir una reunión](/contacto). Aunque si es por curiosear, el plan gratis no necesita reunión ni compromiso: [míralo tú mismo](${APP_URL}).`,
   },
 
   {
@@ -349,7 +349,7 @@ export const FICHAS: Ficha[] = [
     categoria: "objecion",
     claves: ["caro", "mucha plata", "no me alcanza", "presupuesto", "barato"],
     respuesta:
-      `Cuesta menos que perder una licitación. Y por eso el plan gratis existe: pruébalo con tus propias licitaciones y decide después, sin poner tarjeta — [ábrelo acá](${APP_URL}).`,
+      `Cuesta menos que perder una licitación. Y por eso el plan gratis existe: pruébalo con tus propias licitaciones y decide después — [ábrelo acá](${APP_URL}).`,
   },
   {
     id: "obj-a-mano",
@@ -403,7 +403,7 @@ const normalizar = (s: string) =>
 const ID_LICITACION = /\b\d{3,7}\s*-\s*\d{1,4}\s*-\s*[A-Za-z]{2,3}\d{2}\b/;
 
 export const RECONDUCCION_ANALISIS =
-  "Eso lo hace Lici **dentro de la app**, con esa licitación abierta: se lee las bases enteras, te dice qué piden y te cita la página exacta. Acá afuera solo te cuento cómo funciona. Con el plan gratis lo pruebas con una licitación tuya, sin tarjeta.";
+  "Eso lo hace Lici **dentro de la app**, con esa licitación abierta: se lee las bases enteras, te dice qué piden y te cita la página exacta. Acá afuera solo te cuento cómo funciona. Con el plan gratis lo pruebas con una licitación tuya.";
 
 /* Guardrail — «dame datos del mercado».
 
@@ -413,7 +413,7 @@ const PIDE_DATOS =
   /\b(quien(es)?\s+(gana|ganan|gano|ganaron|adjudic\w+|vende|venden|es\s+el\s+proveedor)|cuanto\s+(vend\w+|factur\w+|se\s+adjudic\w+|gan\w+|pag\w+\s+el\s+estado)|monto[s]?\s+(de|del|adjudicad\w+)|ranking\s+de\s+proveedores|lista\s+de\s+proveedores|competidor(es)?\s+de)\b/i;
 
 export const RECONDUCCION_DATOS =
-  "Esos números son justamente el producto: quién compra, quién compite y a cuánto se adjudicó lo tuyo. Se ven **dentro de la app**, cruzados con tu RUT — acá afuera no te los puedo dar. El plan gratis te deja mirarlos sin tarjeta.";
+  "Esos números son justamente el producto: quién compra, quién compite y a cuánto se adjudicó lo tuyo. Se ven **dentro de la app**, cruzados con tu RUT — acá afuera no te los puedo dar. El plan gratis te deja mirarlos.";
 
 /* Guardrail — «cómo se configura» / «no me funciona».
 
@@ -424,7 +424,7 @@ const PIDE_SOPORTE =
   /\b(como\s+(configur\w+|activ\w+|desactiv\w+|conect\w+|instal\w+|cambio|cambiar|edito|editar|agrego|agregar|borro|elimin\w+|cancel\w+)|donde\s+(configur\w+|activ\w+|est[aá]\s+el\s+bot[oó]n|hago\s+clic|se\s+cambia|encuentro)|paso\s+a\s+paso|tutorial|no\s+me\s+(llega|lleg[oó]|funciona|deja|carga|aparece)|no\s+funciona|me\s+da\s+error|olvid[eé]\s+mi\s+(clave|contrase))/i;
 
 export const RECONDUCCION_SOPORTE =
-  "Eso te lo enseña **Lici dentro de la app** — sí, la misma, pero adentro tiene tus datos y te responde con tu caso, no con un manual. Acá afuera te cuento qué hace y por qué te conviene; adentro te acompaña de verdad. El plan gratis parte sin tarjeta. Y si ya eres cliente y algo no anda, escríbenos: [contactar](/contacto).";
+  "Eso te lo enseña **Lici dentro de la app** — sí, la misma, pero adentro tiene tus datos y te responde con tu caso, no con un manual. Acá afuera te cuento qué hace y por qué te conviene; adentro te acompaña de verdad. El plan gratis parte al tiro. Y si ya eres cliente y algo no anda, escríbenos: [contactar](/contacto).";
 
 /* Guardrail — «quiénes son sus clientes».
 

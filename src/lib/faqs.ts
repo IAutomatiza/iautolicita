@@ -36,6 +36,6 @@ export const FAQS: Faq[] = [
     // El enlace "Planes" de la nav apunta acá: es lo único que
     // el sitio dice hoy sobre planes y precios.
     q: "¿Cuánto cuesta?",
-    a: "Hay un plan gratis para siempre, y los de pago parten en $79.000 + IVA al mes. Pagando el año se pagan 10 meses y se usan 12. Sin permanencia: cancelas cuando quieras. Los tienes todos en Planes, en el menú.",
+    a: "Hay un plan gratis, y los de pago parten en $79.000 + IVA al mes. Pagando el año se pagan 10 meses y se usan 12. Sin permanencia: cancelas cuando quieras. Los tienes todos en Planes, en el menú.",
   },
 ];

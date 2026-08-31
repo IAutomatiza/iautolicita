@@ -56,7 +56,7 @@ const PLANES: Plan[] = [
     codigo: "free",
     nombre: "Free",
     descripcion:
-      "Para mirar el mercado y probar a Lici sin poner tarjeta. No caduca.",
+      "Para mirar el mercado y probar a Lici con tus propias licitaciones.",
     neto: 0,
     caracteristicas: [
       {
@@ -177,7 +177,7 @@ export default function Planes() {
               </span>
             </h1>
             <p className="mx-auto max-w-[46ch] text-center font-sans text-[17px] leading-relaxed tracking-tight text-cream-300 md:text-[19px]">
-              Partes gratis y sin tarjeta. Cuando veas lo que hay para ti,
+              Partes gratis. Cuando veas lo que hay para ti,
               eliges plan — y lo cancelas cuando quieras.
             </p>
           </div>
@@ -273,7 +273,7 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
                 className="font-display text-[36px] leading-none"
               />
               <span className="font-sans text-[14px] text-cream-300">
-                {gratis ? "/ para siempre" : "+ IVA / mes"}
+                {gratis ? "/ para partir" : "+ IVA / mes"}
               </span>
             </p>
 
@@ -282,7 +282,7 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
                 columnas arranquen a la misma altura. */}
             <p className="mt-2 font-sans text-[13px] text-cream-400">
               {gratis ? (
-                "sin tarjeta y sin fecha de término"
+                "gratis, para partir"
               ) : anual ? (
                 <>
                   {clp(alAno)} + IVA al año —{" "}
