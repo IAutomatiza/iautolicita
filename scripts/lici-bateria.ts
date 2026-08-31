@@ -184,7 +184,7 @@ const CASOS: Caso[] = [
 const CONTENIDO: [string, RegExp][] = [
   ["¿Qué es un convenio marco?", /cat[aá]logo|convenio/i],
   ["¿Qué es una compra ágil?", /[aá]gil|monto menor|100 utm|cotiza/i],
-  ["¿Qué es un trato directo?", /directo|sin licitaci|excepci/i],
+  ["¿Qué es un trato directo?", /direct|sin licita|excepci|causal|emergencia|proveedor [uú]nico/i],
   ["¿Qué es una boleta de garantía?", /garant[ií]a|cauci[oó]n|respalda|banco|incumpl/i],
   ["¿Qué son las bases administrativas?", /administrativ|reglas|requisito/i],
   ["¿Cómo empiezo a venderle al Estado?", /registr|proveedor|rut|inscri/i],
