@@ -36,6 +36,9 @@ concurrency:
 jobs:
   sincronizar:
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -50,19 +53,42 @@ jobs:
       - name: Trocear (en seco)
         run: npm run lici:sincronizar -- --seco
 
+      # Sin credenciales no se puede escribir, y eso NO es una falla del
+      # cambio que gatilló el flujo: es que el repo todavía no tiene sus
+      # secrets. Reventar acá manda un correo rojo en cada push, para
+      # siempre — una alarma que grita por algo que no es un defecto deja
+      # de mirarse, y el día que falle de verdad nadie va a abrirla.
+      # Se avisa fuerte y se salta.
+      - name: ¿Hay credenciales?
+        id: cred
+        run: |
+          if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "hay=si" >> "$GITHUB_OUTPUT"
+          else
+            echo "hay=no" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Lici sin sincronizar::Faltan los secrets SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY. El troceo se validó, pero el conocimiento de Lici NO se actualizó."
+            {
+              echo "### ⚠️ El conocimiento de Lici no se actualizó"
+              echo
+              echo "Faltan dos secrets del repo: \`SUPABASE_URL\` y \`SUPABASE_SERVICE_ROLE_KEY\`."
+              echo "Se ponen en **Settings → Secrets and variables → Actions**."
+              echo
+              echo "Mientras tanto, después de editar el contenido hay que correrlo a mano:"
+              echo '```'
+              echo "npm run lici:sincronizar"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Sincronizar el conocimiento
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        if: steps.cred.outputs.hay == 'si'
         run: npm run lici:sincronizar
 
       # Los trozos que cambiaron quedaron con embedding en NULL. Sin
       # este paso están cargados y son invisibles para la búsqueda por
       # coseno: el flujo diría "listo" y Lici no los encontraría.
       - name: Embeber lo que cambió
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        if: steps.cred.outputs.hay == 'si'
         run: |
           set -euo pipefail
           resp=$(curl -sS --fail-with-body -X POST \
@@ -81,4 +107,5 @@ jobs:
             });'
 
       - name: Resumen
-        run: echo "Conocimiento de Lici sincronizado y embebido." >> $GITHUB_STEP_SUMMARY
+        if: steps.cred.outputs.hay == 'si'
+        run: echo "Conocimiento de Lici sincronizado y embebido." >> "$GITHUB_STEP_SUMMARY"
