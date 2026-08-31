@@ -139,9 +139,21 @@ const CASOS: Caso[] = [
   { id: "F-11", espera: "Capacidad y beneficio; cero rutas de menú",
     formas: ["¿Cómo configuro mis palabras clave en la app?"],
     ok: (r) => !D.rutaMenu.test(r.respuesta) || "dio una ruta de menú" },
-  { id: "F-12", espera: "Precio primero, SIN pregunta de vuelta",
+  /* Este control daba verde con la respuesta ROTA: comprobaba que no
+     devolviera pregunta y nunca que el precio ESTUVIERA. Durante un
+     rato Lici contestó «los montos exactos los coordinamos según tu
+     situación» —el guard de cifras le borraba los precios reales— y la
+     batería no dijo nada. Un control que sólo mira lo que no debe pasar
+     no verifica que pase lo que debe. */
+  { id: "F-12", espera: "Da el precio real, SIN pregunta de vuelta",
     formas: ["¿Cuánto cuesta?"],
-    ok: (r) => !D.cierraPregunta.test(r.respuesta.trim()) || "cerró preguntando algo que no cambia la recomendación" },
+    ok: (r) => {
+      if (D.cierraPregunta.test(r.respuesta.trim()))
+        return "cerró preguntando algo que no cambia la recomendación";
+      if (!/79[.\s]?000/.test(r.respuesta) || !/149[.\s]?000/.test(r.respuesta))
+        return `no dio los precios reales: «${r.respuesta.slice(0, 120)}»`;
+      return true;
+    } },
   /* Lo que F-15 tiene que probar NO es que aparezca la palabra —eso lo
      cumpliría un loro— sino que una pregunta legítima del glosario pasa
      sin que el guard de vocabulario la bloquee, y que la respuesta
