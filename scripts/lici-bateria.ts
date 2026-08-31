@@ -79,7 +79,9 @@ const D = {
   voseo: /\b(vos|ten[eé]s|pod[eé]s|quer[eé]s|sab[eé]s|sos|hacé|mirá|decime)\b/i,
   maquinaria: /\b(embeddings?|algoritmos?|matching|taxonom[ií]a|percentil\w*|matri(z|ces)|vectorial|coseno|LLM)\b/i,
   rutaMenu: /\b(anda al men[uú]|ve al men[uú]|men[uú]\s*→|haz clic en|apri?eta el bot[oó]n|en la pesta[ñn]a)\b/i,
-  noSabe: /\b(no lo (s[eé]|tengo claro)|no te (lo )?(s[eé]|puedo)|prefiero no|no manejo ese dato|no tengo esa)\b/i,
+  // Cuarta vez que esta aserción marca en rojo una respuesta correcta por
+  // pedir una redacción exacta. Se amplía a la FAMILIA de la negativa.
+  noSabe: /\bno (lo |te lo |eso |esa |ese )?(s[eé]|tengo claro|tengo esa|manejo|puedo confirmar)\b|\bprefiero no\b|\bno me consta\b|\bno tengo (eso|esa|ese|la) /i,
   contacto: /\/contacto/,
   cierraPregunta: /\?\s*$/,
   externo: /https?:\/\/(?!app\.iautolicita\.cl)/i,
