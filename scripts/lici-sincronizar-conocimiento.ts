@@ -365,6 +365,39 @@ async function main() {
   console.log(`  actualizados ${cambiadas.length - nuevas}`);
   console.log(`  retirados   ${retirar.length}`);
   console.log(`  sin cambio  ${filas.length - cambiadas.length}`);
+
+  /* ── Y se embebe, EN EL MISMO COMANDO ──────────────────────────
+     El upsert deja `embedding` en NULL a propósito, para que el trozo
+     cambiado se vuelva a vectorizar. Si el embebido fuera un segundo
+     paso que hay que acordarse de correr, un trozo nuevo quedaría
+     cargado, contado en el informe de arriba… e invisible para la
+     búsqueda por coseno. El comando diría «listo» y Lici no
+     encontraría el contenido nuevo. Va acá para que no exista esa
+     ventana. */
+  if (!cambiadas.length && !retirar.length) {
+    console.log("\n  Nada cambió: no hay nada que embeber.");
+    return;
+  }
+
+  console.log("\n── Embeddings ──────────────────────────────");
+  const r = await fetch(`${URL_SB}/functions/v1/lici-web-embeber`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${LLAVE}`, "Content-Type": "application/json" },
+    body: JSON.stringify({}),
+  });
+  const emb = await r.json().catch(() => null);
+  if (!r.ok || !emb?.ok) {
+    throw new Error(`el embebedor falló: ${emb?.error ?? await r.text()}`);
+  }
+  console.log(`  embebidos   ${emb.embebidos}`);
+  console.log(`  costo       USD ${emb.costo_usd}`);
+  // Un "ok" con pendientes > 0 NO es un éxito.
+  if (emb.pendientes > 0) {
+    throw new Error(
+      `quedaron ${emb.pendientes} trozos sin vector: están cargados pero Lici NO los encuentra. Vuelve a correr el comando.`,
+    );
+  }
+  console.log("\n  ✅ Lici ya sabe lo nuevo.");
 }
 
 main().catch((e) => { console.error("✗", e.message); process.exit(1); });

@@ -84,28 +84,10 @@ jobs:
         if: steps.cred.outputs.hay == 'si'
         run: npm run lici:sincronizar
 
-      # Los trozos que cambiaron quedaron con embedding en NULL. Sin
-      # este paso están cargados y son invisibles para la búsqueda por
-      # coseno: el flujo diría "listo" y Lici no los encontraría.
-      - name: Embeber lo que cambió
-        if: steps.cred.outputs.hay == 'si'
-        run: |
-          set -euo pipefail
-          resp=$(curl -sS --fail-with-body -X POST \
-            "$SUPABASE_URL/functions/v1/lici-web-embeber" \
-            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
-            -H "Content-Type: application/json" -d '{}' --max-time 300)
-          echo "$resp"
-          # Un "ok" con pendientes > 0 NO es un éxito: quedaron trozos
-          # sin vector, o sea invisibles.
-          echo "$resp" | node -e '
-            let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
-              const r=JSON.parse(s);
-              if(!r.ok) { console.error("✗ el embebedor falló:", r.error); process.exit(1); }
-              console.log(`embebidos ${r.embebidos} · pendientes ${r.pendientes} · USD ${r.costo_usd}`);
-              if(r.pendientes>0){console.error("✗ quedaron trozos sin embedding: son invisibles para la búsqueda");process.exit(1);}
-            });'
-
+      # El embebido ya no es un paso aparte: lo hace el propio
+      # sincronizador, en la misma corrida. Tenerlo separado abría una
+      # ventana en la que los trozos quedaban cargados y sin vector —
+      # o sea invisibles para Lici— si el segundo paso no corría.
       - name: Resumen
         if: steps.cred.outputs.hay == 'si'
         run: echo "Conocimiento de Lici sincronizado y embebido." >> "$GITHUB_STEP_SUMMARY"
