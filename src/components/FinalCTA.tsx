@@ -119,7 +119,7 @@ export default function FinalCTA() {
               className="mt-10 font-sans text-[16px] md:text-[18px] leading-[1.55] max-w-[620px] mx-auto"
               style={{ color: "rgba(255,255,255,0.70)" }}
             >
-              Pruébalo gratis con tus propias licitaciones: te abrimos la cuenta y en minutos ves en la plataforma las que <em className="not-italic" style={{ color: "#FFFFFF" }}>calzan contigo hoy</em>, con su precio sugerido. Sin tarjeta y sin instalar nada.
+              Pruébalo gratis con tus propias licitaciones: te abrimos la cuenta y en minutos ves en la plataforma las que <em className="not-italic" style={{ color: "#FFFFFF" }}>calzan contigo hoy</em>, con su precio sugerido. Sin instalar nada.
             </p>
 
             {/* CTAs */}
@@ -173,7 +173,6 @@ export default function FinalCTA() {
             <div className="mt-12 md:mt-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 font-mono text-[10.5px] uppercase tracking-[0.18em]">
               {[
                 "Gratis para partir",
-                "Sin tarjeta",
                 "Sin instalar nada",
                 "Desde el navegador",
               ].map((t, i, arr) => (

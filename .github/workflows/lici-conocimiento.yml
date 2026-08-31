@@ -1,0 +1,84 @@
+# Mantiene al día lo que Lici sabe del sitio.
+#
+# El contenido del sitio vive en src/lib/*.ts. Cada vez que alguien
+# edita un término del glosario, una guía o una ficha de ayuda, este
+# flujo vuelve a trocear, sube sólo lo que cambió (compara el md5 del
+# CUERPO, no el nombre del archivo) y manda a embeber lo nuevo.
+#
+# Sin esto, el conocimiento de Lici se congela el día que se cargó y
+# nadie se entera: responde con el sitio de hace tres meses y suena
+# igual de segura.
+#
+# ⚠️ NO necesita OPENAI_API_KEY. Los embeddings los genera la edge
+# `lici-web-embeber`, que corre en Supabase con la llave que el
+# proyecto ya tiene. Una credencial menos en los secrets del repo.
+name: Conocimiento de Lici
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/lib/glosario.ts"
+      - "src/lib/guias.ts"
+      - "src/lib/ayuda.ts"
+      - "src/lib/comerciales.ts"
+      - "src/lib/faqs.ts"
+      - "src/lib/legal.ts"
+      - "scripts/lici-sincronizar-conocimiento.ts"
+      - ".github/workflows/lici-conocimiento.yml"
+  workflow_dispatch:
+
+concurrency:
+  # Dos corridas a la vez se pisarían el upsert y el retiro.
+  group: lici-conocimiento
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      # Primero en seco: si el troceo se rompió, se ve ANTES de tocar
+      # la base. Un troceo malo aplicado es más caro de deshacer que de
+      # no hacer.
+      - name: Trocear (en seco)
+        run: npm run lici:sincronizar -- --seco
+
+      - name: Sincronizar el conocimiento
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: npm run lici:sincronizar
+
+      # Los trozos que cambiaron quedaron con embedding en NULL. Sin
+      # este paso están cargados y son invisibles para la búsqueda por
+      # coseno: el flujo diría "listo" y Lici no los encontraría.
+      - name: Embeber lo que cambió
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          set -euo pipefail
+          resp=$(curl -sS --fail-with-body -X POST \
+            "$SUPABASE_URL/functions/v1/lici-web-embeber" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "Content-Type: application/json" -d '{}' --max-time 300)
+          echo "$resp"
+          # Un "ok" con pendientes > 0 NO es un éxito: quedaron trozos
+          # sin vector, o sea invisibles.
+          echo "$resp" | node -e '
+            let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
+              const r=JSON.parse(s);
+              if(!r.ok) { console.error("✗ el embebedor falló:", r.error); process.exit(1); }
+              console.log(`embebidos ${r.embebidos} · pendientes ${r.pendientes} · USD ${r.costo_usd}`);
+              if(r.pendientes>0){console.error("✗ quedaron trozos sin embedding: son invisibles para la búsqueda");process.exit(1);}
+            });'
+
+      - name: Resumen
+        run: echo "Conocimiento de Lici sincronizado y embebido." >> $GITHUB_STEP_SUMMARY

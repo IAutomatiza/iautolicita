@@ -21,3 +21,6 @@ probar-lici.ts
 
 # Lo deja el CLI de Deno al trabajar las edge functions; no es del sitio.
 deno.lock
+
+# bundles temporales de los scripts de Lici
+.lici-*.mjs

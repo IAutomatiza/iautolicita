@@ -100,7 +100,7 @@ export default function LiciCierre() {
             </div>
 
             <p className="mt-9 font-mono text-[10.5px] uppercase tracking-[0.14em] text-white/40">
-              Gratis para partir · Sin tarjeta · Desde el navegador
+              Gratis para partir · Desde el navegador
             </p>
           </div>
         </div>
