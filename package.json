@@ -12,7 +12,8 @@
     "probar:lici": "npx esbuild probar-lici.ts --bundle --format=esm --platform=node --outfile=.probar-lici.mjs --log-level=error && node .probar-lici.mjs && rm -f .probar-lici.mjs",
     "sync:planes": "node sincronizar-planes.mjs",
     "lici:sincronizar": "npx esbuild scripts/lici-sincronizar-conocimiento.ts --bundle --format=esm --platform=node --packages=external --outfile=.lici-sync.mjs --log-level=error && node --env-file-if-exists=.env .lici-sync.mjs",
-    "lici:bateria": "npx esbuild scripts/lici-bateria.ts --bundle --format=esm --platform=node --packages=external --outfile=.lici-bateria.mjs --log-level=error && node --env-file-if-exists=.env .lici-bateria.mjs"
+    "lici:bateria": "npx esbuild scripts/lici-bateria.ts --bundle --format=esm --platform=node --packages=external --outfile=.lici-bateria.mjs --log-level=error && node --env-file-if-exists=.env .lici-bateria.mjs",
+    "lici:plan": "npx esbuild scripts/lici-plan-prueba.ts --bundle --format=esm --platform=node --packages=external --outfile=.lici-plan.mjs --log-level=error && node --env-file-if-exists=.env .lici-plan.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",
