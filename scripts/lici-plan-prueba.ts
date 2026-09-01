@@ -118,8 +118,11 @@ async function main() {
   const plan = await alJuez({ modo: "plan", n });
   const casos: Caso[] = plan.casos;
   const porFamilia = casos.reduce((a: Record<string, number>, c) => ({ ...a, [c.familia]: (a[c.familia] ?? 0) + 1 }), {});
+  const up = plan.uso ?? {};
+  const usdPlan = ((up.input_tokens ?? 0) * 10 + (up.output_tokens ?? 0) * 50) / 1e6;
   console.log(`  ${plan.modelo} · ${casos.length} casos · ` +
-    Object.entries(porFamilia).map(([k, v]) => `${k} ${v}`).join(" · "));
+    Object.entries(porFamilia).map(([k, v]) => `${k} ${v}`).join(" · ") +
+    `  ${C.gris}(USD ${usdPlan.toFixed(2)})${C.fin}`);
 
   console.log(`\n${C.fuerte}── 2 · Lici responde ──${C.fin}`);
   await purgar();
@@ -144,6 +147,11 @@ async function juzgarYInformar(pares: Par[]) {
   // más superficial por par.
   const veredictos: Veredicto[] = [];
   let resumenFinal = "";
+  /* El costo de Fable NO estaba instrumentado, y es 10× el de Lici por
+     token — más su razonamiento, que se cobra como SALIDA a USD 50 el
+     millón. Un dia entero de corridas se llevo ~USD 15 y me entere por
+     un error de saldo, no por un contador. */
+  let usdJuez = 0;
     /* 12 y no 25: Fable con esfuerzo alto sobre 25 pares se pasa del
      tiempo máximo de una edge y devuelve 504. Y de paso el veredicto
      por par sale más fino. */
@@ -153,6 +161,8 @@ async function juzgarYInformar(pares: Par[]) {
     const j = await alJuez({ modo: "juzgar", pares: tanda });
     for (const v of j.veredictos as Veredicto[]) veredictos.push({ ...v, i: v.i + i });
     resumenFinal += (resumenFinal ? "\n\n" : "") + j.resumen;
+    const u = j.uso ?? {};
+    usdJuez += ((u.input_tokens ?? 0) * 10 + (u.output_tokens ?? 0) * 50) / 1e6;
     process.stdout.write(`  tanda ${i / TANDA + 1} juzgada\n`);
   }
 
@@ -194,7 +204,11 @@ async function juzgarYInformar(pares: Par[]) {
   console.log(`  con enlace         ${Math.round((100 * pares.filter((p) => p.enlace).length) / pares.length)}%`);
   console.log(`  con algún guard    ${Math.round((100 * pares.filter((p) => p.guards.length).length) / pares.length)}%`);
   console.log(`  costo por pregunta CLP ${media((p) => p.clp).toFixed(2)}`);
-  console.log(`  costo de la prueba CLP ${pares.reduce((s, p) => s + p.clp, 0).toFixed(0)}`);
+  const usdLici = pares.reduce((s, p) => s + p.clp, 0) / 950;
+  console.log(`\n  ${C.fuerte}costo de esta corrida${C.fin}`);
+  console.log(`    Lici (haiku 4.5)   USD ${usdLici.toFixed(2)}   CLP ${(usdLici * 950).toFixed(0)}`);
+  console.log(`    Fable (juez)       USD ${usdJuez.toFixed(2)}   CLP ${(usdJuez * 950).toFixed(0)}   ${C.gris}← 10× por token, y piensa${C.fin}`);
+  console.log(`    ${C.fuerte}total              USD ${(usdLici + usdJuez).toFixed(2)}   CLP ${((usdLici + usdJuez) * 950).toFixed(0)}${C.fin}`);
 
   console.log(`\n${C.fuerte}═══ FABLE ═══${C.fin}`);
   console.log(resumenFinal.split("\n").map((l) => "  " + l).join("\n"));
