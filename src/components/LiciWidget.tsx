@@ -164,12 +164,15 @@ export default function LiciWidget() {
           {/* Cabecera */}
           <div className="flex shrink-0 items-center gap-3 border-b border-[#0A1530]/[0.07] px-4 py-3.5">
             <LiciGlifo alto={30} conBorde />
+            {/* Sólo el nombre. El subtítulo decía «Del producto y los
+                planes», que era cierto cuando Lici sabía 1.500 palabras
+                y hoy ya no: también responde el glosario y las guías del
+                sitio. Un rótulo que promete MENOS de lo que hace le
+                cierra la puerta a quien venía con una duda de
+                licitaciones — y ésa es la conversación que más vende. */}
             <div className="min-w-0 flex-1">
               <div className="font-display text-[15px] font-semibold leading-tight text-[#0A0A0A]">
                 Lici
-              </div>
-              <div className="font-sans text-[12.5px] leading-tight text-[#0A1530]/55">
-                Del producto y los planes
               </div>
             </div>
             <button
