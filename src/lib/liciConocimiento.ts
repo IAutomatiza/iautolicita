@@ -79,13 +79,27 @@ export type Ficha = {
    producto: «¿Qué hace exactamente?» es una pregunta que se hace
    quien ya decidió mirar; «Se me pasan licitaciones» es la frase
    que trae a alguien a la página. Cinco y no seis: en el panel
-   angosto, seis se comen media pantalla antes del saludo. */
+   angosto, seis se comen media pantalla antes del saludo.
+
+   Revisión del 2-sep, con dos cambios:
+   · «¿Sirve para lo que yo vendo?» → «¿Qué compra el Estado de lo
+     mío?». La primera pone en duda el producto antes de empezar y se
+     contesta sí o no; la segunda da por hecho que hay mercado y abre
+     una conversación. Es además la pregunta que lleva derecho a la
+     app, que es la meta.
+   · «Nunca he licitado» → «Nunca le he vendido al Estado». «Licitar»
+     es jerga: quien nunca ha vendido al Estado tampoco usa esa
+     palabra, así que el chip escrito así no lo representa.
+   ⚠️ Los cinco están probados contra la cadena de reconducciones de la
+   edge: ninguno cae en una respuesta enlatada. Un chip que dispare el
+   guardrail sería sugerirle a alguien una pregunta que no vamos a
+   contestar. */
 export const CHIPS_INICIALES = [
-  "¿Sirve para lo que yo vendo?",
+  "¿Qué compra el Estado de lo mío?",
   "¿Cuánto cuesta?",
   "Se me pasan licitaciones",
   "No sé a qué precio ofertar",
-  "Nunca he licitado",
+  "Nunca le he vendido al Estado",
 ];
 
 /* Saluda, se ofrece, y pregunta ABIERTO.
@@ -110,7 +124,20 @@ export const CHIPS_INICIALES = [
    Queda corto a propósito: los cinco chips que van justo abajo ya
    muestran qué se puede preguntar. Repetirlo en el saludo solo
    diluye la pregunta. */
-export const SALUDO = "Hola, soy Lici. ¿En qué te puedo ayudar?";
+/* 🎯 El saludo MOTIVA, no sólo saluda (pedido de Carlos, 2-sep). El
+   anterior —«¿en qué te puedo ayudar?»— era correcto y no vendía nada:
+   quien llega al chat todavía no sabe si esto es para él.
+   Las dos afirmaciones están PUBLICADAS en el sitio y verificadas
+   antes de escribirlas acá: «el Estado compra de todo, desde uniformes
+   hasta software» y los cuatro caminos (licitación, Compra Ágil,
+   convenio marco y trato directo). Nada de cifras de mercado, que
+   además las bloquea el guardrail.
+   🚨 Y se mantiene la pregunta ABIERTA. Una versión vieja abría con
+   «¿qué vende tu empresa?» y eso es nuestra agenda, no la suya: se lee
+   como un formulario de entrada. Quien llega viene con algo en la
+   cabeza; primero lo dice él. */
+export const SALUDO =
+  "Hola, soy Lici. Venderle al Estado es más alcanzable de lo que parece: compra de todo, desde uniformes hasta software, y por cuatro caminos distintos. ¿En qué te ayudo?";
 
 export const FICHAS: Ficha[] = [
   /* ── Producto ─────────────────────────────────────────────── */
