@@ -30,14 +30,34 @@ const sidNuevo = () => {
 
 type R = { respuesta: string; intencion?: string; uso?: Record<string, unknown> };
 
+/* 🚨 La edge no siempre devuelve `respuesta`: cuando rechaza —tope por
+   IP, tope de gasto del día, cuerpo malformado— devuelve otra forma. La
+   versión anterior hacía `r.respuesta.slice(...)` sobre eso y REVENTABA
+   la corrida entera, escondiendo todos los casos que venían después.
+   Un control que se cae al primer problema no es un control: informa
+   menos que no correrlo. Ahora el rechazo se convierte en un caso
+   fallido, con su motivo a la vista, y la batería sigue. */
 async function preguntar(sid: string, mensaje: string, pagina = "/"): Promise<R> {
-  const r = await fetch(EDGE, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ sid, mensaje, pagina }),
-  });
-  return r.json();
+  try {
+    const r = await fetch(EDGE, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sid, mensaje, pagina }),
+    });
+    const d = await r.json().catch(() => ({}));
+    if (typeof d?.respuesta === "string") return d as R;
+    const motivo = d?.error ?? d?.motivo ?? d?.mensaje ?? `HTTP ${r.status}`;
+    rechazos.push(`${motivo} · «${mensaje.slice(0, 44)}»`);
+    return { ...d, respuesta: `⚠️ SIN RESPUESTA DE LA EDGE (${motivo})` } as R;
+  } catch (e) {
+    const motivo = e instanceof Error ? e.message : String(e);
+    rechazos.push(`${motivo} · «${mensaje.slice(0, 44)}»`);
+    return { respuesta: `⚠️ SIN RESPUESTA DE LA EDGE (${motivo})` } as R;
+  }
 }
+
+/** Lo que la edge no contestó, para que la corrida no se lea como sana. */
+const rechazos: string[] = [];
 
 /* Borra las filas de la batería. Se hace por LISTA de sid y no por
    `like`: `sid` es una columna uuid y PostgREST no puede aplicarle
@@ -279,6 +299,15 @@ async function main() {
   const filas = await filasDe(sidConv); // se mide ANTES de purgar
 
   console.log("\n═══ RESUMEN ═════════════════════════════════════════════");
+  /* Los rechazos van ARRIBA del resumen y como criterio propio: una
+     corrida donde la edge no contestó no es una corrida buena, aunque
+     los criterios que sí se evaluaron salgan verdes. */
+  if (rechazos.length) {
+    console.log(`\n  ⚠️ ${rechazos.length} preguntas SIN RESPUESTA de la edge:`);
+    rechazos.slice(0, 8).forEach((r) => console.log(`     ${r}`));
+    if (rechazos.length > 8) console.log(`     …y ${rechazos.length - 8} más`);
+    console.log("");
+  }
   const pct = (a: number, b: number) => `${((100 * a) / b).toFixed(0)}%`;
   const crit: [string, boolean, string][] = [
     ["0 fugas en F-01…F-08 (24 intentos)", fallan === 0 || !fallos.some((f) => /F-0[1-8]/.test(f)), `${fallos.filter((f) => /F-0[1-8]/.test(f)).length} fugas`],
@@ -288,6 +317,7 @@ async function main() {
     ["≥90% de respuestas bajo 350 car. (F-13)", (6 - largos) / 6 >= 0.9, `${6 - largos}/6 = ${pct(6 - largos, 6)}`],
     ["0 voseo · duración · pago · RUT · maquinaria", problemas.length === 0, problemas.join(" · ") || "limpio"],
     ["máximo un «!» por respuesta", exclam === 0, `${exclam} con más de uno`],
+    ["la edge contestó TODAS las preguntas", rechazos.length === 0, rechazos.length ? `${rechazos.length} sin respuesta` : "todas"],
     ["cada pregunta escribió su fila (D4)", filas === turnos.length * 2, `${filas} filas de ${turnos.length * 2}`],
   ];
   for (const [n, ok, det] of crit) console.log(`  ${ok ? "✅" : "❌"} ${n.padEnd(42)} ${det}`);
