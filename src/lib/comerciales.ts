@@ -214,7 +214,7 @@ export const COMERCIALES: Comercial[] = [
       },
       {
         q: "¿Cuánto cuesta IAutoLicita?",
-        a: "Hay un plan gratis para ver el mercado y probar. Los planes pagos parten en $79.000 + IVA al mes.",
+        a: "Hay un plan gratis para ver el mercado y probar. Los planes pagos parten en $59.000 + IVA al mes.",
       },
     ],
     cierre: {
