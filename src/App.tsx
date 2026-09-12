@@ -15,7 +15,6 @@ import GuiasPage from "./pages/GuiasPage";
 import GuiaPage from "./pages/GuiaPage";
 import { GUIAS } from "./lib/guias";
 import AyudaPage from "./pages/AyudaPage";
-import ManualPage from "./pages/ManualPage";
 import AyudaFichaPage from "./pages/AyudaFichaPage";
 import { FICHAS } from "./lib/ayuda";
 import { PRIVACIDAD, TERMINOS } from "./lib/legal";
@@ -90,9 +89,6 @@ export default function App() {
           aparecer ahí. */}
       <Route path="/guias" element={<GuiasPage />} />
       <Route path="/ayuda" element={<AyudaPage />} />
-      {/* El manual completo, sin cuenta. Es el mismo contenido que ve el cliente
-          dentro de la app: se genera del índice del manual, no se escribe acá. */}
-      <Route path="/manual" element={<ManualPage />} />
       {FICHAS.map((f) => (
         <Route key={f.slug} path={`/ayuda/${f.slug}`} element={<AyudaFichaPage slug={f.slug} />} />
       ))}

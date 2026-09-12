@@ -39,14 +39,9 @@ const recursosLinks = [
     desc: "Qué significa cada palabra de una licitación",
   },
   {
-    href: "/manual",
-    title: "Cómo funciona",
-    desc: "La app entera, pantalla por pantalla",
-  },
-  {
     href: "/ayuda",
     title: "Centro de ayuda",
-    desc: "Qué responde cada reporte, antes de entrar",
+    desc: "Qué hay dentro de la app, pantalla por pantalla",
   },
 ];
 
