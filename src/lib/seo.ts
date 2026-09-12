@@ -56,6 +56,12 @@ export const PAGINAS: Record<string, MetaPagina> = {
     descripcion:
       `Plan gratis para partir. Pro ${enPesos(PLAN.pro.neto)} + IVA al mes con alertas al instante y Lici sin tope. Max ${enPesos(PLAN.max.neto)} con varias empresas, presupuestos y cobranza.`,
   },
+  "/manual": {
+    ruta: "/manual",
+    titulo: "Cómo funciona IAutoLicita — el manual, pantalla por pantalla",
+    descripcion:
+      "Las 30 pantallas de IAutoLicita en el orden real del menú: para qué sirve cada una, qué mirar primero y qué hacer en ella. El manual completo, sin cuenta.",
+  },
   "/contacto": {
     ruta: "/contacto",
     titulo: "Pide una reunión — IAutoLicita",
