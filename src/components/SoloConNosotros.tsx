@@ -136,7 +136,7 @@ export default function SoloConNosotros() {
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-brand-100 bg-brand-50">
                     <v.Icon className="h-5 w-5 text-brand-600" strokeWidth={1.8} />
                   </span>
-                  <span aria-hidden="true" className="font-display font-medium text-[26px] leading-none tracking-tightest text-cream-50/15 tabular-nums">
+                  <span aria-hidden="true" className="font-display font-medium text-[26px] leading-none tracking-tightest text-cream-50/45 tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>

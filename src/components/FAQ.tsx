@@ -72,7 +72,7 @@ export default function FAQ() {
                       <div className="flex items-start gap-4 md:gap-6">
                         <span
                           className={`mt-2 md:mt-3 shrink-0 font-mono text-[11px] tabular-nums transition-colors duration-300 ${
-                            activa ? "text-amber-400" : "text-cream-50/50 group-hover:text-cream-50/75"
+                            activa ? "text-amber-400" : "text-cream-50/65 group-hover:text-cream-50/80"
                           }`}
                         >
                           {String(i + 1).padStart(2, "0")}

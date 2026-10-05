@@ -37,7 +37,7 @@ export default {
           50: "#0A0A0A",  // primary text
           100: "#1F1F1F", // strong text
           200: "#404040", // body text
-          300: "#737373", // secondary
+          300: "#6B6B6B", // secondary (era #737373: 4,4:1 sobre #f8f8f7)
           // Era #A8A29E: 2,4:1 sobre el fondo claro (mínimo legible 4,5:1).
           400: "#78716C", // tertiary / captions
         },
