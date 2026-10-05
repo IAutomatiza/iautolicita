@@ -55,10 +55,10 @@ function Item({ item }: { item: TickerItem }) {
       <span className={`px-1.5 py-0.5 rounded font-semibold tracking-[0.06em] ${s.bg} ${s.text}`}>
         {s.label}
       </span>
-      <span className="text-white/35">{item.id}</span>
+      <span className="text-white/60">{item.id}</span>
       <span className="text-white/85 font-medium">{item.org}</span>
       <span className="text-white font-semibold tabular-nums">{item.amount}</span>
-      <span className={item.urgent ? "text-amber-400 font-medium" : "text-white/45"}>
+      <span className={item.urgent ? "text-amber-400 font-medium" : "text-white/60"}>
         {item.meta}
       </span>
       <span className="text-white/20 px-1">·</span>
@@ -81,7 +81,7 @@ export default function MarketTicker() {
             <span className="absolute inset-0 rounded-full bg-sage-400 animate-ping opacity-60" />
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white font-semibold leading-none">
-            Live <span className="hidden sm:inline text-white/45">· ChileCompra</span>
+            Live <span className="hidden sm:inline text-white/60">· ChileCompra</span>
           </span>
         </div>
 
@@ -108,7 +108,7 @@ export default function MarketTicker() {
 
         {/* Right meta — refresh status */}
         <div className="hidden lg:flex flex-shrink-0 px-3 h-full items-center gap-2 border-l border-white/10">
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45 leading-none">
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 leading-none">
             refresh · ahora
           </span>
         </div>

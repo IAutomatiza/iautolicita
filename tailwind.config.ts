@@ -38,7 +38,8 @@ export default {
           100: "#1F1F1F", // strong text
           200: "#404040", // body text
           300: "#737373", // secondary
-          400: "#A8A29E", // tertiary / captions
+          // Era #A8A29E: 2,4:1 sobre el fondo claro (mínimo legible 4,5:1).
+          400: "#78716C", // tertiary / captions
         },
         brand: {
           50: "#EFF4FF",

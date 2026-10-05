@@ -26,7 +26,7 @@ const VisorScore = ({ activo }: VisorProps) => (
   <div className="rounded-2xl border border-white/[0.08] bg-[#0A101B] p-5 md:p-6">
     <div className="flex items-start justify-between gap-5">
       <div className="min-w-0">
-        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full rounded-full bg-[#55b4f8] opacity-60 animate-ping" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
@@ -90,7 +90,7 @@ const MEDIANA = 4; // índice de la barra donde cae la mediana
 const VisorPrecio = ({ activo }: VisorProps) => (
   <div className="rounded-2xl border border-white/[0.08] bg-[#0A101B] p-5 md:p-6">
     <div className="flex items-baseline justify-between gap-3">
-      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">
         Notebooks corporativos · 12.847 OC
       </div>
       <div className="font-mono text-[10px] text-white/30">2025</div>
@@ -115,12 +115,12 @@ const VisorPrecio = ({ activo }: VisorProps) => (
       ))}
     </div>
     <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 font-mono text-[10.5px]">
-      <span className="text-white/35">p25 $389.000</span>
+      <span className="text-white/60">p25 $389.000</span>
       <span className="inline-flex items-center gap-1.5 text-[#55b4f8]">
         <span className="h-2 w-2 rounded-[2px] bg-[#55b4f8]" />
         mediana $487.320
       </span>
-      <span className="text-white/35">p75 $612.000</span>
+      <span className="text-white/60">p75 $612.000</span>
     </div>
   </div>
 );
@@ -129,7 +129,7 @@ const VisorPrecio = ({ activo }: VisorProps) => (
 
 const VisorCita = ({ activo }: VisorProps) => (
   <div className="rounded-2xl border border-white/[0.08] bg-[#0A101B] p-5 md:p-6">
-    <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+    <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">
       <LiciGlifo alto={16} />
       Respuesta de Lici
     </div>
@@ -167,7 +167,7 @@ const COMPETIDORES = [
 
 const VisorCompetencia = ({ activo }: VisorProps) => (
   <div className="rounded-2xl border border-white/[0.08] bg-[#0A101B] p-5 md:p-6">
-    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">
       Adjudicaciones MINSAL · últimos 12 meses
     </div>
     <div className="mt-4 space-y-3">
@@ -175,7 +175,7 @@ const VisorCompetencia = ({ activo }: VisorProps) => (
         <div key={c.n}>
           <div className="flex items-baseline justify-between font-mono text-[11px]">
             <span className={c.propia ? "text-[#55b4f8]" : "text-white/55"}>{c.n}</span>
-            <span className={c.propia ? "text-[#55b4f8]" : "text-white/35"}>{c.p}%</span>
+            <span className={c.propia ? "text-[#55b4f8]" : "text-white/60"}>{c.p}%</span>
           </div>
           <div className="mt-1.5 h-[5px] rounded-full bg-white/[0.06] overflow-hidden">
             <div
@@ -189,7 +189,7 @@ const VisorCompetencia = ({ activo }: VisorProps) => (
         </div>
       ))}
     </div>
-    <div className="mt-4 font-mono text-[10.5px] text-white/35">
+    <div className="mt-4 font-mono text-[10.5px] text-white/60">
       847 licitaciones del rubro analizadas
     </div>
   </div>
@@ -220,7 +220,7 @@ const ALERTAS = [
 
 const VisorAlertas = ({ activo }: VisorProps) => (
   <div className="rounded-2xl border border-white/[0.08] bg-[#0A101B] p-5 md:p-6">
-    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">
       4886-33-LR26 · Vigilancia activa
     </div>
     <div className="mt-4 space-y-2.5">
