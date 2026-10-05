@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { vistaPagina, escucharClicsALaApp } from "./lib/analitica";
+import { vistaPagina, escucharClicsALaApp, configurarAds } from "./lib/analitica";
+import { capturarAtribucion } from "./lib/atribucion";
+import GraciasPage from "./pages/GraciasPage";
+import NoEncontradaPage from "./pages/NoEncontradaPage";
 import HomePage from "./pages/HomePage";
 import LiciPage from "./pages/LiciPage";
 import PreciosPage from "./pages/PreciosPage";
@@ -65,7 +68,11 @@ export default function App() {
   }, [ruta]);
 
   // Un solo oyente para todos los enlaces a la app, del sitio entero.
+  // Y al llegar: guardar de dónde vino la visita (gclid, utm) antes de
+  // que la navegación interna borre la URL. Ver lib/atribucion.ts.
   useEffect(() => {
+    capturarAtribucion();
+    configurarAds();
     escucharClicsALaApp();
   }, []);
 
@@ -100,6 +107,9 @@ export default function App() {
       ))}
       <Route path="/privacidad" element={<LegalPage doc={PRIVACIDAD} />} />
       <Route path="/terminos" element={<LegalPage doc={TERMINOS} />} />
+      <Route path="/gracias" element={<GraciasPage />} />
+      {/* Cualquier otra dirección: 404 (en el servidor, dist/404.html). */}
+      <Route path="*" element={<NoEncontradaPage />} />
     </Routes>
     {/* Lici acompaña todas las páginas: es el canal de conversación
         del sitio desde que salió WhatsApp. */}

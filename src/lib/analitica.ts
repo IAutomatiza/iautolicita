@@ -29,6 +29,8 @@
    molesto, que se caiga la página por eso sería absurdo.
 ═══════════════════════════════════════════════════════════════════ */
 
+import { conAtribucion, vieneDeAnuncio } from "./atribucion";
+
 export const GA_ID = "G-T6H147Q2TG";
 
 type Gtag = (...args: unknown[]) => void;
@@ -76,33 +78,78 @@ export function vistaPagina(ruta: string) {
 export function escucharClicsALaApp() {
   if (typeof document === "undefined") return;
 
-  document.addEventListener(
-    "click",
-    (e) => {
-      const enlace = (e.target as HTMLElement | null)?.closest?.("a");
-      if (!enlace) return;
+  const alClic = (e: MouseEvent) => {
+    const enlace = (e.target as HTMLElement | null)?.closest?.("a");
+    if (!enlace) return;
 
-      const href = enlace.getAttribute("href") ?? "";
-      if (!href.includes("app.iautolicita.cl")) return;
+    const href = enlace.getAttribute("href") ?? "";
+    if (!href.includes("app.iautolicita.cl")) return;
 
-      let medio: string | null = null;
-      let campana: string | null = null;
-      try {
-        const u = new URL(href, window.location.origin);
-        medio = u.searchParams.get("utm_medium");
-        campana = u.searchParams.get("utm_campaign");
-      } catch {
-        /* href raro: se mide igual, sin el detalle */
-      }
+    let medio: string | null = null;
+    let campana: string | null = null;
+    try {
+      const u = new URL(href, window.location.origin);
+      // `cta`/`termino` existen si el enlace ya pasó por conAtribucion
+      // (segundo clic): ahí utm_* ya es el origen del anuncio.
+      medio = u.searchParams.get("cta") ?? u.searchParams.get("utm_medium");
+      campana = u.searchParams.get("termino") ?? u.searchParams.get("utm_campaign");
+    } catch {
+      /* href raro: se mide igual, sin el detalle */
+    }
 
+    if (e.type === "click") {
       evento("clic_probar_app", {
         origen: medio ?? "sin_marca",
         pagina: window.location.pathname,
+        anuncio: vieneDeAnuncio(),
         ...(campana ? { termino: campana } : {}),
       });
-    },
-    // En captura: si algo detiene la propagación más abajo, el evento
-    // igual se registra antes de perderse.
-    true,
-  );
+      // Secundaria en Ads: la principal es el registro, que se sube
+      // desde la base (vw_ads_conversiones_registro) con el gclid.
+      conversionAds("probar_app");
+    }
+
+    // Antes de que el navegador siga el enlace: que el gclid y el
+    // origen real viajen a la app (ver atribucion.ts).
+    enlace.setAttribute("href", conAtribucion(href));
+  };
+
+  // En captura: si algo detiene la propagación más abajo, el evento
+  // igual se registra antes de perderse. `auxclick` cubre el clic con
+  // la rueda (abrir en pestaña nueva), que no dispara `click`.
+  document.addEventListener("click", alClic, true);
+  document.addEventListener("auxclick", alClic, true);
+}
+
+/* ── Google Ads ────────────────────────────────────────────────────
+   La cuenta IAutoLicita (605-308-0388) todavía no termina de crearse:
+   no hay ID de conversión. Mientras ADS_ID esté vacío, todo esto no
+   hace nada. Cuando exista la campaña se completan los tres valores
+   (Objetivos → Conversiones → la acción → «Configurar etiqueta» →
+   «Usar Google tag»: `AW-XXXXXXXXX/etiqueta`) y nada más cambia.
+
+   Por qué la conversión va AQUÍ y no sólo importada desde GA4: en
+   SVEA, con la medición sólo por GTM, llegaron 7 leads con gclid y
+   Ads contó 0. El hit directo `send_to: AW-…/etiqueta` es lo que Ads
+   cuenta sin depender de nadie. */
+export const ADS_ID = ""; // p. ej. "AW-123456789"
+const ADS_ETIQUETAS = {
+  lead: "", // solicitud de reunión → página /gracias
+  probar_app: "", // clic hacia la app (secundaria)
+} as const;
+
+/** Configura Ads una vez (vincula el gclid a la cookie de conversión). */
+export function configurarAds() {
+  if (!ADS_ID) return;
+  gtag()?.("config", ADS_ID);
+}
+
+/** Dispara una conversión de Ads, si hay cuenta configurada. */
+export function conversionAds(tipo: keyof typeof ADS_ETIQUETAS, valor?: number) {
+  const etiqueta = ADS_ETIQUETAS[tipo];
+  if (!ADS_ID || !etiqueta) return;
+  gtag()?.("event", "conversion", {
+    send_to: `${ADS_ID}/${etiqueta}`,
+    ...(valor ? { value: valor, currency: "CLP" } : {}),
+  });
 }

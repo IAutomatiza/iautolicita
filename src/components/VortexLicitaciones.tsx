@@ -42,7 +42,7 @@ export default function VortexLicitaciones() {
 
     const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const FUENTE = '11.5px "Geist Mono", ui-monospace, monospace';
+    const FUENTE = '11.5px "Geist Mono Variable", "Geist Mono", ui-monospace, monospace';
     const R0 = 34; // radio del anillo interior
     const PASO = 33; // separación entre anillos
 

@@ -49,7 +49,7 @@ export default function AsciiRain({ opacidad = 0.1 }: { opacidad?: number }) {
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = '11px "Geist Mono", ui-monospace, monospace';
+      ctx.font = '11px "Geist Mono Variable", "Geist Mono", ui-monospace, monospace';
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       cols = Math.ceil(rect.width / CW);

@@ -121,7 +121,7 @@ export default function LiciRejilla() {
               />
               <div className="overflow-hidden rounded-tl-lg border-l border-t border-[#0A1530]/10 bg-white pl-2 pt-2">
                 <img
-                  src={`${import.meta.env.BASE_URL}app-lici-seccion.png`}
+                  src={`${import.meta.env.BASE_URL}app-lici-seccion.webp`}
                   alt="La sección Lici de IAutoLicita con una licitación abierta: resumen de bases con objeto, cierre y garantía, la cita a la página exacta y el precio sugerido"
                   width={1120}
                   height={700}

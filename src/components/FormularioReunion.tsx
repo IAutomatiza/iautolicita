@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { marcarLeadEnviado } from "../pages/GraciasPage";
 import { ArrowUpRight, Check } from "lucide-react";
 import { enviarLead, hayServidor, type Lead } from "../lib/leads";
 import { evento } from "../lib/analitica";
@@ -31,6 +33,7 @@ export default function FormularioReunion() {
   const [enviando, setEnviando] = useState(false);
   const [listo, setListo] = useState<"servidor" | "correo" | null>(null);
   const [error, setError] = useState("");
+  const navegar = useNavigate();
 
   const cambiar = (campo: string) => (e: { target: { value: string } }) =>
     setDatos((d) => ({ ...d, [campo]: e.target.value }));
@@ -49,6 +52,13 @@ export default function FormularioReunion() {
       // en la base o cayó al correo de respaldo: si un día suben los
       // "mailto", es que la edge está fallando y nadie se enteraría.
       evento("lead_formulario", { via: r.via, con_rut: Boolean(datos.rut) });
+      // Guardado en la base ⇒ a /gracias, que es donde Google Ads cuenta
+      // la conversión. El respaldo por correo NO es un lead confirmado
+      // (puede no apretar «enviar»): se queda aquí con su aviso.
+      if (r.via === "servidor") {
+        marcarLeadEnviado();
+        navegar("/gracias");
+      }
     }
     else setError(r.error);
   };

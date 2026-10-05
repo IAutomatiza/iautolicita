@@ -84,10 +84,12 @@ export default {
         },
       },
       fontFamily: {
+        // Fuentes servidas desde el propio sitio (@fontsource, ver main.tsx):
+        // los paquetes variables se llaman "… Variable".
         condensed: ['"Anton"', "Impact", "sans-serif"],
-        display: ['"Geist"', "ui-sans-serif", "system-ui", "sans-serif"],
-        sans: ['"Geist"', "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ['"Geist Mono"', "ui-monospace", "monospace"],
+        display: ['"Geist Variable"', '"Geist"', "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ['"Geist Variable"', '"Geist"', "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ['"Geist Mono Variable"', '"Geist Mono"', "ui-monospace", "monospace"],
         serif: ['"Instrument Serif"', "Georgia", "serif"],
       },
       letterSpacing: {

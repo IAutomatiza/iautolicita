@@ -148,7 +148,7 @@ export default function HowItWorks() {
 
               <div className="relative rounded-xl md:rounded-2xl overflow-hidden border border-white/15 shadow-[0_40px_100px_-30px_rgba(0,1,21,0.8)]">
                 <img
-                  src={`${import.meta.env.BASE_URL}app-lici-escritorio-v2.png`}
+                  src={`${import.meta.env.BASE_URL}app-lici-escritorio-v2.webp`}
                   alt="Lici dentro de IAutoLicita: resumen de bases, documentos a presentar, calce 87/100 y cuánto conviene ofertar"
                   width={2880}
                   height={1440}

@@ -18,12 +18,33 @@
          como visita: Google creería que todos entran y se quedan
          donde cayeron. Las vistas las manda `vistaPagina()` en cada
          cambio de ruta, incluida la primera. -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6H147Q2TG"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-T6H147Q2TG', { send_page_view: false });
+      /* gtag.js (194 KB) se baja DESPUÉS de que la página cargó: bajado
+         junto con el sitio competía con el título y la portada medía
+         LCP 4 s en móvil. No se pierde nada: todo lo que se mande antes
+         queda en `dataLayer` y gtag lo procesa al llegar (mismo esquema
+         que el sitio de SVEA). */
+      (function () {
+        var hecho = false;
+        function cargar() {
+          if (hecho) return; hecho = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-T6H147Q2TG';
+          document.head.appendChild(s);
+        }
+        function pronto() { ('requestIdleCallback' in window) ? requestIdleCallback(cargar, { timeout: 2500 }) : setTimeout(cargar, 1500); }
+        if (document.readyState === 'complete') pronto();
+        else window.addEventListener('load', pronto, { once: true });
+        ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) {
+          window.addEventListener(ev, cargar, { once: true, passive: true });
+        });
+        setTimeout(cargar, 6000);
+      })();
     </script>
 
     <title>Licitaciones de Mercado Público — IAutoLicita</title>
@@ -42,12 +63,6 @@
 
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Instrument+Serif:ital@0;1&display=swap"
-    />
   </head>
   <body class="bg-ink-950 text-cream-50 antialiased font-sans">
     <div id="root"></div>

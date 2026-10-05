@@ -154,7 +154,7 @@ export default function LiciAManoVsLici() {
               }}
             >
               <img
-                src={`${import.meta.env.BASE_URL}lici-alertas-movil.png`}
+                src={`${import.meta.env.BASE_URL}lici-alertas-movil.webp`}
                 alt=""
                 width={942}
                 height={1274}
@@ -172,7 +172,7 @@ export default function LiciAManoVsLici() {
               }}
             >
               <img
-                src={`${import.meta.env.BASE_URL}lici-chat-movil.png`}
+                src={`${import.meta.env.BASE_URL}lici-chat-movil.webp`}
                 alt="Lici en el teléfono: resume las bases de una licitación, cita la página exacta y sugiere el precio para ganar"
                 width={942}
                 height={1274}

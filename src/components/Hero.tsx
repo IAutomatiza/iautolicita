@@ -44,7 +44,9 @@ export default function Hero() {
             todo en tinta; las cifras bajan al subtítulo y los CTA son
             píldoras. Sin badge ni línea mono: el titular ES la pieza. */}
         <div className="max-w-[1200px] mx-auto text-center">
-          <h1 className="font-condensed uppercase text-cream-50 leading-[0.96] tracking-[0.01em] text-[13vw] md:text-[72px] lg:text-[96px] reveal">
+          {/* Sin `reveal`: el título es el elemento que Google mide como
+              «carga» (LCP). Animado, la portada medía 5,8 s en móvil. */}
+          <h1 className="font-condensed uppercase text-cream-50 leading-[0.96] tracking-[0.01em] text-[13vw] md:text-[72px] lg:text-[96px]">
             Deja de buscar
             <br />
             licitaciones.
@@ -99,7 +101,9 @@ export default function Hero() {
               licitaciones" tal como la ve un cliente. */}
           <div className="relative max-w-[1180px] mx-auto">
             <img
-              src={`${import.meta.env.BASE_URL}app-mis-licitaciones-v2.png`}
+              fetchPriority="low"
+              decoding="async"
+              src={`${import.meta.env.BASE_URL}app-mis-licitaciones-v2.webp`}
               width={1680}
               height={1050}
               alt="Pantalla Mis licitaciones de IAutoLicita: cada licitación con su score, fecha de cierre y estado de gestión"

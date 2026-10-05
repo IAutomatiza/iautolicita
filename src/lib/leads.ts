@@ -14,6 +14,8 @@
    Así el formulario se puede construir y probar completo antes de
    que exista el backend, y enchufarlo después es una variable. */
 
+import { atribucion } from "./atribucion";
+
 export type Lead = {
   nombre: string;
   empresa: string;
@@ -68,6 +70,14 @@ export async function enviarLead(lead: Lead): Promise<Resultado> {
           // esa conversación.
           sid: (() => {
             try { return sessionStorage.getItem("lici_sid"); } catch { return null; }
+          })(),
+          // De dónde vino la visita (gclid, utm_*, página de aterrizaje):
+          // sin esto el lead no se puede unir al anuncio que lo trajo.
+          ...(() => {
+            const a = atribucion();
+            if (!a) return {};
+            const { t: _t, ...resto } = a;
+            return resto;
           })(),
         }),
       });

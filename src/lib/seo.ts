@@ -34,6 +34,8 @@ export type MetaPagina = {
   titulo: string;
   descripcion: string;
   ruta: string;
+  /** No se indexa ni entra al sitemap (fin de un trámite, 404). */
+  noindex?: boolean;
 };
 
 export const PAGINAS: Record<string, MetaPagina> = {
@@ -61,6 +63,18 @@ export const PAGINAS: Record<string, MetaPagina> = {
     titulo: "Pide una reunión — IAutoLicita",
     descripcion:
       "Media hora con tus propias licitaciones en pantalla, no una demo genérica. Déjanos tu RUT y llegamos con tu perfil ya calculado.",
+  },
+  "/gracias": {
+    ruta: "/gracias",
+    titulo: "Solicitud recibida — IAutoLicita",
+    descripcion: "Recibimos tu solicitud de reunión. Te escribimos dentro del día hábil.",
+    noindex: true,
+  },
+  "/404": {
+    ruta: "/404",
+    titulo: "Página no encontrada — IAutoLicita",
+    descripcion: "La página que buscas no existe o se movió.",
+    noindex: true,
   },
   "/privacidad": {
     ruta: "/privacidad",

@@ -16,6 +16,9 @@
     "lici:plan": "npx esbuild scripts/lici-plan-prueba.ts --bundle --format=esm --platform=node --packages=external --outfile=.lici-plan.mjs --log-level=error && node --env-file-if-exists=.env .lici-plan.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
