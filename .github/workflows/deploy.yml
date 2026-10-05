@@ -38,7 +38,8 @@ jobs:
           SITIO_NOINDEX: "1"
       # SPA fallback: Pages sirve 404.html en cualquier ruta que no
       # exista como archivo, y ahí React Router se hace cargo.
-      - run: cp dist/index.html dist/404.html
+      # Si el prerender ya dejó una 404 propia (desde oct-2026), se respeta.
+      - run: '[ -f dist/404.html ] || cp dist/index.html dist/404.html'
       # El prerenderizado (dentro de `npm run build`) ya deja cada ruta
       # con su propio index.html — antes esto se hacía a mano acá para
       # lici y precios. Ahora son seis y salen con su HTML de verdad,

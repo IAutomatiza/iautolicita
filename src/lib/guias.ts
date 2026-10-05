@@ -57,7 +57,7 @@ export const GUIAS: Guia[] = [
     titulo: "Guía de Compra Ágil para proveedores",
     tituloSeo: "Compra Ágil: guía completa para proveedores",
     descripcion:
-      "Cómo funciona la Compra Ágil de Mercado Público paso a paso: quién puede cotizar, cómo se elige, cuánto se demora y los errores que hacen perder cotizaciones ganables.",
+      "La Compra Ágil de Mercado Público paso a paso: quién puede cotizar, cómo se elige, cuánto se demora y los errores que hacen perder cotizaciones.",
     bajada:
       "Es el canal más rápido del Estado y el que menos requisitos pide. También es donde más oportunidades se pierden, y casi nunca por precio.",
     secciones: [
@@ -285,7 +285,7 @@ export const GUIAS: Guia[] = [
     titulo: "Qué garantías te piden y cuánto cuestan",
     tituloSeo: "Garantías en licitaciones: cuánto cuestan y demoran",
     descripcion:
-      "Boleta bancaria, póliza de seguro o certificado de fianza: qué acepta cada licitación, cuánto cuesta cada una, cuánto se demora y cuál conviene según tu caso.",
+      "Boleta bancaria, póliza o certificado de fianza: qué acepta cada licitación, cuánto cuesta, cuánto se demora y cuál te conviene según tu caso.",
     bajada:
       "Nadie te explica que sacar una boleta puede tomar una semana. Y el cierre de la licitación no se mueve.",
     secciones: [
@@ -387,7 +387,7 @@ export const GUIAS: Guia[] = [
     titulo: "Por qué se declara desierta y qué hacer",
     tituloSeo: "Licitación desierta: qué hacer después",
     descripcion:
-      "Qué significa que una licitación quede desierta, por qué pasa, qué opciones le quedan al organismo y por qué para un proveedor suele ser una oportunidad que vuelve.",
+      "Qué significa que una licitación quede desierta, por qué pasa, qué puede hacer el organismo y por qué para un proveedor suele ser una oportunidad.",
     bajada:
       "La necesidad del organismo no desapareció. Casi siempre republica, y quien está atento llega con la oferta lista.",
     secciones: [
@@ -488,7 +488,7 @@ export const GUIAS: Guia[] = [
     titulo: "Cómo leer las bases sin perder el día",
     tituloSeo: "Cómo leer las bases de una licitación",
     descripcion:
-      "Qué mirar primero en unas bases de licitación, en qué orden, y cómo descartar en diez minutos las que no te sirven en vez de leer cien páginas para descubrirlo.",
+      "Qué mirar primero en unas bases de licitación, en qué orden, y cómo descartar en diez minutos las que no te sirven sin leer cien páginas.",
     bajada:
       "Unas bases pueden ser cien páginas. Leerlas enteras para descubrir al final que piden algo que no tienes es la forma más cara de perder un día.",
     secciones: [

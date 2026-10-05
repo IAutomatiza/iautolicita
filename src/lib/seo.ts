@@ -44,13 +44,13 @@ export const PAGINAS: Record<string, MetaPagina> = {
     titulo:
       "Licitaciones de Mercado Público — IAutoLicita",
     descripcion:
-      "Vigilamos Mercado Público y te avisamos solo las licitaciones que calzan con lo que vendes. Te leemos las bases y te decimos a qué precio se adjudicó antes. Plan gratis para partir.",
+      "Te avisamos sólo las licitaciones de Mercado Público que calzan con lo que vendes, te leemos las bases y te decimos a qué precio se adjudicó. Plan gratis.",
   },
   "/lici": {
     ruta: "/lici",
     titulo: "Lici — la IA que te lee las bases de una licitación",
     descripcion:
-      "Lici lee las bases completas de una licitación o compra ágil y te responde qué piden, qué garantía y qué fechas — citando la página exacta. Pruébala gratis.",
+      "Lici lee las bases de una licitación o compra ágil y te dice qué piden, qué garantía y qué fechas, citando la página exacta. Pruébala gratis.",
   },
   "/precios": {
     ruta: "/precios",
