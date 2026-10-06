@@ -47,6 +47,40 @@
       })();
     </script>
 
+    <!-- Píxel de Meta · 1416157013940334 (conjunto de datos «IAutoLicita»)
+         Mismo esquema que Analytics: la cola `fbq` existe desde el
+         primer instante y fbevents.js se baja después de que la
+         página cargó, para no competir con la portada. Lo que se
+         mande antes queda en la cola y se procesa al llegar.
+
+         No hay `fbq('track','PageView')` aquí a propósito: en un sitio
+         de una sola página sólo contaría la primera. Las vistas las
+         manda `vistaPagina()` en cada cambio de ruta (analitica.ts). -->
+    <script>
+      (function (f) {
+        if (f.fbq) return;
+        var n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+        if (!f._fbq) f._fbq = n;
+        n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+        f.fbq('init', '1416157013940334');
+        var hecho = false;
+        function cargar() {
+          if (hecho) return; hecho = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://connect.facebook.net/es_LA/fbevents.js';
+          document.head.appendChild(s);
+        }
+        function pronto() { ('requestIdleCallback' in f) ? requestIdleCallback(cargar, { timeout: 3000 }) : setTimeout(cargar, 2000); }
+        if (document.readyState === 'complete') pronto();
+        else f.addEventListener('load', pronto, { once: true });
+        ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) {
+          f.addEventListener(ev, cargar, { once: true, passive: true });
+        });
+        setTimeout(cargar, 6000);
+      })(window);
+    </script>
+
     <title>Licitaciones de Mercado Público — IAutoLicita</title>
     <meta
       name="description"

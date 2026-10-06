@@ -89,8 +89,8 @@ export const PRIVACIDAD: Documento = {
     {
       titulo: "Cookies y servicios de terceros",
       parrafos: [
-        "Usamos Google Analytics para entender el uso del sitio, y las etiquetas de Google Ads para medir la efectividad de nuestros avisos. Estos servicios instalan cookies propias y de terceros en tu navegador, y pueden usarlas para mostrarte publicidad de IAutoLicita en otros sitios.",
-        "Puedes desactivar las cookies desde la configuración de tu navegador, o dejar de recibir publicidad personalizada de Google desde la configuración de anuncios de tu cuenta de Google. El sitio funciona igual sin ellas.",
+        "Usamos Google Analytics para entender el uso del sitio, y las etiquetas de Google Ads y el píxel de Meta (Facebook e Instagram) para medir la efectividad de nuestros avisos. Estos servicios instalan cookies propias y de terceros en tu navegador, y pueden usarlas para mostrarte publicidad de IAutoLicita en otros sitios y redes sociales.",
+        "Puedes desactivar las cookies desde la configuración de tu navegador, o dejar de recibir publicidad personalizada desde la configuración de anuncios de tu cuenta de Google y de tu cuenta de Facebook o Instagram. El sitio funciona igual sin ellas.",
         "También usamos proveedores de infraestructura para alojar el sitio y la aplicación. Acceden a los datos solo en lo necesario para prestar el servicio.",
       ],
     },
@@ -108,7 +108,7 @@ export const PRIVACIDAD: Documento = {
       titulo: "Dónde se guardan y quién más los procesa",
       parrafos: [
         "Trabajamos con proveedores de infraestructura que están fuera de Chile, así que tus datos salen del país. Te lo decimos porque la ley lo exige y porque corresponde que lo sepas.",
-        "Supabase aloja nuestra base de datos. Vercel sirve este sitio. Google presta la analítica y, cuando corresponda, la publicidad. Anthropic procesa las conversaciones con Lici para generar sus respuestas. Resend entrega los correos que te enviamos.",
+        "Supabase aloja nuestra base de datos. Vercel sirve este sitio. Google presta la analítica y, junto con Meta, la medición de la publicidad. Anthropic procesa las conversaciones con Lici para generar sus respuestas. Resend entrega los correos que te enviamos.",
         "Con todos ellos existe una relación contractual que los obliga a tratar los datos sólo por nuestra instrucción y con medidas de seguridad adecuadas. Ninguno los usa para fines propios.",
         "No vendemos, arrendamos ni cedemos tus datos a terceros con fines comerciales. Nunca.",
       ],

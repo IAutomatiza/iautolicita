@@ -16,7 +16,8 @@
    Cómo funciona
    ─────────────
    · `capturarAtribucion()` corre una vez por carga: si la URL trae
-     gclid/gbraid/wbraid o algún utm_*, lo guarda (gana el último
+     un identificador de clic (gclid, fbclid, ttclid…) o algún utm_*,
+     lo guarda (gana el último
      clic: un anuncio nuevo pisa uno viejo; una visita sin marcas NO
      borra la anterior). Vence a los 90 días, como la cookie de Ads.
    · `atribucion()` lo devuelve para el formulario y la app.
@@ -29,8 +30,9 @@
 const CLAVE = "ial_atribucion";
 const VIGENCIA_MS = 90 * 24 * 3600 * 1000;
 
-/** Los identificadores de clic de Google Ads. gbraid/wbraid son los de iOS. */
-const CLICS = ["gclid", "gbraid", "wbraid"] as const;
+/** Los identificadores de clic de cada red de anuncios: Google Ads
+ *  (gbraid/wbraid son los de iOS), Meta, TikTok y LinkedIn. */
+const CLICS = ["gclid", "gbraid", "wbraid", "fbclid", "ttclid", "li_fat_id"] as const;
 const UTMS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
 
 export type Atribucion = Partial<Record<(typeof CLICS)[number] | (typeof UTMS)[number], string>> & {
@@ -80,11 +82,15 @@ export function atribucion(): Atribucion | null {
   return leer();
 }
 
-/** ¿La visita vino de un anuncio de Google? */
+/** ¿La visita vino de un anuncio pagado?
+ *
+ *  `fbclid` solo no alcanza: Facebook e Instagram se lo cuelgan a
+ *  CUALQUIER enlace, también a los de una publicación gratis. Para
+ *  Meta, TikTok y LinkedIn manda el `utm_medium` del anuncio. */
 export function vieneDeAnuncio(a = atribucion()): boolean {
   if (!a) return false;
-  return Boolean(a.gclid || a.gbraid || a.wbraid) ||
-    (a.utm_source === "google" && /^(cpc|ppc|paid)/.test(a.utm_medium ?? ""));
+  return Boolean(a.gclid || a.gbraid || a.wbraid || a.ttclid || a.li_fat_id) ||
+    /^(cpc|ppc|paid)/.test(a.utm_medium ?? "");
 }
 
 /**

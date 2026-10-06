@@ -41,9 +41,39 @@ function gtag(): Gtag | null {
   return typeof g === "function" ? g : null;
 }
 
-/** Un evento. Si no hay gtag, no pasa nada. */
+/* ── Píxel de Meta ─────────────────────────────────────────────────
+   El conjunto de datos «IAutoLicita» (1416157013940334) se inicia en
+   index.html. Acá sólo se traducen nuestros eventos a los estándar de
+   Meta, que son los que sus campañas saben optimizar:
+
+   · clic_probar_app → Lead        (se fue a registrarse)
+   · lead_formulario → Contact     (pidió una reunión)
+   · ver_precios     → ViewContent (interés real)
+
+   El registro mismo (CompleteRegistration) ocurre en la app, no en
+   este sitio: ése se manda desde allá. Igual que con gtag, si el
+   píxel no está (bloqueador, prerenderizado) esto no hace nada. */
+export const PIXEL_ID = "1416157013940334";
+
+type Fbq = (...args: unknown[]) => void;
+
+function fbq(): Fbq | null {
+  if (typeof window === "undefined") return null;
+  const f = (window as unknown as { fbq?: Fbq }).fbq;
+  return typeof f === "function" ? f : null;
+}
+
+const A_META: Record<string, string> = {
+  clic_probar_app: "Lead",
+  lead_formulario: "Contact",
+  ver_precios: "ViewContent",
+};
+
+/** Un evento. Si no hay gtag ni píxel, no pasa nada. */
 export function evento(nombre: string, datos?: Record<string, unknown>) {
   gtag()?.("event", nombre, datos ?? {});
+  const estandar = A_META[nombre];
+  if (estandar) fbq()?.("track", estandar, { content_name: nombre });
 }
 
 /**
@@ -60,6 +90,7 @@ export function vistaPagina(ruta: string) {
     page_location: typeof window !== "undefined" ? window.location.href : ruta,
     page_title: typeof document !== "undefined" ? document.title : undefined,
   });
+  fbq()?.("track", "PageView");
 }
 
 /**
