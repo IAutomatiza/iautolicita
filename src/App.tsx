@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import LiciPage from "./pages/LiciPage";
 import PreciosPage from "./pages/PreciosPage";
 import LiciWidget from "./components/LiciWidget";
+import AvisoCookies from "./components/AvisoCookies";
 import LegalPage from "./pages/LegalPage";
 import ContactoPage from "./pages/ContactoPage";
 import GlosarioPage from "./pages/GlosarioPage";
@@ -114,6 +115,7 @@ export default function App() {
     {/* Lici acompaña todas las páginas: es el canal de conversación
         del sitio desde que salió WhatsApp. */}
     <LiciWidget />
+    <AvisoCookies />
     </>
   );
 }

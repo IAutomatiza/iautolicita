@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import { EVENTO_ABRIR_COOKIES } from "../lib/consentimiento";
 import { Link } from "react-router-dom";
 import { Mail, Globe } from "lucide-react";
 import { enlaceApp } from "../lib/cta";
@@ -184,6 +185,15 @@ export default function Footer() {
               {LEGALES.map((l) => (
                 <li key={l.label}>{enlace(l, "hover:text-amber-400 transition-colors")}</li>
               ))}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent(EVENTO_ABRIR_COOKIES))}
+                  className="text-left hover:text-amber-400 transition-colors"
+                >
+                  Preferencias de cookies
+                </button>
+              </li>
             </ul>
           ) : (
             <p className="order-1 font-mono text-[10.5px] uppercase tracking-[0.16em] text-cream-400 md:order-2">

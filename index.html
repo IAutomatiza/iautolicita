@@ -19,8 +19,21 @@
          donde cayeron. Las vistas las manda `vistaPagina()` en cada
          cambio de ruta, incluida la primera. -->
     <script>
+      /* Aviso de cookies · el permiso se decide AQUÍ, antes de que cargue
+         nada (ver src/lib/consentimiento.ts).
+           'aviso'    se mide salvo que la persona rechace
+           'permiso'  no se mide hasta que la persona acepte */
+      window.IAL_COOKIES_MODO = 'aviso';
+      window.ialCookiesPermitidas = (function () {
+        var e = null;
+        try { e = localStorage.getItem('ial_cookies'); } catch (x) {}
+        return e === 'aceptadas' || (e !== 'rechazadas' && window.IAL_COOKIES_MODO === 'aviso');
+      })();
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      (function (v) {
+        gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v });
+      })(window.ialCookiesPermitidas ? 'granted' : 'denied');
       gtag('js', new Date());
       gtag('config', 'G-T6H147Q2TG', { send_page_view: false });
       /* gtag.js (194 KB) se baja DESPUÉS de que la página cargó: bajado
@@ -62,6 +75,8 @@
         var n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
         if (!f._fbq) f._fbq = n;
         n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+        // el permiso va antes del init: con 'revoke' el píxel no deja cookies ni manda eventos
+        f.fbq('consent', f.ialCookiesPermitidas ? 'grant' : 'revoke');
         f.fbq('init', '1416157013940334');
         var hecho = false;
         function cargar() {

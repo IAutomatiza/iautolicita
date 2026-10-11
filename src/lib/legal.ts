@@ -28,9 +28,6 @@
    ⚠️ LO QUE SIGUE PENDIENTE, y no lo resuelve este archivo:
    · revisión y firma de un abogado
    · el DPA con cada organización cliente (rol de ENCARGADO)
-   · el banner de consentimiento de cookies — hoy Analytics carga
-     antes de que nadie acepte nada, y eso contradice lo que este
-     documento dice sobre poder desactivarlas
    · la EIPD por el uso de IA, y decidir si hace falta un DPO
 
    El texto vive acá y no dentro del componente para que se pueda
@@ -90,7 +87,7 @@ export const PRIVACIDAD: Documento = {
       titulo: "Cookies y servicios de terceros",
       parrafos: [
         "Usamos Google Analytics para entender el uso del sitio, y las etiquetas de Google Ads y el píxel de Meta (Facebook e Instagram) para medir la efectividad de nuestros avisos. Estos servicios instalan cookies propias y de terceros en tu navegador, y pueden usarlas para mostrarte publicidad de IAutoLicita en otros sitios y redes sociales.",
-        "Puedes desactivar las cookies desde la configuración de tu navegador, o dejar de recibir publicidad personalizada desde la configuración de anuncios de tu cuenta de Google y de tu cuenta de Facebook o Instagram. El sitio funciona igual sin ellas.",
+        "Puedes aceptar o rechazar estas cookies en el aviso que aparece al entrar al sitio, y cambiar tu elección cuando quieras en «Preferencias de cookies», al pie de cada página. También puedes desactivarlas desde la configuración de tu navegador, o dejar de recibir publicidad personalizada desde la configuración de anuncios de tu cuenta de Google y de tu cuenta de Facebook o Instagram. El sitio funciona igual sin ellas.",
         "También usamos proveedores de infraestructura para alojar el sitio y la aplicación. Acceden a los datos solo en lo necesario para prestar el servicio.",
       ],
     },
