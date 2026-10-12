@@ -42,7 +42,7 @@ export type Documento = {
   secciones: Seccion[];
 };
 
-const ACTUALIZADO = "31 de agosto de 2026";
+const ACTUALIZADO = "11 de octubre de 2026";
 
 export const PRIVACIDAD: Documento = {
   ruta: "/privacidad",
@@ -95,7 +95,8 @@ export const PRIVACIDAD: Documento = {
       titulo: "Con qué fundamento los tratamos",
       parrafos: [
         "La Ley 21.719 exige que cada tratamiento tenga una base que lo haga lícito. Estas son las nuestras, por tipo de dato.",
-        "Tu consentimiento: cuando nos escribes por el formulario, cuando conversas con Lici o cuando aceptas cookies de analítica. Puedes retirarlo cuando quieras y dejamos de tratar esos datos.",
+        "Tu consentimiento: cuando nos escribes por el formulario o cuando conversas con Lici. Puedes retirarlo cuando quieras y dejamos de tratar esos datos.",
+        "Las cookies de medición: las usamos para entender el uso del sitio y medir nuestros avisos, y puedes rechazarlas en cualquier momento desde el aviso de cookies o en «Preferencias de cookies», al pie de cada página.",
         "La ejecución del contrato: los datos de tu cuenta y de tu uso de la plataforma, que necesitamos para prestarte el servicio que contrataste.",
         "Nuestro interés legítimo: mantener el sitio seguro, prevenir abusos y entender de forma agregada cómo se usa, para mejorarlo. Es un interés que ponderamos contra tus derechos, y si consideras que no corresponde puedes oponerte.",
         "El cumplimiento de obligaciones legales: la información tributaria y contable que la ley nos obliga a conservar.",
