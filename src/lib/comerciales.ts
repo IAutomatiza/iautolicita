@@ -72,12 +72,12 @@ export const COMERCIALES: Comercial[] = [
   /* ── 1 · Compra Ágil · 15.500 búsquedas/mes ─────────────────── */
   {
     slug: "compra-agil",
-    titulo: "Compra Ágil: el canal donde se parte",
-    tituloSeo: "Compra Ágil de Mercado Público — IAutoLicita",
+    titulo: "Compra Ágil de Mercado Público: entérate a tiempo y postula",
+    tituloSeo: "Compra Ágil Mercado Público: cómo postular — IAutoLicita",
     descripcion:
-      "Recibe las Compras Ágiles que calzan con lo que vendes, con el precio al que se adjudicó antes lo mismo. Sin revisar el portal todos los días.",
+      "Cómo postular a una Compra Ágil de Mercado Público y enterarte a tiempo de las que calzan con lo que vendes, con el precio al que se adjudicó antes.",
     bajada:
-      "Miles de cotizaciones bajo 100 UTM se resuelven en días, con menos competencia y sin bases que leer. El problema no es ganarlas: es enterarse a tiempo.",
+      "Las Compras Ágiles de Mercado Público se resuelven en días, con menos competencia y sin bases que leer. Postular es simple; lo difícil es enterarse antes de que cierren.",
     pruebas: [
       {
         dato: "Sin bases ni garantías",
@@ -105,6 +105,14 @@ export const COMERCIALES: Comercial[] = [
         ],
       },
       {
+        titulo: "Cómo postular a una Compra Ágil",
+        parrafos: [
+          "Entras a Mercado Público con tu usuario de proveedor, abres la Compra Ágil y lees el requerimiento: qué piden, cuánto y dónde se entrega. No hay bases que descargar ni garantías que tomar.",
+          "Envías tu cotización con el precio y los datos que pida el organismo antes de que cierre el plazo. El organismo compara las cotizaciones que recibió y emite la orden de compra a la elegida.",
+          "Por eso el paso que más pesa es el primero: ver la Compra Ágil a tiempo. Si la descubres cuando ya cerró, no hay cotización que mandar.",
+        ],
+      },
+      {
         titulo: "Qué hace IAutoLicita con eso",
         parrafos: [
           "Traes tu RUT y armamos tu perfil solo: qué vendes, en qué rubros, a qué organismos les has vendido. No hay que tipear categorías ni adivinar códigos.",
@@ -121,6 +129,10 @@ export const COMERCIALES: Comercial[] = [
       },
     ],
     faqs: [
+      {
+        q: "¿Cómo postular a una Compra Ágil en Mercado Público?",
+        a: "Con tu usuario de proveedor en Mercado Público abres la Compra Ágil, revisas el requerimiento y envías tu cotización antes del cierre. No se piden bases ni garantías. IAutoLicita te avisa de las que calzan con lo que vendes para que no se te pase el plazo.",
+      },
       {
         q: "¿Necesito estar acreditado en ChileProveedores para cotizar en Compra Ágil?",
         a: "No. Basta estar inscrito en Mercado Público, que es gratis, y tener el rubro correspondiente. La acreditación se justifica más adelante, cuando persigas licitaciones que la exijan.",
