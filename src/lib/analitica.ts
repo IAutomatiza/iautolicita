@@ -153,20 +153,19 @@ export function escucharClicsALaApp() {
 }
 
 /* ── Google Ads ────────────────────────────────────────────────────
-   La cuenta IAutoLicita (605-308-0388) todavía no termina de crearse:
-   no hay ID de conversión. Mientras ADS_ID esté vacío, todo esto no
-   hace nada. Cuando exista la campaña se completan los tres valores
-   (Objetivos → Conversiones → la acción → «Configurar etiqueta» →
-   «Usar Google tag»: `AW-XXXXXXXXX/etiqueta`) y nada más cambia.
+   Cuenta IAutoLicita (605-308-0388). Las etiquetas salen de Objetivos →
+   Conversiones → la acción → «Ver fragmento de evento». La conversión
+   principal de las campañas es «Registro en la app», que NO se dispara
+   acá: se sube desde la base (vw_ads_conversiones_registro) con el gclid.
 
    Por qué la conversión va AQUÍ y no sólo importada desde GA4: en
    SVEA, con la medición sólo por GTM, llegaron 7 leads con gclid y
    Ads contó 0. El hit directo `send_to: AW-…/etiqueta` es lo que Ads
    cuenta sin depender de nadie. */
-export const ADS_ID = ""; // p. ej. "AW-123456789"
+export const ADS_ID = "AW-18417979561"; // cuenta IAutoLicita 605-308-0388 (21-oct-2026)
 const ADS_ETIQUETAS = {
-  lead: "", // solicitud de reunión → página /gracias
-  probar_app: "", // clic hacia la app (secundaria)
+  lead: "o7LgCILQ56QdEKmhsM5E", // «Solicitud de reunión (sitio)», principal → página /gracias
+  probar_app: "hyIICIXQ56QdEKmhsM5E", // «Clic probar la app (sitio)», secundaria
 } as const;
 
 /** Configura Ads una vez (vincula el gclid a la cookie de conversión). */
