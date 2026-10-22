@@ -58,6 +58,27 @@ function leer(): Atribucion | null {
 }
 
 /** Guarda las marcas de la URL actual, si las trae. */
+/** Los asistentes de IA (22-oct-2026). ChatGPT le cuelga `utm_source=chatgpt.com` a sus enlaces; Gemini, Perplexity
+ *  y Copilot casi nunca: sólo dejan de qué página viene la persona (el referrer). Si la visita no trae marcas y viene
+ *  de uno, se guarda como `utm_source=<asistente>` y `utm_medium=ia`, igual que si hubiera traído utm. Gemini a veces
+ *  no manda el referrer: esas visitas siguen sin origen (se cuenta de menos, nunca de más). Igual que tasaria.cl. */
+const ASISTENTES_IA: [RegExp, string][] = [
+  [/(^|\.)(chatgpt\.com|chat\.openai\.com)$/, "chatgpt.com"],
+  [/(^|\.)(gemini|bard)\.google\.com$/, "gemini.google.com"],
+  [/(^|\.)perplexity\.ai$/, "perplexity.ai"],
+  [/(^|\.)(copilot\.microsoft\.com|copilot\.cloud\.microsoft)$/, "copilot.microsoft.com"],
+  [/(^|\.)claude\.ai$/, "claude.ai"],
+  [/(^|\.)chat\.deepseek\.com$/, "deepseek.com"],
+  [/(^|\.)meta\.ai$/, "meta.ai"],
+  [/(^|\.)grok\.com$/, "grok.com"],
+];
+/** El asistente de IA de una URL de origen, o null. */
+export function asistenteIA(url: string): string | null {
+  let host: string;
+  try { host = new URL(url).hostname; } catch { return null; }
+  return ASISTENTES_IA.find(([re]) => re.test(host))?.[1] ?? null;
+}
+
 export function capturarAtribucion() {
   if (typeof window === "undefined") return;
   const p = new URLSearchParams(window.location.search);
@@ -66,6 +87,10 @@ export function capturarAtribucion() {
     const v = p.get(k);
     if (v) nueva[k] = v.slice(0, 300);
   }
+  if (!nueva.utm_source && !CLICS.some((k) => nueva[k])) {
+    const ia = asistenteIA(document.referrer);
+    if (ia) { nueva.utm_source = ia; nueva.utm_medium = "ia"; }
+  } else if (nueva.utm_source && !nueva.utm_medium && asistenteIA(`https://${nueva.utm_source}`)) nueva.utm_medium = "ia";
   if (!Object.keys(nueva).length) return; // visita sin marcas: se conserva la anterior
   nueva.landing = window.location.pathname;
   nueva.t = Date.now();
