@@ -89,6 +89,7 @@ export function capturarAtribucion() {
   }
   if (!nueva.utm_source && !CLICS.some((k) => nueva[k])) {
     const ia = asistenteIA(document.referrer);
+    if (ia && leer()) return; // el referrer no pisa una marca guardada (podría ser un clic de anuncio)
     if (ia) { nueva.utm_source = ia; nueva.utm_medium = "ia"; }
   } else if (nueva.utm_source && !nueva.utm_medium && asistenteIA(`https://${nueva.utm_source}`)) nueva.utm_medium = "ia";
   if (!Object.keys(nueva).length) return; // visita sin marcas: se conserva la anterior
