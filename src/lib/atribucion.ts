@@ -60,7 +60,8 @@ function leer(): Atribucion | null {
 /** Guarda las marcas de la URL actual, si las trae. */
 /** Los asistentes de IA (22-oct-2026). ChatGPT le cuelga `utm_source=chatgpt.com` a sus enlaces; Gemini, Perplexity
  *  y Copilot casi nunca: sólo dejan de qué página viene la persona (el referrer). Si la visita no trae marcas y viene
- *  de uno, se guarda como `utm_source=<asistente>` y `utm_medium=ia`, igual que si hubiera traído utm. Gemini a veces
+ *  de uno, se guarda como `utm_source=<asistente>`, igual que si hubiera traído utm (sin utm_medium, como llega
+ *  ChatGPT: GA4 los junta solo en su canal «AI Assistant».) Gemini a veces
  *  no manda el referrer: esas visitas siguen sin origen (se cuenta de menos, nunca de más). Igual que tasaria.cl. */
 const ASISTENTES_IA: [RegExp, string][] = [
   [/(^|\.)(chatgpt\.com|chat\.openai\.com)$/, "chatgpt.com"],
@@ -90,8 +91,8 @@ export function capturarAtribucion() {
   if (!nueva.utm_source && !CLICS.some((k) => nueva[k])) {
     const ia = asistenteIA(document.referrer);
     if (ia && leer()) return; // el referrer no pisa una marca guardada (podría ser un clic de anuncio)
-    if (ia) { nueva.utm_source = ia; nueva.utm_medium = "ia"; }
-  } else if (nueva.utm_source && !nueva.utm_medium && asistenteIA(`https://${nueva.utm_source}`)) nueva.utm_medium = "ia";
+    if (ia) nueva.utm_source = ia;
+  }
   if (!Object.keys(nueva).length) return; // visita sin marcas: se conserva la anterior
   nueva.landing = window.location.pathname;
   nueva.t = Date.now();
