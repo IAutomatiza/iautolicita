@@ -35,7 +35,7 @@ await build({
   },
 });
 
-const { render, PAGINAS, SITIO, OG_IMAGEN, jsonLdDe } = await import(
+const { render, PAGINAS, SITIO, OG_IMAGEN, jsonLdDe, llmsTxt } = await import(
   join(SSR, "entry-server.js")
 );
 
@@ -119,6 +119,9 @@ for (const pagina of rutas) {
   const palabras = cuerpo.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
   console.log(`  ✓ ${pagina.ruta.padEnd(10)} ${palabras} palabras en el HTML`);
 }
+
+/* 1b · llms.txt (22-oct-2026): resumen para ChatGPT, Gemini, Perplexity y otras IA (src/lib/llms.ts) */
+writeFileSync(join(DIST, "llms.txt"), llmsTxt());
 
 /* 2 · robots.txt — no existía */
 writeFileSync(

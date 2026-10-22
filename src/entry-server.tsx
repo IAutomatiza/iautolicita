@@ -8,6 +8,7 @@ import App from "./App";
    Reexporta lo del módulo de SEO para que el prerenderizador tenga
    una sola cosa que importar. */
 export { PAGINAS, SITIO, OG_IMAGEN, jsonLdDe } from "./lib/seo";
+export { llmsTxt } from "./lib/llms";
 
 export function render(url: string) {
   return renderToString(
