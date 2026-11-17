@@ -57,7 +57,6 @@ function leer(): Atribucion | null {
   }
 }
 
-/** Guarda las marcas de la URL actual, si las trae. */
 /** Los asistentes de IA (22-oct-2026). ChatGPT le cuelga `utm_source=chatgpt.com` a sus enlaces; Gemini, Perplexity
  *  y Copilot casi nunca: sólo dejan de qué página viene la persona (el referrer). Si la visita no trae marcas y viene
  *  de uno, se guarda como `utm_source=<asistente>`, igual que si hubiera traído utm (sin utm_medium, como llega
@@ -80,6 +79,17 @@ export function asistenteIA(url: string): string | null {
   return ASISTENTES_IA.find(([re]) => re.test(host))?.[1] ?? null;
 }
 
+/** La red social de una URL de origen (facebook, instagram o linkedin), o null. */
+export function redSocial(url: string): string | null {
+  let host: string;
+  try { host = new URL(url).hostname; } catch { return null; }
+  if (/(^|\.)instagram\.com$/.test(host)) return "instagram";
+  if (/(^|\.)(facebook\.com|fb\.com|fb\.me)$/.test(host)) return "facebook";
+  if (/(^|\.)(linkedin\.com|lnkd\.in)$/.test(host)) return "linkedin";
+  return null;
+}
+
+/** Guarda las marcas de la URL actual, si las trae (o la red social o el asistente de IA del que viene). */
 export function capturarAtribucion() {
   if (typeof window === "undefined") return;
   const p = new URLSearchParams(window.location.search);
@@ -92,6 +102,13 @@ export function capturarAtribucion() {
     const ia = asistenteIA(document.referrer);
     if (ia && leer()) return; // el referrer no pisa una marca guardada (podría ser un clic de anuncio)
     if (ia) nueva.utm_source = ia;
+  }
+  // Redes sin utm (16-nov-2026): el enlace visible de una publicación o del perfil llega sólo con el fbclid o el
+  // referrer de Facebook/Instagram/LinkedIn; antes el registro quedaba «sitio» (sin origen). Igual que tasaria.cl.
+  if (!nueva.utm_source && !(nueva.gclid || nueva.gbraid || nueva.wbraid || nueva.ttclid || nueva.li_fat_id)) {
+    const red = redSocial(document.referrer) ?? (nueva.fbclid ? "facebook" : null);
+    if (red && !nueva.fbclid && leer()) return; // sólo el referrer no pisa una marca guardada
+    if (red) { nueva.utm_source = red; nueva.utm_medium = "social"; }
   }
   if (!Object.keys(nueva).length) return; // visita sin marcas: se conserva la anterior
   nueva.landing = window.location.pathname;

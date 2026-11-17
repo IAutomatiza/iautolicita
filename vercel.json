@@ -5,6 +5,9 @@
   "framework": null,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/fb", "destination": "/?utm_source=facebook&utm_medium=social&utm_campaign=perfil&utm_content=boton", "permanent": false },
+    { "source": "/ig", "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=perfil&utm_content=bio", "permanent": false },
+    { "source": "/in", "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=perfil&utm_content=pagina", "permanent": false },
     {
       "source": "/planes",
       "destination": "/precios",
