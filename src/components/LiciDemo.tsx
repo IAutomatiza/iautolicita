@@ -268,9 +268,6 @@ export default function LiciDemo() {
     <section className="relative overflow-hidden border-t border-[#0A1530]/[0.07] bg-[#F7F8FA] py-16 md:py-28">
       <div className="container-edge">
         <div className="mx-auto max-w-[760px] text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/60">
-            Pruébala tú
-          </p>
           <h2 className="mt-4 font-display text-[30px] font-medium leading-[1.07] tracking-[-0.03em] text-[#0A0A0A] md:text-[42px]">
             No te responde con opiniones.{" "}
             <span className="text-[#0064E0]">Te responde con pruebas.</span>

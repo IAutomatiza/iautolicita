@@ -273,7 +273,8 @@ export default function Nav() {
           >
             Iniciar sesión
           </a>
-          <CtaButton variant="primary" label="¡Prueba gratis!" />
+          {/* 25-nov: con el nombre largo, en celulares chicos (360) el botón empujaba el menú fuera; ahí va más compacto y sin flecha. */}
+          <CtaButton variant="primary" label="Probar 14 días gratis" className="max-sm:px-3.5 max-sm:text-[13px] max-sm:gap-0 max-sm:[&>svg]:hidden" />
 
           <button
             type="button"

@@ -24,7 +24,7 @@ interface Props {
  * La apariencia no cambió en nada.
  */
 export default function CtaButton({
-  label = "¡Pruébalo gratis!",
+  label = "Probar 14 días gratis",
   variant = "primary",
   className = "",
   origen = "cuerpo",

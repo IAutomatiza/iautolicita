@@ -71,9 +71,6 @@ export default function LiciAManoVsLici() {
                 en gris —la columna que se abandona— y «perdiendo» en
                 el azul con la sombra de rayas. */}
             <div style={entrada(0)}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/60">
-                Antes y después
-              </p>
               <h2 className="mt-4 font-display text-[36px] font-semibold leading-[1.06] tracking-[-0.03em] text-[#0A0A0A] md:text-[54px]">
                 Licitar{" "}
                 <span className="text-[#0A1530]/35 line-through decoration-[#0A1530]/30 decoration-[3px]">

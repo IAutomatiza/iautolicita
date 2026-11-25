@@ -70,7 +70,8 @@ export default function Planes() {
               <p className="mt-1 font-sans text-[15px] text-cream-300">{ALERTAS.para}</p>
             </div>
             <div>
-              <p className="flex items-baseline gap-2">
+              {/* 25-nov (W2): en celular «al mes · IVA incluido» va debajo y en una línea. */}
+              <p className="flex flex-col items-start gap-1 sm:flex-row sm:items-baseline sm:gap-2">
                 <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.03em] text-cream-50 md:text-[64px]">$9.990</span>
                 <span className="font-sans text-[15px] text-cream-300">al mes · IVA incluido</span>
               </p>
@@ -84,8 +85,38 @@ export default function Planes() {
           </div>
         </div>
 
+        {/* 25-nov (W2): las dudas de quien está por pagar, con lo que dicen los Términos. */}
+        <div className="mt-14 md:mt-16">
+          <h2 className="font-display text-[24px] font-semibold tracking-[-0.02em] text-cream-50 md:text-[28px]">Antes de contratar</h2>
+          <dl className="mt-6 grid gap-x-10 gap-y-7 md:grid-cols-2">
+            {DUDAS.map((d) => (
+              <div key={d.p} className="border-t border-[var(--hairline)] pt-5">
+                <dt className="font-sans text-[16px] font-semibold text-cream-50">{d.p}</dt>
+                <dd className="mt-2 font-sans text-[15px] leading-[1.6] text-cream-300">{d.r}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );
 }
 
+const DUDAS = [
+  {
+    p: "¿Qué pasa cuando terminan los 14 días?",
+    r: "Nada se cobra solo. Como no pedimos tarjeta, los avisos simplemente se detienen hasta que contrates.",
+  },
+  {
+    p: "¿Cómo cancelo?",
+    r: "Cuando quieras, sin permanencia. El servicio sigue hasta el término del mes que ya pagaste y no se vuelve a cobrar.",
+  },
+  {
+    p: "¿Con qué pago?",
+    r: "En línea, dentro de la plataforma, a través de Flow. El precio es en pesos chilenos y ya incluye el IVA.",
+  },
+  {
+    p: "¿Y si después necesito más?",
+    r: "Alertas es para enterarte a tiempo. Si trabajas con un equipo o varias empresas, escríbenos y vemos qué te sirve.",
+  },
+];

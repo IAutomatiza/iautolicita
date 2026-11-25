@@ -26,8 +26,9 @@ export default function Hero() {
   const scale = isMobile ? lerp(0.92, 1.0, progress) : lerp(0.48, 1.0, progress);
   const rotateX = isMobile ? 0 : lerp(20, 0, progress);
   const translateY = isMobile ? lerp(20, 0, progress) : lerp(100, 0, progress);
-  const opacity = isMobile ? lerp(0.85, 1, progress) : lerp(0.4, 1, progress);
-  const blur = isMobile ? 0 : lerp(8, 0, progress);
+  // 25-nov (Carlos aprobó W1): sin desenfoque — la captura se veía borrosa y parecía rota.
+  const opacity = isMobile ? lerp(0.85, 1, progress) : lerp(0.75, 1, progress);
+  const blur = 0;
 
   return (
     <section
@@ -61,7 +62,7 @@ export default function Hero() {
           {/* Los CTA usan los mismos componentes y radios que el resto del
               sitio (el azul es el mismo botón del menú, en grande). */}
           <div className="mt-9 flex flex-col items-center sm:flex-row gap-3 justify-center reveal">
-            <CtaButton variant="huge" label="¡Pruébalo gratis!" />
+            <CtaButton variant="huge" label="Probar 14 días gratis" />
             <a
               href="#capacidades"
               className="group inline-flex items-center justify-center gap-2 h-14 px-7 text-[15px] font-medium font-sans rounded-full

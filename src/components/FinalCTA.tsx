@@ -1,4 +1,5 @@
-import { ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { enlaceApp } from "../lib/cta";
 import LiveDot from "./ui/LiveDot";
 
@@ -142,7 +143,7 @@ export default function FinalCTA() {
                   }}
                 >
                   <MessageCircle className="h-4 w-4" strokeWidth={2} />
-                  ¡Pruébalo gratis!
+                  Probar 14 días gratis
                   <ArrowUpRight
                     className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     strokeWidth={2}
@@ -151,22 +152,21 @@ export default function FinalCTA() {
               </span>
 
               {/* Secondary — text link with subtle border */}
-              <a
-                href="https://iautomatiza.cl"
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* 25-nov (W1): antes «Conocer iautomatiza.cl» sacaba al cliente del sitio. */}
+              <Link
+                to="/precios"
                 className="group inline-flex items-center gap-2 h-14 px-6 text-[14.5px] font-medium rounded-lg transition-colors duration-200 hover:bg-white/[0.04]"
                 style={{
                   color: "rgba(255,255,255,0.85)",
                   border: "1px solid rgba(255,255,255,0.14)",
                 }}
               >
-                Conocer iautomatiza.cl
-                <ArrowUpRight
-                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                Ver precios
+                <ArrowRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   strokeWidth={1.8}
                 />
-              </a>
+              </Link>
             </div>
 
             {/* Trust line — micro signals, not big stats */}

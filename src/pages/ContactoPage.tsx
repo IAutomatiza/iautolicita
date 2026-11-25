@@ -32,11 +32,7 @@ export default function ContactoPage() {
           <div className="mx-auto max-w-[1120px] overflow-hidden rounded-3xl border border-[var(--hairline-strong)] bg-white shadow-[0_30px_80px_-40px_rgba(0,40,120,0.35)]">
             <div className="grid lg:grid-cols-[5fr_7fr]">
               <div className="relative bg-brand-600 p-8 text-white md:p-12">
-                <div className="flex items-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/70">
-                  <span>Hablemos</span>
-                  <span className="h-px w-8 bg-white/30" aria-hidden />
-                </div>
-                <h1 className="mt-5 font-display font-medium text-[40px] md:text-[54px] leading-[1.02] tracking-[-0.04em] text-white">
+                <h1 className="font-display font-medium text-[40px] md:text-[54px] leading-[1.02] tracking-[-0.04em] text-white">
                   Media hora con <span className="serif-em text-[#BFD6FF]">tus</span> licitaciones.
                 </h1>
                 <p className="mt-5 font-sans text-[16.5px] leading-[1.6] text-white/85">

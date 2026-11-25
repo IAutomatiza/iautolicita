@@ -22,7 +22,9 @@ import useInView from "../hooks/useInView";
    del mercado, para que la comparación se lea sola.
 ═══════════════════════════════════════════════════════════════ */
 
-const VENTAJAS = [
+/* 25-nov (W1 aprobada): lo que Alertas $9.990 no trae se marca
+   «Planes de equipo · pronto» en vez de venderlo como incluido. */
+const VENTAJAS: { id: string; Icon: typeof Scale; titulo: string; texto: string; dato: string; resto: string; equipo?: boolean }[] = [
   {
     id: "precio",
     Icon: Scale,
@@ -67,6 +69,7 @@ const VENTAJAS = [
       "Tu equipo trabaja en la plataforma y los cierres te alcanzan igual: WhatsApp, correo, PDF o Drive.",
     dato: "Cuatro canales de aviso",
     resto: "El resto te deja revisando a mano.",
+    equipo: true,
   },
   {
     id: "multi",
@@ -76,6 +79,7 @@ const VENTAJAS = [
       "Varios RUT en una sola cuenta, cada uno con su equipo y sus datos por separado.",
     dato: "Sin pagar una cuenta por empresa",
     resto: "El resto cobra por cada una.",
+    equipo: true,
   },
 ];
 
@@ -115,7 +119,7 @@ export default function SoloConNosotros() {
               >
                 <span className="pill-brain-inner">
                   <span className="font-sans font-bold text-[15px] text-[#202020]">
-                    ¡Comienza ahora!
+                    Probar 14 días gratis
                   </span>
                   <ChevronRight className="h-4 w-4 text-[#202020]" strokeWidth={2.2} />
                 </span>
@@ -141,6 +145,11 @@ export default function SoloConNosotros() {
                   </span>
                 </div>
 
+                {v.equipo && (
+                  <span className="mt-4 inline-block rounded-full border border-[var(--hairline-strong)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-cream-400">
+                    Planes de equipo · pronto
+                  </span>
+                )}
                 <h3 className="mt-5 font-display font-medium text-[21px] md:text-[24px] leading-[1.15] tracking-[-0.025em] text-cream-50">
                   {v.titulo}
                 </h3>

@@ -60,7 +60,7 @@ const SECCIONES: { titulo: string; links: Enlace[] }[] = [
       { label: "Iniciar sesión", href: enlaceApp("login") },
       { label: "Pedir una reunión", href: "/contacto", interno: true },
       { label: "Hablar con Lici", href: "#", abreLici: true },
-      { label: "Probar gratis", href: enlaceApp("pie") },
+      { label: "Probar 14 días gratis", href: enlaceApp("pie") },
     ],
   },
 ];
