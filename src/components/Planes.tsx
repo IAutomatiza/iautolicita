@@ -49,30 +49,40 @@ type Plan = {
   cta: string;
   /** La del medio: sombra fuerte en vez de borde de color. */
   recomendado?: boolean;
+  /** 24-nov · Alertas se cobra con IVA incluido y sin opción anual. */
+  ivaIncluido?: boolean;
+  /** Línea bajo el precio (reemplaza la del año). */
+  nota?: string;
 };
 
 const PLANES: Plan[] = [
+  /* 24-nov · Carlos aprobó en el explorador: Precios no mostraba el plan Alertas, que es lo que hoy se
+     vende (quien apretaba «Contratar» en Pro terminaba en la prueba de Alertas). Reemplaza al Free, que ya
+     no se abre: el registro entra a Alertas con 14 días gratis. Pro y Max no se tocan. */
   {
-    codigo: "free",
-    nombre: "Free",
+    codigo: "alertas",
+    nombre: "Alertas",
     descripcion:
-      "Para mirar el mercado y probar a Lici con tus propias licitaciones.",
-    neto: 0,
+      "Para enterarte a tiempo de lo que el Estado compra de lo tuyo, sin revisar el portal.",
+    neto: 9990,
+    ivaIncluido: true,
+    nota: "14 días gratis, sin tarjeta",
     caracteristicas: [
       {
-        titulo: "Mercado Público completo",
-        detalle: "Todo lo que publica el Estado, al día y buscable.",
+        titulo: "Licitaciones y Compras Ágiles",
+        detalle: "Solo las que calzan con lo que vendes, en todo Chile o en tus regiones.",
       },
       {
-        titulo: `${PLAN.free.preguntasDia} preguntas a Lici al día`,
-        detalle: "Le preguntas en tu idioma y responde con las cifras al lado.",
+        titulo: "Cada mañana en tu correo",
+        detalle: "Lo nuevo del día, ordenado por la que cierra primero.",
       },
       {
-        titulo: `${PLAN.free.usuarios} usuario`,
-        detalle: "Tu cuenta, con tu RUT y tu perfil armado en un clic.",
+        titulo: "Sin RUT para empezar",
+        detalle: "Nos dices qué vendes y listo. Si ya le vendiste al Estado, con tu RUT lo armamos solo.",
       },
     ],
-    cta: "Empezar gratis",
+    cta: "Probar 14 días gratis",
+    recomendado: true,
   },
   {
     codigo: "pro",
@@ -95,7 +105,6 @@ const PLANES: Plan[] = [
       },
     ],
     cta: "Contratar ahora",
-    recomendado: true,
   },
   {
     codigo: "max",
@@ -142,7 +151,7 @@ export default function Planes() {
   return (
     <section
       id="planes"
-      className="relative w-full scroll-mt-28 overflow-hidden py-20 lg:py-32"
+      className="relative w-full scroll-mt-28 overflow-hidden py-20 lg:py-16"
     >
       {/* La misma trama de /lici, desvanecida sobre el encabezado. */}
       <DotPattern
@@ -164,7 +173,7 @@ export default function Planes() {
           </BotonBordeMovil>
 
           <div className="flex flex-col gap-4">
-            <h1 className="max-w-[16ch] text-center font-display text-[42px] font-semibold leading-[1.02] tracking-[-0.035em] text-cream-50 md:text-[76px]">
+            <h1 className="max-w-[16ch] text-center font-display text-[42px] font-semibold leading-[1.02] tracking-[-0.035em] text-cream-50 md:text-[56px] lg:max-w-none">
               Cuesta menos que perder{" "}
               <span className="text-brand-600">
                 <LineShadowText
@@ -177,7 +186,7 @@ export default function Planes() {
               </span>
             </h1>
             <p className="mx-auto max-w-[46ch] text-center font-sans text-[17px] leading-relaxed tracking-tight text-cream-300 md:text-[19px]">
-              Partes gratis. Cuando veas lo que hay para ti,
+              14 días gratis, sin tarjeta. Cuando veas lo que hay para ti,
               eliges plan — y lo cancelas cuando quieras.
             </p>
           </div>
@@ -192,7 +201,7 @@ export default function Planes() {
 
           {/* Mensual o por año. El año no es otro precio: son los
               mismos 10 meses que cobra la app. */}
-          <div className="mt-6 flex items-center justify-center">
+          <div className="mt-3 flex items-center justify-center">
             <button
               type="button"
               role="switch"
@@ -219,14 +228,14 @@ export default function Planes() {
             </span>
           </div>
 
-          <div className="grid w-full grid-cols-1 items-stretch gap-8 pt-16 text-left lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 items-stretch gap-8 pt-10 text-left lg:grid-cols-3">
             {PLANES.map((plan) => (
               <Tarjeta key={plan.codigo} plan={plan} anual={anual} />
             ))}
           </div>
 
           <p className="pt-10 font-sans text-[13px] text-cream-400">
-            Valores netos, sin IVA. Sin permanencia: cancelas cuando quieras.
+            Alertas: IVA incluido. Pro y Max: valores netos, sin IVA. Sin permanencia: cancelas cuando quieras.
           </p>
         </div>
       </div>
@@ -242,7 +251,7 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
   // El número grande sigue siendo el mensual —real o prorrateado—
   // para que los tres planes se comparen con la misma unidad. Lo
   // que se cobra de verdad va en la línea de abajo.
-  const mensualMostrado = anual ? Math.round(alAno / 12) : plan.neto;
+  const mensualMostrado = anual && !plan.ivaIncluido ? Math.round(alAno / 12) : plan.neto;
 
   return (
     <div
@@ -273,7 +282,7 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
                 className="font-display text-[36px] leading-none"
               />
               <span className="font-sans text-[14px] text-cream-300">
-                {gratis ? "/ para partir" : "+ IVA / mes"}
+                {gratis ? "/ para partir" : plan.ivaIncluido ? "IVA incluido / mes" : "+ IVA / mes"}
               </span>
             </p>
 
@@ -281,7 +290,9 @@ function Tarjeta({ plan, anual }: { plan: Plan; anual: boolean }) {
                 línea existe también en el gratis para que las tres
                 columnas arranquen a la misma altura. */}
             <p className="mt-2 font-sans text-[13px] text-cream-400">
-              {gratis ? (
+              {plan.nota ? (
+                <span className="text-brand-600">{plan.nota}</span>
+              ) : gratis ? (
                 "gratis, para partir"
               ) : anual ? (
                 <>

@@ -66,7 +66,7 @@ export default function ComercialPage({ slug }: { slug: string }) {
             <div className="mt-9">
               <CTA grande />
               <p className="mt-3 font-sans text-[13.5px] text-cream-400">
-                Se parte con el plan gratis.
+                14 días gratis, sin tarjeta.
               </p>
             </div>
 
@@ -137,7 +137,7 @@ export default function ComercialPage({ slug }: { slug: string }) {
                 <CTA grande />
               </div>
               <p className="mt-3 font-sans text-[13.5px] text-cream-400">
-                Se parte con el plan gratis. Sin reunión previa.
+                14 días gratis, sin tarjeta. Sin reunión previa.
               </p>
             </section>
 

@@ -16,11 +16,11 @@ const steps: {
 }[] = [
   {
     n: "01",
-    title: "Parte con tu RUT",
+    title: "Dinos qué vendes",
     body: (
       <>
-        Leemos tu historial en 7,2 millones de adjudicaciones y tu perfil se
-        arma solo: qué vendes, dónde ganas y quién te compra.{" "}
+        Escribes lo que vendes y dónde. Si ya le vendiste al Estado, con tu RUT
+        leemos tu historial en 7,2 millones de adjudicaciones y se arma solo.{" "}
         <span className="text-cream-50 font-medium">
           Es lo único que haces.
         </span>

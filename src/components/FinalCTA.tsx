@@ -172,7 +172,7 @@ export default function FinalCTA() {
             {/* Trust line — micro signals, not big stats */}
             <div className="mt-12 md:mt-14 flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 font-mono text-[10.5px] uppercase tracking-[0.18em]">
               {[
-                "Gratis para partir",
+                "14 días gratis, sin tarjeta",
                 "Sin instalar nada",
                 "Desde el navegador",
               ].map((t, i, arr) => (

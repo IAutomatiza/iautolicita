@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import CtaButton from "./ui/CtaButton";
 import { enlaceApp } from "../lib/cta";
+import { COMERCIALES, rutaComercial } from "../lib/comerciales";
 
 // Wrangle-inspired IA: one grouped dropdown for the product surface,
 // two flat trust-signal links, and a 3-tier CTA cascade on the right.
@@ -78,7 +79,10 @@ export default function Nav() {
      le montaría encima. Antes esto miraba «¿estoy en el home?», y al
      poner el ticker en el glosario los dos quedaron pisados. Ahora
      mira lo que de verdad importa: si hay ticker o no. */
-  const conTicker = enHome || ruta.startsWith("/glosario");
+  /* 24-nov · la barra LIVE también va en las páginas comerciales, las guías y la ayuda: ahí el menú
+     quedaba tapado a la mitad (logo y «¡Prueba gratis!» cortados). Misma lista de páginas que montan <MarketTicker />. */
+  const conTicker = enHome || ["/glosario", "/guias", "/ayuda"].some((r) => ruta === r || ruta.startsWith(r + "/"))
+    || COMERCIALES.some((c) => ruta === rutaComercial(c.slug));
   const aSeccion = (href: string) => (enHome ? href : `/${href}`);
 
   const [scrolled, setScrolled] = useState(false);

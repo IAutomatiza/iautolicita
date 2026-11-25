@@ -170,7 +170,7 @@ export default function GlosarioTerminoPage() {
                   un compromiso que ata al negocio, y si mañana el plan
                   gratis cambia quedan todas las fichas mintiendo. */}
               <p className="mt-3 font-sans text-[13.5px] leading-[1.5] text-cream-400">
-                Se parte con el plan gratis.
+                14 días gratis, sin tarjeta.
               </p>
             </section>
 

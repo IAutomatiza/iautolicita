@@ -44,7 +44,7 @@ export const PAGINAS: Record<string, MetaPagina> = {
     titulo:
       "Licitaciones de Mercado Público — IAutoLicita",
     descripcion:
-      "Te avisamos sólo las licitaciones de Mercado Público que calzan con lo que vendes, te leemos las bases y te decimos a qué precio se adjudicó. Plan gratis.",
+      "Te avisamos sólo las licitaciones de Mercado Público que calzan con lo que vendes, te leemos las bases y te decimos a qué precio se adjudicó. 14 días gratis.",
   },
   "/lici": {
     ruta: "/lici",
@@ -56,7 +56,7 @@ export const PAGINAS: Record<string, MetaPagina> = {
     ruta: "/precios",
     titulo: "Planes y precios — IAutoLicita",
     descripcion:
-      `Plan gratis para partir. Pro ${enPesos(PLAN.pro.neto)} + IVA al mes con alertas al instante y Lici sin tope. Max ${enPesos(PLAN.max.neto)} con varias empresas, presupuestos y cobranza.`,
+      `Alertas $9.990 al mes con IVA, 14 días gratis. Pro ${enPesos(PLAN.pro.neto)} + IVA al mes con alertas al instante y Lici sin tope. Max ${enPesos(PLAN.max.neto)} con varias empresas, presupuestos y cobranza.`,
   },
   "/contacto": {
     ruta: "/contacto",

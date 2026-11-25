@@ -151,7 +151,7 @@ export default function GuiaPage({ slug }: { slug: string }) {
                 />
               </a>
               <p className="mt-3 font-sans text-[13.5px] text-cream-400">
-                Se parte con el plan gratis.
+                14 días gratis, sin tarjeta.
               </p>
             </section>
 

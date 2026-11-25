@@ -376,12 +376,12 @@ export const FICHAS: Ficha[] = [
   /* ══ Cómo se usa · los seis tutoriales ═════════════════════════ */
   {
     slug: "el-alta-con-tu-rut",
-    titulo: "El alta con tu RUT",
-    tituloSeo: "Cómo empezar: el alta con tu RUT — IAutoLicita",
+    titulo: "El alta: qué vendes y listo",
+    tituloSeo: "Cómo empezar: el alta en un minuto — IAutoLicita",
     descripcion:
-      "Traes tu RUT y el perfil se arma solo: qué vendes, en qué rubros y a qué organismos. Es el primer paso y el único que hay que hacer.",
+      "Nos dices qué vendes, dónde y tu celular, y quedan activos tus avisos. Si ya le vendiste al Estado, con tu RUT (opcional) la búsqueda se arma sola.",
     bajada:
-      "En la mayoría de las herramientas hay que tipear palabras clave y elegir categorías a mano. Acá pones el RUT y el perfil sale armado.",
+      "En la mayoría de las herramientas hay que tipear palabras clave y elegir categorías a mano. Acá escribes lo que vendes como lo diría un comprador —y, si ya vendiste, el RUT te lo completa—.",
     familia: "Cómo se usa",
     responde: [
       "¿Qué necesito para empezar?",
@@ -400,7 +400,7 @@ export const FICHAS: Ficha[] = [
       {
         titulo: "Cómo funciona",
         parrafos: [
-          "Pones tu RUT y listo. El perfil queda armado con lo que vendes, los rubros donde te mueves y los organismos a los que les has vendido.",
+          "Escribes lo que vendes, eliges dónde y dejas tu celular. Si ya le has vendido al Estado, pones tu RUT (es opcional) y agregamos solos lo que más vendes.",
           "Si nunca le has vendido al Estado, el perfil parte de lo que declaras y se va afinando con el uso. No es un requisito tener historial.",
           "Y se puede corregir cuando quieras: si empieza a llegar algo que no calza, se ajusta y deja de llegar.",
         ],
@@ -416,8 +416,8 @@ export const FICHAS: Ficha[] = [
     donde: "Es el primer paso al abrir la cuenta.",
     cierre: {
       texto:
-        "Trae tu RUT y en minutos ves qué hay publicado hoy para lo que vendes.",
-      boton: "Empezar con mi RUT",
+        "Dinos qué vendes y en minutos ves qué hay publicado hoy para ti. 14 días gratis, sin tarjeta.",
+      boton: "Probar 14 días gratis",
     },
     vecinos: ["ajustar-tu-perfil", "mi-empresa-360", "las-alertas"],
   },
@@ -510,7 +510,7 @@ export const FICHAS: Ficha[] = [
     donde: "Menú → Mi búsqueda",
     cierre: {
       texto:
-        "El perfil se ajusta solo con tu RUT, y se corrige en cualquier momento si llega algo que no calza.",
+        "Tu búsqueda se corrige en cualquier momento si llega algo que no calza.",
       boton: "Abrir la app",
     },
     vecinos: ["el-alta-con-tu-rut", "las-alertas", "mi-empresa-360"],
@@ -643,8 +643,8 @@ export const FICHAS: Ficha[] = [
     donde: "Menú → Mi búsqueda, y en la configuración de la cuenta.",
     cierre: {
       texto:
-        "Arma tu perfil con tu RUT y empieza a recibir sólo lo que calza contigo.",
-      boton: "Empezar con mi RUT",
+        "Dinos qué vendes y empieza a recibir sólo lo que calza contigo.",
+      boton: "Probar 14 días gratis",
     },
     vecinos: ["ajustar-tu-perfil", "el-alta-con-tu-rut", "del-tablero-a-la-postulacion"],
   },

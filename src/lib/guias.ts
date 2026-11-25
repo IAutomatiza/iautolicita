@@ -132,7 +132,7 @@ export const GUIAS: Guia[] = [
         id: "con-iautolicita",
         titulo: "Cómo lo resuelve IAutoLicita",
         parrafos: [
-          "El problema real —enterarse a tiempo de lo que calza contigo— es el que la plataforma resuelve. Traes tu RUT y armamos tu perfil solo desde tu historial de ventas al Estado: qué vendes, en qué rubros, a quién le has vendido. No hay que tipear categorías ni adivinar códigos.",
+          "El problema real —enterarse a tiempo de lo que calza contigo— es el que la plataforma resuelve. Nos dices qué vendes y armamos tu búsqueda; si ya le vendiste al Estado, con tu RUT (opcional) se arma sola desde tu historial: qué vendes, en qué rubros, a quién le has vendido. No hay que tipear categorías ni adivinar códigos.",
           "Desde ahí las Compras Ágiles que calzan contigo llegan filtradas, junto con las licitaciones y las grandes compras del convenio marco, en un solo lugar.",
           "Y llegan con contexto: a qué precio se adjudicó antes algo parecido, con su rango real. Cotizar sabiendo eso es distinto de cotizar adivinando.",
         ],

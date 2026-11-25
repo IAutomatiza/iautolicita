@@ -130,7 +130,7 @@ export default function FormularioReunion() {
             placeholder="Comercial Andina"
           />
         </div>
-        <div>
+        <div className="sm:col-span-2">
           <label className={etiqueta} htmlFor="correo">
             Correo
           </label>
@@ -144,18 +144,26 @@ export default function FormularioReunion() {
             placeholder="maria@empresa.cl"
           />
         </div>
-        <div>
-          <label className={etiqueta} htmlFor="telefono">
-            Teléfono <span className="text-cream-400">· opcional</span>
-          </label>
-          <input
-            id="telefono"
-            value={datos.telefono}
-            onChange={cambiar("telefono")}
-            className={campo}
-            placeholder="+56 9 …"
-          />
-        </div>
+      </div>
+
+      {/* 24-nov · aprobado por Carlos: con los 4 opcionales a la vista, «Pedir la reunión» quedaba bajo
+          lo que se ve sin bajar. Quedan a la vista nombre, empresa y correo; el resto, plegado. */}
+      <details className="group/mas mt-4">
+        <summary className="cursor-pointer list-none font-sans text-[14px] text-brand-600 hover:underline [&::-webkit-details-marker]:hidden">
+          <span className="group-open/mas:hidden">+ Agregar más datos (opcional)</span>
+          <span className="hidden group-open/mas:inline">− Ocultar datos opcionales</span>
+        </summary>
+      <div className="mt-4">
+        <label className={etiqueta} htmlFor="telefono">
+          Teléfono <span className="text-cream-400">· opcional</span>
+        </label>
+        <input
+          id="telefono"
+          value={datos.telefono}
+          onChange={cambiar("telefono")}
+          className={campo}
+          placeholder="+56 9 …"
+        />
       </div>
 
       <div className="mt-4">
@@ -214,6 +222,8 @@ export default function FormularioReunion() {
           ))}
         </div>
       </div>
+
+      </details>
 
       {error && (
         <p className="mt-4 font-sans text-[14px] text-ruby-500">{error}</p>

@@ -14,7 +14,7 @@ export function llmsTxt() {
   const sueltas = paginas.filter((p) => !["/", "/privacidad", "/terminos"].includes(p.ruta) && ![RUTA_AYUDA, RUTA_GUIAS, RUTA_GLOSARIO].some((r) => p.ruta === r || p.ruta.startsWith(`${r}/`))).map(linea);
   return `# IAutoLicita
 
-> Para empresas y proveedores que le venden al Estado de Chile por Mercado Público (ChileCompra). Avisa sólo las licitaciones y compras ágiles que calzan con lo que vende cada empresa, lee las bases con inteligencia artificial (Lici) citando la página exacta, y muestra a qué precio se adjudicó lo mismo antes y quién ganó. Tiene plan gratis.
+> Para empresas y proveedores que le venden al Estado de Chile por Mercado Público (ChileCompra). Avisa sólo las licitaciones y compras ágiles que calzan con lo que vende cada empresa, lee las bases con inteligencia artificial (Lici) citando la página exacta, y muestra a qué precio se adjudicó lo mismo antes y quién ganó. Se prueba 14 días gratis, sin tarjeta.
 
 ## Qué hace
 - Alertas: cada día, sólo las licitaciones y compras ágiles de Mercado Público que calzan con los productos o servicios de la empresa.
@@ -25,7 +25,7 @@ export function llmsTxt() {
 - Sitio: ${SITIO} · Contacto: ${SITIO}/contacto
 
 ## Precios
-- Plan gratis para partir.
+- Alertas: $9.990 al mes con IVA incluido, con 14 días gratis y sin tarjeta.
 - Pro: ${enPesos(PLAN.pro.neto)} + IVA al mes, con alertas al instante y Lici sin tope.
 - Max: ${enPesos(PLAN.max.neto)} + IVA al mes, con varias empresas, presupuestos y cobranza.
 - Detalle: ${SITIO}/precios

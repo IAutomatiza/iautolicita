@@ -115,7 +115,7 @@ export const COMERCIALES: Comercial[] = [
       {
         titulo: "Qué hace IAutoLicita con eso",
         parrafos: [
-          "Traes tu RUT y armamos tu perfil solo: qué vendes, en qué rubros, a qué organismos les has vendido. No hay que tipear categorías ni adivinar códigos.",
+          "Nos dices qué vendes y armamos tu búsqueda; si ya le vendiste al Estado, con tu RUT (opcional) la armamos sola desde tu historial. No hay que tipear categorías ni adivinar códigos.",
           "Desde ahí, las Compras Ágiles que calzan contigo te llegan filtradas — junto con las licitaciones y las grandes compras del convenio marco, en un solo lugar y no en tres.",
           "Y llegan con contexto: a qué precio se adjudicó antes algo parecido, con su rango real. Cotizar sabiendo eso es distinto de cotizar adivinando.",
         ],
@@ -147,7 +147,7 @@ export const COMERCIALES: Comercial[] = [
       },
       {
         q: "¿Puedo probar sin pagar?",
-        a: "Sí. El plan gratis deja ver el mercado completo y probar a Lici. Se parte por ahí y se cambia de plan cuando el volumen lo justifique.",
+        a: "Sí. Tienes 14 días gratis, sin tarjeta. Después, el plan Alertas cuesta $9.990 al mes con IVA, y lo cancelas cuando quieras.",
       },
     ],
     cierre: {
@@ -198,7 +198,7 @@ export const COMERCIALES: Comercial[] = [
       {
         titulo: "Buscar por lo que vendes, no por palabras",
         parrafos: [
-          "Traes tu RUT y armamos tu perfil desde tu historial real de ventas al Estado: qué productos, en qué rubros, a qué organismos. No hay que tipear categorías ni acertarle a un código.",
+          "Nos dices qué vendes y armamos tu búsqueda. Si ya le vendiste al Estado, con tu RUT (opcional) la armamos desde tu historial real: qué productos, en qué rubros, a qué organismos. No hay que tipear categorías ni acertarle a un código.",
           "Con eso el radar corre solo. Lo que calza contigo llega; lo que no, no aparece. Y si algo no calza, se ajusta el perfil y deja de llegar.",
           "Cada aviso viene con lo que hace falta para decidir en un minuto: qué piden las bases, qué garantía, cuándo cierra y a qué precio se adjudicó antes algo parecido.",
         ],
@@ -226,11 +226,11 @@ export const COMERCIALES: Comercial[] = [
       },
       {
         q: "¿Cuánto cuesta IAutoLicita?",
-        a: "Hay un plan gratis para ver el mercado y probar. Los planes pagos parten en $59.000 + IVA al mes.",
+        a: "El plan Alertas cuesta $9.990 al mes con IVA, con 14 días gratis y sin tarjeta para partir. Pro y Max parten en $59.000 + IVA al mes.",
       },
     ],
     cierre: {
-      titulo: "Empieza con tu RUT",
+      titulo: "Pruébalo 14 días gratis",
       texto:
         "En minutos ves las licitaciones publicadas hoy que calzan con lo que vendes.",
       boton: "Ver las que calzan conmigo",
@@ -288,7 +288,7 @@ export const COMERCIALES: Comercial[] = [
       {
         titulo: "Empezar sabiendo si hay mercado",
         parrafos: [
-          "Traes tu RUT y armamos el perfil desde tu historial real: qué has vendido, en qué rubros, a quién. Si nunca le has vendido al Estado, se arma desde lo que declaras y se va afinando.",
+          "Nos dices qué vendes y armamos tu búsqueda; si ya le vendiste al Estado, con tu RUT (opcional) se arma desde tu historial real: qué has vendido, en qué rubros, a quién. Si nunca le has vendido, parte de lo que declaras y se va afinando.",
           "Y lo primero que ves es lo que importa: qué hay publicado hoy que calce contigo. No una promesa de que existe mercado — el mercado, en pantalla.",
         ],
       },
@@ -359,7 +359,7 @@ export const COMERCIALES: Comercial[] = [
       {
         titulo: "Buscar por producto",
         parrafos: [
-          "El enfoque distinto es no buscar por palabras sino por lo que vendes. Traes tu RUT, se arma tu perfil de productos desde tu historial real de ventas al Estado, y desde ahí el radar corre contra todo lo que se publica.",
+          "El enfoque distinto es no buscar por palabras sino por lo que vendes. Nos dices qué vendes (o, si ya le vendiste al Estado, tu RUT y se arma desde tu historial real), y desde ahí el radar corre contra todo lo que se publica.",
           "Eso encuentra las licitaciones que están escritas con otras palabras — que son, en la práctica, la mayoría de las que se pierden.",
           "Y no reemplaza la búsqueda manual: la complementa. Se puede seguir buscando a mano cuando hace falta algo puntual.",
         ],
@@ -375,7 +375,7 @@ export const COMERCIALES: Comercial[] = [
     faqs: [
       {
         q: "¿Es un buscador público de licitaciones?",
-        a: "No. Es una funcionalidad dentro de IAutoLicita: se abre la cuenta, se arma el perfil con tu RUT y desde ahí busca contra todo lo publicado. No hay un buscador abierto en este sitio.",
+        a: "No. Es una funcionalidad dentro de IAutoLicita: se abre la cuenta, nos dices qué vendes y desde ahí busca contra todo lo publicado. No hay un buscador abierto en este sitio.",
       },
       {
         q: "¿Puedo seguir buscando por palabras si quiero?",
@@ -387,7 +387,7 @@ export const COMERCIALES: Comercial[] = [
       },
       {
         q: "¿Cuánto cuesta probarlo?",
-        a: "Hay un plan gratis para ver el mercado y probar a Lici. Se parte por ahí.",
+        a: "Nada para partir: 14 días gratis, sin tarjeta. Después, el plan Alertas cuesta $9.990 al mes con IVA.",
       },
     ],
     cierre: {
@@ -414,7 +414,7 @@ export const COMERCIALES: Comercial[] = [
       "Todas prometen lo mismo: avisarte de las licitaciones que te sirven. Estas son las preguntas que separan a las que cumplen.",
     pruebas: [
       {
-        dato: "Pruébala con tu RUT",
+        dato: "Pruébala con tus datos",
         glosa:
           "Si no puedes ver tu propio mercado antes de pagar, no sabes qué estás comprando.",
       },
@@ -434,7 +434,7 @@ export const COMERCIALES: Comercial[] = [
         titulo: "1 · ¿Puedes probarla con tus datos antes de pagar?",
         parrafos: [
           "Una demo con datos de ejemplo no dice nada. Lo que importa es ver TU mercado: qué licitaciones hay hoy para lo que TÚ vendes. Si sólo ofrecen una reunión comercial y una presentación, estás comprando una promesa.",
-          "La prueba honesta se hace con tu RUT y en minutos, sin coordinar agendas.",
+          "La prueba honesta se hace con lo que tú vendes y en minutos, sin coordinar agendas.",
         ],
       },
       {
@@ -501,8 +501,8 @@ export const COMERCIALES: Comercial[] = [
     cierre: {
       titulo: "Pruébalo con tus propios datos",
       texto:
-        "Trae tu RUT y en minutos ves qué licitaciones hay hoy para lo que vendes. Sin reunión previa.",
-      boton: "Probarlo con mi RUT",
+        "Nos dices qué vendes y en minutos ves qué licitaciones hay hoy para ti. 14 días gratis, sin reunión previa.",
+      boton: "Probar 14 días gratis",
     },
     origen: "cuerpo",
     glosario: [

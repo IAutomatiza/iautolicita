@@ -62,11 +62,11 @@ export default function GraciasPage() {
             dejaste el RUT, llegamos con tus licitaciones ya en pantalla.
           </p>
           <p className="mt-8 font-sans text-[15px] leading-[1.6] text-cream-200">
-            Mientras tanto, puedes abrir tu cuenta gratis y ver hoy mismo qué
+            Mientras tanto, puedes probar gratis 14 días y ver hoy mismo qué
             licitaciones y compras ágiles calzan con tu empresa.
           </p>
           <div className="mt-6">
-            <CtaButton variant="huge" origen="cierre" label="Abrir mi cuenta gratis" />
+            <CtaButton variant="huge" origen="cierre" label="Probar 14 días gratis" />
           </div>
         </div>
       </main>

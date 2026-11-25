@@ -79,7 +79,7 @@ export default function LiciCierre() {
             </h2>
 
             <p className="mx-auto mt-6 max-w-[52ch] font-sans text-[15px] leading-[1.65] text-white/65 md:text-[17px]">
-              Abre tu cuenta gratis y pregúntale por tu próxima licitación:
+              Prueba 14 días gratis y pregúntale por tu próxima licitación:
               en minutos ves las que calzan contigo, con su precio sugerido.
             </p>
 
@@ -100,7 +100,7 @@ export default function LiciCierre() {
             </div>
 
             <p className="mt-9 font-mono text-[10.5px] uppercase tracking-[0.14em] text-white/40">
-              Gratis para partir · Desde el navegador
+              14 días gratis · Desde el navegador
             </p>
           </div>
         </div>

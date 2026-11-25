@@ -36,6 +36,6 @@ export const FAQS: Faq[] = [
     // El enlace "Planes" de la nav apunta acá: es lo único que
     // el sitio dice hoy sobre planes y precios.
     q: "¿Cuánto cuesta?",
-    a: "Hay un plan gratis, y los de pago parten en $59.000 + IVA al mes. Pagando el año se pagan 10 meses y se usan 12. Sin permanencia: cancelas cuando quieras. Los tienes todos en Planes, en el menú.",
+    a: "El plan Alertas cuesta $9.990 al mes con IVA, con 14 días gratis y sin tarjeta para partir. Pro y Max parten en $59.000 + IVA al mes; pagando el año se pagan 10 meses y se usan 12. Sin permanencia: cancelas cuando quieras. Los tienes todos en Planes, en el menú.",
   },
 ];
