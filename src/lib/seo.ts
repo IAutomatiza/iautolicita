@@ -1,5 +1,4 @@
 import { FAQS } from "./faqs";
-import { PLAN, enPesos } from "./planes";
 import {
   TERMINOS,
   RUTA_GLOSARIO,
@@ -56,7 +55,7 @@ export const PAGINAS: Record<string, MetaPagina> = {
     ruta: "/precios",
     titulo: "Planes y precios — IAutoLicita",
     descripcion:
-      `Alertas $9.990 al mes con IVA, 14 días gratis. Pro ${enPesos(PLAN.pro.neto)} + IVA al mes con alertas al instante y Lici sin tope. Max ${enPesos(PLAN.max.neto)} con varias empresas, presupuestos y cobranza.`,
+      "Plan Alertas: $9.990 al mes con IVA incluido, con 14 días gratis y sin tarjeta. Te avisamos cada mañana las licitaciones y compras ágiles que calzan con lo que vendes.",
   },
   "/contacto": {
     ruta: "/contacto",
@@ -185,26 +184,10 @@ export const jsonLdProducto = () => ({
   offers: [
     {
       "@type": "Offer",
-      name: "Free",
-      price: "0",
+      name: "Alertas",
+      price: "9990",
       priceCurrency: "CLP",
-      description: "Explorar el mercado completo y probar Lici con tus propias licitaciones.",
-    },
-    {
-      "@type": "Offer",
-      name: "Pro",
-      price: String(PLAN.pro.neto),
-      priceCurrency: "CLP",
-      description:
-        `Alertas al instante, Lici sin tope y gestor de propuestas. Hasta ${PLAN.pro.usuarios} usuarios.`,
-    },
-    {
-      "@type": "Offer",
-      name: "Max",
-      price: String(PLAN.max.neto),
-      priceCurrency: "CLP",
-      description:
-        `Todo lo de Pro, más varias empresas, presupuestos y cobranza. Hasta ${PLAN.max.usuarios} usuarios.`,
+      description: "Licitaciones y compras ágiles que calzan con lo que vendes, cada mañana en tu correo. IVA incluido; 14 días gratis.",
     },
   ],
 });

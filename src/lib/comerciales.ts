@@ -226,7 +226,7 @@ export const COMERCIALES: Comercial[] = [
       },
       {
         q: "¿Cuánto cuesta IAutoLicita?",
-        a: "El plan Alertas cuesta $9.990 al mes con IVA, con 14 días gratis y sin tarjeta para partir. Pro y Max parten en $59.000 + IVA al mes.",
+        a: "El plan Alertas cuesta $9.990 al mes con IVA, con 14 días gratis y sin tarjeta para partir.",
       },
     ],
     cierre: {

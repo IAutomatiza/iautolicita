@@ -57,7 +57,6 @@
    modelo — no con una instrucción amable en el prompt. */
 
 import { APP_URL } from "./cta";
-import { PLAN, enPesos } from "./planes";
 
 export type Ficha = {
   id: string;
@@ -169,7 +168,7 @@ export const FICHAS: Ficha[] = [
     categoria: "modulo",
     claves: ["alerta", "alertas", "aviso", "avisan", "avisa", "avisar", "notificacion", "cuando sale", "sale una", "cierre", "llego tarde", "enterarme", "me entero", "se me pasan", "se me pasa", "me pierdo", "no me entero"],
     respuesta:
-      "Te avisamos apenas se publica, por correo y WhatsApp — no cuando ya quedan tres días. En licitaciones llegar primero es medio negocio. El plan Alertas ($9.990 al mes con IVA) te manda cada mañana lo nuevo del día; las alertas al instante vienen desde el plan Pro.",
+      "Te avisamos por correo cada mañana con lo nuevo del día que calza contigo — no cuando ya quedan tres días. En licitaciones llegar primero es medio negocio. Es el plan Alertas: $9.990 al mes con IVA, con 14 días gratis.",
   },
   {
     id: "lineas-negocio",
@@ -190,7 +189,7 @@ export const FICHAS: Ficha[] = [
     categoria: "modulo",
     claves: ["propuesta", "postular", "postulacion", "oferta", "ofertar", "cotizacion", "cotizar", "anexos", "armar", "preparar", "me ayuda a crear", "crear la propuesta"],
     respuesta:
-      "Lici lee los documentos y con eso **arma la postulación contigo**, paso a paso. Sirve para las dos vías: la **cotización de Compra Ágil** y la **propuesta de una licitación** clásica, con su kit de documentos y sus anexos. Se lanza desde la ficha misma, sin salir a otra parte. Desde el plan Pro.",
+      "Lici lee los documentos y con eso **arma la postulación contigo**, paso a paso. Sirve para las dos vías: la **cotización de Compra Ágil** y la **propuesta de una licitación** clásica, con su kit de documentos y sus anexos. Se lanza desde la ficha misma, sin salir a otra parte. Eso todavía no viene en el plan Alertas: llega más adelante.",
   },
   {
     id: "multi-empresa",
@@ -314,7 +313,7 @@ export const FICHAS: Ficha[] = [
     categoria: "plan",
     claves: ["cuanto cuesta", "precio", "vale", "plan", "planes", "pagar", "tarifa", "valor"],
     respuesta:
-      `Tres planes. **Free** en $0, para mirar el mercado completo y probar con tus propias licitaciones. **Pro** a ${enPesos(PLAN.pro.neto)} + IVA al mes: alertas al instante, Lici sin tope y el gestor de propuestas, hasta ${PLAN.pro.usuarios} usuarios. **Max** a ${enPesos(PLAN.max.neto)} + IVA: suma presupuestos, cobranza y varias empresas, hasta ${PLAN.max.usuarios} usuarios.`,
+      `Hoy hay un plan: **Alertas**, a $9.990 al mes con IVA incluido. Te avisamos cada mañana por correo las licitaciones y compras ágiles que calzan con lo que vendes, en todo Chile o en tus regiones. Tienes **14 días gratis**, sin tarjeta y sin RUT. [Pruébalo acá](${APP_URL}).`,
   },
   {
     id: "gratis",
@@ -430,7 +429,7 @@ const normalizar = (s: string) =>
 const ID_LICITACION = /\b\d{3,7}\s*-\s*\d{1,4}\s*-\s*[A-Za-z]{2,3}\d{2}\b/;
 
 export const RECONDUCCION_ANALISIS =
-  "Eso lo hace Lici **dentro de la app**, con esa licitación abierta: se lee las bases enteras, te dice qué piden y te cita la página exacta. Acá afuera solo te cuento cómo funciona. Viene en los planes Pro y Max.";
+  "Eso lo hace Lici **dentro de la app**, con esa licitación abierta: se lee las bases enteras, te dice qué piden y te cita la página exacta. Acá afuera solo te cuento cómo funciona. Eso todavía no viene en el plan Alertas.";
 
 /* Guardrail — «dame datos del mercado».
 
@@ -440,7 +439,7 @@ const PIDE_DATOS =
   /\b(quien(es)?\s+(gana|ganan|gano|ganaron|adjudic\w+|vende|venden|es\s+el\s+proveedor)|cuanto\s+(vend\w+|factur\w+|se\s+adjudic\w+|gan\w+|pag\w+\s+el\s+estado)|monto[s]?\s+(de|del|adjudicad\w+)|ranking\s+de\s+proveedores|lista\s+de\s+proveedores|competidor(es)?\s+de)\b/i;
 
 export const RECONDUCCION_DATOS =
-  "Esos números son justamente el producto: quién compra, quién compite y a cuánto se adjudicó lo tuyo. Se ven **dentro de la app**, cruzados con tu RUT — acá afuera no te los puedo dar. Vienen en los planes Pro y Max.";
+  "Esos números son justamente el producto: quién compra, quién compite y a cuánto se adjudicó lo tuyo. Se ven **dentro de la app**, cruzados con tu RUT — acá afuera no te los puedo dar. Eso todavía no viene en el plan Alertas.";
 
 /* Guardrail — «cómo se configura» / «no me funciona».
 

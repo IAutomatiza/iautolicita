@@ -2,17 +2,15 @@
    Planes — /precios. 25-nov-2026: Carlos vio la versión de 3
    tarjetas angostas («se ve pésimo») y eligió de 3 variantes la A:
    Alertas al frente, en una tarjeta grande con el botón siempre a
-   la vista; Pro y Max abajo, bajo «¿Trabajas con un equipo?».
-   Pro/Max salen de `src/lib/planes.ts` (generado); Alertas
-   ($9.990 IVA incluido, 14 días gratis) se escribe acá.
+   la vista ($9.990 IVA incluido, 14 días gratis).
+   25-nov: Pro y Max se sacaron — «aún no están activos» (Carlos).
+   Volverán cuando se puedan contratar; sus cifras siguen en
+   `src/lib/planes.ts`.
 ═══════════════════════════════════════════════════════════════ */
-import { useState } from "react";
 import { Check, MoveRight } from "lucide-react";
-import { PLAN } from "../lib/planes";
 import { enlaceApp } from "../lib/cta";
 
 const APP = enlaceApp("planes");
-const clp = (n: number) => "$" + n.toLocaleString("es-CL");
 const AZUL = "#0064E0";
 
 const ALERTAS = {
@@ -25,29 +23,6 @@ const ALERTAS = {
     "Sin RUT para empezar",
   ],
 };
-const PRO = {
-  nombre: "Pro",
-  para: "Para la empresa que postula todos los meses.",
-  items: ["Todo lo de Alertas, al instante", "Lici sin límite: te lee las bases", `${PLAN.pro.usuarios} usuarios`],
-};
-const MAX = {
-  nombre: "Max",
-  para: "Para el equipo que vive de licitar.",
-  items: ["Todo lo de Pro", "Varios RUT en una cuenta", "Presupuestos y cobranza"],
-};
-
-function Toggle({ anual, set }: { anual: boolean; set: (v: boolean) => void }) {
-  return (
-    <button type="button" onClick={() => set(!anual)} className="inline-flex items-center gap-2 font-sans text-[14px] text-cream-50">
-      <span className="relative h-5 w-9 rounded-full transition-colors" style={{ background: anual ? AZUL : "#D6D3D1" }}>
-        <span className="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform" style={{ transform: `translateX(${anual ? 16 : 0}px)` }} />
-      </span>
-      Pago anual <span className="text-brand-600">(2 meses gratis)</span>
-    </button>
-  );
-}
-const precioPM = (neto: number, anual: boolean) => (anual ? Math.round((neto * 10) / 12) : neto);
-
 function Boton({ txt, lleno }: { txt: string; lleno?: boolean }) {
   return (
     <a
@@ -75,7 +50,6 @@ function Lista({ items, grande }: { items: string[]; grande?: boolean }) {
 }
 
 export default function Planes() {
-  const [anual, setAnual] = useState(false);
   return (
     <section id="planes" className="container-edge scroll-mt-28 pt-10 pb-20 lg:pt-12">
       <div className="mx-auto max-w-[1080px]">
@@ -110,31 +84,6 @@ export default function Planes() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-3">
-          <h3 className="font-display text-[24px] font-semibold tracking-[-0.02em] text-cream-50">¿Trabajas con un equipo?</h3>
-          <Toggle anual={anual} set={setAnual} />
-        </div>
-        <div className="mt-5 grid gap-5 md:grid-cols-2">
-          {[PRO, MAX].map((p) => {
-            const neto = p === PRO ? PLAN.pro.neto : PLAN.max.neto;
-            return (
-              <div key={p.nombre} className="flex flex-col gap-5 rounded-2xl border border-[var(--hairline)] bg-white p-7">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h4 className="font-display text-[24px] font-semibold text-cream-50">{p.nombre}</h4>
-                    <p className="mt-1 font-sans text-[14px] text-cream-300">{p.para}</p>
-                  </div>
-                  <p className="text-right">
-                    <span className="block font-display text-[32px] font-semibold leading-none tracking-[-0.02em] text-cream-50">{clp(precioPM(neto, anual))}</span>
-                    <span className="font-sans text-[13px] text-cream-300">+ IVA / mes{anual ? " · pago anual" : ""}</span>
-                  </p>
-                </div>
-                <Lista items={p.items} />
-                <div className="mt-auto"><Boton txt={`Contratar ${p.nombre}`} /></div>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </section>
   );

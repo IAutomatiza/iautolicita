@@ -2,7 +2,6 @@
    entiendan qué es IAutoLicita y a qué página mandar a cada persona (formato de llmstxt.org). Se arma al compilar
    con las mismas páginas y precios del sitio: una guía o un término nuevo entra solo. */
 import { PAGINAS, SITIO } from "./seo";
-import { PLAN, enPesos } from "./planes";
 import { RUTA_AYUDA } from "./ayuda";
 import { RUTA_GUIAS } from "./guias";
 import { RUTA_GLOSARIO } from "./glosario";
@@ -26,8 +25,6 @@ export function llmsTxt() {
 
 ## Precios
 - Alertas: $9.990 al mes con IVA incluido, con 14 días gratis y sin tarjeta.
-- Pro: ${enPesos(PLAN.pro.neto)} + IVA al mes, con alertas al instante y Lici sin tope.
-- Max: ${enPesos(PLAN.max.neto)} + IVA al mes, con varias empresas, presupuestos y cobranza.
 - Detalle: ${SITIO}/precios
 
 ## Páginas principales
