@@ -160,7 +160,7 @@ export const TERMINOS: Documento = {
   ruta: "/terminos",
   titulo: "Términos y condiciones",
   bajada: "Las reglas del servicio, en castellano y sin letra chica.",
-  actualizado: ACTUALIZADO,
+  actualizado: "25 de noviembre de 2026",
   secciones: [
     {
       titulo: "Qué es el servicio",
@@ -179,8 +179,8 @@ export const TERMINOS: Documento = {
     {
       titulo: "Planes y pagos",
       parrafos: [
-        "El plan Free es gratuito, no requiere tarjeta y no tiene fecha de término. Sus límites están publicados en la página de planes.",
-        "Los planes de pago se cobran por adelantado, mensual o anualmente, en pesos chilenos y con IVA sobre el valor neto publicado. El pago anual equivale a diez meses.",
+        "Al abrir una cuenta tienes 14 días de prueba gratis del plan Alertas, sin tarjeta. Al terminar la prueba no se cobra nada de forma automática: los avisos se detienen hasta que contrates un plan.",
+        "El plan Alertas cuesta $9.990 al mes, con IVA incluido. Los planes Pro y Max se cobran por adelantado, mensual o anualmente, en pesos chilenos y con IVA sobre el valor neto publicado; en ellos el pago anual equivale a diez meses.",
         "No hay permanencia mínima: puedes cancelar cuando quieras y el servicio sigue disponible hasta el término del período ya pagado. Los períodos ya transcurridos no se devuelven.",
         "Si cambiamos los precios, avisamos con anticipación y el cambio rige desde tu siguiente renovación.",
       ],
@@ -215,7 +215,7 @@ export const TERMINOS: Documento = {
       titulo: "Derecho a retracto",
       parrafos: [
         "Como la contratación es a distancia, la Ley 19.496 sobre protección de los derechos de los consumidores reconoce un plazo de retracto de 10 días corridos desde la contratación, siempre que no hayas empezado a usar el servicio.",
-        "En la práctica esto pesa poco, porque el plan gratis permite probar la plataforma completa antes de pagar: no hace falta contratar para saber si sirve. De todos modos, si contrataste y te arrepientes dentro del plazo, escríbenos a contacto@iautolicita.cl y lo resolvemos.",
+        "En la práctica esto pesa poco, porque la prueba de 14 días permite usar el servicio antes de pagar: no hace falta contratar para saber si sirve. De todos modos, si contrataste y te arrepientes dentro del plazo, escríbenos a contacto@iautolicita.cl y lo resolvemos.",
       ],
     },
     {
