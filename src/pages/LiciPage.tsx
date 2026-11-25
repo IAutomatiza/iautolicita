@@ -43,12 +43,9 @@ export default function LiciPage() {
 
           <div className="container-edge relative w-full">
             <div className="max-w-[760px] py-20 lg:py-0">
-              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0A0A]/60">
-                Tu analista de licitaciones.
-              </div>
-
+              {/* 25-nov · Carlos: «saca esa parte gris» (el rótulo «Tu analista de licitaciones.»). */}
               {/* La marca en grande */}
-              <div className="mt-7 flex items-center gap-3.5">
+              <div className="flex items-center gap-3.5">
                 <LiciGlifo
                   alto={52}
                   conBorde
