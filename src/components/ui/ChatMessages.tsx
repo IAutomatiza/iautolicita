@@ -52,7 +52,8 @@ export default function ChatMessages({
   esperaLoop = 4500,
   className = "",
 }: Props) {
-  const [visibles, setVisibles] = useState(0);
+  // 25-nov (W3): arranca con la primera pregunta y su respuesta a la vista; antes se veía vacío hasta que entraba en pantalla.
+  const [visibles, setVisibles] = useState(() => Math.min(2, mensajes.length));
   const [tipeando, setTipeando] = useState(false);
   const [activo, setActivo] = useState(false);
   const cajaRef = useRef<HTMLDivElement>(null);

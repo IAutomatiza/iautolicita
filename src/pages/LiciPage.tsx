@@ -78,7 +78,8 @@ export default function LiciPage() {
                   Mismo botón azul redondeado del resto del sitio. */}
               <div className="mt-10 flex flex-wrap items-center gap-3">
                 <CtaButton variant="huge" origen="cuerpo" label="Probar 14 días gratis" />
-                <CtaButton variant="ghost" origen="hero" label="Iniciar sesión" />
+                {/* 25-nov (W3): antes «Iniciar sesión», que no le sirve a quien llega por primera vez. */}
+                <CtaButton variant="ghost" href="/precios" label="Ver precios" />
               </div>
 
               <div className="mt-12 font-mono text-[11px] uppercase tracking-[0.06em] text-[#0A0A0A]/60 flex flex-wrap gap-x-8 gap-y-1.5">
@@ -92,7 +93,8 @@ export default function LiciPage() {
             </div>
 
             {/* Móvil: las órbitas completas bajo el texto */}
-            <div aria-hidden className="lg:hidden pointer-events-none relative h-[360px] mt-6 mb-10">
+            {/* 25-nov (W3): en celular ocupaban casi una pantalla sin decir nada; se ocultan. */}
+            <div aria-hidden className="hidden pointer-events-none relative h-[360px] mt-6 mb-10">
               <div className="absolute left-1/2 -translate-x-1/2 top-0 scale-[0.58] origin-top">
                 <OrbitaLici />
               </div>

@@ -64,10 +64,10 @@ const CONVERSACION: MensajeChat[] = [
 /* Los canales del último panel: alternan celda punteada y logo,
    igual que la grilla de integraciones del original. */
 const CANALES = [
-  { nombre: "WhatsApp", icono: <IconoWhatsApp className="h-7 w-7" /> },
+  { nombre: "WhatsApp", pronto: true, icono: <IconoWhatsApp className="h-7 w-7" /> },
   { nombre: "Correo", icono: <Mail className="h-7 w-7 text-[#EA4335]" strokeWidth={1.7} /> },
-  { nombre: "Informes PDF", icono: <IconoPdf className="h-7 w-7" /> },
-  { nombre: "Google Drive", icono: <IconoDrive className="h-7 w-7" /> },
+  { nombre: "Informes PDF", pronto: true, icono: <IconoPdf className="h-7 w-7" /> },
+  { nombre: "Google Drive", pronto: true, icono: <IconoDrive className="h-7 w-7" /> },
 ];
 
 export default function LiciRejilla() {
@@ -197,6 +197,10 @@ export default function LiciRejilla() {
                     {c.icono}
                     <span className="font-sans text-[12px] text-[#0A1530]/70">
                       {c.nombre}
+                    </span>
+                    {/* 25-nov (W3): Alertas avisa por correo; los otros canales vienen con los planes de equipo. */}
+                    <span className={`text-center font-mono text-[9.5px] uppercase tracking-[0.1em] ${"pronto" in c && c.pronto ? "text-[#0A1530]/45" : "text-[#0064E0]"}`}>
+                      {"pronto" in c && c.pronto ? "Planes de equipo · pronto" : "Incluido en Alertas"}
                     </span>
                   </div>
                 ))}
