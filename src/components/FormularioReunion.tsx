@@ -19,7 +19,7 @@ import { evento } from "../lib/analitica";
 
 const HORARIOS = ["Mañana", "Tarde", "Me da lo mismo"];
 
-export default function FormularioReunion() {
+export default function FormularioReunion({ sinMarco = false }: { sinMarco?: boolean } = {}) {
   const [datos, setDatos] = useState({
     nombre: "",
     empresa: "",
@@ -89,7 +89,7 @@ export default function FormularioReunion() {
   return (
     <form
       onSubmit={enviar}
-      className="rounded-2xl border border-[var(--hairline-strong)] bg-ink-900/40 p-6 md:p-8"
+      className={sinMarco ? "" : "rounded-2xl border border-[var(--hairline-strong)] bg-ink-900/40 p-6 md:p-8"}
     >
       {/* Honeypot — invisible para personas, irresistible para bots */}
       <input
