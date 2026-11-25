@@ -8,6 +8,7 @@ import Eyebrow from "../components/ui/Eyebrow";
 import { POR_SLUG_COMERCIAL, rutaComercial } from "../lib/comerciales";
 import { POR_SLUG as TERMINOS, rutaTermino } from "../lib/glosario";
 import { enlaceApp } from "../lib/cta";
+import CorreoAlertasEjemplo from "../components/CorreoAlertasEjemplo";
 
 /* Las páginas que venden.
 
@@ -87,6 +88,8 @@ export default function ComercialPage({ slug }: { slug: string }) {
                 </div>
               ))}
             </div>
+
+            {c.conCorreo && <CorreoAlertasEjemplo />}
 
             <div className="mt-16 space-y-12">
               {c.bloques.map((b) => (

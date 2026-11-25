@@ -66,6 +66,8 @@ export type Comercial = {
   origen: OrigenCta;
   /** Términos del glosario que esta página enlaza. */
   glosario: string[];
+  /** Muestra bajo las tres pruebas el ejemplo del correo de cada mañana. */
+  conCorreo?: boolean;
 };
 
 export const COMERCIALES: Comercial[] = [
@@ -163,6 +165,7 @@ export const COMERCIALES: Comercial[] = [
   /* ── 2 · Licitaciones públicas · 11.000/mes ─────────────────── */
   {
     slug: "licitaciones-publicas",
+    conCorreo: true,
     titulo: "Licitaciones públicas, sin revisar el portal",
     tituloSeo: "Licitaciones públicas de Mercado Público — IAutoLicita",
     descripcion:
