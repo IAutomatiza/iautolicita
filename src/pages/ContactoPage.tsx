@@ -30,15 +30,25 @@ export default function ContactoPage() {
       <main className="pt-28 pb-20 md:pt-36 md:pb-28">
         <div className="container-edge">
           <div className="mx-auto max-w-[1120px] overflow-hidden rounded-3xl border border-[var(--hairline-strong)] bg-white shadow-[0_30px_80px_-40px_rgba(0,40,120,0.35)]">
-            <div className="grid lg:grid-cols-[5fr_7fr]">
-              <div className="relative bg-brand-600 p-8 text-white md:p-12">
+            {/* 25-nov (W4): en celular va título → formulario → el resto del panel azul,
+                para que el formulario aparezca al tiro. En computador sigue siendo
+                un panel azul a la izquierda y el formulario a la derecha. */}
+            <div className="grid lg:grid-cols-[5fr_7fr] lg:grid-rows-[auto_1fr]">
+              <div className="bg-brand-600 p-8 pb-6 text-white md:p-12 md:pb-6 lg:col-start-1 lg:row-start-1">
                 <h1 className="font-display font-medium text-[40px] md:text-[54px] leading-[1.02] tracking-[-0.04em] text-white">
                   Media hora con <span className="serif-em text-[#BFD6FF]">tus</span> licitaciones.
                 </h1>
                 <p className="mt-5 font-sans text-[16.5px] leading-[1.6] text-white/85">
                   No es una demo con datos de mentira. Es tu empresa, tu rubro y lo que el Estado está comprando hoy.
                 </p>
-                <ul className="mt-8 space-y-4">
+              </div>
+              <div className="flex flex-col justify-center p-8 md:p-12 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+                <h2 className="font-display text-[24px] font-semibold tracking-[-0.02em] text-cream-50">Pide tu reunión</h2>
+                <p className="mt-1 mb-6 font-sans text-[15px] text-cream-300">Te escribimos dentro del día hábil para coordinar.</p>
+                <FormularioReunion sinMarco />
+              </div>
+              <div className="bg-brand-600 p-8 pt-2 text-white md:p-12 md:pt-2 lg:col-start-1 lg:row-start-2">
+                <ul className="mt-6 space-y-4 lg:mt-2">
                   {PUNTOS.map((p) => (
                     <li key={p} className="flex gap-3">
                       <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/15">
@@ -64,9 +74,6 @@ export default function ContactoPage() {
                     Preguntarle a Lici →
                   </button>
                 </div>
-              </div>
-              <div className="flex flex-col justify-center p-8 md:p-12">
-                <FormularioReunion sinMarco />
               </div>
             </div>
           </div>
