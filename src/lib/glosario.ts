@@ -668,7 +668,7 @@ export const TERMINOS: Termino[] = [
       "Postular a todo lo que suene parecido a lo que vendes. Preparar una oferta cuesta días; postular a tres que calzan de verdad rinde más que a veinte que calzan a medias.",
     cierre: {
       texto:
-        "Con tu RUT armamos tu perfil y te mostramos qué licitaciones calzan con lo que vendes hoy — sin que tengas que revisar el portal.",
+        "Nos dices qué vendes y te mostramos qué licitaciones calzan contigo hoy — sin que tengas que revisar el portal.",
       boton: "Ver las que calzan contigo",
     },
     vecinos: ["tipos-de-licitacion-l1-le-lp", "compras-publicas", "compra-agil"],
@@ -763,7 +763,7 @@ export const TERMINOS: Termino[] = [
       "Esperar a «estar listo» para empezar. No hay un trámite de habilitación: el registro es gratis y toma minutos, y la acreditación paga sólo se justifica cuando ya persigues procesos que la exigen.",
     cierre: {
       texto:
-        "Con tu RUT armamos tu perfil solo y te mostramos qué está publicado hoy que calce con lo que vendes.",
+        "Nos dices qué vendes y te mostramos qué está publicado hoy que calce contigo.",
       boton: "Ver qué hay para ti",
     },
     vecinos: ["chileproveedores", "acreditacion", "unspsc"],
@@ -900,7 +900,7 @@ export const TERMINOS: Termino[] = [
       "Elegir el código más general pensando que así llega más. Llega más ruido, no más oportunidades, y el ruido termina haciendo que dejes de mirar los avisos.",
     cierre: {
       texto:
-        "Con tu RUT deducimos tus productos y sus códigos solos, a partir de lo que ya le has vendido al Estado.",
+        "No necesitas saber códigos: escribes lo que vendes como lo diría un comprador. Si ya le vendiste al Estado, con tu RUT (opcional) los deducimos solos.",
       boton: "Ver mi perfil",
     },
     vecinos: ["rubro", "bases-tecnicas", "proveedor-del-estado"],
@@ -1468,7 +1468,7 @@ export const TERMINOS: Termino[] = [
       "Elegirlos el primer día y no volver a mirarlos. Es la causa más común de «Mercado Público no sirve para lo mío».",
     cierre: {
       texto:
-        "Con tu RUT deducimos tus rubros y productos solos, a partir de lo que ya le has vendido al Estado — sin que tengas que adivinar categorías.",
+        "Escribes lo que vendes y listo, sin adivinar categorías. Si ya le vendiste al Estado, con tu RUT (opcional) deducimos tus rubros solos.",
       boton: "Ver mi perfil",
     },
     vecinos: ["unspsc", "proveedor-del-estado", "plan-anual-de-compras"],

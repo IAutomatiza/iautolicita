@@ -151,7 +151,7 @@ export const COMERCIALES: Comercial[] = [
       },
     ],
     cierre: {
-      titulo: "Trae tu RUT y mira qué hay hoy",
+      titulo: "Mira qué hay hoy para ti",
       texto:
         "En minutos ves las Compras Ágiles y licitaciones publicadas que calzan con lo que vendes, con su precio de referencia.",
       boton: "Ver qué hay para mí",
@@ -314,7 +314,7 @@ export const COMERCIALES: Comercial[] = [
     cierre: {
       titulo: "Mira si hay mercado para lo tuyo",
       texto:
-        "Con tu RUT armamos el perfil y te mostramos qué está publicado hoy que calce contigo.",
+        "Nos dices qué vendes y te mostramos qué está publicado hoy que calce contigo.",
       boton: "Ver qué hay para mí",
     },
     origen: "cuerpo",
@@ -391,7 +391,7 @@ export const COMERCIALES: Comercial[] = [
       },
     ],
     cierre: {
-      titulo: "Pruébalo con tu propio RUT",
+      titulo: "Pruébalo con lo que tú vendes",
       texto:
         "En minutos ves qué está publicado hoy que calce con lo que vendes — incluido lo que está escrito con otras palabras.",
       boton: "Probar el buscador",

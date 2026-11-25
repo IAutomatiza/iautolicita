@@ -162,7 +162,7 @@ export const GUIAS: Guia[] = [
     ],
     cierre: {
       texto:
-        "Trae tu RUT y en minutos ves las Compras Ágiles publicadas hoy que calzan con lo que vendes, con su precio de referencia.",
+        "Dinos qué vendes y en minutos ves las Compras Ágiles publicadas hoy que calzan contigo. 14 días gratis, sin tarjeta.",
       boton: "Ver las que calzan conmigo",
     },
     glosario: ["compra-agil", "orden-de-compra", "proveedor-del-estado", "rubro"],

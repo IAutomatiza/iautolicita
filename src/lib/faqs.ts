@@ -14,7 +14,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "¿Necesito instalar algo?",
-    a: "Nada. Entras desde el navegador y listo. Con tu RUT basta: leemos lo que ya has ganado y tu perfil queda armado en un clic — qué vendes, dónde ganas y quién te compra.",
+    a: "Nada. Entras desde el navegador, nos dices qué vendes y listo — sin tarjeta y sin RUT. Si ya le vendiste al Estado, con tu RUT (opcional) leemos lo que has ganado y tu búsqueda queda armada sola.",
   },
   {
     q: "¿Qué los hace distintos?",
