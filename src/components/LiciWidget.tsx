@@ -84,6 +84,20 @@ function conFormato(texto: string, sid: string | null) {
 
 export default function LiciWidget() {
   const [abierto, setAbierto] = useState(false);
+  /* 25-nov · aprobado por Carlos: en el celular la burbuja tapaba texto. Mientras la persona
+     baja, se esconde; aparece de nuevo 0,6 s después de que se detiene. Sólo en pantallas chicas. */
+  const [bajando, setBajando] = useState(false);
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout> | undefined;
+    const alBajar = () => {
+      if (window.innerWidth >= 768) return;
+      setBajando(true);
+      clearTimeout(t);
+      t = setTimeout(() => setBajando(false), 600);
+    };
+    window.addEventListener("scroll", alBajar, { passive: true });
+    return () => { window.removeEventListener("scroll", alBajar); clearTimeout(t); };
+  }, []);
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     { de: "lici", texto: SALUDO },
   ]);
@@ -152,7 +166,7 @@ export default function LiciWidget() {
   const mostrarChips = mensajes.length === 1 && !tipeando;
 
   return (
-    <div className="fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-3 md:bottom-6 md:right-6">
+    <div className={`fixed bottom-4 right-4 z-[60] flex flex-col items-end gap-3 transition-all duration-300 md:bottom-6 md:right-6 ${bajando && !abierto ? "pointer-events-none translate-y-4 opacity-0" : "opacity-100"}`}>
       {/* ── El panel ─────────────────────────────────────────── */}
       {abierto && (
         <div
@@ -282,7 +296,7 @@ export default function LiciWidget() {
         onClick={() => setAbierto((v) => !v)}
         aria-label={abierto ? "Cerrar el chat con Lici" : "Hablar con Lici"}
         aria-expanded={abierto}
-        className="group relative grid h-14 w-14 place-items-center rounded-full border border-[#0A1530]/[0.08] bg-white shadow-[0_10px_30px_-8px_rgba(10,21,48,0.35)] transition-transform duration-200 hover:-translate-y-[2px]"
+        className="group relative grid h-11 w-11 place-items-center rounded-full md:h-14 md:w-14 border border-[#0A1530]/[0.08] bg-white shadow-[0_10px_30px_-8px_rgba(10,21,48,0.35)] transition-transform duration-200 hover:-translate-y-[2px]"
       >
         {!abierto && (
           <span

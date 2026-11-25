@@ -9,7 +9,7 @@ import Seo from "../components/Seo";
 import LiciCierre from "../components/LiciCierre";
 import DotPattern from "../components/ui/DotPattern";
 import Footer from "../components/Footer";
-import { enlaceApp } from "../lib/cta";
+import CtaButton from "../components/ui/CtaButton";
 
 /* ════════════════════════════════════════════════════════════
    /lici — página reiniciada desde cero: por ahora solo el hero,
@@ -77,20 +77,11 @@ export default function LiciPage() {
                 ganarla — antes de que tu competencia termine de leer.
               </p>
 
-              <div className="mt-10 flex items-center gap-1.5">
-                <a
-                  href={enlaceApp("cuerpo")}
-                  className="inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
-                >
-                  Probar Lici
-                </a>
-                <a
-                  href={enlaceApp("hero")}
-                  className="relative inline-flex items-center h-12 px-6 rounded-lg bg-[#16161A] font-mono text-[12px] uppercase tracking-[0.14em] text-[#F2F0EA] hover:bg-[#0064E0] transition-colors duration-200"
-                >
-                  Acceder
-                  <span className="absolute top-2 right-2 h-1.5 w-1.5 rounded-full bg-[#55b4f8]" />
-                </a>
+              {/* 25-nov · aprobado por Carlos: los botones negros en mayúscula parecían de otra página.
+                  Mismo botón azul redondeado del resto del sitio. */}
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <CtaButton variant="huge" origen="cuerpo" label="Probar 14 días gratis" />
+                <CtaButton variant="ghost" origen="hero" label="Iniciar sesión" />
               </div>
 
               <div className="mt-12 font-mono text-[11px] uppercase tracking-[0.06em] text-[#0A0A0A]/60 flex flex-wrap gap-x-8 gap-y-1.5">

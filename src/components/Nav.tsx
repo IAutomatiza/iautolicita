@@ -111,7 +111,7 @@ export default function Nav() {
     <header
       // Bajo el ticker solo en el home; en el resto, pegado arriba.
       // La franja negra es de la portada, no del sitio.
-      className={`fixed inset-x-0 ${conTicker ? "top-8" : "top-0"} z-40 transition-all duration-300 ${
+      className={`fixed inset-x-0 ${conTicker ? "top-0 md:top-8" : "top-0"} z-40 transition-all duration-300 ${
         scrolled
           ? "bg-ink-950/85 backdrop-blur-md border-b border-[var(--hairline)]"
           : "bg-transparent"
